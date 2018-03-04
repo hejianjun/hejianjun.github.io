@@ -4,6 +4,7 @@ date: 2018-03-04 11:56:54
 tags: kettle
 categories:
   - technology
+  - kettel
 typora-root-url: ..
 ---
 ## Spoon编辑篇

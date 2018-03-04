@@ -3,6 +3,7 @@ title: Kettle笔记
 tags: kettle
 categories:
   - technology
+  - kettel
 typora-root-url: ..
 date: 2018-03-04 12:42:47
 ---
