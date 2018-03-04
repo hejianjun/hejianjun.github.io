@@ -1,13 +1,16 @@
 ---
-layout: drafts
-title: Kettle起步
+title: Kettle入门
 date: 2018-03-04 11:56:54
 tags: kettle
 categories:
   - technology
 typora-root-url: ..
 ---
+## Spoon编辑篇
 
+这篇主要说一下Spoon图形工具的使用，多图预警
+
+<!--more-->
 ## 创建一个转换
 
 1. 文件->新建转换
@@ -56,15 +59,15 @@ typora-root-url: ..
 
 1. 上面我们看到表输出报错了，我们查看一下日志发现有个
 
-```java
-2018/03/04 16:08:23 - 表输出.0 - ERROR (version 7.1.0.0-12, build 1 from 2017-05-16 17.18.02 by buildguy) : Because of an error, this step can't continue:
-2018/03/04 16:08:23 - 表输出.0 - ERROR (version 7.1.0.0-12, build 1 from 2017-05-16 17.18.02 by buildguy) : org.pentaho.di.core.exception.KettleValueException: 
-2018/03/04 16:08:23 - 表输出.0 - Unexpected conversion error while converting value [QQ String] to an Integer
-2018/03/04 16:08:23 - 表输出.0 - 
-2018/03/04 16:08:23 - 表输出.0 - QQ String : couldn't convert String to Integer
-2018/03/04 16:08:23 - 表输出.0 - 
-2018/03/04 16:08:23 - 表输出.0 - QQ String : couldn't convert String to number : non-numeric character found at position 1 for value [小鱼呼叫转移]
-```
+    ```java
+    2018/03/04 16:08:23 - 表输出.0 - ERROR (version 7.1.0.0-12, build 1 from 2017-05-16 17.18.02 by buildguy) : Because of an error, this step can't continue:
+    2018/03/04 16:08:23 - 表输出.0 - ERROR (version 7.1.0.0-12, build 1 from 2017-05-16 17.18.02 by buildguy) : org.pentaho.di.core.exception.KettleValueException: 
+    2018/03/04 16:08:23 - 表输出.0 - Unexpected conversion error while converting value [QQ String] to an Integer
+    2018/03/04 16:08:23 - 表输出.0 - 
+    2018/03/04 16:08:23 - 表输出.0 - QQ String : couldn't convert String to Integer
+    2018/03/04 16:08:23 - 表输出.0 - 
+    2018/03/04 16:08:23 - 表输出.0 - QQ String : couldn't convert String to number : non-numeric character found at position 1 for value [小鱼呼叫转移]
+    ```
 
 2. 我们需要修改下QQ这个字段的类型为`String`，然后run一下转换
 
@@ -80,21 +83,20 @@ typora-root-url: ..
 
    ```
 
-3.  显然是sql错误，我们需要查看异常的具体原因，于是我们需要取消表输出的`使用批量插入`功能
+3. 显然是sql错误，我们需要查看异常的具体原因，于是我们需要取消表输出的`使用批量插入`功能
 
    ![debug_transformation2](/images/debug_transformation2.gif)
 
    输出的错误如下
 
-```java
-2018/03/04 16:39:06 - 表输出.0 - ERROR (version 7.1.0.0-12, build 1 from 2017-05-16 17.18.02 by buildguy) : Because of an error, this step can't continue:
-2018/03/04 16:39:06 - 表输出.0 - ERROR (version 7.1.0.0-12, build 1 from 2017-05-16 17.18.02 by buildguy) : org.pentaho.di.core.exception.KettleException: 
-2018/03/04 16:39:06 - 表输出.0 - Error inserting row into table [t_users] with values: [何], [建军], [null], [null], [null], [942156265], [null], [null], [null], [null], [null], [null], [null], [null], [null], [null], [null], [null], [	17677322080], [null], [null], [	13558229098], [null], [null], [null], [null], [null], [null], [null]
-2018/03/04 16:39:06 - 表输出.0 - 
-2018/03/04 16:39:06 - 表输出.0 - Error inserting/updating row
-2018/03/04 16:39:06 - 表输出.0 - ERROR: duplicate key value violates unique constraint "users_name_unique"
-  详细：Key (username)=(何) already exists.
-```
+   ```java
+   2018/03/04 16:39:06 - 表输出.0 - ERROR (version 7.1.0.0-12, build 1 from 2017-05-16 17.18.02 by buildguy) : Because of an error, this step can't continue:
+   2018/03/04 16:39:06 - 表输出.0 - ERROR (version 7.1.0.0-12, build 1 from 2017-05-16 17.18.02 by buildguy) : org.pentaho.di.core.exception.KettleException: 
+   2018/03/04 16:39:06 - 表输出.0 - Error inserting row into table [t_users] with values: [何], [建军], [null], [null], [null], [942156265], [null], [null], [null], [null], [null], [null], [null], [null], [null], [null], [null], [null], [	17677322080], [null], [null], [	13558229098], [null], [null], [null], [null], [null], [null], [null]
+   2018/03/04 16:39:06 - 表输出.0 - 
+   2018/03/04 16:39:06 - 表输出.0 - Error inserting/updating row
+   2018/03/04 16:39:06 - 表输出.0 - ERROR: duplicate key value violates unique constraint "users_name_unique"  详细：Key (username)=(何) already exists.
+   ```
 
 4. 显然是我们的映射关系有问题，我们添加一个Concat Fields转换步骤把姓名映射到username中（这里我勾选了`裁剪表`，不是全量导入千万不要勾选，这个会清除表中原有的所有数据）
 
@@ -104,8 +106,7 @@ typora-root-url: ..
 
 5. 现在我们把`使用批量插入`功能打开保存之后自己试一试吧！
 
-调试这个转换
----
+## 调试这个转换
 
 有时我们需要断点调试，这时需要使用debug的功能
 

@@ -17,6 +17,7 @@ date: 2018-03-04 12:42:47
 
 ​	Kettle中有两种脚本文件，transformation和job，transformation完成针对数据的基础转换，job则完成整个工作流的控制。
 
+<!--more-->
 Kettle的安装与运行
 ------------------
 
