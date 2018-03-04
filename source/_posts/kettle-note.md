@@ -1,8 +1,12 @@
 ---
 title: Kettle笔记
-tags:
+tags: kettle
+categories:
+  - technology
 typora-root-url: ..
+date: 2018-03-04 12:42:47
 ---
+
 
 ​	菜爸叫我整理一下kettle的笔记说是要培训，我一个小菜比什么都不懂，只能临时抱下佛脚，百度一下。
 
@@ -67,4 +71,5 @@ Kettle的安装与运行
   * **作业**是比转换更高一级的处理流程，一个作业里包括多个作业项（Job Entry），一个作业项代表了一项工作，转换也是一个作业项。
 
     ![job](/images/job.jpg)
+
 
