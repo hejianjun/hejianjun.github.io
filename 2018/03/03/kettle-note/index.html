@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="kettle," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="​    菜爸叫我整理一下kettle的笔记说是要培训，我一个小菜比什么都不懂，只能临时抱下佛脚，百度一下。 什么是Kettle​    Kettle是一款国外开源的ETL工具，纯java编写，可以在Window、Linux、Unix上运行，数据抽取高效稳定。这个是百度百科的原话，用我们的话说就是数据迁移的工具。 ​    Kettle中有两种脚本文件，transformation和job，tra">
+<meta name="keywords" content="kettle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kettle笔记">
+<meta property="og:url" content="http://blog.gaojunru.com/2018/03/03/kettle-note/index.html">
+<meta property="og:site_name" content="剑君 の Blog">
+<meta property="og:description" content="​    菜爸叫我整理一下kettle的笔记说是要培训，我一个小菜比什么都不懂，只能临时抱下佛脚，百度一下。 什么是Kettle​    Kettle是一款国外开源的ETL工具，纯java编写，可以在Window、Linux、Unix上运行，数据抽取高效稳定。这个是百度百科的原话，用我们的话说就是数据迁移的工具。 ​    Kettle中有两种脚本文件，transformation和job，tra">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://blog.gaojunru.com/images/spoon.jpg">
+<meta property="og:image" content="http://blog.gaojunru.com/images/transformation.jpg">
+<meta property="og:image" content="http://blog.gaojunru.com/images/job.jpg">
+<meta property="og:updated_time" content="2018-03-05T10:37:44.894Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kettle笔记">
+<meta name="twitter:description" content="​    菜爸叫我整理一下kettle的笔记说是要培训，我一个小菜比什么都不懂，只能临时抱下佛脚，百度一下。 什么是Kettle​    Kettle是一款国外开源的ETL工具，纯java编写，可以在Window、Linux、Unix上运行，数据抽取高效稳定。这个是百度百科的原话，用我们的话说就是数据迁移的工具。 ​    Kettle中有两种脚本文件，transformation和job，tra">
+<meta name="twitter:image" content="http://blog.gaojunru.com/images/spoon.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.gaojunru.com/2018/03/03/kettle-note/"/>
+
+
+
+
+
+  <title>Kettle笔记 | 剑君 の Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">剑君 の Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.gaojunru.com/2018/03/03/kettle-note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hejianjun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="剑君 の Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Kettle笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-03T12:42:47+08:00">
+                2018-03-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index">
+                    <span itemprop="name">technology</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/kettel/" itemprop="url" rel="index">
+                    <span itemprop="name">kettel</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>​    菜爸叫我整理一下kettle的笔记说是要培训，我一个小菜比什么都不懂，只能临时抱下佛脚，百度一下。</p>
+<h2 id="什么是Kettle"><a href="#什么是Kettle" class="headerlink" title="什么是Kettle"></a>什么是Kettle</h2><p>​    Kettle是一款国外开源的ETL工具，纯java编写，可以在Window、Linux、Unix上运行，数据抽取高效稳定。这个是百度百科的原话，用我们的话说就是数据迁移的工具。</p>
+<p>​    Kettle中有两种脚本文件，transformation和job，transformation完成针对数据的基础转换，job则完成整个工作流的控制。</p>
+<a id="more"></a>
+<h2 id="Kettle的安装与运行"><a href="#Kettle的安装与运行" class="headerlink" title="Kettle的安装与运行"></a>Kettle的安装与运行</h2><p>​    可以从 <a href="https://community.hds.com/docs/DOC-1009855" target="_blank" rel="noopener">https://community.hds.com/docs/DOC-1009855</a> 下载最新版的 Kettle软件 ，同时，Kettle 是绿色软件，下载后，解压到任意目录即可。 由于Kettle 是采用java 编写，因此需要在本地有JVM 的运行环境（JDK1.7以上），我们所使用的Kettle的最新版本是7.1 的。安装完成之后，点击目录下面的Spoon.bat或spoon.sh （linux）即可启动kettle的设计工具。</p>
+<p><img src="/images/spoon.jpg" alt="spoon"></p>
+<h2 id="Kettle的基本概念"><a href="#Kettle的基本概念" class="headerlink" title="Kettle的基本概念"></a>Kettle的基本概念</h2><ol>
+<li><strong>作业（job）</strong>，负责将[转换]组织在一起进而完成某一块工作，通常我们需要把一个大的任务分解成几个逻辑上隔离的作业，当这几个作业都完成了，也就说明这项任务完成了。</li>
+</ol>
+<blockquote>
+<ul>
+<li>Job Entry：一个Job Entry 是一个任务的一部分，它执行某些内容。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Hop：一个Hop 代表两个步骤之间的一个或者多个数据流。一个Hop 总是代表着两个Job Entry 之间的连接，并且能够被原始的Job Entry 设置，无条件的执行下一个Job Entry，直到执行成功或者失败。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Note：一个Note 是一个任务附加的文本注释信息。</li>
+</ul>
+</blockquote>
+<ol>
+<li><strong>转换（Transformation）</strong>，定义对数据操作的容器，数据操作就是数据从输入到输出的一个过程，可以理解为比作业粒度更小一级的容器，我们将任务分解成作业，然后需要将作业分解成一个或多个转换，每个转换只完成一部分工作。</li>
+</ol>
+<blockquote>
+<ul>
+<li>Value：Value 是行的一部分，并且是包含以下类型的的数据：Strings、floating point Numbers、unlimited precision BigNumbers、Integers、Dates、或者Boolean。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Row：一行包含0 个或者多个Values。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Output Stream：一个Output Stream 是离开一个步骤时的行的堆栈。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Input Stream：一个Input Stream 是进入一个步骤时的行的堆栈。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Step：转换的一个步骤，可以是一个Stream或是其他元素。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Hop：一个Hop 代表两个步骤之间的一个或者多个数据流。一个Hop 总是代表着一个步骤的输出流和一个步骤的输入流。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Note：一个Note 是一个转换附加的文本注释信息。</li>
+</ul>
+</blockquote>
+<h2 id="Kettle-基本使用"><a href="#Kettle-基本使用" class="headerlink" title="Kettle 基本使用"></a>Kettle 基本使用</h2><ol>
+<li><p>Kettle 的几个子程序</p>
+<blockquote>
+<p><strong>Spoon</strong>图形界面作业和转换设计器</p>
+</blockquote>
+<blockquote>
+<p><strong>Pan</strong>命令行方式执行转换</p>
+</blockquote>
+<blockquote>
+<p><strong>Kitchen</strong>命令行方式执行作业</p>
+</blockquote>
+</li>
+<li><p>转换和作业</p>
+<p>Kettle 的 Spoon 设计器用来设计<strong>转换（Transformation</strong>）和 <strong>作业（Job）</strong>。</p>
+<ul>
+<li><strong>转换</strong>主要是针对数据的各种处理，一个转换里可以包含多个步骤（Step）。</li>
+</ul>
+<p><img src="/images/transformation.jpg" alt="transformation"></p>
+<ul>
+<li><strong>作业</strong>是比转换更高一级的处理流程，一个作业里包括多个作业项（Job Entry），一个作业项代表了一项工作，转换也是一个作业项。</li>
+</ul>
+<p><img src="/images/job.jpg" alt="job"></p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/kettle/" rel="tag"># kettle</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/04/kettle-getting-started/" rel="prev" title="Kettle入门">
+                Kettle入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Hejianjun</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是Kettle"><span class="nav-number">1.</span> <span class="nav-text">什么是Kettle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kettle的安装与运行"><span class="nav-number">2.</span> <span class="nav-text">Kettle的安装与运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kettle的基本概念"><span class="nav-number">3.</span> <span class="nav-text">Kettle的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kettle-基本使用"><span class="nav-number">4.</span> <span class="nav-text">Kettle 基本使用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hejianjun</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
