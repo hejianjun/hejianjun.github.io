@@ -80,3 +80,15 @@ deploy:
   type: git
   repo: git@github.com:hejianjun/hejianjun.github.io.git
   branch: master
+  
+# OSS Images Config
+asset_oss:
+  enable: false
+  oss_url: https://assets.example.com
+  oss_root: /static/ # optional default '/'
+  oss_img_path: /images/ # optional for ossimg tag
+  oss_acid: <AccessID>
+  oss_ackey: <AccessKey>
+  oss_region: oss-cn-shenzhen
+  oss_bucket: assets-example-com
+  oss_internal: false # optional is internal default false
