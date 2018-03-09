@@ -87,8 +87,8 @@ asset_oss:
   oss_url: https://assets.example.com
   oss_root: /static/ # optional default '/'
   oss_img_path: /images/ # optional for ossimg tag
-  oss_acid: <AccessID>
-  oss_ackey: <AccessKey>
+  oss_acid: LTAI6OlkXOoSSzp8
+  oss_ackey: sxwSHiaCZuqqTsn36w065MGTmBdohS
   oss_region: oss-cn-shenzhen
   oss_bucket: assets-example-com
   oss_internal: false # optional is internal default false
