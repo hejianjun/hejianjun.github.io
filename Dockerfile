@@ -1,7 +1,8 @@
 FROM node
 MAINTAINER hejianjun
 COPY docker-extension/nginx.conf /etc/nginx/nginx.conf
-WORKDIR /usr/share/html
-COPY . /usr/share/html
+ENV APP_PATH /usr/share/html
+WORKDIR $APP_PATH
+COPY . $APP_PATH
 RUN ["chmod", "+x", "start.sh"]
-CMD start.sh
+CMD $APP_PATH/start.sh
