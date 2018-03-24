@@ -1,0 +1,10 @@
+web:
+  image: nginx
+  volumes:
+   - ./gaojunru.template:/etc/nginx/conf.d/gaojunru.template
+  ports:
+   - "8080:80"
+  environment:
+   - NGINX_HOST=blog.gaojunru.com
+   - NGINX_PORT=80
+  command: /bin/bash -c "envsubst < /etc/nginx/conf.d/mysite.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
