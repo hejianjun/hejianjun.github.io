@@ -4,16 +4,16 @@
 code.language=node8.x
 
 # docker构建所用的Dockerfile的路径
-docker.file=Dockerfile
+docker.file=docker-extension/nginx/Dockerfile
 
 # 构建命令
-# build.command=sh build
+build.command=sh build
 
 # 构建打包使用的打包文件
-# build.output=.deploy_git
+# build.output=public
 
 # 不要再对 build.output 指定的输出物再进行打包
-build.output.nottgz=True
+# build.output.nottgz=True
 
 # docker构建完成之后，要push到的docker repo
 docker.repo=registry.cn-shenzhen.aliyuncs.com/thunisoft/gjr-hexo

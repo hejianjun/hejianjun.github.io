@@ -1,4 +1,3 @@
 #!/bin/sh
-npm --registry=https://registry.npm.taobao.org install
-npm install -g hexo-cli --registry http://r.cnpmjs.org/
-hexo generate
+npm install --registry=https://registry.npm.taobao.org
+npx hexo-cli generate --registry http://r.cnpmjs.org/

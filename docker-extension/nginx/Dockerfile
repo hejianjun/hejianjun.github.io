@@ -1,8 +1,8 @@
-FROM node
+FROM nginx
 MAINTAINER hejianjun
-ENV APP_PATH /usr/share/html
+COPY nginx.conf /etc/nginx/nginx.conf
+ENV APP_PATH /usr/share/nginx/html
 WORKDIR $APP_PATH
-COPY . $APP_PATH
-RUN ["npm", "install","--registry=https://registry.npm.taobao.org"]
+ADD . $APP_PATH
 RUN ["npm","install","-g","hexo-cli","--registry http://r.cnpmjs.org/"]
 CMD ["hexo","server"]
