@@ -4,7 +4,7 @@
 code.language=node8.x
 
 # docker构建所用的Dockerfile的路径
-docker.file=docker-extension/Dockerfile
+docker.file=Dockerfile
 
 # 构建命令
 # build.command=sh build.sh
