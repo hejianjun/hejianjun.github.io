@@ -7,7 +7,7 @@ code.language=node8.x
 docker.file=Dockerfile
 
 # 构建命令
-# build.command=sh start
+# build.command=sh build
 
 # 构建打包使用的打包文件
 # build.output=.deploy_git
