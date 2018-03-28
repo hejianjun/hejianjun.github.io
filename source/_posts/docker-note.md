@@ -11,6 +11,10 @@ typora-root-url: ..
 
 docker有点像虚拟机不过比虚拟机性能要好一些
 <!--more-->
+## 登录私有仓库
+```bash
+docker login registry.cn-shenzhen.aliyuncs.com
+```
 
 ## 运行镜像
 ```bash
@@ -19,10 +23,10 @@ docker run 镜像地址/镜像名:tag
 这个指令如果本地有会运行本地的images，没有会从远程下载
 下面是例子
 ```bash
-docker run registry.cn-shenzhen.aliyuncs.com/thunisoft/gzyf:latest
+docker run registry.cn-shenzhen.aliyuncs.com/thunisoft/gjr-hexo:latest
 ```
 这个指令就是从registry.cn-shenzhen.aliyuncs.com/thunisoft的远程仓库下载镜像gzyf，tag是latest
 上面这个指令运行完就会执行这个镜像里的程序，后面接`-it /bin/bash`可以进入交互模式调试容器
 ```bash
-docker run registry.cn-shenzhen.aliyuncs.com/thunisoft/gzyf:latest -it /bin/bash
+docker run registry.cn-shenzhen.aliyuncs.com/thunisoft/gjr-hexo:latest -it /bin/bash
 ```
