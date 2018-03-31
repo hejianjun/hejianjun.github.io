@@ -45,7 +45,7 @@ docker run 镜像地址/镜像名:tag
 ```bash
 docker run registry.cn-shenzhen.aliyuncs.com/thunisoft/gjr-hexo:latest
 ```
-这个指令就是从registry.cn-shenzhen.aliyuncs.com/thunisoft的远程仓库下载镜像gzyf，tag是latest
+这个指令就是从registry.cn-shenzhen.aliyuncs.com/thunisoft的远程仓库下载镜像gjr-hexo，tag是latest
 上面这个指令运行完就会执行这个镜像里的程序，后面接`-it /bin/bash`可以进入交互模式调试容器
 ```bash
 docker run -it registry.cn-shenzhen.aliyuncs.com/thunisoft/gjr-hexo:latest /bin/bash
