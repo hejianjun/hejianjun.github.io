@@ -80,12 +80,14 @@ deploy:
   type: git
   repo: git@github.com:hejianjun/hejianjun.github.io.git
   branch: master
-  
+
+sitemap:  
+  path: sitemap.xml 
 # OSS Images Config
 asset_oss:
-  enable: true
+  enable: false
   oss_url: https://hejianjun.github.io
-  oss_root: /static/ # optional default '/'
+  oss_root: /# optional default '/'
   oss_img_path: /images/ # optional for ossimg tag
   oss_acid: LTAI6OlkXOoSSzp8
   oss_ackey: sxwSHiaCZuqqTsn36w065MGTmBdohS
