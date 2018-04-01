@@ -82,15 +82,4 @@ deploy:
   branch: master
 
 sitemap:  
-  path: sitemap.xml 
-# OSS Images Config
-asset_oss:
-  enable: false
-  oss_url: https://hejianjun.github.io
-  oss_root: /# optional default '/'
-  oss_img_path: /images/ # optional for ossimg tag
-  oss_acid: LTAI6OlkXOoSSzp8
-  oss_ackey: sxwSHiaCZuqqTsn36w065MGTmBdohS
-  oss_region: oss-cn-shanghai
-  oss_bucket: gjr-hexo
-  oss_internal: false # optional is internal default false
+  path: sitemap.xml
