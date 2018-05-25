@@ -1,5 +1,5 @@
 ---
-title: Spring Aop的配置
+title: Spring AOP的配置
 date: 2018-05-25 00:00:00
 tags: spring AOP
 categories:
