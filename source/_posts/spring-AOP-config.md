@@ -1,11 +1,11 @@
 ---
 title: Spring AOP的配置
 date: 2018-05-25 00:00:00
-tags: spring AOP
+tags: [ AOP , spring ]
 categories:
   - technology
-  - spring
   - AOP
+  - spring
 typora-root-url: ..
 ---
 
