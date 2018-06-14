@@ -1,7 +1,7 @@
 ---
 title: Spring注解缓存
-date: 2018-06-14 00:00:00
-tags: [ cache，spring]
+date: 2018-06-14 02:00:00
+tags: [ cache , spring ]
 categories:
   - technology
   - cache
@@ -10,7 +10,7 @@ typora-root-url: ..
 ---
 
 ## Spring注解缓存
-
+<!--more-->
 Spring 3.1之后，引入了注解缓存技术，其本质上不是一个具体的缓存实现方案，而是一个对缓存使用的抽象，通过在既有代码中添加少量自定义的各种annotation，即能够达到使用缓存对象和缓存方法的返回对象的效果。Spring的缓存技术具备相当的灵活性，不仅能够使用SpEL（Spring Expression Language）来定义缓存的key和各种condition，还提供开箱即用的缓存临时存储方案，也支持和主流的专业缓存集成。其特点总结如下：
 
 - 少量的配置annotation注释即可使得既有代码支持缓存；

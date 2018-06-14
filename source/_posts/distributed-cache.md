@@ -1,7 +1,7 @@
 ---
 title: 分布式缓存
-date: 2018-06-14 00:00:00
-tags: [distributed， cache]
+date: 2018-06-14 01:00:00
+tags: [ distributed , cache ]
 categories:
   - technology
   - cache
