@@ -16,7 +16,7 @@ typora-root-url: ..
 
 1. 文件->新建转换
 
-   ![create_transformation](/images/create_transformation.gif)
+![create_transformation](/images/create_transformation.gif)
 
 设置转换的属性
 ---

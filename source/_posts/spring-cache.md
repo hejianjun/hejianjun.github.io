@@ -20,7 +20,7 @@ Spring 3.1之后，引入了注解缓存技术，其本质上不是一个具体�
 
 和Spring的事务管理类似，Spring Cache的关键原理就是Spring AOP，通过Spring AOP实现了在方法调用前、调用后获取方法的入参和返回值，进而实现了缓存的逻辑。而Spring Cache利用了Spring AOP的动态代理技术，即当客户端尝试调用pojo的foo()方法的时候，给它的不是pojo自身的引用，而是一个动态生成的代理类。
 
-![Spring动态代理调用图](images/spring%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E8%B0%83%E7%94%A8%E5%9B%BE.png)
+![Spring动态代理调用图](/images/spring%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E8%B0%83%E7%94%A8%E5%9B%BE.png)
 
 图12 Spring动态代理调用图
 
@@ -55,7 +55,7 @@ Spring 3.1之后，引入了注解缓存技术，其本质上不是一个具体�
 
 增加作用域的概念，解决商家信息变更下，多重重要信息实时更新的问题。
 
-![img](images/%E5%9F%9F%E7%BC%93%E5%AD%98%E5%A4%84%E7%90%86%E5%9B%BE.png)
+![img](/images/%E5%9F%9F%E7%BC%93%E5%AD%98%E5%A4%84%E7%90%86%E5%9B%BE.png)
 
 图13 域缓存处理图
 

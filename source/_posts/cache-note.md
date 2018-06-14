@@ -186,7 +186,7 @@ Ehcache是现在最流行的纯Java开源缓存框架，配置简单、结构清
 
 Ehcache是现在最流行的纯Java开源缓存框架，配置简单、结构清晰、功能强大，是一个非常轻量级的缓存实现，我们常用的Hibernate里面就集成了相关缓存功能。
 
-![ehcache框架图](images/ehcach%E6%A1%86%E6%9E%B6%E5%9B%BE.png)
+![ehcache框架图](/images/ehcach%E6%A1%86%E6%9E%B6%E5%9B%BE.png)
 
 图3 Ehcache框架图
 
@@ -209,7 +209,7 @@ Ehcache是现在最流行的纯Java开源缓存框架，配置简单、结构清
 
 图4反映了数据在各个层之间的流转，同时也体现了各层数据的一个生命周期。
 
-![ehcach缓存数据流转图](images/ehcach%E7%BC%93%E5%AD%98%E6%95%B0%E6%8D%AE%E6%B5%81%E8%BD%AC%E5%9B%BE.png)
+![ehcach缓存数据流转图](/images/ehcach%E7%BC%93%E5%AD%98%E6%95%B0%E6%8D%AE%E6%B5%81%E8%BD%AC%E5%9B%BE.png)
 
 图4 缓存数据流转图（L1:本地内存层；L2:Terracotta服务节点层)
 
@@ -299,7 +299,7 @@ Guava Cache的架构设计灵感来源于ConcurrentHashMap，我们前面也提�
 
 Guava Cache继承了ConcurrentHashMap的思路，使用多个segments方式的细粒度锁，在保证线程安全的同时，支持高并发场景需求。Cache类似于Map，它是存储键值对的集合，不同的是它还需要处理evict、expire、dynamic load等算法逻辑，需要一些额外信息来实现这些操作。对此，根据面向对象思想，需要做方法与数据的关联封装。如图5所示cache的内存数据模型，可以看到，使用ReferenceEntry接口来封装一个键值对，而用ValueReference来封装Value值，之所以用Reference命令，是因为Cache要支持WeakReference Key和SoftReference、WeakReference value。
 
-![guavacache数据结构图](images/guavacache%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9B%BE.png)
+![guavacache数据结构图](/images/guavacache%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9B%BE.png)
 
 图5 Guava Cache数据结构图
 

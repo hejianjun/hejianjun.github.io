@@ -14,9 +14,9 @@ typora-root-url: ..
 
 memcached是应用较广的开源分布式缓存产品之一，它本身其实不提供分布式解决方案。在服务端，memcached集群环境实际就是一个个memcached服务器的堆积，环境搭建较为简单；cache的分布式主要是在客户端实现，通过客户端的路由处理来达到分布式解决方案的目的。客户端做路由的原理非常简单，应用服务器在每次存取某key的value时，通过某种算法把key映射到某台memcached服务器nodeA上，因此这个key所有操作都在nodeA上，结构图如图6、图7所示。
 
-![memcached客户端路由图](images/memcached%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%B7%AF%E7%94%B1%E5%9B%BE.png)
+![memcached客户端路由图](/images/memcached%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%B7%AF%E7%94%B1%E5%9B%BE.png)
 图6 memcached客户端路由图
-![memcached一致性hash示例图](images//memcached%E4%B8%80%E8%87%B4%E6%80%A7hash%E7%A4%BA%E4%BE%8B%E5%9B%BE.png)
+![memcached一致性hash示例图](/images/memcached%E4%B8%80%E8%87%B4%E6%80%A7hash%E7%A4%BA%E4%BE%8B%E5%9B%BE.png)
 
 图7 memcached一致性hash示例图
 
@@ -24,7 +24,7 @@ memcached客户端采用一致性hash算法作为路由策略，如图7，相对
 
 memcached是一个高效的分布式内存cache，了解memcached的内存管理机制，才能更好的掌握memcached，让我们可以针对我们数据特点进行调优，让其更好的为我所用。我们知道memcached仅支持基础的key-value键值对类型数据存储。在memcached内存结构中有两个非常重要的概念：slab和chunk。如图8所示。
 
-![memcached内存结构图](images/memcached%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84%E5%9B%BE.png)
+![memcached内存结构图](/images/memcached%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84%E5%9B%BE.png)
 
 图8 memcached内存结构图
 
@@ -49,7 +49,7 @@ memcached内存管理采取预分配、分组管理的方式，分组管理就�
 
 Redis是一个远程内存数据库（非关系型数据库），性能强劲，具有复制特性以及解决问题而生的独一无二的数据模型。它可以存储键值对与5种不同类型的值之间的映射，可以将存储在内存的键值对数据持久化到硬盘，可以使用复制特性来扩展读性能，还可以使用客户端分片来扩展写性能。
 
-![Redis数据模型图](images/redis%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E5%9B%BE.png)
+![Redis数据模型图](/images/redis%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E5%9B%BE.png)
 
 图9 Redis数据模型图
 
@@ -70,9 +70,9 @@ Redis的持久化使用了Buffer I/O，所谓Buffer I/O是指Redis对持久化�
 
 与memcached客户端支持分布式方案不同，Redis更倾向于在服务端构建分布式存储，如图10、11。
 
-![Redis分布式集群图1](images/redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%9B%BE1.png)
+![Redis分布式集群图1](/images/redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%9B%BE1.png)
 图10 Redis分布式集群图1
-![Redis分布式集群图2](images/redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%9B%BE2.png)
+![Redis分布式集群图2](/images/redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%9B%BE2.png)
 
 图11 Redis分布式集群图2
 
