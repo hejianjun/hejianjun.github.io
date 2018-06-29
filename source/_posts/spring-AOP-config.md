@@ -146,3 +146,5 @@ public void doBefore(CommonParent commonParent) {
 <aop:config proxy-target-class="true">
 </aop:config>
 ```
+
+[实例代码下载](/zip/SpringAOPExample.zip)
