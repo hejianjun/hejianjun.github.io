@@ -80,29 +80,54 @@ typora-root-url: ..
 简单代码示例如下：
 
 ```java
-    public void UseLocalCache(){
-     //一个本地的缓存变量
-     Map<String, Object> localCacheStoreMap = new HashMap<String, Object>();
+package com.thunisoft.local;
 
-    List<Object> infosList = this.getInfoList();
-    for(Object item:infosList){
-        if(localCacheStoreMap.containsKey(item)){ //缓存命中 使用缓存数据
-            // todo
-        } else { // 缓存未命中  IO获取数据，结果存入缓存
-            Object valueObject = this.getInfoFromDB();
-            localCacheStoreMap.put(valueObject.toString(), valueObject);
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+public class UseLocalCache {
+    /**
+     * 一个本地的缓存变量
+     */
+    private Map<Integer, Object> localCacheStoreMap = new HashMap<Integer, Object>();
+
+    private List<Integer> infosList = this.getInfoList();
+
+    public List getList() {
+        List newList = new ArrayList<Object>();
+        for (Integer item : infosList) {
+            //缓存命中 使用缓存数据
+            if (localCacheStoreMap.containsKey(item)) {
+                newList.add(localCacheStoreMap.get(item));
+            } else { // 缓存未命中  IO获取数据，结果存入缓存
+                Object valueObject = this.getInfoFromDB(item);
+                localCacheStoreMap.put(item, valueObject);
+                newList.add(valueObject);
+            }
         }
+        return newList;
+    }
+
+    /**
+     * 示例
+     */
+    private List<Integer> getInfoList() {
+        return new ArrayList<Integer>() {{
+            add(1);
+            add(3);
+        }};
+    }
+
+    /**
+     * 示例数据库IO获取
+     */
+    private Object getInfoFromDB(Integer item) {
+        return new Object();
     }
 }
-//示例
-private List<Object> getInfoList(){
-    return new ArrayList<Object>();
-}
-//示例数据库IO获取
-private Object getInfoFromDB(){
-    return new Object();
-}
+
 
 ```
 
@@ -113,7 +138,7 @@ private Object getInfoFromDB(){
 最常用的单例实现静态资源缓存，代码示例如下：
 
 ```java
-      public class CityUtils {
+public class CityUtils {
       private static final HttpClient httpClient = ServerHolder.createClientWithPool(); 
       private static Map<Integer, String> cityIdNameMap = new HashMap<Integer, String>();
       private static Map<Integer, String> districtIdNameMap = new HashMap<Integer, String>();
@@ -173,8 +198,6 @@ private Object getInfoFromDB(){
 ```
 
 业务中常用的配置信息，通过静态变量一次获取缓存内存中，减少频繁的I/O读取，静态变量实现类间可共享，进程内可共享，缓存的实时性稍差。
-
-为了解决本地缓存数据的实时性问题，目前大量使用的是使用http接口刷新缓存
 
 >**这类缓存实现，优点是能直接在heap区内读写，最快也最方便；缺点同样是受heap区域影响，缓存的数据量非常有限，同时缓存时间受GC影响。主要满足单机场景下的小数据量缓存需求，同时对缓存数据的变更无需太敏感感知，如上一般配置管理、基础静态数据等场景。**
 
