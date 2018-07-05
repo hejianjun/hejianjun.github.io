@@ -20,6 +20,8 @@ WebFlux 模块的名称是 spring-webflux，名称中的 Flux 来源于 Reactor 
 
 本文从三个方面对 WebFlux 进行介绍。首先是使用经典的基于 Java 注解的编程模型来进行开发，其次是使用 WebFlux 新增的函数式编程模型来进行开发，最后介绍 WebFlux 应用的测试。通过这样循序渐进的方式让读者了解 WebFlux 应用开发的细节。
 
+<!--more-->
+
 ## Java 注解编程模型
 
 基于 Java 注解的编程模型，对于使用过 Spring MVC 的开发人员来说是再熟悉不过的。在 WebFlux 应用中使用同样的模式，容易理解和上手。我们先从最经典的 Hello World 的示例开始说明。代码清单 1 中的 `BasicController` 是 REST API 的控制器，通过`@RestController` 注解来声明。在 `BasicController` 中声明了一个 URI 为`/hello_world` 的映射。其对应的方法 `sayHelloWorld(`的返回值是 `Mono<String>`类型，其中包含的字符串"Hello World"会作为 HTTP 的响应内容。
