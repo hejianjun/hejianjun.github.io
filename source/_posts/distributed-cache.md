@@ -8,6 +8,7 @@ categories:
 typora-root-url: ..
 ---
 ## 分布式缓存
+缓存大致可以分为两类，一种是应用内缓存，比如Map(简单的数据结构)，以及EH Cache(Java第三方库)，另一种就是缓存组件，比如Memached，Redis。
 <!--more-->
 
 ### memcached缓存

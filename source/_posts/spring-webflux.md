@@ -13,14 +13,14 @@ typora-root-url: ..
 ## WebFlux 简介
 
 ![WebFlux](/images/spring-webflux.png)
-
+<!--more-->
 WebFlux 模块的名称是 spring-webflux，名称中的 Flux 来源于 Reactor 中的类 `Flux`。该模块中包含了对反应式 HTTP、服务器推送事件和 WebSocket 的客户端和服务器端的支持。对于开发人员来说，比较重要的是服务器端的开发，这也是本文的重点。在服务器端，WebFlux 支持两种不同的编程模型：第一种是 Spring MVC 中使用的基于 Java 注解的方式；第二种是基于 Java 8 的 lambda 表达式的函数式编程模型。这两种编程模型只是在代码编写方式上存在不同。它们运行在同样的反应式底层架构之上，因此在运行时是相同的。WebFlux 需要底层提供运行时的支持，WebFlux 可以运行在支持 Servlet 3.1 非阻塞 IO API 的 Servlet 容器上，或是其他异步运行时环境，如 Netty 和 Undertow。
 
 最方便的创建 WebFlux 应用的方式是使用 Spring Boot 提供的应用模板。直接访问 Spring Initializ 网站（http://start.spring.io/），选择创建一个 Maven 或 Gradle 项目。Spring Boot 的版本选择 2.0.0 M2。在添加的依赖中，选择 Reactive Web。最后输入应用所在的分组和名称，点击进行下载即可。需要注意的是，只有在选择了 Spring Boot 2.0.0 M2 之后，依赖中才可以选择 Reactive Web。下载完成之后可以导入到 IDE 中进行编辑。本文的示例代码使用 Intellij IDEA 2017.2 进行编写。
 
 本文从三个方面对 WebFlux 进行介绍。首先是使用经典的基于 Java 注解的编程模型来进行开发，其次是使用 WebFlux 新增的函数式编程模型来进行开发，最后介绍 WebFlux 应用的测试。通过这样循序渐进的方式让读者了解 WebFlux 应用开发的细节。
 
-<!--more-->
+
 
 ## Java 注解编程模型
 
