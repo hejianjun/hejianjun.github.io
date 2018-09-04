@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="分布式缓存">
+<meta name="description" content="分布式缓存缓存大致可以分为两类，一种是应用内缓存，比如Map(简单的数据结构)，以及EH Cache(Java第三方库)，另一种就是缓存组件，比如Memached，Redis。">
 <meta name="keywords" content="cache,distributed">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分布式缓存">
 <meta property="og:url" content="http://blog.gaojunru.com/2018/06/14/distributed-cache/index.html">
 <meta property="og:site_name" content="剑君 の Blog">
-<meta property="og:description" content="分布式缓存">
+<meta property="og:description" content="分布式缓存缓存大致可以分为两类，一种是应用内缓存，比如Map(简单的数据结构)，以及EH Cache(Java第三方库)，另一种就是缓存组件，比如Memached，Redis。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://blog.gaojunru.com/images/memcached%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%B7%AF%E7%94%B1%E5%9B%BE.png">
 <meta property="og:image" content="http://blog.gaojunru.com/images/memcached%E4%B8%80%E8%87%B4%E6%80%A7hash%E7%A4%BA%E4%BE%8B%E5%9B%BE.png">
@@ -93,10 +93,10 @@
 <meta property="og:image" content="http://blog.gaojunru.com/images/redis%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E5%9B%BE.png">
 <meta property="og:image" content="http://blog.gaojunru.com/images/redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%9B%BE1.png">
 <meta property="og:image" content="http://blog.gaojunru.com/images/redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E5%9B%BE2.png">
-<meta property="og:updated_time" content="2018-06-15T06:33:15.570Z">
+<meta property="og:updated_time" content="2018-09-04T06:11:25.199Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式缓存">
-<meta name="twitter:description" content="分布式缓存">
+<meta name="twitter:description" content="分布式缓存缓存大致可以分为两类，一种是应用内缓存，比如Map(简单的数据结构)，以及EH Cache(Java第三方库)，另一种就是缓存组件，比如Memached，Redis。">
 <meta name="twitter:image" content="http://blog.gaojunru.com/images/memcached%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%B7%AF%E7%94%B1%E5%9B%BE.png">
 
 
@@ -370,7 +370,7 @@
       
 
       
-        <h2 id="分布式缓存"><a href="#分布式缓存" class="headerlink" title="分布式缓存"></a>分布式缓存</h2><a id="more"></a>
+        <h2 id="分布式缓存"><a href="#分布式缓存" class="headerlink" title="分布式缓存"></a>分布式缓存</h2><p>缓存大致可以分为两类，一种是应用内缓存，比如Map(简单的数据结构)，以及EH Cache(Java第三方库)，另一种就是缓存组件，比如Memached，Redis。<br><a id="more"></a></p>
 <h3 id="memcached缓存"><a href="#memcached缓存" class="headerlink" title="memcached缓存"></a>memcached缓存</h3><p>memcached是应用较广的开源分布式缓存产品之一，它本身其实不提供分布式解决方案。在服务端，memcached集群环境实际就是一个个memcached服务器的堆积，环境搭建较为简单；cache的分布式主要是在客户端实现，通过客户端的路由处理来达到分布式解决方案的目的。客户端做路由的原理非常简单，应用服务器在每次存取某key的value时，通过某种算法把key映射到某台memcached服务器nodeA上，因此这个key所有操作都在nodeA上，结构图如图6、图7所示。</p>
 <p><img src="/images/memcached%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%B7%AF%E7%94%B1%E5%9B%BE.png" alt="memcached客户端路由图"><br>图6 memcached客户端路由图<br><img src="/images/memcached%E4%B8%80%E8%87%B4%E6%80%A7hash%E7%A4%BA%E4%BE%8B%E5%9B%BE.png" alt="memcached一致性hash示例图"></p>
 <p>图7 memcached一致性hash示例图</p>
@@ -564,7 +564,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -575,7 +575,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
