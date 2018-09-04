@@ -1,3 +1,12 @@
+---
+title: Apache Commons
+date: 2018-09-04 12:42:47
+tags: Apache Commons
+categories:
+  - technology
+  - Apache Commons
+typora-root-url: ..
+---
 # Apache Commons
 
 **Apache Commons**是Apache软件基金会的项目，曾隶属于Jakarta项目。Commons的目的是提供可重用的、开源的Java代码。Commons由三部分组成：Proper（是一些已发布的项目）、Sandbox（是一些正在开发的项目）和Dormant（是一些刚启动或者已经停止维护的项目）。
