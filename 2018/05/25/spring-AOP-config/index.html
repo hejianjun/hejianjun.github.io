@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="AOP,spring," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="基于XML配置的Spring AOP基于XML配置的Spring AOP需要引入AOP配置的Schema，然后我们就可以使用AOP Schema下定义的config、aspect、pointcut等标签进行Spring AOP配置了。 1234567891011&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&amp;lt;beans xmlns=&quot;http://w">
+<meta name="keywords" content="AOP,spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring AOP的配置">
+<meta property="og:url" content="http://blog.gaojunru.com/2018/05/25/spring-AOP-config/index.html">
+<meta property="og:site_name" content="剑君 の Blog">
+<meta property="og:description" content="基于XML配置的Spring AOP基于XML配置的Spring AOP需要引入AOP配置的Schema，然后我们就可以使用AOP Schema下定义的config、aspect、pointcut等标签进行Spring AOP配置了。 1234567891011&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&amp;lt;beans xmlns=&quot;http://w">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-29T03:09:48.531Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring AOP的配置">
+<meta name="twitter:description" content="基于XML配置的Spring AOP基于XML配置的Spring AOP需要引入AOP配置的Schema，然后我们就可以使用AOP Schema下定义的config、aspect、pointcut等标签进行Spring AOP配置了。 1234567891011&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&amp;lt;beans xmlns=&quot;http://w">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.gaojunru.com/2018/05/25/spring-AOP-config/"/>
+
+
+
+
+
+  <title>Spring AOP的配置 | 剑君 の Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">剑君 の Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.gaojunru.com/2018/05/25/spring-AOP-config/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hejianjun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="剑君 の Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Spring AOP的配置</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-25T00:00:00+08:00">
+                2018-05-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index">
+                    <span itemprop="name">technology</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/AOP/" itemprop="url" rel="index">
+                    <span itemprop="name">AOP</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/AOP/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="基于XML配置的Spring-AOP"><a href="#基于XML配置的Spring-AOP" class="headerlink" title="基于XML配置的Spring AOP"></a>基于XML配置的Spring AOP</h1><p>基于XML配置的Spring AOP需要引入AOP配置的Schema，然后我们就可以使用AOP Schema下定义的config、aspect、pointcut等标签进行Spring AOP配置了。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:p</span>=<span class="string">"http://www.springframework.org/schema/p"</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:aop</span>=<span class="string">"http://www.springframework.org/schema/aop"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">     http://www.springframework.org/schema/beans/spring-beans-4.1.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">     http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="tag"><span class="string">     http://www.springframework.org/schema/context/spring-context-4.1.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>基于XML配置的Spring AOP的核心配置是config元素，其它的诸如切面配置、切入点配置等都是配置在它的下面的，所以我们需要先定义一个config元素。</p>
+<h2 id="配置切面"><a href="#配置切面" class="headerlink" title="配置切面"></a>配置切面</h2><p>切面的配置是通过aspect元素配置的，我们需要通过其ref属性指定切面类对应的Spring bean的id或name，还可以通过其order属性指定切面类的在拦截的时候的优先级。需要说明的是在使用Spring时基于XML的配置和基于注解的配置往往是可以混用的，所以在下面示例中我们使用的切面类引用不一定非得在Spring的bean配置文件中进行配置。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"schemaBasedAspect"</span> <span class="attr">class</span>=<span class="string">"com.elim.spring.aop.aspect.SchemaBasedAspect"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 基于XML的AOP配置是基于config元素开始的 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 定义切面 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:aspect</span> <span class="attr">id</span>=<span class="string">"aspect1"</span> <span class="attr">ref</span>=<span class="string">"schemaBasedAspect"</span> <span class="attr">order</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">aop:aspect</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="配置切入点"><a href="#配置切入点" class="headerlink" title="配置切入点"></a>配置切入点</h2><p>切入点可以是直接配置在config元素下的，意为顶级切入点，也可以是配置在指定的aspect下面的。切入点的配置是通过pointcut元素来配置的，在配置的时候我们需要指定id和expression属性，expression属性就对应的是切入点的表达式，其配置规则跟基于Aspectj注解配置时的规则是一样的。如下示例中就定义了两个pointcut，一个是顶级的，一个是在aspectj1中定义的。需要注意的是顶级的Pointcut必须定义在aspect之前。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">expression</span>=<span class="string">"bean(userService)"</span> <span class="attr">id</span>=<span class="string">"userServicePointCut2"</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 定义切面 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:aspect</span> <span class="attr">id</span>=<span class="string">"aspect1"</span> <span class="attr">ref</span>=<span class="string">"schemaBasedAspect"</span> <span class="attr">order</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">expression</span>=<span class="string">"bean(userService)"</span> <span class="attr">id</span>=<span class="string">"userServicePointCut"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">aop:aspect</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果我们的切入点是以Aspectj注解的形式定义在类里面的，我们也可以像在前面介绍的基于Aspectj注解配置那样进行引用，如在下面这个配置就是使用的在SchemaBasedAspect类的pointcut方法上通过@Pointcut指定的表达式。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">expression</span>=<span class="string">"com.elim.spring.aop.aspect.SchemaBasedAspect.pointcut()"</span> <span class="attr">id</span>=<span class="string">"pointcut"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="配置Advice"><a href="#配置Advice" class="headerlink" title="配置Advice"></a>配置Advice</h2><p>切面的最终目的是为了拦截指定切入点的方法执行，然后加入自己特定逻辑的，有了切面定义和切入点的定义后，我们需要定义在哪些切入点上需要使用切面的哪些Advice，即执行切面类的哪些方法。我们知道Advice有before、after、after returning、after throwing和around五种，对应的分别是before、after、after-returning、after-throwing和around标签，它们都是定义在aspect标签下的。这五类Advice在定义时的用法基本上是类似的，通过method方法指定Advice对应的是aspect类的哪个方法，然后通过pointcut指定切入点的表达式，或者通过pointcut-ref指定需要引用的是哪个切入点。如下示例中我们就定义了两个Advice，before Advice指定了对应的是切面类的doBefore方法，然后通过pointcut-ref指定需要使用的切入点是id为userServicePointCut的切入点；around Advice指定了对应的是切面类的doAround方法，然后通过pointcut直接指定了需要作用的切入点表达式。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aop:aspect</span> <span class="attr">id</span>=<span class="string">"aspect1"</span> <span class="attr">ref</span>=<span class="string">"schemaBasedAspect"</span> <span class="attr">order</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 定义一个Around Advice --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:before</span> <span class="attr">method</span>=<span class="string">"doBefore"</span> <span class="attr">pointcut-ref</span>=<span class="string">"userServicePointCut"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:around</span> <span class="attr">method</span>=<span class="string">"doAround"</span> <span class="attr">pointcut</span>=<span class="string">"bean(userService)"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">expression</span>=<span class="string">"bean(userService)"</span> <span class="attr">id</span>=<span class="string">"userServicePointCut"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:aspect</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>和基于注解的配置类似，如果我们需要在afterReturning Advice中访问返回值，我们也可以给对应的处理方法一个返回值对应类型（或Object类型）的参数，然后通过after-returning元素的returning属性指定返回值需要赋予给Advice处理方法的哪个参数，参数名需要一致。同样afterThrowing类型的Advice需要在处理方法中接收抛出的异常时，也可以给定对应的处理方法一个Exception类型的参数，然后通过after-throwing元素的throwing属性指定抛出的异常需要赋值给Advice处理方法的哪个参数。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aop:after-returning</span> <span class="attr">method</span>=<span class="string">"doAfterReturning"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pointcut"</span> <span class="attr">returning</span>=<span class="string">"returnValue"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:after-throwing</span> <span class="attr">method</span>=<span class="string">"doAfterThrowing"</span> <span class="attr">pointcut-ref</span>=<span class="string">"pointcut"</span> <span class="attr">throwing</span>=<span class="string">"ex"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>参数传递也是类似的，在Advice处理方法上给定指定的参数，然后在定义Pointcut表达式的时候加上对应的参数传递限制，如“args(id)”、“this(userService)”等，在需要指定参数的绑定顺序时，可以通过before、around等Advice标签的arg-names属性指定。如下示例中我们就要求id为userServicePointCut的Pointcut需要接收一个参数，这个参数是需要跟对应的Advice处理方法绑定的，而before Advice是使用该Pointcut的，所以就要求id与对应的处理方法参数绑定，而且对应的方法参数名需要是id。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aop:aspect</span> <span class="attr">id</span>=<span class="string">"aspect1"</span> <span class="attr">ref</span>=<span class="string">"schemaBasedAspect"</span> <span class="attr">order</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:before</span> <span class="attr">method</span>=<span class="string">"doBefore"</span> <span class="attr">pointcut-ref</span>=<span class="string">"userServicePointCut"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:around</span> <span class="attr">method</span>=<span class="string">"doAround"</span> <span class="attr">pointcut</span>=<span class="string">"bean(userService)"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">expression</span>=<span class="string">"bean(userService) &amp;amp;&amp;amp; args(id)"</span> <span class="attr">id</span>=<span class="string">"userServicePointCut"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:aspect</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我们对应的doBefore处理方法是这样的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doBefore</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"======================doBefore======================"</span> + id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上面的示例中在定义id为userServicePointcut的表达式的时候用到了“&amp;&amp;”，这是因为在XML中&amp;是特殊字符，我们必须对它进行转义。其实在XML中配置Pointcut表达式时我们可以使用“and”、“or”和“not”替代“&amp;&amp;”、“||”和“!”。</p>
+<h2 id="declare-parents"><a href="#declare-parents" class="headerlink" title="declare-parents"></a>declare-parents</h2><p>在基于注解的形式定义AOP时，我们有一个@DeclareParents注解可以给所有匹配的bean生成的代理默认加上指定的接口实现，并使用默认的实现。如果是基于XML配置时如果想达到对应的效果我们可以通过declare-parents元素来达到对应的效果。示例如下，切面类SchemaBasedAspect有一个doBefore方法接收一个CommonParent参数，我们在配置切面时配置了一个before Advice将调用切面类的doBefore方法；通过declare-parents元素指定service包下面所有的类都实现CommonParent接口，底层在调用的时候将会调用CommonParentImpl的实现。CommonParent接口的源码没有提供，其只定义了一个返回类型为void的doSomething()方法。然后我们的before Advice将拦截id为userService的bean的所有方法调用，注意因为我们声明了所有的Service都将实现CommonParent接口，所以生成的id为userService的bean其实也是实现了CommonParent接口的，在调用的doBefore方法时传递的就是id为userService的bean，我们在doBefore方法中又继续调用CommonParent的doSomething方法就相当于重新调用了id为userService的bean的方法，会造成before Advice循环拦截和调用。很显然此种情况下，我们是不希望CommonParent的方法调用还被拦截的，所以我们在对应的Pointcut表达式上把CommonParent的doSomething方法排除了。在应用注解的时候不用排除也不会循环调用，但是使用XML配置时必须排除。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doBefore</span><span class="params">(CommonParent commonParent)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"======================doBefore======================"</span>);</span><br><span class="line">    commonParent.doSomething();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"schemaBasedAspect"</span> <span class="attr">class</span>=<span class="string">"com.elim.spring.aop.aspect.SchemaBasedAspect"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"commonParent"</span> <span class="attr">class</span>=<span class="string">"com.elim.spring.aop.service.CommonParentImpl"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 基于XML的AOP配置是基于config元素开始的 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:aspect</span> <span class="attr">id</span>=<span class="string">"aspect1"</span> <span class="attr">ref</span>=<span class="string">"schemaBasedAspect"</span> <span class="attr">order</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:before</span> <span class="attr">method</span>=<span class="string">"doBefore"</span> <span class="attr">pointcut-ref</span>=<span class="string">"userServicePointCut"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">expression</span>=<span class="string">"bean(userService) and this(commonParent) and !execution(void com.elim.spring.aop.service.CommonParent.doSomething())"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">id</span>=<span class="string">"userServicePointCut"</span> /&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 加上通用的父类 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:declare-parents</span> <span class="attr">types-matching</span>=<span class="string">"com.elim.spring.aop.service..*"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">implement-interface</span>=<span class="string">"com.elim.spring.aop.service.CommonParent"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">delegate-ref</span>=<span class="string">"commonParent"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">aop:aspect</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="启用CGLIB代理类"><a href="#启用CGLIB代理类" class="headerlink" title="启用CGLIB代理类"></a>启用CGLIB代理类</h2><p>默认情况下当bean实现了接口时Spring AOP是基于JDK的动态代理的，也就是说我们生成的bean只能调用接口中定义的方法，如果我们的bean是没有实现接口的，则会采用CGLIB代理。如果我们希望不管bean是否实现了接口都采用CGLIB代理，则在基于Aspectj注解进行AOP配置时，我们可以通过aspectj-autoproxy元素的proxy-target-class=”true”启用CGLIB代理。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aop:aspectj-autoproxy</span> <span class="attr">proxy-target-class</span>=<span class="string">"true"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果是基于XML的配置时，我们也希望强制使用CGLIB代理时怎么办呢？我们可以在config元素上配置proxy-target-class=”true”。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aop:config</span> <span class="attr">proxy-target-class</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><a href="/zip/SpringAOPExample.zip">实例代码下载</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AOP/" rel="tag"># AOP</a>
+          
+            <a href="/tags/spring/" rel="tag"># spring</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/24/AOP-note/" rel="next" title="AOP笔记">
+                <i class="fa fa-chevron-left"></i> AOP笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/25/aspectJ-AOP/" rel="prev" title="AOP之基于AspectJ注解">
+                AOP之基于AspectJ注解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Hejianjun</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基于XML配置的Spring-AOP"><span class="nav-number">1.</span> <span class="nav-text">基于XML配置的Spring AOP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置切面"><span class="nav-number">1.1.</span> <span class="nav-text">配置切面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置切入点"><span class="nav-number">1.2.</span> <span class="nav-text">配置切入点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Advice"><span class="nav-number">1.3.</span> <span class="nav-text">配置Advice</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#declare-parents"><span class="nav-number">1.4.</span> <span class="nav-text">declare-parents</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启用CGLIB代理类"><span class="nav-number">1.5.</span> <span class="nav-text">启用CGLIB代理类</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hejianjun</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
