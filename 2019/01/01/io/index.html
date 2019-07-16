@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="OCJP," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Java中的IOFile（文件特征与管理）Java IO API中的FIle类可以让你访问底层文件系统，通过File类，你可以做到以下几点：  检测文件是否存在 读取文件长度 重命名或移动文件 删除文件 检测某个路径是文件还是目录 读取目录中的文件列表  请注意：File只能访问文件以及文件系统的元数据。如果你想读写文件内容，需要使用FileInputStream、FileOutputStream">
+<meta name="keywords" content="OCJP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IO">
+<meta property="og:url" content="http://blog.gaojunru.com/2019/01/01/io/index.html">
+<meta property="og:site_name" content="剑君 の Blog">
+<meta property="og:description" content="Java中的IOFile（文件特征与管理）Java IO API中的FIle类可以让你访问底层文件系统，通过File类，你可以做到以下几点：  检测文件是否存在 读取文件长度 重命名或移动文件 删除文件 检测某个路径是文件还是目录 读取目录中的文件列表  请注意：File只能访问文件以及文件系统的元数据。如果你想读写文件内容，需要使用FileInputStream、FileOutputStream">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-16T11:57:55.100Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IO">
+<meta name="twitter:description" content="Java中的IOFile（文件特征与管理）Java IO API中的FIle类可以让你访问底层文件系统，通过File类，你可以做到以下几点：  检测文件是否存在 读取文件长度 重命名或移动文件 删除文件 检测某个路径是文件还是目录 读取目录中的文件列表  请注意：File只能访问文件以及文件系统的元数据。如果你想读写文件内容，需要使用FileInputStream、FileOutputStream">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.gaojunru.com/2019/01/01/io/"/>
+
+
+
+
+
+  <title>IO | 剑君 の Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">剑君 の Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.gaojunru.com/2019/01/01/io/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hejianjun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="剑君 の Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">IO</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-01T21:35:55+08:00">
+                2019-01-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index">
+                    <span itemprop="name">technology</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/OCJP/" itemprop="url" rel="index">
+                    <span itemprop="name">OCJP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Java中的IO"><a href="#Java中的IO" class="headerlink" title="Java中的IO"></a>Java中的IO</h1><h2 id="File（文件特征与管理）"><a href="#File（文件特征与管理）" class="headerlink" title="File（文件特征与管理）"></a>File（文件特征与管理）</h2><p>Java IO API中的FIle类可以让你访问底层文件系统，通过File类，你可以做到以下几点：</p>
+<ul>
+<li>检测文件是否存在</li>
+<li>读取文件长度</li>
+<li>重命名或移动文件</li>
+<li>删除文件</li>
+<li>检测某个路径是文件还是目录</li>
+<li>读取目录中的文件列表</li>
+</ul>
+<p>请注意：File只能访问文件以及文件系统的元数据。如果你想读写文件内容，需要使用FileInputStream、FileOutputStream或者RandomAccessFile。如果你正在使用Java NIO，并且想使用完整的NIO解决方案，你会使用到java.nio.FileChannel(否则你也可以使用File)。</p>
+<h3 id="实例化一个java-io-File对象"><a href="#实例化一个java-io-File对象" class="headerlink" title="实例化一个java.io.File对象"></a>实例化一个java.io.File对象</h3><p>在使用File之前，必须拥有一个File对象，这是实例化的代码例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">File file = <span class="keyword">new</span> File(<span class="string">"c:\\data\\input-file.txt"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>很简单，对吗？File类同样拥有多种不同实例化方式的构造函数。</p>
+<h3 id="检测文件是否存在"><a href="#检测文件是否存在" class="headerlink" title="检测文件是否存在"></a>检测文件是否存在</h3><p>当你获得一个File对象之后，可以检测相应的文件是否存在。当文件不存在的时候，构造函数并不会执行失败。你已经准备好创建一个File了，对吧？</p>
+<p>通过调用exists()方法，可以检测文件是否存在，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">File file = <span class="keyword">new</span> File(<span class="string">"c:\\data\\input-file.txt"</span>);</span><br><span class="line"><span class="keyword">boolean</span> fileExists = file.exists();</span><br></pre></td></tr></table></figure></p>
+<h3 id="文件长度"><a href="#文件长度" class="headerlink" title="文件长度"></a>文件长度</h3><p>通过调用length()可以获得文件的字节长度，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">File file = <span class="keyword">new</span> File(<span class="string">"c:\\data\\input-file.txt"</span>);</span><br><span class="line"><span class="keyword">long</span> length = file.length();</span><br></pre></td></tr></table></figure></p>
+<h3 id="重命名或移动文件"><a href="#重命名或移动文件" class="headerlink" title="重命名或移动文件"></a>重命名或移动文件</h3><p>通过调用File类中的renameTo()方法可以重命名(或者移动)文件，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">File file = <span class="keyword">new</span> File(<span class="string">"c:\\data\\input-file.txt"</span>);</span><br><span class="line"><span class="keyword">boolean</span> success = file.renameTo(<span class="keyword">new</span> File(<span class="string">"c:\\data\\new-file.txt"</span>));</span><br></pre></td></tr></table></figure></p>
+<h3 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h3><p>通过调用delete()方法可以删除文件，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">File file = <span class="keyword">new</span> File(<span class="string">"c:\\data\\input-file.txt"</span>);</span><br><span class="line"><span class="keyword">boolean</span> success = file.delete();</span><br></pre></td></tr></table></figure></p>
+<p>delete()方法与rename()方法一样，返回布尔值表明是否成功删除文件，同样也会有相同的操作失败原因。</p>
+<h3 id="检测某个路径是文件还是目录"><a href="#检测某个路径是文件还是目录" class="headerlink" title="检测某个路径是文件还是目录"></a>检测某个路径是文件还是目录</h3><p>File对象既可以指向一个文件，也可以指向一个目录。可以通过调用isDirectory()方法，可以判断当前File对象指向的是文件还是目录。当方法返回值是true时，File指向的是目录，否则指向的是文件，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">File file = <span class="keyword">new</span> File(<span class="string">"c:\\data"</span>);</span><br><span class="line"><span class="keyword">boolean</span> isDirectory = file.isDirectory();</span><br></pre></td></tr></table></figure></p>
+<h3 id="读取目录中的文件列表"><a href="#读取目录中的文件列表" class="headerlink" title="读取目录中的文件列表"></a>读取目录中的文件列表</h3><p>你可以通过调用list()或者listFiles()方法获取一个目录中的所有文件列表。list()方法返回当前File对象指向的目录中所有文件与子目录的字符串名称(译者注：不会返回子目录下的文件及其子目录名称)。listFiles()方法返回当前File对象指向的目录中所有文件与子目录相关联的File对象(译者注：与list()方法类似，不会返回子目录下的文件及其子目录)。代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">File file = <span class="keyword">new</span> File(<span class="string">"c:\\data"</span>);</span><br><span class="line">String[] fileNames = file.list();</span><br><span class="line">File[] files = file.listFiles();</span><br></pre></td></tr></table></figure></p>
+<h2 id="InputStream-And-OutputStream-基于字节的io"><a href="#InputStream-And-OutputStream-基于字节的io" class="headerlink" title="InputStream And OutputStream(基于字节的io)"></a>InputStream And OutputStream(基于字节的io)</h2><h2 id="InputStream（输入流）"><a href="#InputStream（输入流）" class="headerlink" title="InputStream（输入流）"></a><strong>InputStream</strong>（输入流）</h2><p>java.io.InputStream类是所有Java IO输入流的基类。如果你正在开发一个从流中读取数据的组件，请尝试用InputStream替代任何它的子类(比如FileInputStream)进行开发。这么做能够让你的代码兼容任何类型而非某种确定类型的输入流。</p>
+<p>然而仅仅依靠InputStream并不总是可行。如果你需要将读过的数据推回到流中，你必须使用PushbackInputStream，这意味着你的流变量只能是这个类型，否则在代码中就不能调用PushbackInputStream的unread()方法。</p>
+<p>通常使用输入流中的read()方法读取数据。read()方法返回一个整数，代表了读取到的字节的内容(译者注：0 ~ 255)。当达到流末尾没有更多数据可以读取的时候，read()方法返回-1。</p>
+<p>这是一个简单的示例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">InputStream input = <span class="keyword">new</span> FileInputStream(<span class="string">"c:\\data\\input-file.txt"</span>);</span><br><span class="line"><span class="keyword">int</span> data = input.read(); </span><br><span class="line"><span class="keyword">while</span>(data != -<span class="number">1</span>)&#123;</span><br><span class="line">    data = input.read();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="OutputStream（输出流）"><a href="#OutputStream（输出流）" class="headerlink" title="OutputStream（输出流）"></a><strong>OutputStream</strong>（输出流）</h2><p>java.io.OutputStream是Java IO中所有输出流的基类。如果你正在开发一个能够将数据写入流中的组件，请尝试使用OutputStream替代它的所有子类。</p>
+<p>这是一个简单的示例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OutputStream output = <span class="keyword">new</span> FileOutputStream(<span class="string">"c:\\data\\output-file.txt"</span>);</span><br><span class="line">output.write(<span class="string">"Hello World"</span>.getBytes());</span><br><span class="line">output.close();</span><br></pre></td></tr></table></figure></p>
+<h2 id="组合流"><a href="#组合流" class="headerlink" title="组合流"></a><strong>组合流</strong></h2><p>你可以将流整合起来以便实现更高级的输入和输出操作。比如，一次读取一个字节是很慢的，所以可以从磁盘中一次读取一大块数据，然后从读到的数据块中获取字节。为了实现缓冲，可以把InputStream包装到BufferedInputStream中。代码示例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">InputStream input = <span class="keyword">new</span> BufferedInputStream(<span class="keyword">new</span> FileInputStream(<span class="string">"c:\\data\\input-file.txt"</span>));</span><br></pre></td></tr></table></figure></p>
+<p>缓冲同样可以应用到OutputStream中。你可以实现将大块数据批量地写入到磁盘(或者相应的流)中，这个功能由BufferedOutputStream实现。</p>
+<p>缓冲只是通过流整合实现的其中一个效果。你可以把InputStream包装到PushbackInputStream中，之后可以将读取过的数据推回到流中重新读取，在解析过程中有时候这样做很方便。或者，你可以将两个InputStream整合成一个SequenceInputStream。</p>
+<p>将不同的流整合到一个链中，可以实现更多种高级操作。通过编写包装了标准流的类，可以实现你想要的效果和过滤器。</p>
+<h2 id="Reader-And-Writer-基于字符的io"><a href="#Reader-And-Writer-基于字符的io" class="headerlink" title="Reader And Writer(基于字符的io)"></a>Reader And Writer(基于字符的io)</h2><h2 id="Reader"><a href="#Reader" class="headerlink" title="Reader"></a><strong>Reader</strong></h2><p>Reader类是Java IO中所有Reader的基类。子类包括BufferedReader，PushbackReader，InputStreamReader，StringReader和其他Reader。</p>
+<p>这是一个简单的Java IO Reader的例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Reader reader = <span class="keyword">new</span> FileReader(<span class="string">"c:\\data\\myfile.txt"</span>);</span><br><span class="line"><span class="keyword">int</span> data = reader.read();</span><br><span class="line"><span class="keyword">while</span>(data != -<span class="number">1</span>)&#123;</span><br><span class="line">    <span class="keyword">char</span> dataChar = (<span class="keyword">char</span>) data;</span><br><span class="line">    data = reader.read();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>请注意，InputStream的read()方法返回一个字节，意味着这个返回值的范围在0到255之间(当达到流末尾时，返回-1)，Reader的read()方法返回一个字符，意味着这个返回值的范围在0到65535之间(当达到流末尾时，同样返回-1)。这并不意味着Reade只会从数据源中一次读取2个字节，Reader会根据文本的编码，一次读取一个或者多个字节。</p>
+<p>你通常会使用Reader的子类，而不会直接使用Reader。Reader的子类包括InputStreamReader，CharArrayReader，FileReader等等。</p>
+<h2 id="整合Reader与InputStream"><a href="#整合Reader与InputStream" class="headerlink" title="整合Reader与InputStream"></a><strong>整合Reader与InputStream</strong></h2><p>一个Reader可以和一个InputStream相结合。如果你有一个InputStream输入流，并且想从其中读取字符，可以把这个InputStream包装到InputStreamReader中。把InputStream传递到InputStreamReader的构造函数中：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Reader reader = <span class="keyword">new</span> InputStreamReader(inputStream);</span><br></pre></td></tr></table></figure></p>
+<p>在构造函数中可以指定解码方式。</p>
+<h2 id="Writer"><a href="#Writer" class="headerlink" title="Writer"></a><strong>Writer</strong></h2><p>Writer类是Java IO中所有Writer的基类。子类包括BufferedWriter和PrintWriter等等。这是一个Java IO Writer的例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Writer writer = <span class="keyword">new</span> FileWriter(<span class="string">"c:\\data\\file-output.txt"</span>); </span><br><span class="line">writer.write(<span class="string">"Hello World Writer"</span>); </span><br><span class="line">writer.close();</span><br></pre></td></tr></table></figure></p>
+<p>同样，你最好使用Writer的子类，不需要直接使用Writer，因为子类的实现更加明确，更能表现你的意图。常用子类包括OutputStreamWriter，CharArrayWriter，FileWriter等。Writer的write(int c)方法，会将传入参数的低16位写入到Writer中，忽略高16位的数据。</p>
+<h2 id="整合Writer和OutputStream"><a href="#整合Writer和OutputStream" class="headerlink" title="整合Writer和OutputStream"></a><strong>整合Writer和OutputStream</strong></h2><p>与Reader和InputStream类似，一个Writer可以和一个OutputStream相结合。把OutputStream包装到OutputStreamWriter中，所有写入到OutputStreamWriter的字符都将会传递给OutputStream。这是一个OutputStreamWriter的例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Writer writer = <span class="keyword">new</span> OutputStreamWriter(outputStream);</span><br></pre></td></tr></table></figure></p>
+<h2 id="整合Reader和Writer"><a href="#整合Reader和Writer" class="headerlink" title="整合Reader和Writer"></a><strong>整合Reader和Writer</strong></h2><p>和字节流一样，Reader和Writer可以相互结合实现更多更有趣的IO，工作原理和把Reader与InputStream或者Writer与OutputStream相结合类似。举个栗子，可以通过将Reader包装到BufferedReader、Writer包装到BufferedWriter中实现缓冲。以下是例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Reader reader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(...));</span><br><span class="line">Writer writer = <span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> FileWriter(...));</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OCJP/" rel="tag"># OCJP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/01/NoSuchMethodError/" rel="next" title="NoSuchMethodError">
+                <i class="fa fa-chevron-left"></i> NoSuchMethodError
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/01/lambda/" rel="prev" title="Lambda">
+                Lambda <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Hejianjun</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java中的IO"><span class="nav-number">1.</span> <span class="nav-text">Java中的IO</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#File（文件特征与管理）"><span class="nav-number">1.1.</span> <span class="nav-text">File（文件特征与管理）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实例化一个java-io-File对象"><span class="nav-number">1.1.1.</span> <span class="nav-text">实例化一个java.io.File对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测文件是否存在"><span class="nav-number">1.1.2.</span> <span class="nav-text">检测文件是否存在</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件长度"><span class="nav-number">1.1.3.</span> <span class="nav-text">文件长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重命名或移动文件"><span class="nav-number">1.1.4.</span> <span class="nav-text">重命名或移动文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除文件"><span class="nav-number">1.1.5.</span> <span class="nav-text">删除文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测某个路径是文件还是目录"><span class="nav-number">1.1.6.</span> <span class="nav-text">检测某个路径是文件还是目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取目录中的文件列表"><span class="nav-number">1.1.7.</span> <span class="nav-text">读取目录中的文件列表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InputStream-And-OutputStream-基于字节的io"><span class="nav-number">1.2.</span> <span class="nav-text">InputStream And OutputStream(基于字节的io)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InputStream（输入流）"><span class="nav-number">1.3.</span> <span class="nav-text">InputStream（输入流）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OutputStream（输出流）"><span class="nav-number">1.4.</span> <span class="nav-text">OutputStream（输出流）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组合流"><span class="nav-number">1.5.</span> <span class="nav-text">组合流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reader-And-Writer-基于字符的io"><span class="nav-number">1.6.</span> <span class="nav-text">Reader And Writer(基于字符的io)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reader"><span class="nav-number">1.7.</span> <span class="nav-text">Reader</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整合Reader与InputStream"><span class="nav-number">1.8.</span> <span class="nav-text">整合Reader与InputStream</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Writer"><span class="nav-number">1.9.</span> <span class="nav-text">Writer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整合Writer和OutputStream"><span class="nav-number">1.10.</span> <span class="nav-text">整合Writer和OutputStream</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整合Reader和Writer"><span class="nav-number">1.11.</span> <span class="nav-text">整合Reader和Writer</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hejianjun</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

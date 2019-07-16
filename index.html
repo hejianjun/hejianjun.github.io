@@ -259,6 +259,744 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.gaojunru.com/2019/01/01/stream/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hejianjun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="剑君 の Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/01/stream/" itemprop="url">Java 8 中的 Streams API 详解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-01T21:35:55+08:00">
+                2019-01-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index">
+                    <span itemprop="name">technology</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/OCJP/" itemprop="url" rel="index">
+                    <span itemprop="name">OCJP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="什么是-Stream"><a href="#什么是-Stream" class="headerlink" title="什么是 Stream"></a>什么是 Stream</h2><p>Java 8 中的 Stream 是对集合（Collection）对象功能的增强，它专注于对集合对象进行各种非常便利、高效的聚合操作（aggregate operation），或者大批量数据操作 (bulk data operation)。</p>
+<h3 id="什么是聚合操作"><a href="#什么是聚合操作" class="headerlink" title="什么是聚合操作"></a>什么是聚合操作</h3><p>在传统的 J2EE 应用中，Java 代码经常不得不依赖于关系型数据库的聚合操作来完成诸如：</p>
+<ul>
+<li>客户每月平均消费金额</li>
+<li>最昂贵的在售商品</li>
+<li>本周完成的有效订单（排除了无效的）</li>
+<li>取十个数据样本作为首页推荐<br>这类的操作。</li>
+</ul>
+<p>在 Java 7 中，如果要发现 type 为 grocery 的所有交易，然后返回以交易值降序排序好的交易 ID 集合，我们需要这样写：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Transaction&gt; groceryTransactions = <span class="keyword">new</span> Arraylist&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span>(Transaction t: transactions)&#123;</span><br><span class="line"> <span class="keyword">if</span>(t.getType() == Transaction.GROCERY)&#123;</span><br><span class="line">   groceryTransactions.add(t);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line">Collections.sort(groceryTransactions, <span class="keyword">new</span> Comparator()&#123;</span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Transaction t1, Transaction t2)</span></span>&#123;</span><br><span class="line">   <span class="keyword">return</span> t2.getValue().compareTo(t1.getValue());</span><br><span class="line"> &#125;</span><br><span class="line">&#125;);</span><br><span class="line">List&lt;Integer&gt; transactionIds = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span>(Transaction t: groceryTransactions)&#123;</span><br><span class="line"> transactionsIds.add(t.getId());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>而在 Java 8 使用 Stream，代码更加简洁易读；而且使用并发模式，程序执行速度更快。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; transactionsIds = transactions.parallelStream().</span><br><span class="line"> filter(t -&gt; t.getType() == Transaction.GROCERY).</span><br><span class="line"> sorted(comparing(Transaction::getValue).reversed()).</span><br><span class="line"> map(Transaction::getId).</span><br><span class="line"> collect(toList());</span><br></pre></td></tr></table></figure></p>
+<h2 id="Stream-总览"><a href="#Stream-总览" class="headerlink" title="Stream 总览"></a>Stream 总览</h2><h3 id="什么是流"><a href="#什么是流" class="headerlink" title="什么是流"></a>什么是流</h3><p>Stream 不是集合元素，它不是数据结构并不保存数据，它是有关算法和计算的，它更像一个高级版本的 Iterator。原始版本的 Iterator，用户只能显式地一个一个遍历元素并对其执行某些操作；高级版本的 Stream，用户只要给出需要对其包含的元素执行什么操作，比如 “过滤掉长度大于 10 的字符串”、“获取每个字符串的首字母”等，Stream 会隐式地在内部进行遍历，做出相应的数据转换。</p>
+<p>Stream 就如同一个迭代器（Iterator），单向，不可往复，数据只能遍历一次，遍历过一次后即用尽了，就好比流水从面前流过，一去不复返。</p>
+<p>而和迭代器又不同的是，Stream 可以并行化操作，迭代器只能命令式地、串行化操作。顾名思义，当使用串行方式去遍历时，每个 item 读完后再读下一个 item。而使用并行去遍历时，数据会被分成多个段，其中每一个都在不同的线程中处理，然后将结果一起输出。Stream 的并行操作依赖于 Java7 中引入的 Fork/Join 框架（JSR166y）来拆分任务和加速处理过程。Java 的并行 API 演变历程基本如下：</p>
+<ol>
+<li>1.0-1.4 中的 java.lang.Thread</li>
+<li>5.0 中的 java.util.concurrent</li>
+<li>6.0 中的 Phasers 等</li>
+<li>7.0 中的 Fork/Join 框架</li>
+<li>8.0 中的 Lambda</li>
+</ol>
+<p>Stream 的另外一大特点是，数据源本身可以是无限的。</p>
+<h3 id="流的构成"><a href="#流的构成" class="headerlink" title="流的构成"></a>流的构成</h3><p>当我们使用一个流的时候，通常包括三个基本步骤：</p>
+<p>获取一个数据源（source）→ 数据转换→执行操作获取想要的结果，每次转换原有 Stream 对象不改变，返回一个新的 Stream 对象（可以有多次转换），这就允许对其操作可以像链条一样排列，变成一个管道，如下图所示。</p>
+<h5 id="流管道-Stream-Pipeline-的构成"><a href="#流管道-Stream-Pipeline-的构成" class="headerlink" title="流管道 (Stream Pipeline) 的构成"></a>流管道 (Stream Pipeline) 的构成</h5><p><img src="images/stream.png" alt="stream"></p>
+<p>有多种方式生成 Stream Source：</p>
+<p>从 Collection 和数组</p>
+<ul>
+<li>Collection.stream()</li>
+<li>Collection.parallelStream()</li>
+<li>Arrays.stream(T array) or Stream.of()</li>
+</ul>
+<p>从 BufferedReader</p>
+<ul>
+<li>java.io.BufferedReader.lines()</li>
+</ul>
+<p>静态工厂</p>
+<ul>
+<li>java.util.stream.IntStream.range()</li>
+<li>java.nio.file.Files.walk()</li>
+</ul>
+<p>自己构建</p>
+<ul>
+<li>java.util.Spliterator</li>
+</ul>
+<p>其它</p>
+<ul>
+<li>Random.ints()</li>
+<li>BitSet.stream()</li>
+<li>Pattern.splitAsStream(java.lang.CharSequence)</li>
+<li>JarFile.stream()</li>
+</ul>
+<p>流的操作类型分为两种：</p>
+<ul>
+<li><p><strong>Intermediate</strong>：一个流可以后面跟随零个或多个 intermediate 操作。其目的主要是打开流，做出某种程度的数据映射/过滤，然后返回一个新的流，交给下一个操作使用。这类操作都是惰性化的（lazy），就是说，仅仅调用到这类方法，并没有真正开始流的遍历。</p>
+</li>
+<li><p><strong>Terminal</strong>：一个流只能有一个 terminal 操作，当这个操作执行后，流就被使用“光”了，无法再被操作。所以这必定是流的最后一个操作。Terminal 操作的执行，才会真正开始流的遍历，并且会生成一个结果，或者一个 side effect。</p>
+</li>
+</ul>
+<p>还有一种操作被称为 <strong>short-circuiting</strong>。用以指：</p>
+<ul>
+<li><p>对于一个 intermediate 操作，如果它接受的是一个无限大（infinite/unbounded）的 Stream，但返回一个有限的新 Stream。</p>
+</li>
+<li><p>对于一个 terminal 操作，如果它接受的是一个无限大的 Stream，但能在有限的时间计算出结果。</p>
+</li>
+</ul>
+<p>当操作一个无限大的 Stream，而又希望在有限时间内完成操作，则在管道内拥有一个 short-circuiting 操作是必要非充分条件。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> sum = widgets.stream()</span><br><span class="line"> .filter(w -&gt; w.getColor() == RED)</span><br><span class="line"> .mapToInt(w -&gt; w.getWeight())</span><br><span class="line"> .sum();</span><br></pre></td></tr></table></figure>
+<p>stream() 获取当前小物件的 source，filter 和 mapToInt 为 intermediate 操作，进行数据筛选和转换，最后一个 sum() 为 terminal 操作，对符合条件的全部小物件作重量求和。</p>
+<h2 id="流的使用详解"><a href="#流的使用详解" class="headerlink" title="流的使用详解"></a>流的使用详解</h2><p>简单说，对 Stream 的使用就是实现一个 filter-map-reduce 过程，产生一个最终结果，或者导致一个副作用（side effect）。</p>
+<h3 id="流的构造与转换"><a href="#流的构造与转换" class="headerlink" title="流的构造与转换"></a>流的构造与转换</h3><p>下面提供最常见的几种构造 Stream 的样例。</p>
+<p>构造流的几种常见方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. Individual values</span></span><br><span class="line">Stream stream = Stream.of(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>);</span><br><span class="line"><span class="comment">// 2. Arrays</span></span><br><span class="line">String [] strArray = <span class="keyword">new</span> String[] &#123;<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>&#125;;</span><br><span class="line">stream = Stream.of(strArray);</span><br><span class="line">stream = Arrays.stream(strArray);</span><br><span class="line"><span class="comment">// 3. Collections</span></span><br><span class="line">List&lt;String&gt; list = Arrays.asList(strArray);</span><br><span class="line">stream = list.stream();</span><br></pre></td></tr></table></figure></p>
+<p>需要注意的是，对于基本数值型，目前有三种对应的包装类型 Stream：</p>
+<p>IntStream、LongStream、DoubleStream。当然我们也可以用 Stream<integer>、Stream<long> &gt;、Stream<double>，但是 boxing 和 unboxing 会很耗时，所以特别为这三种基本数值型提供了对应的 Stream。</double></long></integer></p>
+<p>Java 8 中还没有提供其它数值型 Stream，因为这将导致扩增的内容较多。而常规的数值型聚合运算可以通过上面三种 Stream 进行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">IntStream.of(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;).forEach(System.out::println);</span><br><span class="line">IntStream.range(<span class="number">1</span>, <span class="number">3</span>).forEach(System.out::println);</span><br><span class="line">IntStream.rangeClosed(<span class="number">1</span>, <span class="number">3</span>).forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+<p>流转换为其它数据结构<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. Array</span></span><br><span class="line">String[] strArray1 = stream.toArray(String[]::<span class="keyword">new</span>);</span><br><span class="line"><span class="comment">// 2. Collection</span></span><br><span class="line">List&lt;String&gt; list1 = stream.collect(Collectors.toList());</span><br><span class="line">List&lt;String&gt; list2 = stream.collect(Collectors.toCollection(ArrayList::<span class="keyword">new</span>));</span><br><span class="line">Set set1 = stream.collect(Collectors.toSet());</span><br><span class="line">Stack stack1 = stream.collect(Collectors.toCollection(Stack::<span class="keyword">new</span>));</span><br><span class="line"><span class="comment">// 3. String</span></span><br><span class="line">String str = stream.collect(Collectors.joining()).toString();</span><br></pre></td></tr></table></figure></p>
+<p>一个 Stream 只可以使用一次，上面的代码为了简洁而重复使用了数次。</p>
+<h3 id="流的操作"><a href="#流的操作" class="headerlink" title="流的操作"></a>流的操作</h3><p>接下来，当把一个数据结构包装成 Stream 后，就要开始对里面的元素进行各类操作了。常见的操作可以归类如下。</p>
+<ul>
+<li>Intermediate：</li>
+</ul>
+<p>map (mapToInt, flatMap 等)、 filter、 distinct、 sorted、 peek、 limit、 skip、 parallel、 sequential、 unordered</p>
+<ul>
+<li>Terminal：</li>
+</ul>
+<p>forEach、 forEachOrdered、 toArray、 reduce、 collect、 min、 max、 count、 anyMatch、 allMatch、 noneMatch、 findFirst、 findAny、 iterator</p>
+<ul>
+<li>Short-circuiting：</li>
+</ul>
+<p>anyMatch、 allMatch、 noneMatch、 findFirst、 findAny、 limit</p>
+<p>我们下面看一下 Stream 的比较典型用法。</p>
+<p><strong> map/flatMap</strong></p>
+<p>我们先来看 map。如果你熟悉 scala 这类函数式语言，对这个方法应该很了解，它的作用就是把 input Stream 的每一个元素，映射成 output Stream 的另外一个元素。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; output = wordList.stream().</span><br><span class="line">map(String::toUpperCase).</span><br><span class="line">collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
+<p>这段代码把所有的单词转换为大写。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; nums = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line">List&lt;Integer&gt; squareNums = nums.stream().</span><br><span class="line">map(n -&gt; n * n).</span><br><span class="line">collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
+<p>这段代码生成一个整数 list 的平方数 {1, 4, 9, 16}。</p>
+<p>从上面例子可以看出，map 生成的是个 1:1 映射，每个输入元素，都按照规则转换成为另外一个元素。还有一些场景，是一对多映射关系的，这时需要 flatMap。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;List&lt;Integer&gt;&gt; inputStream = Stream.of(</span><br><span class="line"> Arrays.asList(<span class="number">1</span>),</span><br><span class="line"> Arrays.asList(<span class="number">2</span>, <span class="number">3</span>),</span><br><span class="line"> Arrays.asList(<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)</span><br><span class="line"> );</span><br><span class="line">Stream&lt;Integer&gt; outputStream = inputStream.</span><br><span class="line">flatMap((childList) -&gt; childList.stream());</span><br></pre></td></tr></table></figure>
+<p>flatMap 把 input Stream 中的层级结构扁平化，就是将最底层元素抽出来放到一起，最终 output 的新 Stream 里面已经没有 List 了，都是直接的数字。</p>
+<p><strong>filter</strong></p>
+<p>filter 对原始 Stream 进行某项测试，通过测试的元素被留下来生成一个新 Stream。</p>
+<p>留下偶数<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Integer[] sixNums = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;;</span><br><span class="line">Integer[] evens =</span><br><span class="line">Stream.of(sixNums).filter(n -&gt; n%<span class="number">2</span> == <span class="number">0</span>).toArray(Integer[]::<span class="keyword">new</span>);</span><br></pre></td></tr></table></figure></p>
+<p>经过条件“被 2 整除”的 filter，剩下的数字为 {2, 4, 6}。</p>
+<p>把单词挑出来<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; output = reader.lines().</span><br><span class="line"> flatMap(line -&gt; Stream.of(line.split(REGEXP))).</span><br><span class="line"> filter(word -&gt; word.length() &gt; <span class="number">0</span>).</span><br><span class="line"> collect(Collectors.toList());</span><br></pre></td></tr></table></figure></p>
+<p>这段代码首先把每行的单词用 flatMap 整理到新的 Stream，然后保留长度不为 0 的，就是整篇文章中的全部单词了。</p>
+<p><strong>forEach</strong></p>
+<p>forEach 方法接收一个 Lambda 表达式，然后在 Stream 的每一个元素上执行该表达式。</p>
+<h5 id="清单-12-打印姓名（forEach-和-pre-java8-的对比）"><a href="#清单-12-打印姓名（forEach-和-pre-java8-的对比）" class="headerlink" title="清单 12. 打印姓名（forEach 和 pre-java8 的对比）"></a>清单 12. 打印姓名（forEach 和 pre-java8 的对比）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// Java 8</span><br><span class="line">roster.stream()</span><br><span class="line"> .filter(p -&gt; p.getGender() == Person.Sex.MALE)</span><br><span class="line"> .forEach(p -&gt; System.out.println(p.getName()));</span><br><span class="line">// Pre-Java 8</span><br><span class="line">for (Person p : roster) &#123;</span><br><span class="line"> if (p.getGender() == Person.Sex.MALE) &#123;</span><br><span class="line"> System.out.println(p.getName());</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对一个人员集合遍历，找出男性并打印姓名。可以看出来，forEach 是为 Lambda 而设计的，保持了最紧凑的风格。而且 Lambda 表达式本身是可以重用的，非常方便。当需要为多核系统优化时，可以 parallelStream().forEach()，只是此时原有元素的次序没法保证，并行的情况下将改变串行时操作的行为，此时 forEach 本身的实现不需要调整，而 Java8 以前的 for 循环 code 可能需要加入额外的多线程逻辑。</p>
+<p>但一般认为，forEach 和常规 for 循环的差异不涉及到性能，它们仅仅是函数式风格与传统 Java 风格的差别。</p>
+<p>另外一点需要注意，forEach 是 terminal 操作，因此它执行后，Stream 的元素就被“消费”掉了，你无法对一个 Stream 进行两次 terminal 运算。下面的代码是错误的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stream.forEach(element -&gt; doOneThing(element));</span><br><span class="line">stream.forEach(element -&gt; doAnotherThing(element));</span><br></pre></td></tr></table></figure></p>
+<p>相反，具有相似功能的 intermediate 操作 peek 可以达到上述目的。如下是出现在该 api javadoc 上的一个示例。</p>
+<h5 id="清单-13-peek-对每个元素执行操作并返回一个新的-Stream"><a href="#清单-13-peek-对每个元素执行操作并返回一个新的-Stream" class="headerlink" title="清单 13. peek 对每个元素执行操作并返回一个新的 Stream"></a>清单 13. peek 对每个元素执行操作并返回一个新的 Stream</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Stream.of(&quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;)</span><br><span class="line"> .filter(e -&gt; e.length() &gt; 3)</span><br><span class="line"> .peek(e -&gt; System.out.println(&quot;Filtered value: &quot; + e))</span><br><span class="line"> .map(String::toUpperCase)</span><br><span class="line"> .peek(e -&gt; System.out.println(&quot;Mapped value: &quot; + e))</span><br><span class="line"> .collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
+<p>forEach 不能修改自己包含的本地变量值，也不能用 break/return 之类的关键字提前结束循环。</p>
+<p><strong>findFirst</strong></p>
+<p>这是一个 termimal 兼 short-circuiting 操作，它总是返回 Stream 的第一个元素，或者空。</p>
+<p>这里比较重点的是它的返回值类型：Optional。这也是一个模仿 Scala 语言中的概念，作为一个容器，它可能含有某值，或者不包含。使用它的目的是尽可能避免 NullPointerException。</p>
+<h5 id="清单-14-Optional-的两个用例"><a href="#清单-14-Optional-的两个用例" class="headerlink" title="清单 14. Optional 的两个用例"></a>清单 14. Optional 的两个用例</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">String strA = &quot; abcd &quot;, strB = null;</span><br><span class="line">print(strA);</span><br><span class="line">print(&quot;&quot;);</span><br><span class="line">print(strB);</span><br><span class="line">getLength(strA);</span><br><span class="line">getLength(&quot;&quot;);</span><br><span class="line">getLength(strB);</span><br><span class="line">public static void print(String text) &#123;</span><br><span class="line"> // Java 8</span><br><span class="line"> Optional.ofNullable(text).ifPresent(System.out::println);</span><br><span class="line"> // Pre-Java 8</span><br><span class="line"> if (text != null) &#123;</span><br><span class="line"> System.out.println(text);</span><br><span class="line"> &#125;</span><br><span class="line"> &#125;</span><br><span class="line">public static int getLength(String text) &#123;</span><br><span class="line"> // Java 8</span><br><span class="line">return Optional.ofNullable(text).map(String::length).orElse(-1);</span><br><span class="line"> // Pre-Java 8</span><br><span class="line">// return if (text != null) ? text.length() : -1;</span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
+<p>在更复杂的 if (xx != null) 的情况中，使用 Optional 代码的可读性更好，而且它提供的是编译时检查，能极大的降低 NPE 这种 Runtime Exception 对程序的影响，或者迫使程序员更早的在编码阶段处理空值问题，而不是留到运行时再发现和调试。</p>
+<p>Stream 中的 findAny、max/min、reduce 等方法等返回 Optional 值。还有例如 IntStream.average() 返回 OptionalDouble 等等。</p>
+<p><strong>reduce</strong></p>
+<p>这个方法的主要作用是把 Stream 元素组合起来。它提供一个起始值（种子），然后依照运算规则（BinaryOperator），和前面 Stream 的第一个、第二个、第 n 个元素组合。从这个意义上说，字符串拼接、数值的 sum、min、max、average 都是特殊的 reduce。例如 Stream 的 sum 就相当于</p>
+<p>Integer sum = integers.reduce(0, (a, b) -&gt; a+b); 或</p>
+<p>Integer sum = integers.reduce(0, Integer::sum);</p>
+<p>也有没有起始值的情况，这时会把 Stream 的前面两个元素组合起来，返回的是 Optional。</p>
+<h5 id="清单-15-reduce-的用例"><a href="#清单-15-reduce-的用例" class="headerlink" title="清单 15. reduce 的用例"></a>清单 15. reduce 的用例</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 字符串连接，concat = &quot;ABCD&quot;</span><br><span class="line">String concat = Stream.of(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;).reduce(&quot;&quot;, String::concat); </span><br><span class="line">// 求最小值，minValue = -3.0</span><br><span class="line">double minValue = Stream.of(-1.5, 1.0, -3.0, -2.0).reduce(Double.MAX_VALUE, Double::min); </span><br><span class="line">// 求和，sumValue = 10, 有起始值</span><br><span class="line">int sumValue = Stream.of(1, 2, 3, 4).reduce(0, Integer::sum);</span><br><span class="line">// 求和，sumValue = 10, 无起始值</span><br><span class="line">sumValue = Stream.of(1, 2, 3, 4).reduce(Integer::sum).get();</span><br><span class="line">// 过滤，字符串连接，concat = &quot;ace&quot;</span><br><span class="line">concat = Stream.of(&quot;a&quot;, &quot;B&quot;, &quot;c&quot;, &quot;D&quot;, &quot;e&quot;, &quot;F&quot;).</span><br><span class="line"> filter(x -&gt; x.compareTo(&quot;Z&quot;) &gt; 0).</span><br><span class="line"> reduce(&quot;&quot;, String::concat);</span><br></pre></td></tr></table></figure>
+<p>上面代码例如第一个示例的 reduce()，第一个参数（空白字符）即为起始值，第二个参数（String::concat）为 BinaryOperator。这类有起始值的 reduce() 都返回具体的对象。而对于第四个示例没有起始值的 reduce()，由于可能没有足够的元素，返回的是 Optional，请留意这个区别。</p>
+<p><strong>limit/skip</strong></p>
+<p>limit 返回 Stream 的前面 n 个元素；skip 则是扔掉前 n 个元素（它是由一个叫 subStream 的方法改名而来）。</p>
+<h5 id="清单-16-limit-和-skip-对运行次数的影响"><a href="#清单-16-limit-和-skip-对运行次数的影响" class="headerlink" title="清单 16. limit 和 skip 对运行次数的影响"></a>清单 16. limit 和 skip 对运行次数的影响</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public void testLimitAndSkip() &#123;</span><br><span class="line"> List&lt;Person&gt; persons = new ArrayList();</span><br><span class="line"> for (int i = 1; i &lt;= 10000; i++) &#123;</span><br><span class="line"> Person person = new Person(i, &quot;name&quot; + i);</span><br><span class="line"> persons.add(person);</span><br><span class="line"> &#125;</span><br><span class="line">List&lt;String&gt; personList2 = persons.stream().</span><br><span class="line">map(Person::getName).limit(10).skip(3).collect(Collectors.toList());</span><br><span class="line"> System.out.println(personList2);</span><br><span class="line">&#125;</span><br><span class="line">private class Person &#123;</span><br><span class="line"> public int no;</span><br><span class="line"> private String name;</span><br><span class="line"> public Person (int no, String name) &#123;</span><br><span class="line"> this.no = no;</span><br><span class="line"> this.name = name;</span><br><span class="line"> &#125;</span><br><span class="line"> public String getName() &#123;</span><br><span class="line"> System.out.println(name);</span><br><span class="line"> return name;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">name1</span><br><span class="line">name2</span><br><span class="line">name3</span><br><span class="line">name4</span><br><span class="line">name5</span><br><span class="line">name6</span><br><span class="line">name7</span><br><span class="line">name8</span><br><span class="line">name9</span><br><span class="line">name10</span><br><span class="line">[name4, name5, name6, name7, name8, name9, name10]</span><br></pre></td></tr></table></figure></p>
+<p>这是一个有 10，000 个元素的 Stream，但在 short-circuiting 操作 limit 和 skip 的作用下，管道中 map 操作指定的 getName() 方法的执行次数为 limit 所限定的 10 次，而最终返回结果在跳过前 3 个元素后只有后面 7 个返回。</p>
+<p>有一种情况是 limit/skip 无法达到 short-circuiting 目的的，就是把它们放在 Stream 的排序操作后，原因跟 sorted 这个 intermediate 操作有关：此时系统并不知道 Stream 排序后的次序如何，所以 sorted 中的操作看上去就像完全没有被 limit 或者 skip 一样。</p>
+<h5 id="清单-17-limit-和-skip-对-sorted-后的运行次数无影响"><a href="#清单-17-limit-和-skip-对-sorted-后的运行次数无影响" class="headerlink" title="清单 17. limit 和 skip 对 sorted 后的运行次数无影响"></a>清单 17. limit 和 skip 对 sorted 后的运行次数无影响</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Person&gt; persons = new ArrayList();</span><br><span class="line"> for (int i = 1; i &lt;= 5; i++) &#123;</span><br><span class="line"> Person person = new Person(i, &quot;name&quot; + i);</span><br><span class="line"> persons.add(person);</span><br><span class="line"> &#125;</span><br><span class="line">List&lt;Person&gt; personList2 = persons.stream().sorted((p1, p2) -&gt; </span><br><span class="line">p1.getName().compareTo(p2.getName())).limit(2).collect(Collectors.toList());</span><br><span class="line">System.out.println(personList2);</span><br></pre></td></tr></table></figure>
+<p>上面的示例对清单 13 做了微调，首先对 5 个元素的 Stream 排序，然后进行 limit 操作。输出结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">name2</span><br><span class="line">name1</span><br><span class="line">name3</span><br><span class="line">name2</span><br><span class="line">name4</span><br><span class="line">name3</span><br><span class="line">name5</span><br><span class="line">name4</span><br><span class="line">[stream.StreamDW$Person@816f27d, stream.StreamDW$Person@87aac27]</span><br></pre></td></tr></table></figure>
+<p>即虽然最后的返回元素数量是 2，但整个管道中的 sorted 表达式执行次数没有像前面例子相应减少。</p>
+<p>最后有一点需要注意的是，对一个 parallel 的 Steam 管道来说，如果其元素是有序的，那么 limit 操作的成本会比较大，因为它的返回对象必须是前 n 个也有一样次序的元素。取而代之的策略是取消元素间的次序，或者不要用 parallel Stream。</p>
+<p><strong>sorted</strong></p>
+<p>对 Stream 的排序通过 sorted 进行，它比数组的排序更强之处在于你可以首先对 Stream 进行各类 map、filter、limit、skip 甚至 distinct 来减少元素数量后，再排序，这能帮助程序明显缩短执行时间。我们对清单 14 进行优化：</p>
+<h5 id="清单-18-优化：排序前进行-limit-和-skip"><a href="#清单-18-优化：排序前进行-limit-和-skip" class="headerlink" title="清单 18. 优化：排序前进行 limit 和 skip"></a>清单 18. 优化：排序前进行 limit 和 skip</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Person&gt; persons = new ArrayList();</span><br><span class="line"> for (int i = 1; i &lt;= 5; i++) &#123;</span><br><span class="line"> Person person = new Person(i, &quot;name&quot; + i);</span><br><span class="line"> persons.add(person);</span><br><span class="line"> &#125;</span><br><span class="line">List&lt;Person&gt; personList2 = persons.stream().limit(2).sorted((p1, p2) -&gt; p1.getName().compareTo(p2.getName())).collect(Collectors.toList());</span><br><span class="line">System.out.println(personList2);</span><br></pre></td></tr></table></figure>
+<p>结果会简单很多：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name2</span><br><span class="line">name1</span><br><span class="line">[stream.StreamDW$Person@6ce253f1, stream.StreamDW$Person@53d8d10a]</span><br></pre></td></tr></table></figure></p>
+<p>当然，这种优化是有 business logic 上的局限性的：即不要求排序后再取值。</p>
+<p><strong>min/max/distinct</strong></p>
+<p>min 和 max 的功能也可以通过对 Stream 元素先排序，再 findFirst 来实现，但前者的性能会更好，为 O(n)，而 sorted 的成本是 O(n log n)。同时它们作为特殊的 reduce 方法被独立出来也是因为求最大最小值是很常见的操作。</p>
+<h5 id="清单-19-找出最长一行的长度"><a href="#清单-19-找出最长一行的长度" class="headerlink" title="清单 19. 找出最长一行的长度"></a>清单 19. 找出最长一行的长度</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">BufferedReader br = new BufferedReader(new FileReader(&quot;c:\\SUService.log&quot;));</span><br><span class="line">int longest = br.lines().</span><br><span class="line"> mapToInt(String::length).</span><br><span class="line"> max().</span><br><span class="line"> getAsInt();</span><br><span class="line">br.close();</span><br><span class="line">System.out.println(longest);</span><br></pre></td></tr></table></figure>
+<p>下面的例子则使用 distinct 来找出不重复的单词。</p>
+<h5 id="清单-20-找出全文的单词，转小写，并排序"><a href="#清单-20-找出全文的单词，转小写，并排序" class="headerlink" title="清单 20. 找出全文的单词，转小写，并排序"></a>清单 20. 找出全文的单词，转小写，并排序</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; words = br.lines().</span><br><span class="line"> flatMap(line -&gt; Stream.of(line.split(&quot; &quot;))).</span><br><span class="line"> filter(word -&gt; word.length() &gt; 0).</span><br><span class="line"> map(String::toLowerCase).</span><br><span class="line"> distinct().</span><br><span class="line"> sorted().</span><br><span class="line"> collect(Collectors.toList());</span><br><span class="line">br.close();</span><br><span class="line">System.out.println(words);</span><br></pre></td></tr></table></figure>
+<p><strong>Match</strong></p>
+<p>Stream 有三个 match 方法，从语义上说：</p>
+<ul>
+<li>allMatch：Stream 中全部元素符合传入的 predicate，返回 true</li>
+<li>anyMatch：Stream 中只要有一个元素符合传入的 predicate，返回 true</li>
+<li>noneMatch：Stream 中没有一个元素符合传入的 predicate，返回 true</li>
+</ul>
+<p>它们都不是要遍历全部元素才能返回结果。例如 allMatch 只要一个元素不满足条件，就 skip 剩下的所有元素，返回 false。对清单 13 中的 Person 类稍做修改，加入一个 age 属性和 getAge 方法。</p>
+<h5 id="清单-21-使用-Match"><a href="#清单-21-使用-Match" class="headerlink" title="清单 21. 使用 Match"></a>清单 21. 使用 Match</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Person&gt; persons = new ArrayList();</span><br><span class="line">persons.add(new Person(1, &quot;name&quot; + 1, 10));</span><br><span class="line">persons.add(new Person(2, &quot;name&quot; + 2, 21));</span><br><span class="line">persons.add(new Person(3, &quot;name&quot; + 3, 34));</span><br><span class="line">persons.add(new Person(4, &quot;name&quot; + 4, 6));</span><br><span class="line">persons.add(new Person(5, &quot;name&quot; + 5, 55));</span><br><span class="line">boolean isAllAdult = persons.stream().</span><br><span class="line"> allMatch(p -&gt; p.getAge() &gt; 18);</span><br><span class="line">System.out.println(&quot;All are adult? &quot; + isAllAdult);</span><br><span class="line">boolean isThereAnyChild = persons.stream().</span><br><span class="line"> anyMatch(p -&gt; p.getAge() &lt; 12);</span><br><span class="line">System.out.println(&quot;Any child? &quot; + isThereAnyChild);</span><br></pre></td></tr></table></figure>
+<p>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">All are adult? false</span><br><span class="line">Any child? true</span><br></pre></td></tr></table></figure></p>
+<h3 id="进阶：自己生成流"><a href="#进阶：自己生成流" class="headerlink" title="进阶：自己生成流"></a>进阶：自己生成流</h3><p><strong>Stream.generate</strong></p>
+<p>通过实现 Supplier 接口，你可以自己来控制流的生成。这种情形通常用于随机数、常量的 Stream，或者需要前后元素间维持着某种状态信息的 Stream。把 Supplier 实例传递给 Stream.generate() 生成的 Stream，默认是串行（相对 parallel 而言）但无序的（相对 ordered 而言）。由于它是无限的，在管道中，必须利用 limit 之类的操作限制 Stream 大小。</p>
+<h5 id="清单-22-生成-10-个随机整数"><a href="#清单-22-生成-10-个随机整数" class="headerlink" title="清单 22. 生成 10 个随机整数"></a>清单 22. 生成 10 个随机整数</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Random seed = new Random();</span><br><span class="line">Supplier&lt;Integer&gt; random = seed::nextInt;</span><br><span class="line">Stream.generate(random).limit(10).forEach(System.out::println);</span><br><span class="line">//Another way</span><br><span class="line">IntStream.generate(() -&gt; (int) (System.nanoTime() % 100)).</span><br><span class="line">limit(10).forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+<p>Stream.generate() 还接受自己实现的 Supplier。例如在构造海量测试数据的时候，用某种自动的规则给每一个变量赋值；或者依据公式计算 Stream 的每个元素值。这些都是维持状态信息的情形。</p>
+<h5 id="清单-23-自实现-Supplier"><a href="#清单-23-自实现-Supplier" class="headerlink" title="清单 23. 自实现 Supplier"></a>清单 23. 自实现 Supplier</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Stream.generate(new PersonSupplier()).</span><br><span class="line">limit(10).</span><br><span class="line">forEach(p -&gt; System.out.println(p.getName() + &quot;, &quot; + p.getAge()));</span><br><span class="line">private class PersonSupplier implements Supplier&lt;Person&gt; &#123;</span><br><span class="line"> private int index = 0;</span><br><span class="line"> private Random random = new Random();</span><br><span class="line"> @Override</span><br><span class="line"> public Person get() &#123;</span><br><span class="line"> return new Person(index++, &quot;StormTestUser&quot; + index, random.nextInt(100));</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">StormTestUser1, 9</span><br><span class="line">StormTestUser2, 12</span><br><span class="line">StormTestUser3, 88</span><br><span class="line">StormTestUser4, 51</span><br><span class="line">StormTestUser5, 22</span><br><span class="line">StormTestUser6, 28</span><br><span class="line">StormTestUser7, 81</span><br><span class="line">StormTestUser8, 51</span><br><span class="line">StormTestUser9, 4</span><br><span class="line">StormTestUser10, 76</span><br></pre></td></tr></table></figure></p>
+<p><strong>Stream.iterate</strong></p>
+<p>iterate 跟 reduce 操作很像，接受一个种子值，和一个 UnaryOperator（例如 f）。然后种子值成为 Stream 的第一个元素，f(seed) 为第二个，f(f(seed)) 第三个，以此类推。</p>
+<p><strong>清单 24. 生成一个等差数列</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Stream.iterate(0, n -&gt; n + 3).limit(10). forEach(x -&gt; System.out.print(x + &quot; &quot;));.</span><br></pre></td></tr></table></figure></p>
+<p>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 3 6 9 12 15 18 21 24 27</span><br></pre></td></tr></table></figure></p>
+<p>与 Stream.generate 相仿，在 iterate 时候管道必须有 limit 这样的操作来限制 Stream 大小。</p>
+<h3 id="进阶：用-Collectors-来进行-reduction-操作"><a href="#进阶：用-Collectors-来进行-reduction-操作" class="headerlink" title="进阶：用 Collectors 来进行 reduction 操作"></a>进阶：用 Collectors 来进行 reduction 操作</h3><p>java.util.stream.Collectors 类的主要作用就是辅助进行各类有用的 reduction 操作，例如转变输出为 Collection，把 Stream 元素进行归组。</p>
+<p><strong>groupingBy/partitioningBy</strong></p>
+<h5 id="清单-25-按照年龄归组"><a href="#清单-25-按照年龄归组" class="headerlink" title="清单 25. 按照年龄归组"></a>清单 25. 按照年龄归组</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;Integer, List&lt;Person&gt;&gt; personGroups = Stream.generate(new PersonSupplier()).</span><br><span class="line"> limit(100).</span><br><span class="line"> collect(Collectors.groupingBy(Person::getAge));</span><br><span class="line">Iterator it = personGroups.entrySet().iterator();</span><br><span class="line">while (it.hasNext()) &#123;</span><br><span class="line"> Map.Entry&lt;Integer, List&lt;Person&gt;&gt; persons = (Map.Entry) it.next();</span><br><span class="line"> System.out.println(&quot;Age &quot; + persons.getKey() + &quot; = &quot; + persons.getValue().size());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的 code，首先生成 100 人的信息，然后按照年龄归组，相同年龄的人放到同一个 list 中，可以看到如下的输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Age 0 = 2</span><br><span class="line">Age 1 = 2</span><br><span class="line">Age 5 = 2</span><br><span class="line">Age 8 = 1</span><br><span class="line">Age 9 = 1</span><br><span class="line">Age 11 = 2</span><br><span class="line">……</span><br></pre></td></tr></table></figure></p>
+<h5 id="清单-26-按照未成年人和成年人归组"><a href="#清单-26-按照未成年人和成年人归组" class="headerlink" title="清单 26. 按照未成年人和成年人归组"></a>清单 26. 按照未成年人和成年人归组</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;Boolean, List&lt;Person&gt;&gt; children = Stream.generate(new PersonSupplier()).</span><br><span class="line"> limit(100).</span><br><span class="line"> collect(Collectors.partitioningBy(p -&gt; p.getAge() &lt; 18));</span><br><span class="line">System.out.println(&quot;Children number: &quot; + children.get(true).size());</span><br><span class="line">System.out.println(&quot;Adult number: &quot; + children.get(false).size());</span><br></pre></td></tr></table></figure>
+<p>输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Children number: 23 </span><br><span class="line">Adult number: 77</span><br></pre></td></tr></table></figure></p>
+<p>在使用条件“年龄小于 18”进行分组后可以看到，不到 18 岁的未成年人是一组，成年人是另外一组。partitioningBy 其实是一种特殊的 groupingBy，它依照条件测试的是否两种结果来构造返回的数据结构，get(true) 和 get(false) 能即为全部的元素对象。</p>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>总之，Stream 的特性可以归纳为：</p>
+<ul>
+<li><p>不是数据结构</p>
+</li>
+<li><p>它没有内部存储，它只是用操作管道从 source（数据结构、数组、generator function、IO channel）抓取数据。</p>
+</li>
+<li><p>它也绝不修改自己所封装的底层数据结构的数据。例如 Stream 的 filter 操作会产生一个不包含被过滤元素的新 Stream，而不是从 source 删除那些元素。</p>
+</li>
+<li><p>所有 Stream 的操作必须以 lambda 表达式为参数</p>
+</li>
+<li><p>不支持索引访问</p>
+</li>
+<li><p>你可以请求第一个元素，但无法请求第二个，第三个，或最后一个。不过请参阅下一项。</p>
+</li>
+<li><p>很容易生成数组或者 List</p>
+</li>
+<li><p>惰性化</p>
+</li>
+<li><p>很多 Stream 操作是向后延迟的，一直到它弄清楚了最后需要多少数据才会开始。</p>
+</li>
+<li><p>Intermediate 操作永远是惰性化的。</p>
+</li>
+<li><p>并行能力</p>
+</li>
+<li><p>当一个 Stream 是并行化的，就不需要再写多线程代码，所有对它的操作会自动并行进行的。</p>
+</li>
+<li><p>可以是无限的</p>
+</li>
+<li><p>集合有固定大小，Stream 则不必。limit(n) 和 findFirst() 这类的 short-circuiting 操作可以对无限的 Stream 进行运算并很快完成。</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.gaojunru.com/2019/01/01/lambda/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hejianjun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="剑君 の Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/01/lambda/" itemprop="url">Lambda</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-01T21:35:55+08:00">
+                2019-01-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index">
+                    <span itemprop="name">technology</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/OCJP/" itemprop="url" rel="index">
+                    <span itemprop="name">OCJP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h1><h2 id="Java为何需要Lambda"><a href="#Java为何需要Lambda" class="headerlink" title="Java为何需要Lambda"></a>Java为何需要Lambda</h2><h2 id="代码简洁，开发快速"><a href="#代码简洁，开发快速" class="headerlink" title="代码简洁，开发快速"></a>代码简洁，开发快速</h2><p>减少了代码的重复，因此程序比较短，开发速度较快。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Before Java 8:</span></span><br><span class="line"><span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Before Java8 "</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).start();</span><br><span class="line"></span><br><span class="line"><span class="comment">//Java 8 way:</span></span><br><span class="line"><span class="keyword">new</span> Thread(() -&gt; System.out.println(<span class="string">"In Java8!"</span>));</span><br></pre></td></tr></table></figure>
+<h2 id="接近自然语言，易于理解"><a href="#接近自然语言，易于理解" class="headerlink" title="接近自然语言，易于理解"></a>接近自然语言，易于理解</h2><p>编程的自由度很高，可以写出很接近自然语言的代码。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Prior Java 8 :</span></span><br><span class="line">List features = Arrays.asList(<span class="string">"Lambdas"</span>, <span class="string">"Default Method"</span>, </span><br><span class="line"><span class="string">"Stream API"</span>, <span class="string">"Date and Time API"</span>);</span><br><span class="line"><span class="keyword">for</span> (String feature : features) &#123;</span><br><span class="line">   System.out.println(feature);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//In Java 8:</span></span><br><span class="line">List features = Arrays.asList(<span class="string">"Lambdas"</span>, <span class="string">"Default Method"</span>, <span class="string">"Stream API"</span>,</span><br><span class="line"> <span class="string">"Date and Time API"</span>);</span><br><span class="line">features.forEach(n -&gt; System.out.println(n));</span><br></pre></td></tr></table></figure>
+<h2 id="易于”并发编程”"><a href="#易于”并发编程”" class="headerlink" title="易于”并发编程”"></a>易于”并发编程”</h2><p>函数式编程不需要考虑”死锁”（deadlock），因为它不修改变量，所以根本不存在”锁”线程的问题。不必担心一个线程的数据，被另一个线程修改，所以可以很放心地把工作分摊到多个线程，部署”并发编程”（concurrency）。</p>
+<p>假设一个业务场景：对于20元以上的商品，进行9折处理，最后得到这些商品的折后价格。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> BigDecimal totalOfDiscountedPrices = prices.stream()</span><br><span class="line">.filter(price -&gt; price.compareTo(BigDecimal.valueOf(<span class="number">20</span>)) &gt; <span class="number">0</span>)</span><br><span class="line">.map(price -&gt; price.multiply(BigDecimal.valueOf(<span class="number">0.9</span>)))</span><br><span class="line">.reduce(BigDecimal.ZERO,BigDecimal::add);</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"Total of discounted prices: "</span> + totalOfDiscountedPrices);</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> BigDecimal totalOfDiscountedPrices = prices.parallelStream()</span><br><span class="line">.filter(price -&gt; price.compareTo(BigDecimal.valueOf(<span class="number">20</span>)) &gt; <span class="number">0</span>)</span><br><span class="line">.map(price -&gt; price.multiply(BigDecimal.valueOf(<span class="number">0.9</span>)))</span><br><span class="line">.reduce(BigDecimal.ZERO,BigDecimal::add);</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"Total of discounted prices: "</span> + totalOfDiscountedPrices);</span><br></pre></td></tr></table></figure>
+<h1 id="Lambda的阴暗面"><a href="#Lambda的阴暗面" class="headerlink" title="Lambda的阴暗面"></a>Lambda的阴暗面</h1><p>前面都是讲Lambda如何改变Java程序员的思维习惯，但Lambda确实也带来了困惑</p>
+<p>JVM可以执行任何语言编写的代码，只要它们能编译成字节码，字节码自身是充分OO的，被设计成接近于Java语言，这意味着Java被编译成的字节码非常容易被重新组装。</p>
+<p>但是如果不是Java语言，差距将越来越大，Scala源码和被编译成的字节码之间巨大差距是一个证明，编译器加入了大量合成类 方法和变量，以便让JVM按照语言自身特定语法和流程控制执行。</p>
+<p>我们首先看看Java 6/7中的一个传统方法案例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// simple check against empty strings</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">check</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (s.equals(<span class="string">""</span>)) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s.length();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//map names to lengths</span></span><br><span class="line"> </span><br><span class="line">List lengths = <span class="keyword">new</span> ArrayList();</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> (String name : Arrays.asList(args)) &#123;</span><br><span class="line">    lengths.add(check(name));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果一个空的字符串传入，这段代码将抛出错误，堆栈跟踪如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">at LmbdaMain.check(LmbdaMain.java:<span class="number">19</span>)</span><br><span class="line">at LmbdaMain.main(LmbdaMain.java:<span class="number">34</span>)</span><br></pre></td></tr></table></figure></p>
+<p>再看看Lambda的例子<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Stream lengths = names.stream().map(name -&gt; check(name));</span><br><span class="line"> </span><br><span class="line">at LmbdaMain.check(LmbdaMain.java:<span class="number">19</span>)</span><br><span class="line">at LmbdaMain.lambda$<span class="number">0</span>(LmbdaMain.java:<span class="number">37</span>)</span><br><span class="line">at LmbdaMain$$Lambda$<span class="number">1</span>/<span class="number">821270929</span>.apply(Unknown Source)</span><br><span class="line">at java.util.stream.ReferencePipeline$<span class="number">3</span>$<span class="number">1</span>.accept(ReferencePipeline.java:<span class="number">193</span>)</span><br><span class="line">at java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:<span class="number">948</span>)</span><br><span class="line">at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:<span class="number">512</span>)</span><br><span class="line">at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:<span class="number">502</span>)</span><br><span class="line">at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:<span class="number">708</span>)</span><br><span class="line">at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:<span class="number">234</span>)</span><br><span class="line">at java.util.stream.LongPipeline.reduce(LongPipeline.java:<span class="number">438</span>)</span><br><span class="line">at java.util.stream.LongPipeline.sum(LongPipeline.java:<span class="number">396</span>)</span><br><span class="line">at java.util.stream.ReferencePipeline.count(ReferencePipeline.java:<span class="number">526</span>)</span><br><span class="line">at LmbdaMain.main(LmbdaMain.java:<span class="number">39</span>)</span><br></pre></td></tr></table></figure></p>
+<p>这非常类似Scala，出错栈信息太长，我们为代码的精简付出力代价，更精确的代码意味着更复杂的调试。</p>
+<h1 id="函数式接口"><a href="#函数式接口" class="headerlink" title="函数式接口"></a>函数式接口</h1><p>函数式接口（functional interface 也叫功能性接口，其实是同一个东西）。简单来说，函数式接口是只包含一个方法的接口。 @FunctionalInterface作为注解,这个注解是非必须的。</p>
+<h2 id="Lambda语法"><a href="#Lambda语法" class="headerlink" title="Lambda语法"></a>Lambda语法</h2><p>包含三个部分</p>
+<ol>
+<li>一个括号内用逗号分隔的形式参数，参数是函数式接口里面方法的参数</li>
+<li>一个箭头符号：-&gt;</li>
+<li>方法体，可以是表达式和代码块，方法体函数式接口里面方法的实现，如果是代码块，则必须用{}来包裹起来，且需要一个return 返回值，但有个例外，若函数式接口里面方法返回值是void，则无需{}</li>
+</ol>
+<p>总体看起来像这样<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(parameters) -&gt; expression 或者 (parameters) -&gt; &#123; statements; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>看一个完整的例子，方便理解<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 测试lambda表达式</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> benhail</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestLambda</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">runThreadUseLambda</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//Runnable是一个函数接口，只包含了有个无参数的，返回void的run方法；</span></span><br><span class="line">        <span class="comment">//所以lambda表达式左边没有参数，右边也没有return，只是单纯的打印一句话</span></span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt;System.out.println(<span class="string">"lambda实现的线程"</span>)).start(); </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">runThreadUseInnerClass</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//这种方式就不多讲了，以前旧版本比较常见的做法</span></span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">"内部类实现的线程"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        TestLambda.runThreadUseLambda();</span><br><span class="line">        TestLambda.runThreadUseInnerClass();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以看出，使用lambda表达式设计的代码会更加简洁，而且还可读。</p>
+<h2 id="方法引用"><a href="#方法引用" class="headerlink" title="方法引用"></a>方法引用</h2><p>其实是lambda表达式的一个简化写法，所引用的方法其实是lambda表达式的方法体实现，语法也很简单，左边是容器（可以是类名，实例名），中间是”::”，右边是相应的方法名。如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ObjectReference::methodName</span><br></pre></td></tr></table></figure>
+<p>一般方法的引用格式是</p>
+<ol>
+<li>如果是静态方法，则是ClassName::methodName。如 Object ::equals</li>
+<li>如果是实例方法，则是Instance::methodName。如Object obj=new Object();obj::equals;</li>
+<li>构造函数.则是ClassName::new</li>
+</ol>
+<p>再来看一个完整的例子，方便理解<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.FlowLayout;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.ActionEvent;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JButton;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JFrame;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> benhail</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestMethodReference</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        JFrame frame = <span class="keyword">new</span> JFrame();</span><br><span class="line">        frame.setLayout(<span class="keyword">new</span> FlowLayout());</span><br><span class="line">        frame.setVisible(<span class="keyword">true</span>);</span><br><span class="line">		</span><br><span class="line">        JButton button1 = <span class="keyword">new</span> JButton(<span class="string">"点我!"</span>);</span><br><span class="line">        JButton button2 = <span class="keyword">new</span> JButton(<span class="string">"也点我!"</span>);</span><br><span class="line">		</span><br><span class="line">        frame.getContentPane().add(button1);</span><br><span class="line">        frame.getContentPane().add(button2);</span><br><span class="line">        <span class="comment">//这里addActionListener方法的参数是ActionListener，是一个函数式接口</span></span><br><span class="line">        <span class="comment">//使用lambda表达式方式</span></span><br><span class="line">        button1.addActionListener(e -&gt; &#123; System.out.println(<span class="string">"这里是Lambda实现方式"</span>); &#125;);</span><br><span class="line">        <span class="comment">//使用方法引用方式</span></span><br><span class="line">        button2.addActionListener(TestMethodReference::doSomething);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 这里是函数式接口ActionListener的实现方法</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> e </span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">(ActionEvent e)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">        System.out.println(<span class="string">"这里是方法引用实现方式"</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以看出，doSomething方法就是lambda表达式的实现，这样的好处就是，如果你觉得lambda的方法体会很长，影响代码可读性，方法引用就是个解决办法</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.gaojunru.com/2019/01/01/io/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hejianjun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="剑君 の Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/01/io/" itemprop="url">IO</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-01T21:35:55+08:00">
+                2019-01-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index">
+                    <span itemprop="name">technology</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/OCJP/" itemprop="url" rel="index">
+                    <span itemprop="name">OCJP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Java中的IO"><a href="#Java中的IO" class="headerlink" title="Java中的IO"></a>Java中的IO</h1><h2 id="File（文件特征与管理）"><a href="#File（文件特征与管理）" class="headerlink" title="File（文件特征与管理）"></a>File（文件特征与管理）</h2><p>Java IO API中的FIle类可以让你访问底层文件系统，通过File类，你可以做到以下几点：</p>
+<ul>
+<li>检测文件是否存在</li>
+<li>读取文件长度</li>
+<li>重命名或移动文件</li>
+<li>删除文件</li>
+<li>检测某个路径是文件还是目录</li>
+<li>读取目录中的文件列表</li>
+</ul>
+<p>请注意：File只能访问文件以及文件系统的元数据。如果你想读写文件内容，需要使用FileInputStream、FileOutputStream或者RandomAccessFile。如果你正在使用Java NIO，并且想使用完整的NIO解决方案，你会使用到java.nio.FileChannel(否则你也可以使用File)。</p>
+<h3 id="实例化一个java-io-File对象"><a href="#实例化一个java-io-File对象" class="headerlink" title="实例化一个java.io.File对象"></a>实例化一个java.io.File对象</h3><p>在使用File之前，必须拥有一个File对象，这是实例化的代码例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">File file = <span class="keyword">new</span> File(<span class="string">"c:\\data\\input-file.txt"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>很简单，对吗？File类同样拥有多种不同实例化方式的构造函数。</p>
+<h3 id="检测文件是否存在"><a href="#检测文件是否存在" class="headerlink" title="检测文件是否存在"></a>检测文件是否存在</h3><p>当你获得一个File对象之后，可以检测相应的文件是否存在。当文件不存在的时候，构造函数并不会执行失败。你已经准备好创建一个File了，对吧？</p>
+<p>通过调用exists()方法，可以检测文件是否存在，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">File file = <span class="keyword">new</span> File(<span class="string">"c:\\data\\input-file.txt"</span>);</span><br><span class="line"><span class="keyword">boolean</span> fileExists = file.exists();</span><br></pre></td></tr></table></figure></p>
+<h3 id="文件长度"><a href="#文件长度" class="headerlink" title="文件长度"></a>文件长度</h3><p>通过调用length()可以获得文件的字节长度，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">File file = <span class="keyword">new</span> File(<span class="string">"c:\\data\\input-file.txt"</span>);</span><br><span class="line"><span class="keyword">long</span> length = file.length();</span><br></pre></td></tr></table></figure></p>
+<h3 id="重命名或移动文件"><a href="#重命名或移动文件" class="headerlink" title="重命名或移动文件"></a>重命名或移动文件</h3><p>通过调用File类中的renameTo()方法可以重命名(或者移动)文件，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">File file = <span class="keyword">new</span> File(<span class="string">"c:\\data\\input-file.txt"</span>);</span><br><span class="line"><span class="keyword">boolean</span> success = file.renameTo(<span class="keyword">new</span> File(<span class="string">"c:\\data\\new-file.txt"</span>));</span><br></pre></td></tr></table></figure></p>
+<h3 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h3><p>通过调用delete()方法可以删除文件，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">File file = <span class="keyword">new</span> File(<span class="string">"c:\\data\\input-file.txt"</span>);</span><br><span class="line"><span class="keyword">boolean</span> success = file.delete();</span><br></pre></td></tr></table></figure></p>
+<p>delete()方法与rename()方法一样，返回布尔值表明是否成功删除文件，同样也会有相同的操作失败原因。</p>
+<h3 id="检测某个路径是文件还是目录"><a href="#检测某个路径是文件还是目录" class="headerlink" title="检测某个路径是文件还是目录"></a>检测某个路径是文件还是目录</h3><p>File对象既可以指向一个文件，也可以指向一个目录。可以通过调用isDirectory()方法，可以判断当前File对象指向的是文件还是目录。当方法返回值是true时，File指向的是目录，否则指向的是文件，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">File file = <span class="keyword">new</span> File(<span class="string">"c:\\data"</span>);</span><br><span class="line"><span class="keyword">boolean</span> isDirectory = file.isDirectory();</span><br></pre></td></tr></table></figure></p>
+<h3 id="读取目录中的文件列表"><a href="#读取目录中的文件列表" class="headerlink" title="读取目录中的文件列表"></a>读取目录中的文件列表</h3><p>你可以通过调用list()或者listFiles()方法获取一个目录中的所有文件列表。list()方法返回当前File对象指向的目录中所有文件与子目录的字符串名称(译者注：不会返回子目录下的文件及其子目录名称)。listFiles()方法返回当前File对象指向的目录中所有文件与子目录相关联的File对象(译者注：与list()方法类似，不会返回子目录下的文件及其子目录)。代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">File file = <span class="keyword">new</span> File(<span class="string">"c:\\data"</span>);</span><br><span class="line">String[] fileNames = file.list();</span><br><span class="line">File[] files = file.listFiles();</span><br></pre></td></tr></table></figure></p>
+<h2 id="InputStream-And-OutputStream-基于字节的io"><a href="#InputStream-And-OutputStream-基于字节的io" class="headerlink" title="InputStream And OutputStream(基于字节的io)"></a>InputStream And OutputStream(基于字节的io)</h2><h2 id="InputStream（输入流）"><a href="#InputStream（输入流）" class="headerlink" title="InputStream（输入流）"></a><strong>InputStream</strong>（输入流）</h2><p>java.io.InputStream类是所有Java IO输入流的基类。如果你正在开发一个从流中读取数据的组件，请尝试用InputStream替代任何它的子类(比如FileInputStream)进行开发。这么做能够让你的代码兼容任何类型而非某种确定类型的输入流。</p>
+<p>然而仅仅依靠InputStream并不总是可行。如果你需要将读过的数据推回到流中，你必须使用PushbackInputStream，这意味着你的流变量只能是这个类型，否则在代码中就不能调用PushbackInputStream的unread()方法。</p>
+<p>通常使用输入流中的read()方法读取数据。read()方法返回一个整数，代表了读取到的字节的内容(译者注：0 ~ 255)。当达到流末尾没有更多数据可以读取的时候，read()方法返回-1。</p>
+<p>这是一个简单的示例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">InputStream input = <span class="keyword">new</span> FileInputStream(<span class="string">"c:\\data\\input-file.txt"</span>);</span><br><span class="line"><span class="keyword">int</span> data = input.read(); </span><br><span class="line"><span class="keyword">while</span>(data != -<span class="number">1</span>)&#123;</span><br><span class="line">    data = input.read();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="OutputStream（输出流）"><a href="#OutputStream（输出流）" class="headerlink" title="OutputStream（输出流）"></a><strong>OutputStream</strong>（输出流）</h2><p>java.io.OutputStream是Java IO中所有输出流的基类。如果你正在开发一个能够将数据写入流中的组件，请尝试使用OutputStream替代它的所有子类。</p>
+<p>这是一个简单的示例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OutputStream output = <span class="keyword">new</span> FileOutputStream(<span class="string">"c:\\data\\output-file.txt"</span>);</span><br><span class="line">output.write(<span class="string">"Hello World"</span>.getBytes());</span><br><span class="line">output.close();</span><br></pre></td></tr></table></figure></p>
+<h2 id="组合流"><a href="#组合流" class="headerlink" title="组合流"></a><strong>组合流</strong></h2><p>你可以将流整合起来以便实现更高级的输入和输出操作。比如，一次读取一个字节是很慢的，所以可以从磁盘中一次读取一大块数据，然后从读到的数据块中获取字节。为了实现缓冲，可以把InputStream包装到BufferedInputStream中。代码示例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">InputStream input = <span class="keyword">new</span> BufferedInputStream(<span class="keyword">new</span> FileInputStream(<span class="string">"c:\\data\\input-file.txt"</span>));</span><br></pre></td></tr></table></figure></p>
+<p>缓冲同样可以应用到OutputStream中。你可以实现将大块数据批量地写入到磁盘(或者相应的流)中，这个功能由BufferedOutputStream实现。</p>
+<p>缓冲只是通过流整合实现的其中一个效果。你可以把InputStream包装到PushbackInputStream中，之后可以将读取过的数据推回到流中重新读取，在解析过程中有时候这样做很方便。或者，你可以将两个InputStream整合成一个SequenceInputStream。</p>
+<p>将不同的流整合到一个链中，可以实现更多种高级操作。通过编写包装了标准流的类，可以实现你想要的效果和过滤器。</p>
+<h2 id="Reader-And-Writer-基于字符的io"><a href="#Reader-And-Writer-基于字符的io" class="headerlink" title="Reader And Writer(基于字符的io)"></a>Reader And Writer(基于字符的io)</h2><h2 id="Reader"><a href="#Reader" class="headerlink" title="Reader"></a><strong>Reader</strong></h2><p>Reader类是Java IO中所有Reader的基类。子类包括BufferedReader，PushbackReader，InputStreamReader，StringReader和其他Reader。</p>
+<p>这是一个简单的Java IO Reader的例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Reader reader = <span class="keyword">new</span> FileReader(<span class="string">"c:\\data\\myfile.txt"</span>);</span><br><span class="line"><span class="keyword">int</span> data = reader.read();</span><br><span class="line"><span class="keyword">while</span>(data != -<span class="number">1</span>)&#123;</span><br><span class="line">    <span class="keyword">char</span> dataChar = (<span class="keyword">char</span>) data;</span><br><span class="line">    data = reader.read();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>请注意，InputStream的read()方法返回一个字节，意味着这个返回值的范围在0到255之间(当达到流末尾时，返回-1)，Reader的read()方法返回一个字符，意味着这个返回值的范围在0到65535之间(当达到流末尾时，同样返回-1)。这并不意味着Reade只会从数据源中一次读取2个字节，Reader会根据文本的编码，一次读取一个或者多个字节。</p>
+<p>你通常会使用Reader的子类，而不会直接使用Reader。Reader的子类包括InputStreamReader，CharArrayReader，FileReader等等。</p>
+<h2 id="整合Reader与InputStream"><a href="#整合Reader与InputStream" class="headerlink" title="整合Reader与InputStream"></a><strong>整合Reader与InputStream</strong></h2><p>一个Reader可以和一个InputStream相结合。如果你有一个InputStream输入流，并且想从其中读取字符，可以把这个InputStream包装到InputStreamReader中。把InputStream传递到InputStreamReader的构造函数中：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Reader reader = <span class="keyword">new</span> InputStreamReader(inputStream);</span><br></pre></td></tr></table></figure></p>
+<p>在构造函数中可以指定解码方式。</p>
+<h2 id="Writer"><a href="#Writer" class="headerlink" title="Writer"></a><strong>Writer</strong></h2><p>Writer类是Java IO中所有Writer的基类。子类包括BufferedWriter和PrintWriter等等。这是一个Java IO Writer的例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Writer writer = <span class="keyword">new</span> FileWriter(<span class="string">"c:\\data\\file-output.txt"</span>); </span><br><span class="line">writer.write(<span class="string">"Hello World Writer"</span>); </span><br><span class="line">writer.close();</span><br></pre></td></tr></table></figure></p>
+<p>同样，你最好使用Writer的子类，不需要直接使用Writer，因为子类的实现更加明确，更能表现你的意图。常用子类包括OutputStreamWriter，CharArrayWriter，FileWriter等。Writer的write(int c)方法，会将传入参数的低16位写入到Writer中，忽略高16位的数据。</p>
+<h2 id="整合Writer和OutputStream"><a href="#整合Writer和OutputStream" class="headerlink" title="整合Writer和OutputStream"></a><strong>整合Writer和OutputStream</strong></h2><p>与Reader和InputStream类似，一个Writer可以和一个OutputStream相结合。把OutputStream包装到OutputStreamWriter中，所有写入到OutputStreamWriter的字符都将会传递给OutputStream。这是一个OutputStreamWriter的例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Writer writer = <span class="keyword">new</span> OutputStreamWriter(outputStream);</span><br></pre></td></tr></table></figure></p>
+<h2 id="整合Reader和Writer"><a href="#整合Reader和Writer" class="headerlink" title="整合Reader和Writer"></a><strong>整合Reader和Writer</strong></h2><p>和字节流一样，Reader和Writer可以相互结合实现更多更有趣的IO，工作原理和把Reader与InputStream或者Writer与OutputStream相结合类似。举个栗子，可以通过将Reader包装到BufferedReader、Writer包装到BufferedWriter中实现缓冲。以下是例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Reader reader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(...));</span><br><span class="line">Writer writer = <span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> FileWriter(...));</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.gaojunru.com/2018/12/01/NoSuchMethodError/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -366,163 +1104,6 @@
             <p>昨天答辩的时候考到<code>NoSuchMethodError</code>这个经常遇到的错误，居然没有回答上来，在此处记录一下<br><code>NoSuchMethodError</code>按字面理解是方法找不到，这个一般不是真的没有这个方法，不然编译的时候就报错了，有可能是jar包的版本不对或者是冲突<br>下面是排查的思路<br>如果是在开发环境当然是用IDE调试，在生产环境一般是JDB调试，下面只说怎么在JDB调试<br>查看日志报错所在的行<br>使用 <code>stop in</code>断点<br>执行<code>eval 缺少方法的类.class.getProtectionDomain().getCodeSource()</code>查看类所属的位置</p>
 
           
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.gaojunru.com/2018/09/04/apache-commons/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hejianjun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="剑君 の Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/04/apache-commons/" itemprop="url">Apache Commons</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-04T12:42:47+08:00">
-                2018-09-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/" itemprop="url" rel="index">
-                    <span itemprop="name">technology</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/Apache-Commons/" itemprop="url" rel="index">
-                    <span itemprop="name">Apache Commons</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Apache-Commons"><a href="#Apache-Commons" class="headerlink" title="Apache Commons"></a>Apache Commons</h1><p><strong>Apache Commons</strong>是Apache软件基金会的项目，曾隶属于Jakarta项目。Commons的目的是提供可重用的、开源的Java代码。Commons由三部分组成：Proper（是一些已发布的项目）、Sandbox（是一些正在开发的项目）和Dormant（是一些刚启动或者已经停止维护的项目）。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/04/apache-commons/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -727,6 +1308,163 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.gaojunru.com/2018/09/04/apache-commons/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hejianjun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="剑君 の Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/04/apache-commons/" itemprop="url">Apache Commons</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-04T12:42:47+08:00">
+                2018-09-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index">
+                    <span itemprop="name">technology</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/Apache-Commons/" itemprop="url" rel="index">
+                    <span itemprop="name">Apache Commons</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Apache-Commons"><a href="#Apache-Commons" class="headerlink" title="Apache Commons"></a>Apache Commons</h1><p><strong>Apache Commons</strong>是Apache软件基金会的项目，曾隶属于Jakarta项目。Commons的目的是提供可重用的、开源的Java代码。Commons由三部分组成：Proper（是一些已发布的项目）、Sandbox（是一些正在开发的项目）和Dormant（是一些刚启动或者已经停止维护的项目）。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/04/apache-commons/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.gaojunru.com/2018/09/01/JPDA /">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -834,163 +1572,6 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/09/01/JPDA /#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.gaojunru.com/2018/07/05/SQL/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hejianjun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="剑君 の Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/05/SQL/" itemprop="url">SQL</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-05T12:42:47+08:00">
-                2018-07-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/" itemprop="url" rel="index">
-                    <span itemprop="name">technology</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/SQL/" itemprop="url" rel="index">
-                    <span itemprop="name">SQL</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="SQL基础学习"><a href="#SQL基础学习" class="headerlink" title="SQL基础学习"></a>SQL基础学习</h1><p>SQL 是用于访问和处理数据库的标准的计算机语言。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/05/SQL/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1199,6 +1780,163 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.gaojunru.com/2018/07/05/SQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hejianjun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="剑君 の Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/05/SQL/" itemprop="url">SQL</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-05T12:42:47+08:00">
+                2018-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index">
+                    <span itemprop="name">technology</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/SQL/" itemprop="url" rel="index">
+                    <span itemprop="name">SQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="SQL基础学习"><a href="#SQL基础学习" class="headerlink" title="SQL基础学习"></a>SQL基础学习</h1><p>SQL 是用于访问和处理数据库的标准的计算机语言。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/05/SQL/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://blog.gaojunru.com/2018/06/29/spring-webflux/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1343,493 +2081,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.gaojunru.com/2018/06/14/spring-cache/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hejianjun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="剑君 の Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/14/spring-cache/" itemprop="url">Spring注解缓存</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-14T02:00:00+08:00">
-                2018-06-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/" itemprop="url" rel="index">
-                    <span itemprop="name">technology</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/cache/" itemprop="url" rel="index">
-                    <span itemprop="name">cache</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/cache/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="Spring注解缓存"><a href="#Spring注解缓存" class="headerlink" title="Spring注解缓存"></a>Spring注解缓存</h2><p>Spring 3.1之后，引入了注解缓存技术，其本质上不是一个具体的缓存实现方案，而是一个对缓存使用的抽象，通过在既有代码中添加少量自定义的各种annotation，即能够达到使用缓存对象和缓存方法的返回对象的效果。Spring的缓存技术具备相当的灵活性，不仅能够使用SpEL（Spring Expression Language）来定义缓存的key和各种condition，还提供开箱即用的缓存临时存储方案，也支持和主流的专业缓存集成。其特点总结如下：<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/14/spring-cache/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.gaojunru.com/2018/06/14/distributed-cache/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hejianjun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="剑君 の Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/14/distributed-cache/" itemprop="url">分布式缓存</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-14T01:00:00+08:00">
-                2018-06-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/" itemprop="url" rel="index">
-                    <span itemprop="name">technology</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/cache/" itemprop="url" rel="index">
-                    <span itemprop="name">cache</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="分布式缓存"><a href="#分布式缓存" class="headerlink" title="分布式缓存"></a>分布式缓存</h2><p>缓存大致可以分为两类，一种是应用内缓存，比如Map(简单的数据结构)，以及EH Cache(Java第三方库)，另一种就是缓存组件，比如Memached，Redis。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/14/distributed-cache/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.gaojunru.com/2018/06/14/cache-note/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hejianjun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="剑君 の Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/14/cache-note/" itemprop="url">缓存笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-14T00:00:00+08:00">
-                2018-06-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/" itemprop="url" rel="index">
-                    <span itemprop="name">technology</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/cache/" itemprop="url" rel="index">
-                    <span itemprop="name">cache</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h1><h2 id="维基百科"><a href="#维基百科" class="headerlink" title="维基百科"></a>维基百科</h2><p>高速缓存（英语：cache，/kæʃ/ kash）简称缓存，原始意义是指访问速度比一般随机存取存储器（RAM）快的一种RAM，通常它不像系统主存那样使用DRAM技术，而使用昂贵但较快速的SRAM技术。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/14/cache-note/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1875,7 +2131,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1886,7 +2142,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1897,7 +2153,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
