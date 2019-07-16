@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT, gaojunru, hejianjun" />
+  <meta name="keywords" content="JPDA," />
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="Apache CommonsApache Commons是Apache软件基金会的项目，曾隶属于Jakarta项目。Commons的目的是提供可重用的、开源的Java代码。Commons由三部分组成：Proper（是一些已发布的项目）、Sandbox（是一些正在开发的项目）和Dormant（是一些刚启动或者已经停止维护的项目）。 目录 Commons Proper Commons Sandbox">
+<meta name="description" content="昨天答辩的时候考到NoSuchMethodError这个经常遇到的错误，居然没有回答上来，在此处记录一下NoSuchMethodError按字面理解是方法找不到，这个一般不是真的没有这个方法，不然编译的时候就报错了，有可能是jar包的版本不对或者是冲突下面是排查的思路如果是在开发环境当然是用IDE调试，在生产环境一般是JDB调试，下面只说怎么在JDB调试查看日志报错所在的行使用 stop in断点">
+<meta name="keywords" content="JPDA">
 <meta property="og:type" content="article">
-<meta property="og:title" content="剑君 の Blog">
-<meta property="og:url" content="http://blog.gaojunru.com/2018/08/01/Apache Commons/index.html">
+<meta property="og:title" content="NoSuchMethodError">
+<meta property="og:url" content="http://blog.gaojunru.com/2018/12/01/NoSuchMethodError/index.html">
 <meta property="og:site_name" content="剑君 の Blog">
-<meta property="og:description" content="Apache CommonsApache Commons是Apache软件基金会的项目，曾隶属于Jakarta项目。Commons的目的是提供可重用的、开源的Java代码。Commons由三部分组成：Proper（是一些已发布的项目）、Sandbox（是一些正在开发的项目）和Dormant（是一些刚启动或者已经停止维护的项目）。 目录 Commons Proper Commons Sandbox">
+<meta property="og:description" content="昨天答辩的时候考到NoSuchMethodError这个经常遇到的错误，居然没有回答上来，在此处记录一下NoSuchMethodError按字面理解是方法找不到，这个一般不是真的没有这个方法，不然编译的时候就报错了，有可能是jar包的版本不对或者是冲突下面是排查的思路如果是在开发环境当然是用IDE调试，在生产环境一般是JDB调试，下面只说怎么在JDB调试查看日志报错所在的行使用 stop in断点">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-03T03:28:28.709Z">
+<meta property="og:updated_time" content="2019-07-16T11:32:53.642Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑君 の Blog">
-<meta name="twitter:description" content="Apache CommonsApache Commons是Apache软件基金会的项目，曾隶属于Jakarta项目。Commons的目的是提供可重用的、开源的Java代码。Commons由三部分组成：Proper（是一些已发布的项目）、Sandbox（是一些正在开发的项目）和Dormant（是一些刚启动或者已经停止维护的项目）。 目录 Commons Proper Commons Sandbox">
+<meta name="twitter:title" content="NoSuchMethodError">
+<meta name="twitter:description" content="昨天答辩的时候考到NoSuchMethodError这个经常遇到的错误，居然没有回答上来，在此处记录一下NoSuchMethodError按字面理解是方法找不到，这个一般不是真的没有这个方法，不然编译的时候就报错了，有可能是jar包的版本不对或者是冲突下面是排查的思路如果是在开发环境当然是用IDE调试，在生产环境一般是JDB调试，下面只说怎么在JDB调试查看日志报错所在的行使用 stop in断点">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://blog.gaojunru.com/2018/08/01/Apache Commons/"/>
+  <link rel="canonical" href="http://blog.gaojunru.com/2018/12/01/NoSuchMethodError/"/>
 
 
 
 
 
-  <title> | 剑君 の Blog</title>
+  <title>NoSuchMethodError | 剑君 の Blog</title>
   
 
 
@@ -262,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://blog.gaojunru.com/2018/08/01/Apache Commons/">
+    <link itemprop="mainEntityOfPage" href="http://blog.gaojunru.com/2018/12/01/NoSuchMethodError/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hejianjun">
@@ -279,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">NoSuchMethodError</h1>
         
 
         <div class="post-meta">
@@ -291,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-01T09:41:50+08:00">
-                2018-08-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-01T21:35:55+08:00">
+                2018-12-01
               </time>
             
 
@@ -301,6 +302,39 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index">
+                    <span itemprop="name">technology</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/JPDA/" itemprop="url" rel="index">
+                    <span itemprop="name">JPDA</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -329,48 +363,7 @@
       
 
       
-        <h1 id="Apache-Commons"><a href="#Apache-Commons" class="headerlink" title="Apache Commons"></a>Apache Commons</h1><p><strong>Apache Commons</strong>是Apache软件基金会的项目，曾隶属于Jakarta项目。Commons的目的是提供可重用的、开源的Java代码。Commons由三部分组成：Proper（是一些已发布的项目）、Sandbox（是一些正在开发的项目）和Dormant（是一些刚启动或者已经停止维护的项目）。</p>
-<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
-<li>Commons Proper</li>
-<li>Commons Sandbox</li>
-<li>Commons Dormant</li>
-</ul>
-<h2 id="Commons-Proper"><a href="#Commons-Proper" class="headerlink" title="Commons Proper"></a>Commons Proper</h2><p>Commons Proper的目的是创建和维护可重用的<code>Java</code>组件库。Commons Proper是一个协作与共享的地方，Commons的开发者努力确保其组件对其他的<code>软件库</code>的依赖最少，以便可以轻松地<code>部署</code>这些组件。此外，Commons组件会尽可能的保持其<code>接口</code>的稳定，因而Apache用户以及其他Apache项目可以实现这些组件，而无需担心未来接口的变化。</p>
-<p>截至2006年8月，Commons Proper上有三十多个项目，分为五大类。</p>
-<table>
-<thead>
-<tr>
-<th>组件类别</th>
-<th>示例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>包</td>
-<td>Codec和Modeler</td>
-</tr>
-<tr>
-<td>杂项</td>
-<td>CLI、Discovery、Lang和Collections</td>
-</tr>
-<tr>
-<td>实用程序</td>
-<td>BeanUtils、Configuration、Logging、DBCP、Pool和Validator</td>
-</tr>
-<tr>
-<td>Web相关</td>
-<td>FileUpload和Net</td>
-</tr>
-<tr>
-<td>XML相关</td>
-<td>Betwixt、Digester、Jelly和JXPath</td>
-</tr>
-</tbody>
-</table>
-<h2 id="Commons-Sandbox"><a href="#Commons-Sandbox" class="headerlink" title="Commons Sandbox"></a>Commons Sandbox</h2><p>Commons Sandbox是Java组件开发的工作区，在Sandbox中Commons的贡献者协作和检验那些被未列入Commons Proper的项目。Sandbox项目在Commons成员的支持下晋升为Commons Proper项目；大量的开发者协作强化Sandbox项目，直到它们匹配推广的标准。</p>
-<p>可在Commons Sandbox项目页面上查看当前Commons Sandbox项目的列表。</p>
-<h2 id="Commons-Dormant"><a href="#Commons-Dormant" class="headerlink" title="Commons Dormant"></a>Commons Dormant</h2><p>Commons Dormant是一个当前处于非活动状态的组件库。用户也可以使用这些组件，但必须自己进行组件的构建。一般而言，这些组件不会在近期发布。</p>
-<p>可在Commons Dormant项目页面上查看当前Commons Dormant项目的列表。</p>
+        <p>昨天答辩的时候考到<code>NoSuchMethodError</code>这个经常遇到的错误，居然没有回答上来，在此处记录一下<br><code>NoSuchMethodError</code>按字面理解是方法找不到，这个一般不是真的没有这个方法，不然编译的时候就报错了，有可能是jar包的版本不对或者是冲突<br>下面是排查的思路<br>如果是在开发环境当然是用IDE调试，在生产环境一般是JDB调试，下面只说怎么在JDB调试<br>查看日志报错所在的行<br>使用 <code>stop in</code>断点<br>执行<code>eval 缺少方法的类.class.getProtectionDomain().getCodeSource()</code>查看类所属的位置</p>
 
       
     </div>
@@ -386,6 +379,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/JPDA/" rel="tag"># JPDA</a>
+          
+        </div>
+      
 
       
       
@@ -395,8 +394,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/01/JPDA 体系概览/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2018/09/04/apache-commons/" rel="next" title="Apache Commons">
+                <i class="fa fa-chevron-left"></i> Apache Commons
               </a>
             
           </div>
@@ -460,17 +459,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -485,7 +475,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -496,7 +486,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -507,7 +497,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -531,22 +521,6 @@
       </section>
 
       
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Apache-Commons"><span class="nav-number">1.</span> <span class="nav-text">Apache Commons</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">1.1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Commons-Proper"><span class="nav-number">1.2.</span> <span class="nav-text">Commons Proper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Commons-Sandbox"><span class="nav-number">1.3.</span> <span class="nav-text">Commons Sandbox</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Commons-Dormant"><span class="nav-number">1.4.</span> <span class="nav-text">Commons Dormant</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
 
       
 
@@ -560,7 +534,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
