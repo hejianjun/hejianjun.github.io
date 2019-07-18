@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.gaojunru.com/2019/07/16/JVM/</loc>
+    
+    <lastmod>2019-07-16T12:36:04.179Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.gaojunru.com/2019/07/16/log4jdbc&sqlfx/</loc>
+    
+    <lastmod>2019-07-16T12:35:28.271Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.gaojunru.com/2019/01/01/stream/</loc>
     
     <lastmod>2019-07-16T11:58:32.582Z</lastmod>
