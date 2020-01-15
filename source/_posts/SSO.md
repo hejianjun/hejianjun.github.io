@@ -131,7 +131,7 @@ CAS Client 与受保护的客户端应用部署在一起，以 Filter 方式保�
 
  
 
-![cas基础协议图](images/cas_clip_image001.jpg)
+![cas基础协议图](/images/cas_clip_image001.jpg)
 
 基础协议图
 
@@ -143,7 +143,7 @@ CAS Client 与受保护的客户端应用部署在一起，以 Filter 方式保�
 
 ​    CAS请求认证时序图如下：
 
-![cas认证时序图](images/cas_clip_image003.gif) 
+![cas认证时序图](/images/cas_clip_image003.gif) 
 
 ### 3.2.1.      CAS 如何实现 SSO
 
@@ -165,7 +165,7 @@ CAS Client 与受保护的客户端应用部署在一起，以 Filter 方式保�
 
 下面为代理应用（helloService）获取PGT的过程：（注：PGTURL用于表示一个Proxy服务，是一个回调链接；PGT相当于代理证；PGTIOU为取代理证的钥匙，用来与PGT做关联关系；）
 
-![cas代理PGT获取](images/cas_clip_image004.jpg) 
+![cas代理PGT获取](/images/cas_clip_image004.jpg) 
 
 如上面的CAS Proxy图所示，**CAS Client** 在基础协议之上，在验证ST时提供了一个额外的PGT URL(而且是 SSL 的入口)给CAS Server，使得CAS Server可以通过PGT URL提供一个PGT给CAS Client。
 
@@ -173,7 +173,7 @@ CAS Client拿到了PGT(PGTIOU-85…..ti2td)，就可以通过PGT向后端Web应�
 
 下面是代理认证和提供服务的过程：
 
-![img](images/cas_clip_image005.jpg)
+![代理认证和提供服务的过程](/images/cas_clip_image005.jpg)
 
 如上图所示，Proxy认证与普通的认证其实差别不大，Step1，2与基础模式的Step1,2几乎一样，唯一不同的是，Proxy模式用的是PGT而不是TGC，是Proxy Ticket（PT）而不是Service Ticket。
 
