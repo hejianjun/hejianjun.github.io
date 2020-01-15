@@ -87,15 +87,15 @@
 <meta property="og:site_name" content="剑君 の Blog">
 <meta property="og:description" content="CAS实现SSO单点登录原理1.      CAS简介1.1.  What is CAS？CAS（Central Authentication Service） 是 Yale大学发起的一个企业级的、开源的项目，旨在为 Web 应用系统提供一种可靠的单点登录解决方法（属于Web SSO）。 CAS开始于2001年， 并在 2004年 12月正式成为JA-SIG的一个项目。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://hejianjun.github.io/2018/09/04/SSO/images/cas_clip_image001.jpg">
-<meta property="og:image" content="https://hejianjun.github.io/2018/09/04/SSO/images/cas_clip_image003.gif">
-<meta property="og:image" content="https://hejianjun.github.io/2018/09/04/SSO/images/cas_clip_image004.jpg">
-<meta property="og:image" content="https://hejianjun.github.io/2018/09/04/SSO/images/cas_clip_image005.jpg">
-<meta property="og:updated_time" content="2019-07-16T11:40:10.737Z">
+<meta property="og:image" content="https://hejianjun.github.io/images/cas_clip_image001.jpg">
+<meta property="og:image" content="https://hejianjun.github.io/images/cas_clip_image003.gif">
+<meta property="og:image" content="https://hejianjun.github.io/images/cas_clip_image004.jpg">
+<meta property="og:image" content="https://hejianjun.github.io/images/cas_clip_image005.jpg">
+<meta property="og:updated_time" content="2020-01-15T06:18:08.114Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CAS实现SSO单点登录原理">
 <meta name="twitter:description" content="CAS实现SSO单点登录原理1.      CAS简介1.1.  What is CAS？CAS（Central Authentication Service） 是 Yale大学发起的一个企业级的、开源的项目，旨在为 Web 应用系统提供一种可靠的单点登录解决方法（属于Web SSO）。 CAS开始于2001年， 并在 2004年 12月正式成为JA-SIG的一个项目。">
-<meta name="twitter:image" content="https://hejianjun.github.io/2018/09/04/SSO/images/cas_clip_image001.jpg">
+<meta name="twitter:image" content="https://hejianjun.github.io/images/cas_clip_image001.jpg">
 
 
 
@@ -419,12 +419,12 @@
 </li>
 </ol>
 <p>下面是CAS 最基本的协议过程：</p>
-<p><img src="images/cas_clip_image001.jpg" alt="cas基础协议图"></p>
+<p><img src="/images/cas_clip_image001.jpg" alt="cas基础协议图"></p>
 <p>基础协议图</p>
 <p>如上图：CAS Client 与受保护的客户端应用部署在一起，以Filter方式保护Web应用的受保护资源，过滤从客户端过来的每一个Web请求，同时，CAS Client 会分析HTTP请求中是否包含请求Service Ticket( ST上图中的Ticket) ，如果没有，则说明该用户是没有经过认证的；于是CAS Client 会重定向用户请求到 CAS Server（Step 2），并传递Service（要访问的目的资源地址）。 Step 3是用户认证过程，如果用户提供了正确的Credentials， CAS Server随机产生一个相当长度、唯一、不可伪造的Service Ticket，并缓存以待将来验证，并且重定向用户到Service 所在地址（附带刚才产生的Service Ticket ）, <strong>并为客户端浏览器设置一个Ticket Granted Cookie（TGC）</strong>；CAS Client 在拿到Service和新产生的 Ticket过后，在Step 5和Step6中与CAS Server进行身份核实，以确保 Service Ticket 的合法性。</p>
 <p>在该协议中，所有与CAS Server的交互均采用SSL协议，以确保ST和TGC的安全性。协议工作过程中会有<strong>2次重定向</strong>的过程。但是 CAS Client与CAS Server之间进行Ticket验证的过程对于用户是透明的（使用HttpsURLConnection）。</p>
 <p>​    CAS请求认证时序图如下：</p>
-<p><img src="images/cas_clip_image003.gif" alt="cas认证时序图"> </p>
+<p><img src="/images/cas_clip_image003.gif" alt="cas认证时序图"> </p>
 <h3 id="3-2-1-CAS-如何实现-SSO"><a href="#3-2-1-CAS-如何实现-SSO" class="headerlink" title="3.2.1.      CAS 如何实现 SSO"></a>3.2.1.      CAS 如何实现 SSO</h3><p>当用户访问另一个应用的服务再次被重定向到CAS Server的时候，CAS Server会主动获到这个TGC cookie，然后做下面的事情：</p>
 <p>1) 如果User持有TGC且其还没失效，那么就走基础协议图的Step4，达到了 SSO 的效果；</p>
 <p>2) 如果TGC失效，那么用户还是要重新认证 (走基础协议图的Step3)。</p>
@@ -432,11 +432,11 @@
 <p>这种情况下，假设App2也是需要对User进行身份验证才能访问，那么，为了不影响用户体验（过多的重定向导致User的IE窗口不停地闪动)，CAS引入了一种Proxy认证机制，即CAS Client可以代理用户去访问其它Web应用。</p>
 <p>代理的前提是需要CAS Client拥有用户的身份信息(类似凭据)。之前我们提到的TGC是用户持有对自己身份信息的一种凭据，这里的PGT就是CAS Client端持有的对用户身份信息的一种凭据。凭借TGC，User可以免去输入密码以获取访问其它服务的Service Ticket，所以，这里凭借PGT，Web应用可以代理用户去实现后端的认证，而<strong>无需前端用户的参与</strong>。</p>
 <p>下面为代理应用（helloService）获取PGT的过程：（注：PGTURL用于表示一个Proxy服务，是一个回调链接；PGT相当于代理证；PGTIOU为取代理证的钥匙，用来与PGT做关联关系；）</p>
-<p><img src="images/cas_clip_image004.jpg" alt="cas代理PGT获取"> </p>
+<p><img src="/images/cas_clip_image004.jpg" alt="cas代理PGT获取"> </p>
 <p>如上面的CAS Proxy图所示，<strong>CAS Client</strong> 在基础协议之上，在验证ST时提供了一个额外的PGT URL(而且是 SSL 的入口)给CAS Server，使得CAS Server可以通过PGT URL提供一个PGT给CAS Client。</p>
 <p>CAS Client拿到了PGT(PGTIOU-85…..ti2td)，就可以通过PGT向后端Web应用进行认证。</p>
 <p>下面是代理认证和提供服务的过程：</p>
-<p><img src="images/cas_clip_image005.jpg" alt="img"></p>
+<p><img src="/images/cas_clip_image005.jpg" alt="代理认证和提供服务的过程"></p>
 <p>如上图所示，Proxy认证与普通的认证其实差别不大，Step1，2与基础模式的Step1,2几乎一样，唯一不同的是，Proxy模式用的是PGT而不是TGC，是Proxy Ticket（PT）而不是Service Ticket。</p>
 <h3 id="3-2-3-辅助说明"><a href="#3-2-3-辅助说明" class="headerlink" title="3.2.3.      辅助说明"></a>3.2.3.      辅助说明</h3><p>CAS的SSO实现方式可简化理解为：1个Cookie和N个Session。CAS Server创建cookie，在所有应用认证时使用，各应用通过创建各自的Session来标识用户是否已登录。</p>
 <p>用户在一个应用验证通过后，以后用户在同一浏览器里访问此应用时，客户端应用中的过滤器会在session里读取到用户信息，所以就不会去CAS Server认证。如果在此浏览器里访问别的web应用时，客户端应用中的过滤器在session里读取不到用户信息，就会去CAS Server的login接口认证，但这时CAS Server会读取到浏览器传来的cookie（TGC），所以CAS Server不会要求用户去登录页面登录，只是会根据service参数生成一个Ticket，然后再和web应用做一个验证ticket的交互而已。</p>
