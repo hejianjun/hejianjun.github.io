@@ -1,7 +1,10 @@
 ---
 title: frp
 date: 2020-03-27 10:08:39
-tags:内网穿透,远程桌面
+tags: 内网穿透,远程桌面
+categories: 
+  - technology
+  - NAT
 typora-root-url: ..
 ---
 
@@ -19,56 +22,54 @@ typora-root-url: ..
 
 1. 设置个开机密码（不要设置简单密码，不然电脑中毒别怪我没警告你）
 
-   ![win10设置开机密码](/images/win10setpassword.png)
+ ![win10设置开机密码](/images/win10setpassword.png)
 
 2. 右击“此电脑”，点击“属性”，选择“远程设置”，勾选“允许远程协助连接这台计算机”和“允许远程连接到此计算机”
 
-![rdp1](/images/rdp1.png)
+ ![rdp1](/images/rdp1.png)
 
-![rdp2](/images/rdp2.png)
+ ![rdp2](/images/rdp2.png)
 
 3. 右键网络图标，选择“打开网络和Internet设置”，选择“windows防火墙”,“允许应用通过防火墙”，勾选“远程桌面“
 
-![firewall1](/images/firewall1.png)
+ ![firewall1](/images/firewall1.png)
 
-![firewall2](/images/firewall2.png)
+ ![firewall2](/images/firewall2.png)
 
 4. 在github下载frp并上传到外网服务器，https://github.com/fatedier/frp/releases
 5. 修改 frps.ini 文件，这里使用了最简化的配置：
 
-```
-# frps.ini
-[common]
-bind_port = 7000
-```
+ ```
+ # frps.ini
+ [common]
+ bind_port = 7000
+ ```
 
 5. 在外网服务器上启动frps
-
-   ./frps -c ./frps.ini
-
+ ```
+ ./frps -c ./frps.ini
+ ```
 6. 修改需要远程电脑的 frpc.ini 文件，假设 frps 所在服务器的公网 IP 为 x.x.x.x；
 
-```
-# frpc.ini
-[common]
-server_addr = x.x.x.x
-server_port = 7000
+ ```
+ # frpc.ini
+ [common]
+ server_addr = x.x.x.x
+ server_port = 7000
 
-[rdp]
-type = tcp
-local_ip = 127.0.0.1
-local_port = 3389
-remote_port = 6556
-```
+ [rdp]
+ type = tcp
+ local_ip = 127.0.0.1
+ local_port = 3389
+ remote_port = 6556
+ ```
 
 7. 在被远程的机器上启动 frpc：
 
-```
-./frpc -c ./frpc.ini
-```
+ ```
+ ./frpc -c ./frpc.ini
+ ```
 
 8. 现在你可以使用x.x.x.x:6556来远程你的机器了
 
-   
-
-![image-20200328130645691](/images/rdp3.png)
+ ![rdp3](/images/rdp3.png)
