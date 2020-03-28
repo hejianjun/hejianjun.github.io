@@ -1,7 +1,7 @@
 ---
 title: frp
 date: 2020-03-27 10:08:39
-tags: 内网穿透,远程桌面
+tags: 内网穿透
 categories: 
   - technology
   - NAT
