@@ -259,6 +259,512 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hejianjun.github.io/2020/03/27/frp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hejianjun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="剑君 の Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/27/frp/" itemprop="url">frp</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-27T10:08:39+08:00">
+                2020-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index">
+                    <span itemprop="name">technology</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/NAT/" itemprop="url" rel="index">
+                    <span itemprop="name">NAT</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>​    公司使用NAT协议，所以远程一直靠TeamViewer，然后TeamViewer给我们公司发了律师函，有天逛github无意间发现frp这个“神器”，本着互联网精神，给大家共享一下（被公司网管或者ZF的BM部门抓到可不关我的事）。</p>
+<h1 id="通过-RDP-访问公司内网机器"><a href="#通过-RDP-访问公司内网机器" class="headerlink" title="通过 RDP 访问公司内网机器"></a>通过 RDP 访问公司内网机器</h1><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
+<li><p>你有一个外网服务器（腾讯云啊，阿里云啊，搞活动的时候99一年，一人购买多人收益）</p>
+</li>
+<li><p>win10专业版或者企业版（实测家庭版不行）</p>
+</li>
+</ol>
+<h3 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h3><ol>
+<li><p>设置个开机密码（不要设置简单密码，不然电脑中毒别怪我没警告你）</p>
+<p><img src="/images/win10setpassword.png" alt="win10设置开机密码"></p>
+</li>
+<li><p>右击“此电脑”，点击“属性”，选择“远程设置”，勾选“允许远程协助连接这台计算机”和“允许远程连接到此计算机”</p>
+<p><img src="/images/rdp1.png" alt="rdp1"></p>
+<p><img src="/images/rdp2.png" alt="rdp2"></p>
+</li>
+<li><p>右键网络图标，选择“打开网络和Internet设置”，选择“windows防火墙”,“允许应用通过防火墙”，勾选“远程桌面“</p>
+<p><img src="/images/firewall1.png" alt="firewall1"></p>
+<p><img src="/images/firewall2.png" alt="firewall2"></p>
+</li>
+<li><p>在github下载frp并上传到外网服务器，<a href="https://github.com/fatedier/frp/releases" target="_blank" rel="noopener">https://github.com/fatedier/frp/releases</a></p>
+</li>
+<li><p>修改 frps.ini 文件，这里使用了最简化的配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># frps.ini</span><br><span class="line">[common]</span><br><span class="line">bind_port = 7000</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在外网服务器上启动frps</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./frps -c ./frps.ini</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改需要远程电脑的 frpc.ini 文件，假设 frps 所在服务器的公网 IP 为 x.x.x.x；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># frpc.ini</span><br><span class="line">[common]</span><br><span class="line">server_addr = x.x.x.x</span><br><span class="line">server_port = 7000</span><br><span class="line"></span><br><span class="line">[rdp]</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 3389</span><br><span class="line">remote_port = 6556</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在被远程的机器上启动 frpc：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./frpc -c ./frpc.ini</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>现在你可以使用x.x.x.x:6556来远程你的机器了</p>
+<p><img src="/images/rdp3.png" alt="rdp3"></p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hejianjun.github.io/2019/09/06/诉讼服务/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hejianjun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="剑君 の Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/06/诉讼服务/" itemprop="url">诉讼服务</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-06T13:12:00+08:00">
+                2019-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/业务知识/" itemprop="url" rel="index">
+                    <span itemprop="name">业务知识</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/业务知识/法院/" itemprop="url" rel="index">
+                    <span itemprop="name">法院</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="主要的功能"><a href="#主要的功能" class="headerlink" title="主要的功能"></a>主要的功能</h2><p>当前，各地法院正在推行“诉讼服务中心”建设，其主要的功能有：<br>1、诉讼引导、法律宣传。由专人负责接待，根据来访人员的目的将其引导至相关区域，进行必要的诉讼指引和法律宣传。<br>2、登记立案、先行调解。接收案件材料，办理登记立案手续、核算诉讼费；为当事人、代理人、辩护人提供用于查询案件信息、查阅案卷的验证密码；对符合条件的当事人提供司法救助，根据规定办理诉讼费的减、缓、免除。确有需要的，为当事人提供上门立案、节假日预约立案服务。有条件的可以设置金融机构现场服务窗口，实现诉讼费等费用的现场缴纳。</p>
+<blockquote>
+<p>设立调解工作室，由法官、专职人民调解员等进行诉前调解或立案调解，开展诉调对接工作。</p>
+</blockquote>
+<p>3、受理申请、材料收转。接受当事人等提出的财产保全、证据保全、委托鉴定等申请，形式审查后转相关部门办理。特殊情况下，提供紧急办理申请事项的服务。<br>接收当事人、代理人、辩护人提交的诉讼材料，转交法官或合议庭。<br>4、查询咨询、联系法官。通过窗口接待、触摸屏、网络等手段和形式，为当事人、代理人、辩护人提供承办法官、审判组织、流程信息等案件信息查询服务。为当事人等提供法律咨询，有条件的可以提供与诉讼相关的心理咨询。提供专门的阅卷室方便当事人、代理人、辩护人根据规定查阅卷宗，并提供扫描、复印等服务。当事人、代理人、辩护人需要联系法官的，及时帮助联系，有正当理由并得到法官同意的，安排与法官在专门的地点会见。</p>
+<blockquote>
+<p>根据条件和实际需要，可以设置律师或志愿者服务窗口，由律师或具备专业知识的志愿者为当事人无偿提供诉讼咨询和帮助。积极争取将律师在诉讼服务大厅的无偿服务纳入法律援助范围。</p>
+</blockquote>
+<p>5、文书送达、判后答疑。在合议庭与当事人已有约定后，为当事人提供窗口送达诉讼文书服务。当事人对裁判提出疑问的，通知合议庭答疑。<br>6、信访接待、投诉建议。接待处理申诉信访；开展远程视频接访。<br>设投诉信箱，接受举报投诉与意见建议，转相关部门处理。有条件的可以设置纪检监察窗口。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hejianjun.github.io/2019/09/06/刑事案件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hejianjun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="剑君 の Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/06/刑事案件/" itemprop="url">刑事案件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-06T13:12:00+08:00">
+                2019-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/业务知识/" itemprop="url" rel="index">
+                    <span itemprop="name">业务知识</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/业务知识/法院/" itemprop="url" rel="index">
+                    <span itemprop="name">法院</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="刑事案件"><a href="#刑事案件" class="headerlink" title="刑事案件"></a>刑事案件</h1><p>刑事案件是指犯罪嫌疑人或者被告人被控涉嫌侵犯了《刑法》所保护的社会关系，国家为了追究犯罪嫌疑人或者被告人的刑事责任而进行立案侦察、审判并给予刑事制裁（如罚金、有期徒刑、死刑、剥夺政治权利等）的案件</p>
+<h2 id="构成要素"><a href="#构成要素" class="headerlink" title="构成要素"></a>构成要素</h2><p>(一)作案时间要素<br>(二)作案空间要素<br>(三)案件相关人要素<br>(四)案件相关行为要素<br>(五)案件相关物要素</p>
+<h2 id="基本特点"><a href="#基本特点" class="headerlink" title="基本特点"></a>基本特点</h2><p>(一)外在表现为直接侵害形态<br>(二)多数案件存在明显的犯罪现场<br>(三)案件因果联系复杂多样<br>(四)案件形成具有阶段性与突发性</p>
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>民事案件一般遵循不告不理的原则，即当事人不主动向国家司法机关请求，国家司法机关一般不介入干预当事人之间的纠纷。而刑事案件一般都有国家刑事司法机关主动介入，受害人或者群众报案、举报后，公安、检察机关即会介入侦查。然后由检察院代表国家对被告人提起公诉，由法院作为法律的裁判者进行公正的审判从而达到制裁犯罪人和保护人民的刑法目的。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hejianjun.github.io/2019/09/06/民事案件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -570,323 +1076,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hejianjun.github.io/2019/09/06/刑事案件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hejianjun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="剑君 の Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/06/刑事案件/" itemprop="url">刑事案件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-06T13:12:00+08:00">
-                2019-09-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/业务知识/" itemprop="url" rel="index">
-                    <span itemprop="name">业务知识</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/业务知识/法院/" itemprop="url" rel="index">
-                    <span itemprop="name">法院</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="刑事案件"><a href="#刑事案件" class="headerlink" title="刑事案件"></a>刑事案件</h1><p>刑事案件是指犯罪嫌疑人或者被告人被控涉嫌侵犯了《刑法》所保护的社会关系，国家为了追究犯罪嫌疑人或者被告人的刑事责任而进行立案侦察、审判并给予刑事制裁（如罚金、有期徒刑、死刑、剥夺政治权利等）的案件</p>
-<h2 id="构成要素"><a href="#构成要素" class="headerlink" title="构成要素"></a>构成要素</h2><p>(一)作案时间要素<br>(二)作案空间要素<br>(三)案件相关人要素<br>(四)案件相关行为要素<br>(五)案件相关物要素</p>
-<h2 id="基本特点"><a href="#基本特点" class="headerlink" title="基本特点"></a>基本特点</h2><p>(一)外在表现为直接侵害形态<br>(二)多数案件存在明显的犯罪现场<br>(三)案件因果联系复杂多样<br>(四)案件形成具有阶段性与突发性</p>
-<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>民事案件一般遵循不告不理的原则，即当事人不主动向国家司法机关请求，国家司法机关一般不介入干预当事人之间的纠纷。而刑事案件一般都有国家刑事司法机关主动介入，受害人或者群众报案、举报后，公安、检察机关即会介入侦查。然后由检察院代表国家对被告人提起公诉，由法院作为法律的裁判者进行公正的审判从而达到制裁犯罪人和保护人民的刑法目的。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hejianjun.github.io/2019/09/06/诉讼服务/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hejianjun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="剑君 の Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/06/诉讼服务/" itemprop="url">诉讼服务</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-06T13:12:00+08:00">
-                2019-09-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/业务知识/" itemprop="url" rel="index">
-                    <span itemprop="name">业务知识</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/业务知识/法院/" itemprop="url" rel="index">
-                    <span itemprop="name">法院</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="主要的功能"><a href="#主要的功能" class="headerlink" title="主要的功能"></a>主要的功能</h2><p>当前，各地法院正在推行“诉讼服务中心”建设，其主要的功能有：<br>1、诉讼引导、法律宣传。由专人负责接待，根据来访人员的目的将其引导至相关区域，进行必要的诉讼指引和法律宣传。<br>2、登记立案、先行调解。接收案件材料，办理登记立案手续、核算诉讼费；为当事人、代理人、辩护人提供用于查询案件信息、查阅案卷的验证密码；对符合条件的当事人提供司法救助，根据规定办理诉讼费的减、缓、免除。确有需要的，为当事人提供上门立案、节假日预约立案服务。有条件的可以设置金融机构现场服务窗口，实现诉讼费等费用的现场缴纳。</p>
-<blockquote>
-<p>设立调解工作室，由法官、专职人民调解员等进行诉前调解或立案调解，开展诉调对接工作。</p>
-</blockquote>
-<p>3、受理申请、材料收转。接受当事人等提出的财产保全、证据保全、委托鉴定等申请，形式审查后转相关部门办理。特殊情况下，提供紧急办理申请事项的服务。<br>接收当事人、代理人、辩护人提交的诉讼材料，转交法官或合议庭。<br>4、查询咨询、联系法官。通过窗口接待、触摸屏、网络等手段和形式，为当事人、代理人、辩护人提供承办法官、审判组织、流程信息等案件信息查询服务。为当事人等提供法律咨询，有条件的可以提供与诉讼相关的心理咨询。提供专门的阅卷室方便当事人、代理人、辩护人根据规定查阅卷宗，并提供扫描、复印等服务。当事人、代理人、辩护人需要联系法官的，及时帮助联系，有正当理由并得到法官同意的，安排与法官在专门的地点会见。</p>
-<blockquote>
-<p>根据条件和实际需要，可以设置律师或志愿者服务窗口，由律师或具备专业知识的志愿者为当事人无偿提供诉讼咨询和帮助。积极争取将律师在诉讼服务大厅的无偿服务纳入法律援助范围。</p>
-</blockquote>
-<p>5、文书送达、判后答疑。在合议庭与当事人已有约定后，为当事人提供窗口送达诉讼文书服务。当事人对裁判提出疑问的，通知合议庭答疑。<br>6、信访接待、投诉建议。接待处理申诉信访；开展远程视频接访。<br>设投诉信箱，接受举报投诉与意见建议，转相关部门处理。有条件的可以设置纪检监察窗口。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hejianjun.github.io/2019/07/16/log4jdbc&sqlfx/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -997,192 +1186,6 @@
 <h2 id="SQLFX"><a href="#SQLFX" class="headerlink" title="SQLFX"></a>SQLFX</h2><p>SQLFX是我们公司为了DBA方便的分析项目中不规范的sql而编写的软件，主要由两部分组成client和server</p>
 <p>client的作用类似于ELK中的Filebeat，每天晚上定时（可在服务端配置）将log4jdbc日志压缩后发送到服务端</p>
 <p>server则定时解析client发送上来的log4jdbc日志生成报告并发邮箱给DBA</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hejianjun.github.io/2019/01/01/lambda/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hejianjun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="剑君 の Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/01/lambda/" itemprop="url">Lambda</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-01T21:35:55+08:00">
-                2019-01-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/" itemprop="url" rel="index">
-                    <span itemprop="name">technology</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/OCJP/" itemprop="url" rel="index">
-                    <span itemprop="name">OCJP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h1><h2 id="Java为何需要Lambda"><a href="#Java为何需要Lambda" class="headerlink" title="Java为何需要Lambda"></a>Java为何需要Lambda</h2><h2 id="代码简洁，开发快速"><a href="#代码简洁，开发快速" class="headerlink" title="代码简洁，开发快速"></a>代码简洁，开发快速</h2><p>减少了代码的重复，因此程序比较短，开发速度较快。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Before Java 8:</span></span><br><span class="line"><span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Before Java8 "</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).start();</span><br><span class="line"></span><br><span class="line"><span class="comment">//Java 8 way:</span></span><br><span class="line"><span class="keyword">new</span> Thread(() -&gt; System.out.println(<span class="string">"In Java8!"</span>));</span><br></pre></td></tr></table></figure>
-<h2 id="接近自然语言，易于理解"><a href="#接近自然语言，易于理解" class="headerlink" title="接近自然语言，易于理解"></a>接近自然语言，易于理解</h2><p>编程的自由度很高，可以写出很接近自然语言的代码。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Prior Java 8 :</span></span><br><span class="line">List features = Arrays.asList(<span class="string">"Lambdas"</span>, <span class="string">"Default Method"</span>, </span><br><span class="line"><span class="string">"Stream API"</span>, <span class="string">"Date and Time API"</span>);</span><br><span class="line"><span class="keyword">for</span> (String feature : features) &#123;</span><br><span class="line">   System.out.println(feature);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//In Java 8:</span></span><br><span class="line">List features = Arrays.asList(<span class="string">"Lambdas"</span>, <span class="string">"Default Method"</span>, <span class="string">"Stream API"</span>,</span><br><span class="line"> <span class="string">"Date and Time API"</span>);</span><br><span class="line">features.forEach(n -&gt; System.out.println(n));</span><br></pre></td></tr></table></figure>
-<h2 id="易于”并发编程”"><a href="#易于”并发编程”" class="headerlink" title="易于”并发编程”"></a>易于”并发编程”</h2><p>函数式编程不需要考虑”死锁”（deadlock），因为它不修改变量，所以根本不存在”锁”线程的问题。不必担心一个线程的数据，被另一个线程修改，所以可以很放心地把工作分摊到多个线程，部署”并发编程”（concurrency）。</p>
-<p>假设一个业务场景：对于20元以上的商品，进行9折处理，最后得到这些商品的折后价格。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> BigDecimal totalOfDiscountedPrices = prices.stream()</span><br><span class="line">.filter(price -&gt; price.compareTo(BigDecimal.valueOf(<span class="number">20</span>)) &gt; <span class="number">0</span>)</span><br><span class="line">.map(price -&gt; price.multiply(BigDecimal.valueOf(<span class="number">0.9</span>)))</span><br><span class="line">.reduce(BigDecimal.ZERO,BigDecimal::add);</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"Total of discounted prices: "</span> + totalOfDiscountedPrices);</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> BigDecimal totalOfDiscountedPrices = prices.parallelStream()</span><br><span class="line">.filter(price -&gt; price.compareTo(BigDecimal.valueOf(<span class="number">20</span>)) &gt; <span class="number">0</span>)</span><br><span class="line">.map(price -&gt; price.multiply(BigDecimal.valueOf(<span class="number">0.9</span>)))</span><br><span class="line">.reduce(BigDecimal.ZERO,BigDecimal::add);</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"Total of discounted prices: "</span> + totalOfDiscountedPrices);</span><br></pre></td></tr></table></figure>
-<h1 id="Lambda的阴暗面"><a href="#Lambda的阴暗面" class="headerlink" title="Lambda的阴暗面"></a>Lambda的阴暗面</h1><p>前面都是讲Lambda如何改变Java程序员的思维习惯，但Lambda确实也带来了困惑</p>
-<p>JVM可以执行任何语言编写的代码，只要它们能编译成字节码，字节码自身是充分OO的，被设计成接近于Java语言，这意味着Java被编译成的字节码非常容易被重新组装。</p>
-<p>但是如果不是Java语言，差距将越来越大，Scala源码和被编译成的字节码之间巨大差距是一个证明，编译器加入了大量合成类 方法和变量，以便让JVM按照语言自身特定语法和流程控制执行。</p>
-<p>我们首先看看Java 6/7中的一个传统方法案例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// simple check against empty strings</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">check</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (s.equals(<span class="string">""</span>)) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s.length();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//map names to lengths</span></span><br><span class="line"> </span><br><span class="line">List lengths = <span class="keyword">new</span> ArrayList();</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> (String name : Arrays.asList(args)) &#123;</span><br><span class="line">    lengths.add(check(name));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>如果一个空的字符串传入，这段代码将抛出错误，堆栈跟踪如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">at LmbdaMain.check(LmbdaMain.java:<span class="number">19</span>)</span><br><span class="line">at LmbdaMain.main(LmbdaMain.java:<span class="number">34</span>)</span><br></pre></td></tr></table></figure></p>
-<p>再看看Lambda的例子<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Stream lengths = names.stream().map(name -&gt; check(name));</span><br><span class="line"> </span><br><span class="line">at LmbdaMain.check(LmbdaMain.java:<span class="number">19</span>)</span><br><span class="line">at LmbdaMain.lambda$<span class="number">0</span>(LmbdaMain.java:<span class="number">37</span>)</span><br><span class="line">at LmbdaMain$$Lambda$<span class="number">1</span>/<span class="number">821270929</span>.apply(Unknown Source)</span><br><span class="line">at java.util.stream.ReferencePipeline$<span class="number">3</span>$<span class="number">1</span>.accept(ReferencePipeline.java:<span class="number">193</span>)</span><br><span class="line">at java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:<span class="number">948</span>)</span><br><span class="line">at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:<span class="number">512</span>)</span><br><span class="line">at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:<span class="number">502</span>)</span><br><span class="line">at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:<span class="number">708</span>)</span><br><span class="line">at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:<span class="number">234</span>)</span><br><span class="line">at java.util.stream.LongPipeline.reduce(LongPipeline.java:<span class="number">438</span>)</span><br><span class="line">at java.util.stream.LongPipeline.sum(LongPipeline.java:<span class="number">396</span>)</span><br><span class="line">at java.util.stream.ReferencePipeline.count(ReferencePipeline.java:<span class="number">526</span>)</span><br><span class="line">at LmbdaMain.main(LmbdaMain.java:<span class="number">39</span>)</span><br></pre></td></tr></table></figure></p>
-<p>这非常类似Scala，出错栈信息太长，我们为代码的精简付出力代价，更精确的代码意味着更复杂的调试。</p>
-<h1 id="函数式接口"><a href="#函数式接口" class="headerlink" title="函数式接口"></a>函数式接口</h1><p>函数式接口（functional interface 也叫功能性接口，其实是同一个东西）。简单来说，函数式接口是只包含一个方法的接口。 @FunctionalInterface作为注解,这个注解是非必须的。</p>
-<h2 id="Lambda语法"><a href="#Lambda语法" class="headerlink" title="Lambda语法"></a>Lambda语法</h2><p>包含三个部分</p>
-<ol>
-<li>一个括号内用逗号分隔的形式参数，参数是函数式接口里面方法的参数</li>
-<li>一个箭头符号：-&gt;</li>
-<li>方法体，可以是表达式和代码块，方法体函数式接口里面方法的实现，如果是代码块，则必须用{}来包裹起来，且需要一个return 返回值，但有个例外，若函数式接口里面方法返回值是void，则无需{}</li>
-</ol>
-<p>总体看起来像这样<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(parameters) -&gt; expression 或者 (parameters) -&gt; &#123; statements; &#125;</span><br></pre></td></tr></table></figure></p>
-<p>看一个完整的例子，方便理解<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 测试lambda表达式</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> benhail</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestLambda</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">runThreadUseLambda</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//Runnable是一个函数接口，只包含了有个无参数的，返回void的run方法；</span></span><br><span class="line">        <span class="comment">//所以lambda表达式左边没有参数，右边也没有return，只是单纯的打印一句话</span></span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt;System.out.println(<span class="string">"lambda实现的线程"</span>)).start(); </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">runThreadUseInnerClass</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//这种方式就不多讲了，以前旧版本比较常见的做法</span></span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">"内部类实现的线程"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        TestLambda.runThreadUseLambda();</span><br><span class="line">        TestLambda.runThreadUseInnerClass();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>可以看出，使用lambda表达式设计的代码会更加简洁，而且还可读。</p>
-<h2 id="方法引用"><a href="#方法引用" class="headerlink" title="方法引用"></a>方法引用</h2><p>其实是lambda表达式的一个简化写法，所引用的方法其实是lambda表达式的方法体实现，语法也很简单，左边是容器（可以是类名，实例名），中间是”::”，右边是相应的方法名。如下所示：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ObjectReference::methodName</span><br></pre></td></tr></table></figure>
-<p>一般方法的引用格式是</p>
-<ol>
-<li>如果是静态方法，则是ClassName::methodName。如 Object ::equals</li>
-<li>如果是实例方法，则是Instance::methodName。如Object obj=new Object();obj::equals;</li>
-<li>构造函数.则是ClassName::new</li>
-</ol>
-<p>再来看一个完整的例子，方便理解<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.FlowLayout;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.ActionEvent;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JButton;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JFrame;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> benhail</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestMethodReference</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        JFrame frame = <span class="keyword">new</span> JFrame();</span><br><span class="line">        frame.setLayout(<span class="keyword">new</span> FlowLayout());</span><br><span class="line">        frame.setVisible(<span class="keyword">true</span>);</span><br><span class="line">		</span><br><span class="line">        JButton button1 = <span class="keyword">new</span> JButton(<span class="string">"点我!"</span>);</span><br><span class="line">        JButton button2 = <span class="keyword">new</span> JButton(<span class="string">"也点我!"</span>);</span><br><span class="line">		</span><br><span class="line">        frame.getContentPane().add(button1);</span><br><span class="line">        frame.getContentPane().add(button2);</span><br><span class="line">        <span class="comment">//这里addActionListener方法的参数是ActionListener，是一个函数式接口</span></span><br><span class="line">        <span class="comment">//使用lambda表达式方式</span></span><br><span class="line">        button1.addActionListener(e -&gt; &#123; System.out.println(<span class="string">"这里是Lambda实现方式"</span>); &#125;);</span><br><span class="line">        <span class="comment">//使用方法引用方式</span></span><br><span class="line">        button2.addActionListener(TestMethodReference::doSomething);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 这里是函数式接口ActionListener的实现方法</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> e </span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">(ActionEvent e)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">        System.out.println(<span class="string">"这里是方法引用实现方式"</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>可以看出，doSomething方法就是lambda表达式的实现，这样的好处就是，如果你觉得lambda的方法体会很长，影响代码可读性，方法引用就是个解决办法</p>
 
           
         
@@ -1591,6 +1594,192 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hejianjun.github.io/2019/01/01/lambda/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hejianjun">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="剑君 の Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/01/lambda/" itemprop="url">Lambda</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-01T21:35:55+08:00">
+                2019-01-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index">
+                    <span itemprop="name">technology</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/OCJP/" itemprop="url" rel="index">
+                    <span itemprop="name">OCJP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h1><h2 id="Java为何需要Lambda"><a href="#Java为何需要Lambda" class="headerlink" title="Java为何需要Lambda"></a>Java为何需要Lambda</h2><h2 id="代码简洁，开发快速"><a href="#代码简洁，开发快速" class="headerlink" title="代码简洁，开发快速"></a>代码简洁，开发快速</h2><p>减少了代码的重复，因此程序比较短，开发速度较快。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Before Java 8:</span></span><br><span class="line"><span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Before Java8 "</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).start();</span><br><span class="line"></span><br><span class="line"><span class="comment">//Java 8 way:</span></span><br><span class="line"><span class="keyword">new</span> Thread(() -&gt; System.out.println(<span class="string">"In Java8!"</span>));</span><br></pre></td></tr></table></figure>
+<h2 id="接近自然语言，易于理解"><a href="#接近自然语言，易于理解" class="headerlink" title="接近自然语言，易于理解"></a>接近自然语言，易于理解</h2><p>编程的自由度很高，可以写出很接近自然语言的代码。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Prior Java 8 :</span></span><br><span class="line">List features = Arrays.asList(<span class="string">"Lambdas"</span>, <span class="string">"Default Method"</span>, </span><br><span class="line"><span class="string">"Stream API"</span>, <span class="string">"Date and Time API"</span>);</span><br><span class="line"><span class="keyword">for</span> (String feature : features) &#123;</span><br><span class="line">   System.out.println(feature);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//In Java 8:</span></span><br><span class="line">List features = Arrays.asList(<span class="string">"Lambdas"</span>, <span class="string">"Default Method"</span>, <span class="string">"Stream API"</span>,</span><br><span class="line"> <span class="string">"Date and Time API"</span>);</span><br><span class="line">features.forEach(n -&gt; System.out.println(n));</span><br></pre></td></tr></table></figure>
+<h2 id="易于”并发编程”"><a href="#易于”并发编程”" class="headerlink" title="易于”并发编程”"></a>易于”并发编程”</h2><p>函数式编程不需要考虑”死锁”（deadlock），因为它不修改变量，所以根本不存在”锁”线程的问题。不必担心一个线程的数据，被另一个线程修改，所以可以很放心地把工作分摊到多个线程，部署”并发编程”（concurrency）。</p>
+<p>假设一个业务场景：对于20元以上的商品，进行9折处理，最后得到这些商品的折后价格。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> BigDecimal totalOfDiscountedPrices = prices.stream()</span><br><span class="line">.filter(price -&gt; price.compareTo(BigDecimal.valueOf(<span class="number">20</span>)) &gt; <span class="number">0</span>)</span><br><span class="line">.map(price -&gt; price.multiply(BigDecimal.valueOf(<span class="number">0.9</span>)))</span><br><span class="line">.reduce(BigDecimal.ZERO,BigDecimal::add);</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"Total of discounted prices: "</span> + totalOfDiscountedPrices);</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> BigDecimal totalOfDiscountedPrices = prices.parallelStream()</span><br><span class="line">.filter(price -&gt; price.compareTo(BigDecimal.valueOf(<span class="number">20</span>)) &gt; <span class="number">0</span>)</span><br><span class="line">.map(price -&gt; price.multiply(BigDecimal.valueOf(<span class="number">0.9</span>)))</span><br><span class="line">.reduce(BigDecimal.ZERO,BigDecimal::add);</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"Total of discounted prices: "</span> + totalOfDiscountedPrices);</span><br></pre></td></tr></table></figure>
+<h1 id="Lambda的阴暗面"><a href="#Lambda的阴暗面" class="headerlink" title="Lambda的阴暗面"></a>Lambda的阴暗面</h1><p>前面都是讲Lambda如何改变Java程序员的思维习惯，但Lambda确实也带来了困惑</p>
+<p>JVM可以执行任何语言编写的代码，只要它们能编译成字节码，字节码自身是充分OO的，被设计成接近于Java语言，这意味着Java被编译成的字节码非常容易被重新组装。</p>
+<p>但是如果不是Java语言，差距将越来越大，Scala源码和被编译成的字节码之间巨大差距是一个证明，编译器加入了大量合成类 方法和变量，以便让JVM按照语言自身特定语法和流程控制执行。</p>
+<p>我们首先看看Java 6/7中的一个传统方法案例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// simple check against empty strings</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">check</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (s.equals(<span class="string">""</span>)) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s.length();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//map names to lengths</span></span><br><span class="line"> </span><br><span class="line">List lengths = <span class="keyword">new</span> ArrayList();</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> (String name : Arrays.asList(args)) &#123;</span><br><span class="line">    lengths.add(check(name));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果一个空的字符串传入，这段代码将抛出错误，堆栈跟踪如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">at LmbdaMain.check(LmbdaMain.java:<span class="number">19</span>)</span><br><span class="line">at LmbdaMain.main(LmbdaMain.java:<span class="number">34</span>)</span><br></pre></td></tr></table></figure></p>
+<p>再看看Lambda的例子<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Stream lengths = names.stream().map(name -&gt; check(name));</span><br><span class="line"> </span><br><span class="line">at LmbdaMain.check(LmbdaMain.java:<span class="number">19</span>)</span><br><span class="line">at LmbdaMain.lambda$<span class="number">0</span>(LmbdaMain.java:<span class="number">37</span>)</span><br><span class="line">at LmbdaMain$$Lambda$<span class="number">1</span>/<span class="number">821270929</span>.apply(Unknown Source)</span><br><span class="line">at java.util.stream.ReferencePipeline$<span class="number">3</span>$<span class="number">1</span>.accept(ReferencePipeline.java:<span class="number">193</span>)</span><br><span class="line">at java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:<span class="number">948</span>)</span><br><span class="line">at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:<span class="number">512</span>)</span><br><span class="line">at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:<span class="number">502</span>)</span><br><span class="line">at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:<span class="number">708</span>)</span><br><span class="line">at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:<span class="number">234</span>)</span><br><span class="line">at java.util.stream.LongPipeline.reduce(LongPipeline.java:<span class="number">438</span>)</span><br><span class="line">at java.util.stream.LongPipeline.sum(LongPipeline.java:<span class="number">396</span>)</span><br><span class="line">at java.util.stream.ReferencePipeline.count(ReferencePipeline.java:<span class="number">526</span>)</span><br><span class="line">at LmbdaMain.main(LmbdaMain.java:<span class="number">39</span>)</span><br></pre></td></tr></table></figure></p>
+<p>这非常类似Scala，出错栈信息太长，我们为代码的精简付出力代价，更精确的代码意味着更复杂的调试。</p>
+<h1 id="函数式接口"><a href="#函数式接口" class="headerlink" title="函数式接口"></a>函数式接口</h1><p>函数式接口（functional interface 也叫功能性接口，其实是同一个东西）。简单来说，函数式接口是只包含一个方法的接口。 @FunctionalInterface作为注解,这个注解是非必须的。</p>
+<h2 id="Lambda语法"><a href="#Lambda语法" class="headerlink" title="Lambda语法"></a>Lambda语法</h2><p>包含三个部分</p>
+<ol>
+<li>一个括号内用逗号分隔的形式参数，参数是函数式接口里面方法的参数</li>
+<li>一个箭头符号：-&gt;</li>
+<li>方法体，可以是表达式和代码块，方法体函数式接口里面方法的实现，如果是代码块，则必须用{}来包裹起来，且需要一个return 返回值，但有个例外，若函数式接口里面方法返回值是void，则无需{}</li>
+</ol>
+<p>总体看起来像这样<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(parameters) -&gt; expression 或者 (parameters) -&gt; &#123; statements; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>看一个完整的例子，方便理解<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 测试lambda表达式</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> benhail</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestLambda</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">runThreadUseLambda</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//Runnable是一个函数接口，只包含了有个无参数的，返回void的run方法；</span></span><br><span class="line">        <span class="comment">//所以lambda表达式左边没有参数，右边也没有return，只是单纯的打印一句话</span></span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt;System.out.println(<span class="string">"lambda实现的线程"</span>)).start(); </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">runThreadUseInnerClass</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//这种方式就不多讲了，以前旧版本比较常见的做法</span></span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">"内部类实现的线程"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        TestLambda.runThreadUseLambda();</span><br><span class="line">        TestLambda.runThreadUseInnerClass();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以看出，使用lambda表达式设计的代码会更加简洁，而且还可读。</p>
+<h2 id="方法引用"><a href="#方法引用" class="headerlink" title="方法引用"></a>方法引用</h2><p>其实是lambda表达式的一个简化写法，所引用的方法其实是lambda表达式的方法体实现，语法也很简单，左边是容器（可以是类名，实例名），中间是”::”，右边是相应的方法名。如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ObjectReference::methodName</span><br></pre></td></tr></table></figure>
+<p>一般方法的引用格式是</p>
+<ol>
+<li>如果是静态方法，则是ClassName::methodName。如 Object ::equals</li>
+<li>如果是实例方法，则是Instance::methodName。如Object obj=new Object();obj::equals;</li>
+<li>构造函数.则是ClassName::new</li>
+</ol>
+<p>再来看一个完整的例子，方便理解<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.FlowLayout;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.ActionEvent;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JButton;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JFrame;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> benhail</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestMethodReference</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        JFrame frame = <span class="keyword">new</span> JFrame();</span><br><span class="line">        frame.setLayout(<span class="keyword">new</span> FlowLayout());</span><br><span class="line">        frame.setVisible(<span class="keyword">true</span>);</span><br><span class="line">		</span><br><span class="line">        JButton button1 = <span class="keyword">new</span> JButton(<span class="string">"点我!"</span>);</span><br><span class="line">        JButton button2 = <span class="keyword">new</span> JButton(<span class="string">"也点我!"</span>);</span><br><span class="line">		</span><br><span class="line">        frame.getContentPane().add(button1);</span><br><span class="line">        frame.getContentPane().add(button2);</span><br><span class="line">        <span class="comment">//这里addActionListener方法的参数是ActionListener，是一个函数式接口</span></span><br><span class="line">        <span class="comment">//使用lambda表达式方式</span></span><br><span class="line">        button1.addActionListener(e -&gt; &#123; System.out.println(<span class="string">"这里是Lambda实现方式"</span>); &#125;);</span><br><span class="line">        <span class="comment">//使用方法引用方式</span></span><br><span class="line">        button2.addActionListener(TestMethodReference::doSomething);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 这里是函数式接口ActionListener的实现方法</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> e </span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">(ActionEvent e)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">        System.out.println(<span class="string">"这里是方法引用实现方式"</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以看出，doSomething方法就是lambda表达式的实现，这样的好处就是，如果你觉得lambda的方法体会很长，影响代码可读性，方法引用就是个解决办法</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hejianjun.github.io/2019/01/01/io/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1923,164 +2112,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hejianjun.github.io/2018/09/04/SSO/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hejianjun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="剑君 の Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/04/SSO/" itemprop="url">CAS实现SSO单点登录原理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-04T12:42:47+08:00">
-                2018-09-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/" itemprop="url" rel="index">
-                    <span itemprop="name">technology</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/CAS/" itemprop="url" rel="index">
-                    <span itemprop="name">CAS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="CAS实现SSO单点登录原理"><a href="#CAS实现SSO单点登录原理" class="headerlink" title="CAS实现SSO单点登录原理"></a>CAS实现SSO单点登录原理</h1><h1 id="1-CAS简介"><a href="#1-CAS简介" class="headerlink" title="1.      CAS简介"></a>1.      CAS简介</h1><h2 id="1-1-What-is-CAS？"><a href="#1-1-What-is-CAS？" class="headerlink" title="1.1.  What is CAS？"></a>1.1.  What is CAS？</h2><p>CAS（Central Authentication Service） 是 Yale大学发起的一个企业级的、开源的项目，旨在为 Web 应用系统提供一种可靠的单点登录解决方法（属于Web SSO）。</p>
-<p>CAS开始于2001年， 并在 2004年 12月正式成为JA-SIG的一个项目。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/04/SSO/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2131,7 +2162,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2142,7 +2173,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2153,7 +2184,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
