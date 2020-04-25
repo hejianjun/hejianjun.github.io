@@ -1,12 +1,3 @@
----
-title: IO
-date: 2019-01-01 21:35:55
-tags: OCJP
-categories:
-  - technology
-  - OCJP
-typora-root-url: ..
----
 # Java中的IO
 
 
@@ -22,10 +13,6 @@ Java IO API中的FIle类可以让你访问底层文件系统，通过File类，�
 - 读取目录中的文件列表
 
 请注意：File只能访问文件以及文件系统的元数据。如果你想读写文件内容，需要使用FileInputStream、FileOutputStream或者RandomAccessFile。如果你正在使用Java NIO，并且想使用完整的NIO解决方案，你会使用到java.nio.FileChannel(否则你也可以使用File)。
-
-[PPT](/reveal.js/io.html)
-
-<!--more-->
 
 
 ### 实例化一个java.io.File对象
