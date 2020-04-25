@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="剑君 の Blog">
 <meta property="og:description" content="Java中的IOFile（文件特征与管理）Java IO API中的FIle类可以让你访问底层文件系统，通过File类，你可以做到以下几点：  检测文件是否存在 读取文件长度 重命名或移动文件 删除文件 检测某个路径是文件还是目录 读取目录中的文件列表  请注意：File只能访问文件以及文件系统的元数据。如果你想读写文件内容，需要使用FileInputStream、FileOutputStream">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-16T11:57:55.100Z">
+<meta property="og:updated_time" content="2020-04-25T04:36:03.566Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IO">
 <meta name="twitter:description" content="Java中的IOFile（文件特征与管理）Java IO API中的FIle类可以让你访问底层文件系统，通过File类，你可以做到以下几点：  检测文件是否存在 读取文件长度 重命名或移动文件 删除文件 检测某个路径是文件还是目录 读取目录中的文件列表  请注意：File只能访问文件以及文件系统的元数据。如果你想读写文件内容，需要使用FileInputStream、FileOutputStream">
@@ -373,6 +373,8 @@
 <li>读取目录中的文件列表</li>
 </ul>
 <p>请注意：File只能访问文件以及文件系统的元数据。如果你想读写文件内容，需要使用FileInputStream、FileOutputStream或者RandomAccessFile。如果你正在使用Java NIO，并且想使用完整的NIO解决方案，你会使用到java.nio.FileChannel(否则你也可以使用File)。</p>
+<p><a href="/reveal.js/io.html">PPT</a></p>
+<a id="more"></a>
 <h3 id="实例化一个java-io-File对象"><a href="#实例化一个java-io-File对象" class="headerlink" title="实例化一个java.io.File对象"></a>实例化一个java.io.File对象</h3><p>在使用File之前，必须拥有一个File对象，这是实例化的代码例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">File file = <span class="keyword">new</span> File(<span class="string">"c:\\data\\input-file.txt"</span>);</span><br></pre></td></tr></table></figure></p>
 <p>很简单，对吗？File类同样拥有多种不同实例化方式的构造函数。</p>
 <h3 id="检测文件是否存在"><a href="#检测文件是否存在" class="headerlink" title="检测文件是否存在"></a>检测文件是否存在</h3><p>当你获得一个File对象之后，可以检测相应的文件是否存在。当文件不存在的时候，构造函数并不会执行失败。你已经准备好创建一个File了，对吧？</p>
@@ -433,8 +435,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/01/stream/" rel="next" title="Java 8 中的 Streams API 详解">
-                <i class="fa fa-chevron-left"></i> Java 8 中的 Streams API 详解
+              <a href="/2018/12/01/NoSuchMethodError/" rel="next" title="NoSuchMethodError">
+                <i class="fa fa-chevron-left"></i> NoSuchMethodError
               </a>
             
           </div>
@@ -443,8 +445,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/16/log4jdbc&sqlfx/" rel="prev" title="log4jdbc 和 sqlfx">
-                log4jdbc 和 sqlfx <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/01/lambda/" rel="prev" title="Lambda">
+                Lambda <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -527,7 +529,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
