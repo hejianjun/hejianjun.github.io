@@ -8,8 +8,8 @@ categories:
 typora-root-url: ..
 ---
 
-​	公司使用NAT协议，所以远程一直靠TeamViewer，然后TeamViewer给我们公司发了律师函，有天逛github无意间发现frp这个“神器”，本着互联网精神，给大家共享一下（被公司网管或者ZF的BM部门抓到可不关我的事）。
-
+公司使用NAT协议，所以远程一直靠TeamViewer，然后TeamViewer给我们公司发了律师函，有天逛github无意间发现frp这个“神器”，本着互联网精神，给大家共享一下（被公司网管或者ZF的BM部门抓到可不关我的事）。
+<!--more-->
 # 通过 RDP 访问公司内网机器
 
 ### 准备工作
