@@ -101,10 +101,13 @@
   <p class="date">2019-01-01 21:35:55</p>
 </section>
 
-<section id="什么是-stream" class="slide level2">
-<h2>什么是 Stream</h2>
+<section>
+<section id="什么是-stream" class="title-slide slide level1">
+<h1>什么是 Stream</h1>
 <p>Java 8 中的 Stream 是对集合（Collection）对象功能的增强，它专注于对集合对象进行各种非常便利、高效的聚合操作（aggregate operation），或者大批量数据操作 (bulk data operation)。</p>
-<h3 id="什么是聚合操作">什么是聚合操作</h3>
+</section>
+<section id="什么是聚合操作" class="title-slide slide level2">
+<h2>什么是聚合操作</h2>
 <p>在传统的 J2EE 应用中，Java 代码经常不得不依赖于关系型数据库的聚合操作来完成诸如： - 客户每月平均消费金额 - 最昂贵的在售商品 - 本周完成的有效订单（排除了无效的） - 取十个数据样本作为首页推荐 这类的操作。</p>
 <p>在 Java 7 中，如果要发现 type 为 grocery 的所有交易，然后返回以交易值降序排序好的交易 ID 集合，我们需要这样写：</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="bu">List</span>&lt;Transaction&gt; groceryTransactions = <span class="kw">new</span> Arraylist&lt;&gt;();</span>
@@ -129,9 +132,14 @@
 <span id="cb2-4"><a href="#cb2-4"></a> <span class="fu">map</span>(Transaction::getId).</span>
 <span id="cb2-5"><a href="#cb2-5"></a> <span class="fu">collect</span>(<span class="fu">toList</span>());</span></code></pre></div>
 </section>
-<section id="stream-总览" class="slide level2">
-<h2>Stream 总览</h2>
-<h3 id="什么是流">什么是流</h3>
+</section>
+<section>
+<section id="stream-总览" class="title-slide slide level1">
+<h1>Stream 总览</h1>
+
+</section>
+<section id="什么是流" class="title-slide slide level2">
+<h2>什么是流</h2>
 <p>Stream 不是集合元素，它不是数据结构并不保存数据，它是有关算法和计算的，它更像一个高级版本的 Iterator。原始版本的 Iterator，用户只能显式地一个一个遍历元素并对其执行某些操作；高级版本的 Stream，用户只要给出需要对其包含的元素执行什么操作，比如 “过滤掉长度大于 10 的字符串”、“获取每个字符串的首字母”等，Stream 会隐式地在内部进行遍历，做出相应的数据转换。</p>
 <p>Stream 就如同一个迭代器（Iterator），单向，不可往复，数据只能遍历一次，遍历过一次后即用尽了，就好比流水从面前流过，一去不复返。</p>
 <p>而和迭代器又不同的是，Stream 可以并行化操作，迭代器只能命令式地、串行化操作。顾名思义，当使用串行方式去遍历时，每个 item 读完后再读下一个 item。而使用并行去遍历时，数据会被分成多个段，其中每一个都在不同的线程中处理，然后将结果一起输出。Stream 的并行操作依赖于 Java7 中引入的 Fork/Join 框架（JSR166y）来拆分任务和加速处理过程。Java 的并行 API 演变历程基本如下：</p>
@@ -143,10 +151,15 @@
 <li>8.0 中的 Lambda</li>
 </ol>
 <p>Stream 的另外一大特点是，数据源本身可以是无限的。</p>
-<h3 id="流的构成">流的构成</h3>
+</section>
+
+<section id="流的构成" class="title-slide slide level2">
+<h2>流的构成</h2>
 <p>当我们使用一个流的时候，通常包括三个基本步骤：</p>
 <p>获取一个数据源（source）→ 数据转换→执行操作获取想要的结果，每次转换原有 Stream 对象不改变，返回一个新的 Stream 对象（可以有多次转换），这就允许对其操作可以像链条一样排列，变成一个管道，如下图所示。</p>
-<h5 id="流管道-stream-pipeline-的构成">流管道 (Stream Pipeline) 的构成</h5>
+</section>
+<section id="流管道-stream-pipeline-的构成" class="slide level3">
+<h3>流管道 (Stream Pipeline) 的构成</h3>
 <figure>
 <img data-src="images/stream.png" alt="" /><figcaption>stream</figcaption>
 </figure>
@@ -173,10 +186,14 @@
 <span id="cb3-4"><a href="#cb3-4"></a> .<span class="fu">sum</span>();</span></code></pre></div>
 <p>stream() 获取当前小物件的 source，filter 和 mapToInt 为 intermediate 操作，进行数据筛选和转换，最后一个 sum() 为 terminal 操作，对符合条件的全部小物件作重量求和。</p>
 </section>
-<section id="流的使用详解" class="slide level2">
-<h2>流的使用详解</h2>
+</section>
+<section>
+<section id="流的使用详解" class="title-slide slide level1">
+<h1>流的使用详解</h1>
 <p>简单说，对 Stream 的使用就是实现一个 filter-map-reduce 过程，产生一个最终结果，或者导致一个副作用（side effect）。</p>
-<h3 id="流的构造与转换">流的构造与转换</h3>
+</section>
+<section id="流的构造与转换" class="title-slide slide level2">
+<h2>流的构造与转换</h2>
 <p>下面提供最常见的几种构造 Stream 的样例。</p>
 <p>构造流的几种常见方法</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">// 1. Individual values</span></span>
@@ -205,7 +222,10 @@
 <span id="cb6-8"><a href="#cb6-8"></a><span class="co">// 3. String</span></span>
 <span id="cb6-9"><a href="#cb6-9"></a><span class="bu">String</span> str = stream.<span class="fu">collect</span>(Collectors.<span class="fu">joining</span>()).<span class="fu">toString</span>();</span></code></pre></div>
 <p>一个 Stream 只可以使用一次，上面的代码为了简洁而重复使用了数次。</p>
-<h3 id="流的操作">流的操作</h3>
+</section>
+
+<section id="流的操作" class="title-slide slide level2">
+<h2>流的操作</h2>
 <p>接下来，当把一个数据结构包装成 Stream 后，就要开始对里面的元素进行各类操作了。常见的操作可以归类如下。</p>
 <ul>
 <li>Intermediate：</li>
@@ -255,7 +275,9 @@
 <p>这段代码首先把每行的单词用 flatMap 整理到新的 Stream，然后保留长度不为 0 的，就是整篇文章中的全部单词了。</p>
 <p><strong>forEach</strong></p>
 <p>forEach 方法接收一个 Lambda 表达式，然后在 Stream 的每一个元素上执行该表达式。</p>
-<h5 id="清单-12.-打印姓名foreach-和-pre-java8-的对比">清单 12. 打印姓名（forEach 和 pre-java8 的对比）</h5>
+</section>
+<section id="清单-12.-打印姓名foreach-和-pre-java8-的对比" class="slide level3">
+<h3>清单 12. 打印姓名（forEach 和 pre-java8 的对比）</h3>
 <pre><code>// Java 8
 roster.stream()
  .filter(p -&gt; p.getGender() == Person.Sex.MALE)
@@ -272,7 +294,9 @@ for (Person p : roster) {
 <pre><code>stream.forEach(element -&gt; doOneThing(element));
 stream.forEach(element -&gt; doAnotherThing(element));</code></pre>
 <p>相反，具有相似功能的 intermediate 操作 peek 可以达到上述目的。如下是出现在该 api javadoc 上的一个示例。</p>
-<h5 id="清单-13.-peek-对每个元素执行操作并返回一个新的-stream">清单 13. peek 对每个元素执行操作并返回一个新的 Stream</h5>
+</section>
+<section id="清单-13.-peek-对每个元素执行操作并返回一个新的-stream" class="slide level3">
+<h3>清单 13. peek 对每个元素执行操作并返回一个新的 Stream</h3>
 <pre><code>Stream.of(&quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;)
  .filter(e -&gt; e.length() &gt; 3)
  .peek(e -&gt; System.out.println(&quot;Filtered value: &quot; + e))
@@ -283,7 +307,9 @@ stream.forEach(element -&gt; doAnotherThing(element));</code></pre>
 <p><strong>findFirst</strong></p>
 <p>这是一个 termimal 兼 short-circuiting 操作，它总是返回 Stream 的第一个元素，或者空。</p>
 <p>这里比较重点的是它的返回值类型：Optional。这也是一个模仿 Scala 语言中的概念，作为一个容器，它可能含有某值，或者不包含。使用它的目的是尽可能避免 NullPointerException。</p>
-<h5 id="清单-14.-optional-的两个用例">清单 14. Optional 的两个用例</h5>
+</section>
+<section id="清单-14.-optional-的两个用例" class="slide level3">
+<h3>清单 14. Optional 的两个用例</h3>
 <pre><code>String strA = &quot; abcd &quot;, strB = null;
 print(strA);
 print(&quot;&quot;);
@@ -312,7 +338,9 @@ return Optional.ofNullable(text).map(String::length).orElse(-1);
 <p>Integer sum = integers.reduce(0, (a, b) -&gt; a+b); 或</p>
 <p>Integer sum = integers.reduce(0, Integer::sum);</p>
 <p>也有没有起始值的情况，这时会把 Stream 的前面两个元素组合起来，返回的是 Optional。</p>
-<h5 id="清单-15.-reduce-的用例">清单 15. reduce 的用例</h5>
+</section>
+<section id="清单-15.-reduce-的用例" class="slide level3">
+<h3>清单 15. reduce 的用例</h3>
 <pre><code>// 字符串连接，concat = &quot;ABCD&quot;
 String concat = Stream.of(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;).reduce(&quot;&quot;, String::concat); 
 // 求最小值，minValue = -3.0
@@ -328,7 +356,9 @@ concat = Stream.of(&quot;a&quot;, &quot;B&quot;, &quot;c&quot;, &quot;D&quot;, &
 <p>上面代码例如第一个示例的 reduce()，第一个参数（空白字符）即为起始值，第二个参数（String::concat）为 BinaryOperator。这类有起始值的 reduce() 都返回具体的对象。而对于第四个示例没有起始值的 reduce()，由于可能没有足够的元素，返回的是 Optional，请留意这个区别。</p>
 <p><strong>limit/skip</strong></p>
 <p>limit 返回 Stream 的前面 n 个元素；skip 则是扔掉前 n 个元素（它是由一个叫 subStream 的方法改名而来）。</p>
-<h5 id="清单-16.-limit-和-skip-对运行次数的影响">清单 16. limit 和 skip 对运行次数的影响</h5>
+</section>
+<section id="清单-16.-limit-和-skip-对运行次数的影响" class="slide level3">
+<h3>清单 16. limit 和 skip 对运行次数的影响</h3>
 <pre><code>public void testLimitAndSkip() {
  List&lt;Person&gt; persons = new ArrayList();
  for (int i = 1; i &lt;= 10000; i++) {
@@ -365,7 +395,9 @@ name10
 [name4, name5, name6, name7, name8, name9, name10]</code></pre>
 <p>这是一个有 10，000 个元素的 Stream，但在 short-circuiting 操作 limit 和 skip 的作用下，管道中 map 操作指定的 getName() 方法的执行次数为 limit 所限定的 10 次，而最终返回结果在跳过前 3 个元素后只有后面 7 个返回。</p>
 <p>有一种情况是 limit/skip 无法达到 short-circuiting 目的的，就是把它们放在 Stream 的排序操作后，原因跟 sorted 这个 intermediate 操作有关：此时系统并不知道 Stream 排序后的次序如何，所以 sorted 中的操作看上去就像完全没有被 limit 或者 skip 一样。</p>
-<h5 id="清单-17.-limit-和-skip-对-sorted-后的运行次数无影响">清单 17. limit 和 skip 对 sorted 后的运行次数无影响</h5>
+</section>
+<section id="清单-17.-limit-和-skip-对-sorted-后的运行次数无影响" class="slide level3">
+<h3>清单 17. limit 和 skip 对 sorted 后的运行次数无影响</h3>
 <pre><code>List&lt;Person&gt; persons = new ArrayList();
  for (int i = 1; i &lt;= 5; i++) {
  Person person = new Person(i, &quot;name&quot; + i);
@@ -388,7 +420,9 @@ name4
 <p>最后有一点需要注意的是，对一个 parallel 的 Steam 管道来说，如果其元素是有序的，那么 limit 操作的成本会比较大，因为它的返回对象必须是前 n 个也有一样次序的元素。取而代之的策略是取消元素间的次序，或者不要用 parallel Stream。</p>
 <p><strong>sorted</strong></p>
 <p>对 Stream 的排序通过 sorted 进行，它比数组的排序更强之处在于你可以首先对 Stream 进行各类 map、filter、limit、skip 甚至 distinct 来减少元素数量后，再排序，这能帮助程序明显缩短执行时间。我们对清单 14 进行优化：</p>
-<h5 id="清单-18.-优化排序前进行-limit-和-skip">清单 18. 优化：排序前进行 limit 和 skip</h5>
+</section>
+<section id="清单-18.-优化排序前进行-limit-和-skip" class="slide level3">
+<h3>清单 18. 优化：排序前进行 limit 和 skip</h3>
 <pre><code>List&lt;Person&gt; persons = new ArrayList();
  for (int i = 1; i &lt;= 5; i++) {
  Person person = new Person(i, &quot;name&quot; + i);
@@ -403,7 +437,9 @@ name1
 <p>当然，这种优化是有 business logic 上的局限性的：即不要求排序后再取值。</p>
 <p><strong>min/max/distinct</strong></p>
 <p>min 和 max 的功能也可以通过对 Stream 元素先排序，再 findFirst 来实现，但前者的性能会更好，为 O(n)，而 sorted 的成本是 O(n log n)。同时它们作为特殊的 reduce 方法被独立出来也是因为求最大最小值是很常见的操作。</p>
-<h5 id="清单-19.-找出最长一行的长度">清单 19. 找出最长一行的长度</h5>
+</section>
+<section id="清单-19.-找出最长一行的长度" class="slide level3">
+<h3>清单 19. 找出最长一行的长度</h3>
 <pre><code>BufferedReader br = new BufferedReader(new FileReader(&quot;c:\\SUService.log&quot;));
 int longest = br.lines().
  mapToInt(String::length).
@@ -412,7 +448,9 @@ int longest = br.lines().
 br.close();
 System.out.println(longest);</code></pre>
 <p>下面的例子则使用 distinct 来找出不重复的单词。</p>
-<h5 id="清单-20.-找出全文的单词转小写并排序">清单 20. 找出全文的单词，转小写，并排序</h5>
+</section>
+<section id="清单-20.-找出全文的单词转小写并排序" class="slide level3">
+<h3>清单 20. 找出全文的单词，转小写，并排序</h3>
 <pre><code>List&lt;String&gt; words = br.lines().
  flatMap(line -&gt; Stream.of(line.split(&quot; &quot;))).
  filter(word -&gt; word.length() &gt; 0).
@@ -430,7 +468,9 @@ System.out.println(words);</code></pre>
 <li>noneMatch：Stream 中没有一个元素符合传入的 predicate，返回 true</li>
 </ul>
 <p>它们都不是要遍历全部元素才能返回结果。例如 allMatch 只要一个元素不满足条件，就 skip 剩下的所有元素，返回 false。对清单 13 中的 Person 类稍做修改，加入一个 age 属性和 getAge 方法。</p>
-<h5 id="清单-21.-使用-match">清单 21. 使用 Match</h5>
+</section>
+<section id="清单-21.-使用-match" class="slide level3">
+<h3>清单 21. 使用 Match</h3>
 <pre><code>List&lt;Person&gt; persons = new ArrayList();
 persons.add(new Person(1, &quot;name&quot; + 1, 10));
 persons.add(new Person(2, &quot;name&quot; + 2, 21));
@@ -446,10 +486,15 @@ System.out.println(&quot;Any child? &quot; + isThereAnyChild);</code></pre>
 <p>输出结果：</p>
 <pre><code>All are adult? false
 Any child? true</code></pre>
-<h3 id="进阶自己生成流">进阶：自己生成流</h3>
+</section>
+
+<section id="进阶自己生成流" class="title-slide slide level2">
+<h2>进阶：自己生成流</h2>
 <p><strong>Stream.generate</strong></p>
 <p>通过实现 Supplier 接口，你可以自己来控制流的生成。这种情形通常用于随机数、常量的 Stream，或者需要前后元素间维持着某种状态信息的 Stream。把 Supplier 实例传递给 Stream.generate() 生成的 Stream，默认是串行（相对 parallel 而言）但无序的（相对 ordered 而言）。由于它是无限的，在管道中，必须利用 limit 之类的操作限制 Stream 大小。</p>
-<h5 id="清单-22.-生成-10-个随机整数">清单 22. 生成 10 个随机整数</h5>
+</section>
+<section id="清单-22.-生成-10-个随机整数" class="slide level3">
+<h3>清单 22. 生成 10 个随机整数</h3>
 <pre><code>Random seed = new Random();
 Supplier&lt;Integer&gt; random = seed::nextInt;
 Stream.generate(random).limit(10).forEach(System.out::println);
@@ -457,7 +502,9 @@ Stream.generate(random).limit(10).forEach(System.out::println);
 IntStream.generate(() -&gt; (int) (System.nanoTime() % 100)).
 limit(10).forEach(System.out::println);</code></pre>
 <p>Stream.generate() 还接受自己实现的 Supplier。例如在构造海量测试数据的时候，用某种自动的规则给每一个变量赋值；或者依据公式计算 Stream 的每个元素值。这些都是维持状态信息的情形。</p>
-<h5 id="清单-23.-自实现-supplier">清单 23. 自实现 Supplier</h5>
+</section>
+<section id="清单-23.-自实现-supplier" class="slide level3">
+<h3>清单 23. 自实现 Supplier</h3>
 <pre><code>Stream.generate(new PersonSupplier()).
 limit(10).
 forEach(p -&gt; System.out.println(p.getName() + &quot;, &quot; + p.getAge()));
@@ -487,10 +534,15 @@ StormTestUser10, 76</code></pre>
 <p>输出结果：</p>
 <pre><code>0 3 6 9 12 15 18 21 24 27</code></pre>
 <p>与 Stream.generate 相仿，在 iterate 时候管道必须有 limit 这样的操作来限制 Stream 大小。</p>
-<h3 id="进阶用-collectors-来进行-reduction-操作">进阶：用 Collectors 来进行 reduction 操作</h3>
+</section>
+
+<section id="进阶用-collectors-来进行-reduction-操作" class="title-slide slide level2">
+<h2>进阶：用 Collectors 来进行 reduction 操作</h2>
 <p>java.util.stream.Collectors 类的主要作用就是辅助进行各类有用的 reduction 操作，例如转变输出为 Collection，把 Stream 元素进行归组。</p>
 <p><strong>groupingBy/partitioningBy</strong></p>
-<h5 id="清单-25.-按照年龄归组">清单 25. 按照年龄归组</h5>
+</section>
+<section id="清单-25.-按照年龄归组" class="slide level3">
+<h3>清单 25. 按照年龄归组</h3>
 <pre><code>Map&lt;Integer, List&lt;Person&gt;&gt; personGroups = Stream.generate(new PersonSupplier()).
  limit(100).
  collect(Collectors.groupingBy(Person::getAge));
@@ -507,7 +559,9 @@ Age 8 = 1
 Age 9 = 1
 Age 11 = 2
 ……</code></pre>
-<h5 id="清单-26.-按照未成年人和成年人归组">清单 26. 按照未成年人和成年人归组</h5>
+</section>
+<section id="清单-26.-按照未成年人和成年人归组" class="slide level3">
+<h3>清单 26. 按照未成年人和成年人归组</h3>
 <pre><code>Map&lt;Boolean, List&lt;Person&gt;&gt; children = Stream.generate(new PersonSupplier()).
  limit(100).
  collect(Collectors.partitioningBy(p -&gt; p.getAge() &lt; 18));
@@ -518,8 +572,9 @@ System.out.println(&quot;Adult number: &quot; + children.get(false).size());</co
 Adult number: 77</code></pre>
 <p>在使用条件“年龄小于 18”进行分组后可以看到，不到 18 岁的未成年人是一组，成年人是另外一组。partitioningBy 其实是一种特殊的 groupingBy，它依照条件测试的是否两种结果来构造返回的数据结构，get(true) 和 get(false) 能即为全部的元素对象。</p>
 </section>
-<section id="结束语" class="slide level2">
-<h2>结束语</h2>
+</section>
+<section id="结束语" class="title-slide slide level1">
+<h1>结束语</h1>
 <p>总之，Stream 的特性可以归纳为：</p>
 <ul>
 <li><p>不是数据结构</p></li>

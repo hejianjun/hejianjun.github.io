@@ -8,12 +8,12 @@ categories:
 typora-root-url: ..
 ---
 
-## 什么是 Stream
+# 什么是 Stream
 Java 8 中的 Stream 是对集合（Collection）对象功能的增强，它专注于对集合对象进行各种非常便利、高效的聚合操作（aggregate operation），或者大批量数据操作 (bulk data operation)。
 [PPT](/reveal.js/stream.html)
 <!--more-->
 
-### 什么是聚合操作
+## 什么是聚合操作
 
 在传统的 J2EE 应用中，Java 代码经常不得不依赖于关系型数据库的聚合操作来完成诸如：
 - 客户每月平均消费金额
@@ -51,9 +51,9 @@ List<Integer> transactionsIds = transactions.parallelStream().
 ```
 
 
-## Stream 总览
+# Stream 总览
 
-### 什么是流
+## 什么是流
 
 Stream 不是集合元素，它不是数据结构并不保存数据，它是有关算法和计算的，它更像一个高级版本的 Iterator。原始版本的 Iterator，用户只能显式地一个一个遍历元素并对其执行某些操作；高级版本的 Stream，用户只要给出需要对其包含的元素执行什么操作，比如 “过滤掉长度大于 10 的字符串”、“获取每个字符串的首字母”等，Stream 会隐式地在内部进行遍历，做出相应的数据转换。
 
@@ -70,13 +70,13 @@ Stream 就如同一个迭代器（Iterator），单向，不可往复，数据�
 Stream 的另外一大特点是，数据源本身可以是无限的。
 
 
-### 流的构成
+## 流的构成
 
 当我们使用一个流的时候，通常包括三个基本步骤：
 
 获取一个数据源（source）→ 数据转换→执行操作获取想要的结果，每次转换原有 Stream 对象不改变，返回一个新的 Stream 对象（可以有多次转换），这就允许对其操作可以像链条一样排列，变成一个管道，如下图所示。
 
-##### 流管道 (Stream Pipeline) 的构成
+#### 流管道 (Stream Pipeline) 的构成
 
 ![stream](images/stream.png)
 
@@ -128,12 +128,12 @@ int sum = widgets.stream()
 stream() 获取当前小物件的 source，filter 和 mapToInt 为 intermediate 操作，进行数据筛选和转换，最后一个 sum() 为 terminal 操作，对符合条件的全部小物件作重量求和。
 
 
-## 流的使用详解
+# 流的使用详解
 
 简单说，对 Stream 的使用就是实现一个 filter-map-reduce 过程，产生一个最终结果，或者导致一个副作用（side effect）。
 
 
-### 流的构造与转换
+## 流的构造与转换
 
 下面提供最常见的几种构造 Stream 的样例。
 
@@ -178,7 +178,7 @@ String str = stream.collect(Collectors.joining()).toString();
 一个 Stream 只可以使用一次，上面的代码为了简洁而重复使用了数次。
 
 
-### 流的操作
+## 流的操作
 
 接下来，当把一个数据结构包装成 Stream 后，就要开始对里面的元素进行各类操作了。常见的操作可以归类如下。
 
@@ -258,7 +258,7 @@ List<String> output = reader.lines().
 
 forEach 方法接收一个 Lambda 表达式，然后在 Stream 的每一个元素上执行该表达式。
 
-##### 清单 12. 打印姓名（forEach 和 pre-java8 的对比）
+#### 清单 12. 打印姓名（forEach 和 pre-java8 的对比）
 ```
 // Java 8
 roster.stream()
@@ -283,7 +283,7 @@ stream.forEach(element -> doAnotherThing(element));
 ```
 相反，具有相似功能的 intermediate 操作 peek 可以达到上述目的。如下是出现在该 api javadoc 上的一个示例。
 
-##### 清单 13. peek 对每个元素执行操作并返回一个新的 Stream
+#### 清单 13. peek 对每个元素执行操作并返回一个新的 Stream
 ```
 Stream.of("one", "two", "three", "four")
  .filter(e -> e.length() > 3)
@@ -301,7 +301,7 @@ forEach 不能修改自己包含的本地变量值，也不能用 break/return �
 
 这里比较重点的是它的返回值类型：Optional。这也是一个模仿 Scala 语言中的概念，作为一个容器，它可能含有某值，或者不包含。使用它的目的是尽可能避免 NullPointerException。
 
-##### 清单 14. Optional 的两个用例
+#### 清单 14. Optional 的两个用例
 ```
 String strA = " abcd ", strB = null;
 print(strA);
@@ -341,7 +341,7 @@ Integer sum = integers.reduce(0, Integer::sum);
 
 也有没有起始值的情况，这时会把 Stream 的前面两个元素组合起来，返回的是 Optional。
 
-##### 清单 15. reduce 的用例
+#### 清单 15. reduce 的用例
 ```
 // 字符串连接，concat = "ABCD"
 String concat = Stream.of("A", "B", "C", "D").reduce("", String::concat); 
@@ -364,7 +364,7 @@ concat = Stream.of("a", "B", "c", "D", "e", "F").
 
 limit 返回 Stream 的前面 n 个元素；skip 则是扔掉前 n 个元素（它是由一个叫 subStream 的方法改名而来）。
 
-##### 清单 16. limit 和 skip 对运行次数的影响
+#### 清单 16. limit 和 skip 对运行次数的影响
 ```
 public void testLimitAndSkip() {
  List<Person> persons = new ArrayList();
@@ -409,7 +409,7 @@ name10
 
 有一种情况是 limit/skip 无法达到 short-circuiting 目的的，就是把它们放在 Stream 的排序操作后，原因跟 sorted 这个 intermediate 操作有关：此时系统并不知道 Stream 排序后的次序如何，所以 sorted 中的操作看上去就像完全没有被 limit 或者 skip 一样。
 
-##### 清单 17. limit 和 skip 对 sorted 后的运行次数无影响
+#### 清单 17. limit 和 skip 对 sorted 后的运行次数无影响
 ```
 List<Person> persons = new ArrayList();
  for (int i = 1; i <= 5; i++) {
@@ -443,7 +443,7 @@ name4
 
 对 Stream 的排序通过 sorted 进行，它比数组的排序更强之处在于你可以首先对 Stream 进行各类 map、filter、limit、skip 甚至 distinct 来减少元素数量后，再排序，这能帮助程序明显缩短执行时间。我们对清单 14 进行优化：
 
-##### 清单 18. 优化：排序前进行 limit 和 skip
+#### 清单 18. 优化：排序前进行 limit 和 skip
 ```
 List<Person> persons = new ArrayList();
  for (int i = 1; i <= 5; i++) {
@@ -467,7 +467,7 @@ name1
 
 min 和 max 的功能也可以通过对 Stream 元素先排序，再 findFirst 来实现，但前者的性能会更好，为 O(n)，而 sorted 的成本是 O(n log n)。同时它们作为特殊的 reduce 方法被独立出来也是因为求最大最小值是很常见的操作。
 
-##### 清单 19. 找出最长一行的长度
+#### 清单 19. 找出最长一行的长度
 ```
 BufferedReader br = new BufferedReader(new FileReader("c:\\SUService.log"));
 int longest = br.lines().
@@ -479,7 +479,7 @@ System.out.println(longest);
 ```
 下面的例子则使用 distinct 来找出不重复的单词。
 
-##### 清单 20. 找出全文的单词，转小写，并排序
+#### 清单 20. 找出全文的单词，转小写，并排序
 ```
 List<String> words = br.lines().
  flatMap(line -> Stream.of(line.split(" "))).
@@ -503,7 +503,7 @@ Stream 有三个 match 方法，从语义上说：
 
 它们都不是要遍历全部元素才能返回结果。例如 allMatch 只要一个元素不满足条件，就 skip 剩下的所有元素，返回 false。对清单 13 中的 Person 类稍做修改，加入一个 age 属性和 getAge 方法。
 
-##### 清单 21. 使用 Match
+#### 清单 21. 使用 Match
 ```
 List<Person> persons = new ArrayList();
 persons.add(new Person(1, "name" + 1, 10));
@@ -525,13 +525,13 @@ Any child? true
 ```
 
 
-### 进阶：自己生成流
+## 进阶：自己生成流
 
 **Stream.generate**
 
 通过实现 Supplier 接口，你可以自己来控制流的生成。这种情形通常用于随机数、常量的 Stream，或者需要前后元素间维持着某种状态信息的 Stream。把 Supplier 实例传递给 Stream.generate() 生成的 Stream，默认是串行（相对 parallel 而言）但无序的（相对 ordered 而言）。由于它是无限的，在管道中，必须利用 limit 之类的操作限制 Stream 大小。
 
-##### 清单 22. 生成 10 个随机整数
+#### 清单 22. 生成 10 个随机整数
 ```
 Random seed = new Random();
 Supplier<Integer> random = seed::nextInt;
@@ -542,7 +542,7 @@ limit(10).forEach(System.out::println);
 ```
 Stream.generate() 还接受自己实现的 Supplier。例如在构造海量测试数据的时候，用某种自动的规则给每一个变量赋值；或者依据公式计算 Stream 的每个元素值。这些都是维持状态信息的情形。
 
-##### 清单 23. 自实现 Supplier
+#### 清单 23. 自实现 Supplier
 ```
 Stream.generate(new PersonSupplier()).
 limit(10).
@@ -589,13 +589,13 @@ Stream.iterate(0, n -> n + 3).limit(10). forEach(x -> System.out.print(x + " "))
 与 Stream.generate 相仿，在 iterate 时候管道必须有 limit 这样的操作来限制 Stream 大小。
 
 
-### 进阶：用 Collectors 来进行 reduction 操作
+## 进阶：用 Collectors 来进行 reduction 操作
 
 java.util.stream.Collectors 类的主要作用就是辅助进行各类有用的 reduction 操作，例如转变输出为 Collection，把 Stream 元素进行归组。
 
 **groupingBy/partitioningBy**
 
-##### 清单 25. 按照年龄归组
+#### 清单 25. 按照年龄归组
 ```
 Map<Integer, List<Person>> personGroups = Stream.generate(new PersonSupplier()).
  limit(100).
@@ -618,7 +618,7 @@ Age 11 = 2
 ……
 ```
 
-##### 清单 26. 按照未成年人和成年人归组
+#### 清单 26. 按照未成年人和成年人归组
 ```
 Map<Boolean, List<Person>> children = Stream.generate(new PersonSupplier()).
  limit(100).
@@ -635,7 +635,7 @@ Adult number: 77
 在使用条件“年龄小于 18”进行分组后可以看到，不到 18 岁的未成年人是一组，成年人是另外一组。partitioningBy 其实是一种特殊的 groupingBy，它依照条件测试的是否两种结果来构造返回的数据结构，get(true) 和 get(false) 能即为全部的元素对象。
 
 
-## 结束语
+# 结束语
 
 总之，Stream 的特性可以归纳为：
 
