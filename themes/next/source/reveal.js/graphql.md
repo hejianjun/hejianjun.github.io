@@ -4,10 +4,7 @@ date: 2020-04-25 13:27:25
 tags:
 typora-root-url: ..
 ---
-[PPT](/reveal.js/graphql.html)
-
 # 优点
-
 ## 一种用于 API 的查询语言
 GraphQL 既是一种用于 API 的查询语言也是一个满足你数据查询的运行时。 GraphQL 对你的 API 中的数据提供了一套易于理解的完整描述，使得客户端能够准确地获得它需要的数据，而且没有任何冗余，也让 API 更容易地随着时间推移而演进，还能用于构建强大的开发者工具。
 
@@ -27,9 +24,13 @@ GraphQL API 基于类型和字段的方式进行组织，而非入口端点。�
 ## 使用你现有的 数据和代码
 
 GraphQL 让你的整个应用共享一套 API，而不用被限制于特定存储引擎。GraphQL 引擎已经有多种语言实现，通过 GraphQL API 能够更好利用你的现有数据和代码。你只需要为类型系统的字段编写函数，GraphQL 就能通过优化并发的方式来调用它们。
+
 # 入门
-`graphql-java`必须运行在Java 8之上
+
 ## Maven
+
+graphql-java需要运行在java 8 及其以上
+
 ```xml
 <dependency>
     <groupId>com.graphql-java</groupId>
@@ -75,4 +76,70 @@ public class HelloWorld {
     }
 }
 ```
+
+# Schema
+## SDL
+
+```javascript
+# 审判组织成员
+interface Spzzcy{
+    # 编号
+    bh: ID
+    # 角色
+    js: String @dict
+    # 姓名
+    xm: String
+}
+# 通用审判组织成员
+type T_FY_SPZZCY implements Spzzcy{
+    bh: ID @fetch(from: "C_BH")
+    js: String @fetch(from: "N_JS") @dict
+    xm: String @fetch(from: "C_XM")
+}
+
+```
+
+## DataFetcher
+
+```java
+/**
+ * 获取诉讼档案
+ * @return 诉讼档案获取器
+ */
+public DataFetcher getSsda() {
+	return env -> {
+		GraphQLContext context = env.getContext();
+		Set<String> columns = GraphQLUtils.getColumns(env.getSelectionSet(), env.getFieldType());
+		Integer ajlb = context.get("ajlb");
+		String bhaj = context.get("bhaj");
+		return graphqlDao.getSsda(ajlb, bhaj, columns);
+	};
+}
+```
+
+## TypeResolver
+
+```java
+/**
+ * 获取类型转换器
+ * @return 类型转换器
+ */
+public static TypeResolver getTypeResolver(String alias) {
+	return env -> {
+		GraphQLContext context = env.getContext();
+		return GraphQLUtils.getType(env.getSchema(), context.get("ajlb"), alias);
+	};
+}
+```
+
+## Types
+
+GraphQL 支持以下数据类型
+
+- Scalar
+- Object
+- Interface
+- Union
+- InputObject
+- Enum
 

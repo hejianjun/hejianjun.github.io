@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Graphql</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="./css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="./css/theme/serif.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? './css/print/pdf.css' : './css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="./lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+  <h1 class="title">Graphql</h1>
+  <p class="date">2020-04-25 13:27:25</p>
+</section>
+
+<section><section id="优点" class="titleslide slide level1"><h1>优点</h1></section><section id="一种用于-api-的查询语言" class="slide level2">
+<h2>一种用于 API 的查询语言</h2>
+<p>GraphQL 既是一种用于 API 的查询语言也是一个满足你数据查询的运行时。 GraphQL 对你的 API 中的数据提供了一套易于理解的完整描述，使得客户端能够准确地获得它需要的数据，而且没有任何冗余，也让 API 更容易地随着时间推移而演进，还能用于构建强大的开发者工具。</p>
+</section><section id="请求你所要的数据-不多不少" class="slide level2">
+<h2>请求你所要的数据 不多不少</h2>
+<p>向你的 API 发出一个 GraphQL 请求就能准确获得你想要的数据，不多不少。 GraphQL 查询总是返回可预测的结果。使用 GraphQL 的应用可以工作得又快又稳，因为控制数据的是应用，而不是服务器。</p>
+</section><section id="获取多个资源-只用一个请求" class="slide level2">
+<h2>获取多个资源 只用一个请求</h2>
+<p>GraphQL 查询不仅能够获得资源的属性，还能沿着资源间引用进一步查询。典型的 REST API 请求多个资源时得载入多个 URL，而 GraphQL 可以通过一次请求就获取你应用所需的所有数据。这样一来，即使是比较慢的移动网络连接下，使用 GraphQL 的应用也能表现得足够迅速。</p>
+</section><section id="描述所有的可能-类型系统" class="slide level2">
+<h2>描述所有的可能 类型系统</h2>
+<p>GraphQL API 基于类型和字段的方式进行组织，而非入口端点。你可以通过一个单一入口端点得到你所有的数据能力。GraphQL 使用类型来保证应用只请求可能的数据，还提供了清晰的辅助性错误信息。应用可以使用类型，而避免编写手动解析代码。</p>
+</section><section id="api-演进-无需划分版本" class="slide level2">
+<h2>API 演进 无需划分版本</h2>
+<p>给你的 GraphQL API 添加字段和类型而无需影响现有查询。老旧的字段可以废弃，从工具中隐藏。通过使用单一演进版本，GraphQL API 使得应用始终能够使用新的特性，并鼓励使用更加简洁、更好维护的服务端代码。</p>
+</section><section id="使用你现有的-数据和代码" class="slide level2">
+<h2>使用你现有的 数据和代码</h2>
+<p>GraphQL 让你的整个应用共享一套 API，而不用被限制于特定存储引擎。GraphQL 引擎已经有多种语言实现，通过 GraphQL API 能够更好利用你的现有数据和代码。你只需要为类型系统的字段编写函数，GraphQL 就能通过优化并发的方式来调用它们。</p>
+</section></section>
+<section><section id="入门" class="titleslide slide level1"><h1>入门</h1></section><section id="maven" class="slide level2">
+<h2>Maven</h2>
+<p>graphql-java需要运行在java 8 及其以上</p>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;dependency&gt;</span>
+    <span class="kw">&lt;groupId&gt;</span>com.graphql-java<span class="kw">&lt;/groupId&gt;</span>
+    <span class="kw">&lt;artifactId&gt;</span>graphql-java<span class="kw">&lt;/artifactId&gt;</span>
+    <span class="kw">&lt;version&gt;</span>14.0<span class="kw">&lt;/version&gt;</span>
+<span class="kw">&lt;/dependency&gt;</span></code></pre></div>
+</section><section id="hello-world" class="slide level2">
+<h2>Hello World</h2>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">import</span><span class="im"> graphql.ExecutionResult;</span>
+<span class="kw">import</span><span class="im"> graphql.GraphQL;</span>
+<span class="kw">import</span><span class="im"> graphql.schema.GraphQLSchema;</span>
+<span class="kw">import</span><span class="im"> graphql.schema.StaticDataFetcher;</span>
+<span class="kw">import</span><span class="im"> graphql.schema.idl.RuntimeWiring;</span>
+<span class="kw">import</span><span class="im"> graphql.schema.idl.SchemaGenerator;</span>
+<span class="kw">import</span><span class="im"> graphql.schema.idl.SchemaParser;</span>
+<span class="kw">import</span><span class="im"> graphql.schema.idl.TypeDefinitionRegistry;</span>
+
+<span class="kw">import static</span><span class="im"> graphql.schema.idl.RuntimeWiring.newRuntimeWiring;</span>
+
+<span class="kw">public</span> <span class="kw">class</span> HelloWorld {
+
+    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(<span class="bu">String</span>[] args) {
+        <span class="bu">String</span> schema = <span class="st">&quot;type Query{hello: String}&quot;</span>;
+
+        SchemaParser schemaParser = <span class="kw">new</span> <span class="fu">SchemaParser</span>();
+        TypeDefinitionRegistry typeDefinitionRegistry = schemaParser.<span class="fu">parse</span>(schema);
+
+        RuntimeWiring runtimeWiring = <span class="fu">newRuntimeWiring</span>()
+                .<span class="fu">type</span>(<span class="st">&quot;Query&quot;</span>, builder -&gt; builder.<span class="fu">dataFetcher</span>(<span class="st">&quot;hello&quot;</span>, <span class="kw">new</span> <span class="fu">StaticDataFetcher</span>(<span class="st">&quot;world&quot;</span>)))
+                .<span class="fu">build</span>();
+
+        SchemaGenerator schemaGenerator = <span class="kw">new</span> <span class="fu">SchemaGenerator</span>();
+        GraphQLSchema graphQLSchema = schemaGenerator.<span class="fu">makeExecutableSchema</span>(typeDefinitionRegistry, runtimeWiring);
+
+        GraphQL build = GraphQL.<span class="fu">newGraphQL</span>(graphQLSchema).<span class="fu">build</span>();
+        ExecutionResult executionResult = build.<span class="fu">execute</span>(<span class="st">&quot;{hello}&quot;</span>);
+
+        <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(executionResult.<span class="fu">getData</span>().<span class="fu">toString</span>());
+        <span class="co">// Prints: {hello=world}</span>
+    }
+}</code></pre></div>
+</section></section>
+<section><section id="schema" class="titleslide slide level1"><h1>Schema</h1></section><section id="sdl" class="slide level2">
+<h2>SDL</h2>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"># 审判组织成员
+<span class="kw">interface</span> Spzzcy<span class="op">{</span>
+    # 编号
+    <span class="dt">bh</span><span class="op">:</span> ID
+    # 角色
+    <span class="dt">js</span><span class="op">:</span> String @dict
+    # 姓名
+    <span class="dt">xm</span><span class="op">:</span> String
+<span class="op">}</span>
+# 通用审判组织成员
+type T_FY_SPZZCY <span class="kw">implements</span> Spzzcy<span class="op">{</span>
+    <span class="dt">bh</span><span class="op">:</span> ID @<span class="at">fetch</span>(<span class="dt">from</span><span class="op">:</span> <span class="st">&quot;C_BH&quot;</span>)
+    <span class="dt">js</span><span class="op">:</span> String @<span class="at">fetch</span>(<span class="dt">from</span><span class="op">:</span> <span class="st">&quot;N_JS&quot;</span>) @dict
+    <span class="dt">xm</span><span class="op">:</span> String @<span class="at">fetch</span>(<span class="dt">from</span><span class="op">:</span> <span class="st">&quot;C_XM&quot;</span>)
+<span class="op">}</span></code></pre></div>
+</section><section id="datafetcher" class="slide level2">
+<h2>DataFetcher</h2>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+ <span class="co">*</span> 获取诉讼档案
+ <span class="co">* </span><span class="kw">@return </span>诉讼档案获取器
+ <span class="co">*/</span>
+<span class="kw">public</span> DataFetcher <span class="fu">getSsda</span>() {
+    <span class="kw">return</span> env -&gt; {
+        GraphQLContext context = env.<span class="fu">getContext</span>();
+        <span class="bu">Set</span>&lt;<span class="bu">String</span>&gt; columns = GraphQLUtils.<span class="fu">getColumns</span>(env.<span class="fu">getSelectionSet</span>(), env.<span class="fu">getFieldType</span>());
+        <span class="bu">Integer</span> ajlb = context.<span class="fu">get</span>(<span class="st">&quot;ajlb&quot;</span>);
+        <span class="bu">String</span> bhaj = context.<span class="fu">get</span>(<span class="st">&quot;bhaj&quot;</span>);
+        <span class="kw">return</span> graphqlDao.<span class="fu">getSsda</span>(ajlb, bhaj, columns);
+    };
+}</code></pre></div>
+</section><section id="typeresolver" class="slide level2">
+<h2>TypeResolver</h2>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+ <span class="co">*</span> 获取类型转换器
+ <span class="co">* </span><span class="kw">@return </span>类型转换器
+ <span class="co">*/</span>
+<span class="kw">public</span> <span class="dt">static</span> TypeResolver <span class="fu">getTypeResolver</span>(<span class="bu">String</span> alias) {
+    <span class="kw">return</span> env -&gt; {
+        GraphQLContext context = env.<span class="fu">getContext</span>();
+        <span class="kw">return</span> GraphQLUtils.<span class="fu">getType</span>(env.<span class="fu">getSchema</span>(), context.<span class="fu">get</span>(<span class="st">&quot;ajlb&quot;</span>), alias);
+    };
+}</code></pre></div>
+</section><section id="types" class="slide level2">
+<h2>Types</h2>
+<p>GraphQL 支持以下数据类型</p>
+<ul>
+<li>Scalar</li>
+<li>Object</li>
+<li>Interface</li>
+<li>Union</li>
+<li>InputObject</li>
+<li>Enum</li>
+</ul>
+</section></section>
+    </div>
+  </div>
+
+  <script src="./lib/js/head.min.js"></script>
+  <script src="./js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: './lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: './plugin/zoom-js/zoom.js', async: true },
+              { src: './plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>

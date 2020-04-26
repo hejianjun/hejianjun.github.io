@@ -78,7 +78,7 @@ Stream 的另外一大特点是，数据源本身可以是无限的。
 
 #### 流管道 (Stream Pipeline) 的构成
 
-![stream](images/stream.png)
+![stream](/images/stream.png)
 
 有多种方式生成 Stream Source：
 

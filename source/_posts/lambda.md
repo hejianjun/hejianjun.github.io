@@ -16,6 +16,7 @@ typora-root-url: ..
 
 
 ## 代码简洁，开发快速
+
 减少了代码的重复，因此程序比较短，开发速度较快。
 
 
@@ -35,6 +36,7 @@ new Thread(() -> System.out.println("In Java8!"));
 
 
 ## 接近自然语言，易于理解
+
 编程的自由度很高，可以写出很接近自然语言的代码。
 
 
@@ -55,6 +57,7 @@ features.forEach(n -> System.out.println(n));
 
 
 ## 易于"并发编程"
+
 函数式编程不需要考虑"死锁"（deadlock），因为它不修改变量，所以根本不存在"锁"线程的问题。不必担心一个线程的数据，被另一个线程修改，所以可以很放心地把工作分摊到多个线程，部署"并发编程"（concurrency）。
 
 
@@ -81,8 +84,6 @@ System.out.println("Total of discounted prices: " + totalOfDiscountedPrices);
 
 
 # Lambda的阴暗面
-
-
 
 前面都是讲Lambda如何改变Java程序员的思维习惯，但Lambda确实也带来了困惑
 
