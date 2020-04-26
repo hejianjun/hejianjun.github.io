@@ -87,15 +87,15 @@ interface Spzzcy{
     # 编号
     bh: ID
     # 角色
-    js: String @dict
+    js: String
     # 姓名
     xm: String
 }
 # 通用审判组织成员
 type T_FY_SPZZCY implements Spzzcy{
-    bh: ID @fetch(from: "C_BH")
-    js: String @fetch(from: "N_JS") @dict
-    xm: String @fetch(from: "C_XM")
+    bh: ID
+    js: String
+    xm: String
 }
 
 ```
@@ -144,3 +144,27 @@ GraphQL 支持以下数据类型
 - InputObject
 - Enum
 
+# SDL Directives
+
+## 附加操作
+
+原来的代码
+```javascript
+# 通用审判组织成员
+type T_FY_SPZZCY implements Spzzcy{
+    bh: ID
+    js: String
+    xm: String
+}
+
+```
+我们可以看到js属性是个代码值我们需要进行转换，这个通常需要在data fetcher中进行处理但是我们现在有更简单的方法
+```javascript
+# 通用审判组织成员
+type T_FY_SPZZCY implements Spzzcy{
+    bh: ID
+    js: String 
+    xm: String
+}
+
+```
