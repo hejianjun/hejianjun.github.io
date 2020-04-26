@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://hejianjun.github.io/2020/04/25/graphql/</loc>
+    
+    <lastmod>2020-04-26T06:11:16.545Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hejianjun.github.io/2019/01/01/lambda/</loc>
+    
+    <lastmod>2020-04-26T06:10:08.869Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hejianjun.github.io/2019/01/01/stream/</loc>
+    
+    <lastmod>2020-04-26T03:03:00.989Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://hejianjun.github.io/2019/09/06/%E8%AF%89%E8%AE%BC%E6%9C%8D%E5%8A%A1/</loc>
     
     <lastmod>2020-04-25T04:36:03.586Z</lastmod>
@@ -37,23 +58,9 @@
   </url>
   
   <url>
-    <loc>https://hejianjun.github.io/2020/03/28/graphql/</loc>
-    
-    <lastmod>2020-04-25T04:36:03.551Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://hejianjun.github.io/2020/03/27/frp/</loc>
     
     <lastmod>2020-04-25T04:36:03.547Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hejianjun.github.io/2019/01/01/stream/</loc>
-    
-    <lastmod>2020-04-13T02:38:32.355Z</lastmod>
     
   </url>
   
@@ -68,13 +75,6 @@
     <loc>https://hejianjun.github.io/2019/07/16/log4jdbc&sqlfx/</loc>
     
     <lastmod>2019-07-16T12:35:28.271Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://hejianjun.github.io/2019/01/01/lambda/</loc>
-    
-    <lastmod>2019-07-16T11:58:10.097Z</lastmod>
     
   </url>
   
