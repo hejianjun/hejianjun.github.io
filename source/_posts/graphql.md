@@ -4,7 +4,7 @@ date: 2020-04-25 13:27:25
 tags:
 typora-root-url: ..
 ---
-[PPT](/reveal.js/graphql.html)
+
 # 优点
 ## 一种用于 API 的查询语言
 GraphQL 既是一种用于 API 的查询语言也是一个满足你数据查询的运行时。 GraphQL 对你的 API 中的数据提供了一套易于理解的完整描述，使得客户端能够准确地获得它需要的数据，而且没有任何冗余，也让 API 更容易地随着时间推移而演进，还能用于构建强大的开发者工具。
@@ -144,11 +144,64 @@ GraphQL 支持以下数据类型
 - InputObject
 - Enum
 
+# Execution
+
+## 查询
+
+```java
+/**
+ * 查询数据
+ * @param ywlx 业务类型
+ * @param query 查询条件
+ * @param variables 查询变量
+ * @return 案件数据
+ */
+@Override
+public Map<String, Object> query(Integer ywlx, String query, Map<String, Object> variables) {
+	//当业务类型查询不到相应的案件类别时，（有可能是业务标识为<司法辅助>司法辅助没有业务类型，用的是业务标识）如果案件类别为空，则返回
+	Integer ajlb = ZzfwGyUtils.getAjlbByYwlx(ywlx);
+	if (ajlb == null) {
+		logger.error("未根据所传业务类型找到对应的案件类别,业务类型:{}", ywlx);
+		return NOT_FOUND;
+	}
+	IDictCache dict = DictManager.getDict(ajlb);
+	logger.info("ywlx:{},query:{},variables,{}",ywlx,query,variables);
+	ExecutionInput executionInput = ExecutionInput.newExecutionInput()
+			.context(GraphQLContext.newContext().of("ywlx",ywlx).of("ajlb", ajlb))
+			.variables(variables)
+			.root(dict)
+			.query(query)
+			.build();
+	ExecutionResult execute = graphQL.execute(executionInput);
+	return execute.toSpecification();
+}
+```
+
+## Data Fetchers
+
+每个graphql字段类型都有一个`graphql.schema.DataFetcher`关联。其他语言的graphql实现通常将这种代码称为`resolvers`。
+
+如果没有在字段上指定DataFetcher，则将使用`graphql.schema.PropertyDataFetcher`来获取Java POJO对象的字段值。
+
+
+
+# Data mapping
+
+## PropertyDataFetcher
+
+GraphQL-Java默认的`graphql.schema.PropertyDataFetcher`支持Map或者POJO
+对于Schema中的每个对象，会通过Map的get(String key)方法或者POJO的getter方法获取它并返回
+
+
+
 # SDL Directives
 
 ## 附加操作
 
-原来的代码
+### 原来的SDL
+
+我们可以看到js属性是个代码值我们需要进行转换，这个通常需要在data fetcher中进行处理
+
 ```javascript
 # 通用审判组织成员
 type T_FY_SPZZCY implements Spzzcy{
@@ -158,13 +211,15 @@ type T_FY_SPZZCY implements Spzzcy{
 }
 
 ```
-我们可以看到js属性是个代码值我们需要进行转换，这个通常需要在data fetcher中进行处理但是我们现在有更简单的方法
+
+### 但是我们现在有更简单的方法
 ```javascript
+# 设置代码转换 使用Artery数据字典
+directive @dict on FIELD_DEFINITION
 # 通用审判组织成员
 type T_FY_SPZZCY implements Spzzcy{
     bh: ID
-    js: String 
+    js: String @dict
     xm: String
 }
-
 ```
