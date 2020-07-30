@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="dcterms.date" content="2020-07-30">
+  <title>MAVEN</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="./css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="./css/theme/serif.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? './css/print/pdf.css' : './css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="./lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+  <h1 class="title">MAVEN</h1>
+  <p class="date">2020-07-30</p>
+</section>
+
+<section><section id="为何需要maven" class="titleslide slide level1"><h1>为何需要MAVEN</h1></section><section id="使用maven前" class="slide level2">
+<h2>使用maven前</h2>
+<figure>
+<img src="images/india.png" alt="印度挂票" /><figcaption>印度挂票</figcaption>
+</figure>
+<p>项目臃肿不堪，jar包从各种渠道引入</p>
+</section><section id="使用maven后" class="slide level2">
+<h2>使用maven后</h2>
+<figure>
+<img src="images/china.png" alt="中国高铁" /><figcaption>中国高铁</figcaption>
+</figure>
+<p>项目从统一的规范下载，升级管理jar版本只需要修改配置文件</p>
+</section></section>
+<section><section id="安装" class="titleslide slide level1"><h1>安装</h1></section><section id="配置环境变量" class="slide level2">
+<h2>配置环境变量</h2>
+<table>
+<thead>
+<tr class="header">
+<th>系统变量名</th>
+<th>说明</th>
+<th>实例值</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MAVEN_HOME</td>
+<td>maven根目录</td>
+<td>C:\tool\apache-maven-3.3.9</td>
+</tr>
+<tr class="even">
+<td>Path</td>
+<td>windows查找命令路径</td>
+<td>;%MAVEN_HOME%\bin</td>
+</tr>
+</tbody>
+</table>
+</section></section>
+<section><section id="约定配置" class="titleslide slide level1"><h1>约定配置</h1></section><section id="常用maven目录结构" class="slide level2">
+<h2>常用Maven目录结构</h2>
+<pre><code>src
+  -main
+      –java java源代码文件
+      –resources 资源库，会自动复制到classes目录里
+      –webapp web应用的目录。WEB-INF、css、js等
+  –test
+      –java 单元测试java源代码文件
+      –resources 测试需要用的资源库
+target 打包输出目录
+pom.xml  maven的pom文件
+LICENSE.txt Project’s license
+README.txt Project’s readme</code></pre>
+</section></section>
+<section><section id="maven-pom" class="titleslide slide level1"><h1>Maven POM</h1></section><section id="pom文件" class="slide level2">
+<h2>pom文件</h2>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;project</span><span class="ot"> xmlns</span> <span class="ot">=</span> <span class="st">&quot;http://maven.apache.org/POM/4.0.0&quot;</span>
+<span class="ot">    xmlns:xsi</span> <span class="ot">=</span> <span class="st">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+<span class="ot">    xsi:schemaLocation</span> <span class="ot">=</span> <span class="st">&quot;http://maven.apache.org/POM/4.0.0</span>
+<span class="st">    http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span><span class="kw">&gt;</span>
+ 
+    <span class="co">&lt;!-- 模型版本 --&gt;</span>
+    <span class="kw">&lt;modelVersion&gt;</span>4.0.0<span class="kw">&lt;/modelVersion&gt;</span>
+    <span class="co">&lt;!-- 公司或者组织的唯一标志，并且配置时生成的路径也是由此生成， 如com.companyname.project-group，maven会将该项目打成的jar包放本地路径：/com/companyname/project-group --&gt;</span>
+    <span class="kw">&lt;groupId&gt;</span>com.thunisoft.project-group<span class="kw">&lt;/groupId&gt;</span>
+    <span class="co">&lt;!-- 项目的唯一ID，一个groupId下面可能多个项目，就是靠artifactId来区分的 --&gt;</span>
+    <span class="kw">&lt;artifactId&gt;</span>project<span class="kw">&lt;/artifactId&gt;</span>
+    <span class="co">&lt;!-- 版本号 --&gt;</span>
+    <span class="kw">&lt;version&gt;</span>1.0<span class="kw">&lt;/version&gt;</span>
+<span class="kw">&lt;/project&gt;</span></code></pre></div>
+</section><section id="node说明" class="slide level2">
+<h2>node说明</h2>
+<table>
+<thead>
+<tr class="header">
+<th>节点</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>project</td>
+<td>工程的根标签。</td>
+</tr>
+<tr class="even">
+<td>modelVersion</td>
+<td>模型版本需要设置为 4.0。</td>
+</tr>
+<tr class="odd">
+<td>groupId</td>
+<td>这是工程组的标识。它在一个组织或者项目中通常是唯一的</td>
+</tr>
+<tr class="even">
+<td>artifactId</td>
+<td>这是工程的标识。它通常是工程的名称。</td>
+</tr>
+<tr class="odd">
+<td>version</td>
+<td>这是工程的版本号。在 artifact 的仓库中，它用来区分不同的版本。</td>
+</tr>
+</tbody>
+</table>
+</section></section>
+<section><section id="maven有哪些常用命令都是什么作用" class="titleslide slide level1"><h1>Maven有哪些常用命令？都是什么作用？</h1></section><section id="maven-构建生命周期" class="slide level2">
+<h2>Maven 构建生命周期</h2>
+<figure>
+<img src="images/maven.png" alt="Maven构建生命周期" /><figcaption>Maven构建生命周期</figcaption>
+</figure>
+</section><section id="clean清理" class="slide level2">
+<h2>Clean（清理）</h2>
+<p>移除所有上一次构建生成的文件</p>
+</section><section id="compile编译" class="slide level2">
+<h2>Compile（编译）</h2>
+<p>编译项目的源代码。</p>
+</section><section id="package打包" class="slide level2">
+<h2>Package（打包）</h2>
+<p>将编译后的代码打包成可分发格式的文件，比如JAR、WAR或者EAR文件。</p>
+</section><section id="install安装" class="slide level2">
+<h2>Install（安装）</h2>
+<p>安装项目包到本地仓库，这样项目包可以用作其他本地项目的依赖。</p>
+</section><section id="deploy部署" class="slide level2">
+<h2>Deploy（部署）</h2>
+<p>将最终的项目包复制到远程仓库中与其他开发者和项目共享。</p>
+</section></section>
+<section><section id="设置jdk版本" class="titleslide slide level1"><h1>设置JDK版本</h1></section><section id="方法一" class="slide level2">
+<h2>方法一</h2>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"> <span class="kw">&lt;properties&gt;</span>
+     <span class="kw">&lt;maven.compiler.source&gt;</span>${java.version}<span class="kw">&lt;/maven.compiler.source&gt;</span>
+     <span class="kw">&lt;maven.compiler.target&gt;</span>${java.version}<span class="kw">&lt;/maven.compiler.target&gt;</span>
+     <span class="kw">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span class="kw">&lt;/project.build.sourceEncoding&gt;</span>
+     <span class="kw">&lt;project.reporting.outputEncoding&gt;</span>UTF-8<span class="kw">&lt;/project.reporting.outputEncoding&gt;</span>
+     <span class="kw">&lt;java.version&gt;</span>1.8<span class="kw">&lt;/java.version&gt;</span>
+ <span class="kw">&lt;/properties&gt;</span></code></pre></div>
+</section><section id="方法二" class="slide level2">
+<h2>方法二</h2>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"> <span class="kw">&lt;plugin&gt;</span>
+     <span class="kw">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="kw">&lt;/groupId&gt;</span>
+     <span class="kw">&lt;artifactId&gt;</span>maven-compiler-plugin<span class="kw">&lt;/artifactId&gt;</span>
+     <span class="kw">&lt;configuration&gt;</span>
+     <span class="kw">&lt;source&gt;</span>1.8<span class="kw">&lt;/source&gt;</span>
+     <span class="kw">&lt;target&gt;</span>1.8<span class="kw">&lt;/target&gt;</span>
+     <span class="kw">&lt;/configuration&gt;</span>
+ <span class="kw">&lt;/plugin&gt;</span></code></pre></div>
+</section></section>
+<section><section id="maven-快照snapshot" class="titleslide slide level1"><h1>Maven 快照(SNAPSHOT)</h1></section><section id="snapshot-版本代表不稳定尚处于开发中的版本" class="slide level2">
+<h2>1、Snapshot 版本代表不稳定、尚处于开发中的版本。</h2>
+</section><section id="release-版本则代表稳定的版本" class="slide level2">
+<h2>2、Release 版本则代表稳定的版本。</h2>
+</section></section>
+<section><section id="什么情况下该用-snapshot" class="titleslide slide level1"><h1>什么情况下该用 SNAPSHOT?</h1></section><section id="协同开发时如果-a-依赖构件-b由于-b-会更新b-应该使用-snapshot-来标识自己" class="slide level2">
+<h2>协同开发时，如果 A 依赖构件 B，由于 B 会更新，B 应该使用 SNAPSHOT 来标识自己。</h2>
+<p>这种做法的必要性可以反证如下： a. 如果 B 不用 SNAPSHOT，而是每次更新后都使用一个稳定的版本，那版本号就会升得太快，每天一升甚至每个小时一升，这就是对版本号的滥用。 b.如果 B 不用 SNAPSHOT, 但一直使用一个单一的 Release 版本号，那当 B 更新后，A 可能并不会接受到更新。因为 A 所使用的 repository 一般不会频繁更新 release 版本的缓存（即本地 repository)，所以B以不换版本号的方式更新后，A在拿B时发现本地已有这个版本，就不会去远程Repository下载最新的 B</p>
+</section></section>
+<section><section id="不用-release-版本在所有地方都用-snapshot-版本行不行" class="titleslide slide level1"><h1>不用 Release 版本，在所有地方都用 SNAPSHOT 版本行不行？</h1></section><section id="不行" class="slide level2">
+<h2>不行。</h2>
+<p>正式环境中不得使用 snapshot 版本的库。 比如说，今天你依赖某个 snapshot 版本的第三方库成功构建了自己的应用，明天再构建时可能就会失败，因为今晚第三方可能已经更新了它的 snapshot 库。你再次构建时，Maven 会去远程 repository 下载 snapshot 的最新版本，你构建时用的库就是新的 jar 文件了，这时正确性就很难保证了。</p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="./lib/js/head.min.js"></script>
+  <script src="./js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: './lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: './plugin/zoom-js/zoom.js', async: true },
+              { src: './plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
