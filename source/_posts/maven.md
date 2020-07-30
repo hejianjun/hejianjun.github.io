@@ -7,29 +7,28 @@ categories:
   - Java
 typora-root-url: ..
 ---
-# MAVEN
 
 # 为何需要MAVEN
 
 ## 使用maven前
 
-![印度挂票](images/印度挂票.png)
+![印度挂票](images/india.png)
 
 项目臃肿不堪，jar包从各种渠道引入
 
 ## 使用maven后
 
-![中国高铁](images/中国高铁.png)
+![中国高铁](images/china.png)
 
 项目从统一的规范下载，升级管理jar版本只需要修改配置文件
 
 # 安装
 ## 配置环境变量
 
-| 系统变量名 | 说明                | 实例值                     |
-| ---------- | ------------------- | -------------------------- |
-| MAVEN_HOME | maven根目录         | C:\tool\apache-maven-3.3.9 |
-| Path       | windows查找命令路径 | ;%MAVEN_HOME%\bin          |
+| 系统变量名 | 说明                | 实例值                       |
+| ---------- | ------------------- | ---------------------------- |
+| MAVEN_HOME | maven根目录         | C:\\tool\\apache-maven-3.3.9 |
+| Path       | windows查找命令路径 | ;%MAVEN_HOME%\\bin           |
 
 # 约定配置
 
@@ -83,18 +82,7 @@ README.txt Project’s readme
 
 ## Maven 构建生命周期
 
-```flow
-st=>start: Start
-validate=>operation: validate
-compile=>operation: compile
-test=>operation: test
-package=>operation: package
-verify=>operation: verify
-install=>operation: install
-deploy=>operation: deploy
-e=>end
-st->validate->compile->test->package->verify->install->deploy->e
-```
+![Maven构建生命周期](images/maven.png)
 
 ## Clean（清理）
 
@@ -150,15 +138,17 @@ st->validate->compile->test->package->verify->install->deploy->e
 
 ## 2、Release 版本则代表稳定的版本。
 
-## 什么情况下该用 SNAPSHOT?
+# 什么情况下该用 SNAPSHOT?
 
-协同开发时，如果 A 依赖构件 B，由于 B 会更新，B 应该使用 SNAPSHOT 来标识自己。这种做法的必要性可以反证如下：
+## 协同开发时，如果 A 依赖构件 B，由于 B 会更新，B 应该使用 SNAPSHOT 来标识自己。
 
+这种做法的必要性可以反证如下：
 a. 如果 B 不用 SNAPSHOT，而是每次更新后都使用一个稳定的版本，那版本号就会升得太快，每天一升甚至每个小时一升，这就是对版本号的滥用。
 b.如果 B 不用 SNAPSHOT, 但一直使用一个单一的 Release 版本号，那当 B 更新后，A 可能并不会接受到更新。因为 A 所使用的 repository 一般不会频繁更新 release 版本的缓存（即本地 repository)，所以B以不换版本号的方式更新后，A在拿B时发现本地已有这个版本，就不会去远程Repository下载最新的 B
 
-## 不用 Release 版本，在所有地方都用 SNAPSHOT 版本行不行？     
+# 不用 Release 版本，在所有地方都用 SNAPSHOT 版本行不行？     
 
-不行。正式环境中不得使用 snapshot 版本的库。 比如说，今天你依赖某个 snapshot 版本的第三方库成功构建了自己的应用，明天再构建时可能就会失败，因为今晚第三方可能已经更新了它的 snapshot 库。你再次构建时，Maven 会去远程 repository 下载 snapshot 的最新版本，你构建时用的库就是新的 jar 文件了，这时正确性就很难保证了。
+## 不行。
+正式环境中不得使用 snapshot 版本的库。 比如说，今天你依赖某个 snapshot 版本的第三方库成功构建了自己的应用，明天再构建时可能就会失败，因为今晚第三方可能已经更新了它的 snapshot 库。你再次构建时，Maven 会去远程 repository 下载 snapshot 的最新版本，你构建时用的库就是新的 jar 文件了，这时正确性就很难保证了。
 
 
