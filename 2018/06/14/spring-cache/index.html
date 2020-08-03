@@ -1,383 +1,104 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html>
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <meta charset="utf-8">
+  
 
   
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="cache,spring," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="Spring注解缓存Spring 3.1之后，引入了注解缓存技术，其本质上不是一个具体的缓存实现方案，而是一个对缓存使用的抽象，通过在既有代码中添加少量自定义的各种annotation，即能够达到使用缓存对象和缓存方法的返回对象的效果。Spring的缓存技术具备相当的灵活性，不仅能够使用SpEL（Spring Expression Language）来定义缓存的key和各种condition，还提">
-<meta name="keywords" content="cache,spring">
+  <title>Spring注解缓存 | 剑君 の Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Spring注解缓存Spring 3.1之后，引入了注解缓存技术，其本质上不是一个具体的缓存实现方案，而是一个对缓存使用的抽象，通过在既有代码中添加少量自定义的各种annotation，即能够达到使用缓存对象和缓存方法的返回对象的效果。Spring的缓存技术具备相当的灵活性，不仅能够使用SpEL（Spring Expression Language）来定义缓存的key和各种condition，还提">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring注解缓存">
-<meta property="og:url" content="https://hejianjun.github.io/2018/06/14/spring-cache/index.html">
+<meta property="og:url" content="https://hejianjun.com/2018/06/14/spring-cache/index.html">
 <meta property="og:site_name" content="剑君 の Blog">
 <meta property="og:description" content="Spring注解缓存Spring 3.1之后，引入了注解缓存技术，其本质上不是一个具体的缓存实现方案，而是一个对缓存使用的抽象，通过在既有代码中添加少量自定义的各种annotation，即能够达到使用缓存对象和缓存方法的返回对象的效果。Spring的缓存技术具备相当的灵活性，不仅能够使用SpEL（Spring Expression Language）来定义缓存的key和各种condition，还提">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://hejianjun.github.io/images/spring%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E8%B0%83%E7%94%A8%E5%9B%BE.png">
-<meta property="og:image" content="https://hejianjun.github.io/images/%E5%9F%9F%E7%BC%93%E5%AD%98%E5%A4%84%E7%90%86%E5%9B%BE.png">
-<meta property="og:updated_time" content="2018-09-04T06:13:10.532Z">
+<meta property="og:locale">
+<meta property="og:image" content="https://hejianjun.com/images/spring%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E8%B0%83%E7%94%A8%E5%9B%BE.png">
+<meta property="og:image" content="https://hejianjun.com/images/%E5%9F%9F%E7%BC%93%E5%AD%98%E5%A4%84%E7%90%86%E5%9B%BE.png">
+<meta property="article:published_time" content="2018-06-13T18:00:00.000Z">
+<meta property="article:modified_time" content="2018-09-04T06:13:10.532Z">
+<meta property="article:author" content="Hejianjun">
+<meta property="article:tag" content="cache">
+<meta property="article:tag" content="spring">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring注解缓存">
-<meta name="twitter:description" content="Spring注解缓存Spring 3.1之后，引入了注解缓存技术，其本质上不是一个具体的缓存实现方案，而是一个对缓存使用的抽象，通过在既有代码中添加少量自定义的各种annotation，即能够达到使用缓存对象和缓存方法的返回对象的效果。Spring的缓存技术具备相当的灵活性，不仅能够使用SpEL（Spring Expression Language）来定义缓存的key和各种condition，还提">
-<meta name="twitter:image" content="https://hejianjun.github.io/images/spring%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E8%B0%83%E7%94%A8%E5%9B%BE.png">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Mist',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="https://hejianjun.github.io/2018/06/14/spring-cache/"/>
-
-
-
-
-
-  <title>Spring注解缓存 | 剑君 の Blog</title>
+<meta name="twitter:image" content="https://hejianjun.com/images/spring%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E8%B0%83%E7%94%A8%E5%9B%BE.png">
   
-
-
-
-
-
-
-
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
+    <link rel="alternate" href="/atom.xml" title="剑君 の Blog" type="application/atom+xml">
   
   
-    
+    <link rel="icon" href="/favicon.png">
   
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
+<meta name="generator" content="Hexo 5.0.0"></head>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">剑君 の Blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">剑君 の Blog</a>
+      </h1>
+      
     </div>
-      
-        <p class="site-subtitle"></p>
-      
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://hejianjun.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-spring-cache" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/14/spring-cache/" class="article-date">
+  <time datetime="2018-06-13T18:00:00.000Z" itemprop="datePublished">2018-06-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/cache/">cache</a>►<a class="article-category-link" href="/categories/technology/cache/spring/">spring</a>
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
   </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-sitemap">
-          <a href="/sitemap.xml" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
-            
-            站点地图
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
+  <div class="article-inner">
     
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hejianjun.github.io/2018/06/14/spring-cache/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hejianjun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="剑君 の Blog">
-    </span>
-
     
-      <header class="post-header">
-
+      <header class="article-header">
         
-        
-          <h1 class="post-title" itemprop="name headline">Spring注解缓存</h1>
-        
+  
+    <h1 class="article-title" itemprop="name">
+      Spring注解缓存
+    </h1>
+  
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-14T02:00:00+08:00">
-                2018-06-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/" itemprop="url" rel="index">
-                    <span itemprop="name">technology</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/cache/" itemprop="url" rel="index">
-                    <span itemprop="name">cache</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/cache/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
       </header>
     
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
-        <h2 id="Spring注解缓存"><a href="#Spring注解缓存" class="headerlink" title="Spring注解缓存"></a>Spring注解缓存</h2><p>Spring 3.1之后，引入了注解缓存技术，其本质上不是一个具体的缓存实现方案，而是一个对缓存使用的抽象，通过在既有代码中添加少量自定义的各种annotation，即能够达到使用缓存对象和缓存方法的返回对象的效果。Spring的缓存技术具备相当的灵活性，不仅能够使用SpEL（Spring Expression Language）来定义缓存的key和各种condition，还提供开箱即用的缓存临时存储方案，也支持和主流的专业缓存集成。其特点总结如下：<br><a id="more"></a></p>
+        <h2 id="Spring注解缓存"><a href="#Spring注解缓存" class="headerlink" title="Spring注解缓存"></a>Spring注解缓存</h2><p>Spring 3.1之后，引入了注解缓存技术，其本质上不是一个具体的缓存实现方案，而是一个对缓存使用的抽象，通过在既有代码中添加少量自定义的各种annotation，即能够达到使用缓存对象和缓存方法的返回对象的效果。Spring的缓存技术具备相当的灵活性，不仅能够使用SpEL（Spring Expression Language）来定义缓存的key和各种condition，还提供开箱即用的缓存临时存储方案，也支持和主流的专业缓存集成。其特点总结如下：</p>
+<a id="more"></a>
 <ul>
 <li>少量的配置annotation注释即可使得既有代码支持缓存；</li>
 <li>支持开箱即用，不用安装和部署额外的第三方组件即可使用缓存；</li>
@@ -397,8 +118,7 @@
 <th>主要配置参数说明</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>@Cacheable</td>
 <td>主要针对方法配置，能够根据方法的请求参数对其结果进行缓存</td>
 <td><strong>value：</strong>缓存的名称，在 Spring 配置文件中定义，必须指定至少一个； <strong>key：</strong>缓存的 key，可以为空，如果指定要按照 SpEL 表达式编写，如果不指定，则默认按照方法的所有参数进行组合； <strong>condition：</strong>缓存的条件，可以为空，使用 SpEL 编写，返回 true 或者 false，只有为 true 才进行缓存</td>
@@ -413,8 +133,7 @@
 <td>主要针对方法配置，能够根据一定的条件对缓存进行清空</td>
 <td><strong>value：</strong>缓存的名称，在 Spring 配置文件中定义，必须指定至少一个； <strong>key：</strong>缓存的 key，可以为空，如果指定要按照 SpEL 表达式编写，如果不指定，则默认按照方法的所有参数进行组合； <strong>condition：</strong>缓存的条件，可以为空，使用 SpEL 编写，返回 true 或者 false，只有为 true 才进行缓存； <strong>allEntries：</strong>是否清空所有缓存内容，默认为 false，如果指定为 true，则方法调用后将立即清空所有缓存； <strong>beforeInvocation：</strong>是否在方法执行前就清空，默认为 false，如果指定为 true，则在方法还没有执行的时候就清空缓存，默认情况下，如果方法执行抛出异常，则不会清空缓存</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>可扩展支持：Spring注解cache能够满足一般应用对缓存的需求，但随着应用服务的复杂化，大并发高可用性能要求下，需要进行一定的扩展，这时对其自身集成的缓存方案可能不太适用，该怎么办？Spring预先有考虑到这点，那么怎样利用Spring提供的扩展点实现我们自己的缓存，且在不改变原来已有代码的情况下进行扩展？是否在方法执行前就清空，默认为false，如果指定为true，则在方法还没有执行的时候就清空缓存，默认情况下，如果方法执行抛出异常，则不会清空缓存。</p>
 <blockquote>
 <p><strong>这基本能够满足一般应用对缓存的需求，但现实总是很复杂，当你的用户量上去或者性能跟不上，总需要进行扩展，这个时候你或许对其提供的内存缓存不满意了，因为其不支持高可用性，也不具备持久化数据能力，这个时候，你就需要自定义你的缓存方案了，还好，Spring也想到了这一点。</strong></p>
@@ -432,8 +151,7 @@
 <th>主要配置参数说明</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>@HotelCacheable</td>
 <td>主要针对方法配置，能够根据方法的请求参数对其结果进行缓存</td>
 <td><strong>domain：</strong>作用域，针对集合场景，解决批量更新问题； <strong>domainKey：</strong>作用域对应的缓存key； <strong>key：</strong>缓存对象key 前缀； <strong>fieldKey：</strong>缓存对象key，与前缀合并生成对象key； <strong>condition：</strong>缓存获取前置条件，支持spel语法； <strong>cacheCondition：</strong>缓存刷入前置条件，支持spel语法； <strong>expireTime：</strong>超时时间设置</td>
@@ -443,8 +161,7 @@
 <td>主要针对方法配置，能够根据一定的条件对缓存进行清空</td>
 <td><strong>同上</strong></td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>增加作用域的概念，解决商家信息变更下，多重重要信息实时更新的问题。</p>
 <p><img src="/images/%E5%9F%9F%E7%BC%93%E5%AD%98%E5%A4%84%E7%90%86%E5%9B%BE.png" alt="img"></p>
 <p>图13 域缓存处理图</p>
@@ -460,382 +177,151 @@
 
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/cache/" rel="tag"># cache</a>
-          
-            <a href="/tags/spring/" rel="tag"># spring</a>
-          
-        </div>
-      
-
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.com/2018/06/14/spring-cache/" data-id="ckde6sns20028dcpmbdgq0dgh" class="article-share-link">Share</a>
       
       
-      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cache/" rel="tag">cache</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/" rel="tag">spring</a></li></ul>
 
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/06/14/distributed-cache/" rel="next" title="分布式缓存">
-                <i class="fa fa-chevron-left"></i> 分布式缓存
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/29/spring-webflux/" rel="prev" title="spring webflux">
-                spring webflux <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
     </footer>
   </div>
   
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-    <div class="comments" id="comments">
-      <div id="SOHUCS"></div>
-    </div>
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
     
-    <div class="sidebar-inner">
+<nav id="article-nav">
+  
+    <a href="/2018/06/29/spring-webflux/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          spring webflux
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/06/14/distributed-cache/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">分布式缓存</div>
+    </a>
+  
+</nav>
 
-      
+  
+</article>
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/">technology</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/">AOP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/AspectJ/">AspectJ</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/spring/">spring</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/Apache-Commons/">Apache Commons</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/CAS/">CAS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/DBMS/">DBMS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/JPDA/">JPDA</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/NAT/">NAT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/OCJP/">OCJP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/SQL/">SQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/cache/">cache</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/cache/spring/">spring</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/dubbo/">dubbo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/kettel/">kettel</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/sql/">sql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/webflux/">webflux</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%9A%E5%8A%A1%E7%9F%A5%E8%AF%86/">业务知识</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%9A%E5%8A%A1%E7%9F%A5%E8%AF%86/%E6%B3%95%E9%99%A2/">法院</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/" rel="tag">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Commons/" rel="tag">Apache Commons</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DBMS/" rel="tag">DBMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPDA/" rel="tag">JPDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OCJP/" rel="tag">OCJP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSO/" rel="tag">SSO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aspectJ/" rel="tag">aspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cache/" rel="tag">cache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/distributed/" rel="tag">distributed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dubbo/" rel="tag">dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kettle/" rel="tag">kettle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/" rel="tag">sql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webflux/" rel="tag">webflux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">内网穿透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%95%E9%99%A2%E4%B8%9A%E5%8A%A1/" rel="tag">法院业务</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AOP/" style="font-size: 16.67px;">AOP</a> <a href="/tags/Apache-Commons/" style="font-size: 10px;">Apache Commons</a> <a href="/tags/DBMS/" style="font-size: 10px;">DBMS</a> <a href="/tags/JPDA/" style="font-size: 13.33px;">JPDA</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/OCJP/" style="font-size: 16.67px;">OCJP</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/aspectJ/" style="font-size: 10px;">aspectJ</a> <a href="/tags/cache/" style="font-size: 16.67px;">cache</a> <a href="/tags/distributed/" style="font-size: 10px;">distributed</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/kettle/" style="font-size: 16.67px;">kettle</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/webflux/" style="font-size: 10px;">webflux</a> <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 10px;">内网穿透</a> <a href="/tags/%E6%B3%95%E9%99%A2%E4%B8%9A%E5%8A%A1/" style="font-size: 20px;">法院业务</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/08/03/log/">日志框架</a>
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
+        
+          <li>
+            <a href="/2020/07/30/maven/">MAVEN</a>
           </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">Hejianjun</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">28</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">24</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring注解缓存"><span class="nav-number">1.</span> <span class="nav-text">Spring注解缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#酒店商家端自定义注解缓存"><span class="nav-number">1.1.</span> <span class="nav-text">酒店商家端自定义注解缓存</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
+        
+          <li>
+            <a href="/2020/04/25/graphql/">Graphql</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/27/frp/">frp</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/06/%E5%88%91%E4%BA%8B%E6%A1%88%E4%BB%B6/">刑事案件</a>
+          </li>
+        
+      </ul>
     </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Hejianjun</span>
-
-  
-</div>
-
-
-
-
-
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
   </div>
 
   
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Hejianjun<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
   
-
-
-
-
-
-
-
-
-
-
-
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
 
   
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
 
-	
+<script src="/js/script.js"></script>
 
 
 
 
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
+  </div>
 </body>
 </html>

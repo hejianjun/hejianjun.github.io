@@ -1,373 +1,105 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html>
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <meta charset="utf-8">
+  
 
   
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="cache," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="缓存维基百科高速缓存（英语：cache，/kæʃ/ kash）简称缓存，原始意义是指访问速度比一般随机存取存储器（RAM）快的一种RAM，通常它不像系统主存那样使用DRAM技术，而使用昂贵但较快速的SRAM技术。">
-<meta name="keywords" content="cache">
+  <title>缓存笔记 | 剑君 の Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="缓存维基百科高速缓存（英语：cache，&#x2F;kæʃ&#x2F; kash）简称缓存，原始意义是指访问速度比一般随机存取存储器（RAM）快的一种RAM，通常它不像系统主存那样使用DRAM技术，而使用昂贵但较快速的SRAM技术。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="缓存笔记">
-<meta property="og:url" content="https://hejianjun.github.io/2018/06/14/cache-note/index.html">
+<meta property="og:url" content="https://hejianjun.com/2018/06/14/cache-note/index.html">
 <meta property="og:site_name" content="剑君 の Blog">
-<meta property="og:description" content="缓存维基百科高速缓存（英语：cache，/kæʃ/ kash）简称缓存，原始意义是指访问速度比一般随机存取存储器（RAM）快的一种RAM，通常它不像系统主存那样使用DRAM技术，而使用昂贵但较快速的SRAM技术。">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://hejianjun.github.io/images/ehcach%E6%A1%86%E6%9E%B6%E5%9B%BE.png">
-<meta property="og:image" content="https://hejianjun.github.io/images/ehcach%E7%BC%93%E5%AD%98%E6%95%B0%E6%8D%AE%E6%B5%81%E8%BD%AC%E5%9B%BE.png">
-<meta property="og:image" content="https://hejianjun.github.io/images/guavacache%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9B%BE.png">
-<meta property="og:updated_time" content="2018-06-15T07:52:13.480Z">
+<meta property="og:description" content="缓存维基百科高速缓存（英语：cache，&#x2F;kæʃ&#x2F; kash）简称缓存，原始意义是指访问速度比一般随机存取存储器（RAM）快的一种RAM，通常它不像系统主存那样使用DRAM技术，而使用昂贵但较快速的SRAM技术。">
+<meta property="og:locale">
+<meta property="og:image" content="https://hejianjun.com/images/ehcach%E6%A1%86%E6%9E%B6%E5%9B%BE.png">
+<meta property="og:image" content="https://hejianjun.com/images/ehcach%E7%BC%93%E5%AD%98%E6%95%B0%E6%8D%AE%E6%B5%81%E8%BD%AC%E5%9B%BE.png">
+<meta property="og:image" content="https://hejianjun.com/images/guavacache%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9B%BE.png">
+<meta property="article:published_time" content="2018-06-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2018-06-15T07:52:13.480Z">
+<meta property="article:author" content="Hejianjun">
+<meta property="article:tag" content="cache">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="缓存笔记">
-<meta name="twitter:description" content="缓存维基百科高速缓存（英语：cache，/kæʃ/ kash）简称缓存，原始意义是指访问速度比一般随机存取存储器（RAM）快的一种RAM，通常它不像系统主存那样使用DRAM技术，而使用昂贵但较快速的SRAM技术。">
-<meta name="twitter:image" content="https://hejianjun.github.io/images/ehcach%E6%A1%86%E6%9E%B6%E5%9B%BE.png">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Mist',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="https://hejianjun.github.io/2018/06/14/cache-note/"/>
-
-
-
-
-
-  <title>缓存笔记 | 剑君 の Blog</title>
+<meta name="twitter:image" content="https://hejianjun.com/images/ehcach%E6%A1%86%E6%9E%B6%E5%9B%BE.png">
   
-
-
-
-
-
-
-
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
+    <link rel="alternate" href="/atom.xml" title="剑君 の Blog" type="application/atom+xml">
   
   
-    
+    <link rel="icon" href="/favicon.png">
   
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
+<meta name="generator" content="Hexo 5.0.0"></head>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">剑君 の Blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">剑君 の Blog</a>
+      </h1>
+      
     </div>
-      
-        <p class="site-subtitle"></p>
-      
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://hejianjun.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-cache-note" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/14/cache-note/" class="article-date">
+  <time datetime="2018-06-13T16:00:00.000Z" itemprop="datePublished">2018-06-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/cache/">cache</a>
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
   </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-sitemap">
-          <a href="/sitemap.xml" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
-            
-            站点地图
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
+  <div class="article-inner">
     
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hejianjun.github.io/2018/06/14/cache-note/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hejianjun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="剑君 の Blog">
-    </span>
-
     
-      <header class="post-header">
-
+      <header class="article-header">
         
-        
-          <h1 class="post-title" itemprop="name headline">缓存笔记</h1>
-        
+  
+    <h1 class="article-title" itemprop="name">
+      缓存笔记
+    </h1>
+  
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-14T00:00:00+08:00">
-                2018-06-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/" itemprop="url" rel="index">
-                    <span itemprop="name">technology</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/cache/" itemprop="url" rel="index">
-                    <span itemprop="name">cache</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
       </header>
     
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
-        <h1 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h1><h2 id="维基百科"><a href="#维基百科" class="headerlink" title="维基百科"></a>维基百科</h2><p>高速缓存（英语：cache，/kæʃ/ kash）简称缓存，原始意义是指访问速度比一般随机存取存储器（RAM）快的一种RAM，通常它不像系统主存那样使用DRAM技术，而使用昂贵但较快速的SRAM技术。<br><a id="more"></a><br>如今缓存的概念已被扩充，不仅在CPU和主内存之间有Cache，而且在内存和硬盘之间也有Cache（磁盘缓存），乃至在硬盘与网络之间也有某种意义上的Cache──称为Internet临时文件夹或网络内容缓存等。凡是位于速度相差较大的两种硬件之间，用于协调两者数据传输速度差异的结构，均可称之为Cache。</p>
+        <h1 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h1><h2 id="维基百科"><a href="#维基百科" class="headerlink" title="维基百科"></a>维基百科</h2><p>高速缓存（英语：cache，/kæʃ/ kash）简称缓存，原始意义是指访问速度比一般随机存取存储器（RAM）快的一种RAM，通常它不像系统主存那样使用DRAM技术，而使用昂贵但较快速的SRAM技术。</p>
+<a id="more"></a>
+<p>如今缓存的概念已被扩充，不仅在CPU和主内存之间有Cache，而且在内存和硬盘之间也有Cache（磁盘缓存），乃至在硬盘与网络之间也有某种意义上的Cache──称为Internet临时文件夹或网络内容缓存等。凡是位于速度相差较大的两种硬件之间，用于协调两者数据传输速度差异的结构，均可称之为Cache。</p>
 <h2 id="缓存特征"><a href="#缓存特征" class="headerlink" title="缓存特征"></a>缓存特征</h2><p>缓存也是一个数据模型对象，那么必然有它的一些特征：</p>
 <h4 id="命中率"><a href="#命中率" class="headerlink" title="命中率"></a>命中率</h4><p>命中率=返回正确结果数/请求缓存次数，命中率问题是缓存中的一个非常重要的问题，它是衡量缓存有效性的重要指标。命中率越高，表明缓存的使用率越高。</p>
 <h4 id="最大元素（或最大空间）"><a href="#最大元素（或最大空间）" class="headerlink" title="最大元素（或最大空间）"></a>最大元素（或最大空间）</h4><p>缓存中可以存放的最大元素的数量，一旦缓存中元素数量超过这个值（或者缓存数据所占空间超过其最大支持空间），那么将会触发缓存启动清空策略根据不同的场景合理的设置最大元素值往往可以一定程度上提高缓存的命中率，从而更有效的时候缓存。</p>
@@ -405,11 +137,13 @@
 <h2 id="本地缓存"><a href="#本地缓存" class="headerlink" title="本地缓存"></a>本地缓存</h2><h3 id="编程直接实现缓存"><a href="#编程直接实现缓存" class="headerlink" title="编程直接实现缓存"></a>编程直接实现缓存</h3><p>个别场景下，我们只需要简单的缓存数据的功能，而无需关注更多存取、清空策略等深入的特性时，直接编程实现缓存则是最便捷和高效的。</p>
 <p><strong>a. 成员变量或局部变量实现</strong></p>
 <p>简单代码示例如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.thunisoft.local;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UseLocalCache</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 一个本地的缓存变量</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Map&lt;Integer, Object&gt; localCacheStoreMap = <span class="keyword">new</span> HashMap&lt;Integer, Object&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;Integer&gt; infosList = <span class="keyword">this</span>.getInfoList();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List <span class="title">getList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        List newList = <span class="keyword">new</span> ArrayList&lt;Object&gt;();</span><br><span class="line">        <span class="keyword">for</span> (Integer item : infosList) &#123;</span><br><span class="line">            <span class="comment">//缓存命中 使用缓存数据</span></span><br><span class="line">            <span class="keyword">if</span> (localCacheStoreMap.containsKey(item)) &#123;</span><br><span class="line">                newList.add(localCacheStoreMap.get(item));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123; <span class="comment">// 缓存未命中  IO获取数据，结果存入缓存</span></span><br><span class="line">                Object valueObject = <span class="keyword">this</span>.getInfoFromDB(item);</span><br><span class="line">                localCacheStoreMap.put(item, valueObject);</span><br><span class="line">                newList.add(valueObject);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> newList;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 示例</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> List&lt;Integer&gt; <span class="title">getInfoList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ArrayList&lt;Integer&gt;() &#123;&#123;</span><br><span class="line">            add(<span class="number">1</span>);</span><br><span class="line">            add(<span class="number">3</span>);</span><br><span class="line">        &#125;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 示例数据库IO获取</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> Object <span class="title">getInfoFromDB</span><span class="params">(Integer item)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Object();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.thunisoft.local;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UseLocalCache</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 一个本地的缓存变量</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Map&lt;Integer, Object&gt; localCacheStoreMap = <span class="keyword">new</span> HashMap&lt;Integer, Object&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> List&lt;Integer&gt; infosList = <span class="keyword">this</span>.getInfoList();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List <span class="title">getList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        List newList = <span class="keyword">new</span> ArrayList&lt;Object&gt;();</span><br><span class="line">        <span class="keyword">for</span> (Integer item : infosList) &#123;</span><br><span class="line">            <span class="comment">//缓存命中 使用缓存数据</span></span><br><span class="line">            <span class="keyword">if</span> (localCacheStoreMap.containsKey(item)) &#123;</span><br><span class="line">                newList.add(localCacheStoreMap.get(item));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123; <span class="comment">// 缓存未命中  IO获取数据，结果存入缓存</span></span><br><span class="line">                Object valueObject = <span class="keyword">this</span>.getInfoFromDB(item);</span><br><span class="line">                localCacheStoreMap.put(item, valueObject);</span><br><span class="line">                newList.add(valueObject);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> newList;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 示例</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> List&lt;Integer&gt; <span class="title">getInfoList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ArrayList&lt;Integer&gt;() &#123;&#123;</span><br><span class="line">            add(<span class="number">1</span>);</span><br><span class="line">            add(<span class="number">3</span>);</span><br><span class="line">        &#125;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 示例数据库IO获取</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> Object <span class="title">getInfoFromDB</span><span class="params">(Integer item)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Object();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>以局部变量map结构缓存部分业务数据，减少频繁的重复数据库I/O操作。缺点仅限于类的自身作用域内，类间无法共享缓存。</p>
 <p><strong>b. 静态变量实现</strong></p>
 <p>最常用的单例实现静态资源缓存，代码示例如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CityUtils</span> </span>&#123;</span><br><span class="line">      <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> HttpClient httpClient = ServerHolder.createClientWithPool(); </span><br><span class="line">      <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;Integer, String&gt; cityIdNameMap = <span class="keyword">new</span> HashMap&lt;Integer, String&gt;();</span><br><span class="line">      <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;Integer, String&gt; districtIdNameMap = <span class="keyword">new</span> HashMap&lt;Integer, String&gt;();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> &#123;</span><br><span class="line">    HttpGet get = <span class="keyword">new</span> HttpGet(<span class="string">"http://gis-in.sankuai.com/api/location/city/all"</span>);</span><br><span class="line">    BaseAuthorizationUtils.generateAuthAndDateHeader(get,</span><br><span class="line">            BaseAuthorizationUtils.CLIENT_TO_REQUEST_MDC,</span><br><span class="line">            BaseAuthorizationUtils.SECRET_TO_REQUEST_MDC);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        String resultStr = httpClient.execute(get, <span class="keyword">new</span> BasicResponseHandler());</span><br><span class="line">        JSONObject resultJo = <span class="keyword">new</span> JSONObject(resultStr);</span><br><span class="line">        JSONArray dataJa = resultJo.getJSONArray(<span class="string">"data"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dataJa.length(); i++) &#123;</span><br><span class="line">            JSONObject itemJo = dataJa.getJSONObject(i);</span><br><span class="line">            cityIdNameMap.put(itemJo.getInt(<span class="string">"id"</span>), itemJo.getString(<span class="string">"name"</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Init City List Error!"</span>, e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">    HttpGet get = <span class="keyword">new</span> HttpGet(<span class="string">"http://gis-in.sankuai.com/api/location/district/all"</span>);</span><br><span class="line">    BaseAuthorizationUtils.generateAuthAndDateHeader(get,</span><br><span class="line">            BaseAuthorizationUtils.CLIENT_TO_REQUEST_MDC,</span><br><span class="line">            BaseAuthorizationUtils.SECRET_TO_REQUEST_MDC);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        String resultStr = httpClient.execute(get, <span class="keyword">new</span> BasicResponseHandler());</span><br><span class="line">        JSONObject resultJo = <span class="keyword">new</span> JSONObject(resultStr);</span><br><span class="line">        JSONArray dataJa = resultJo.getJSONArray(<span class="string">"data"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dataJa.length(); i++) &#123;</span><br><span class="line">            JSONObject itemJo = dataJa.getJSONObject(i);</span><br><span class="line">            districtIdNameMap.put(itemJo.getInt(<span class="string">"id"</span>), itemJo.getString(<span class="string">"name"</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Init District List Error!"</span>, e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getCityName</span><span class="params">(<span class="keyword">int</span> cityId)</span> </span>&#123;</span><br><span class="line">      String name = cityIdNameMap.get(cityId);</span><br><span class="line">      <span class="keyword">if</span> (name == <span class="keyword">null</span>) &#123;</span><br><span class="line">        name = <span class="string">"未知"</span>;</span><br><span class="line">      &#125;</span><br><span class="line">       <span class="keyword">return</span> name;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getDistrictName</span><span class="params">(<span class="keyword">int</span> districtId)</span> </span>&#123;</span><br><span class="line">      String name = districtIdNameMap.get(districtId);</span><br><span class="line">       <span class="keyword">if</span> (name == <span class="keyword">null</span>) &#123;</span><br><span class="line">         name = <span class="string">"未知"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">       <span class="keyword">return</span> name;</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CityUtils</span> </span>&#123;</span><br><span class="line">      <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> HttpClient httpClient = ServerHolder.createClientWithPool(); </span><br><span class="line">      <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;Integer, String&gt; cityIdNameMap = <span class="keyword">new</span> HashMap&lt;Integer, String&gt;();</span><br><span class="line">      <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;Integer, String&gt; districtIdNameMap = <span class="keyword">new</span> HashMap&lt;Integer, String&gt;();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> &#123;</span><br><span class="line">    HttpGet get = <span class="keyword">new</span> HttpGet(<span class="string">&quot;http://gis-in.sankuai.com/api/location/city/all&quot;</span>);</span><br><span class="line">    BaseAuthorizationUtils.generateAuthAndDateHeader(get,</span><br><span class="line">            BaseAuthorizationUtils.CLIENT_TO_REQUEST_MDC,</span><br><span class="line">            BaseAuthorizationUtils.SECRET_TO_REQUEST_MDC);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        String resultStr = httpClient.execute(get, <span class="keyword">new</span> BasicResponseHandler());</span><br><span class="line">        JSONObject resultJo = <span class="keyword">new</span> JSONObject(resultStr);</span><br><span class="line">        JSONArray dataJa = resultJo.getJSONArray(<span class="string">&quot;data&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dataJa.length(); i++) &#123;</span><br><span class="line">            JSONObject itemJo = dataJa.getJSONObject(i);</span><br><span class="line">            cityIdNameMap.put(itemJo.getInt(<span class="string">&quot;id&quot;</span>), itemJo.getString(<span class="string">&quot;name&quot;</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;Init City List Error!&quot;</span>, e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">    HttpGet get = <span class="keyword">new</span> HttpGet(<span class="string">&quot;http://gis-in.sankuai.com/api/location/district/all&quot;</span>);</span><br><span class="line">    BaseAuthorizationUtils.generateAuthAndDateHeader(get,</span><br><span class="line">            BaseAuthorizationUtils.CLIENT_TO_REQUEST_MDC,</span><br><span class="line">            BaseAuthorizationUtils.SECRET_TO_REQUEST_MDC);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        String resultStr = httpClient.execute(get, <span class="keyword">new</span> BasicResponseHandler());</span><br><span class="line">        JSONObject resultJo = <span class="keyword">new</span> JSONObject(resultStr);</span><br><span class="line">        JSONArray dataJa = resultJo.getJSONArray(<span class="string">&quot;data&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dataJa.length(); i++) &#123;</span><br><span class="line">            JSONObject itemJo = dataJa.getJSONObject(i);</span><br><span class="line">            districtIdNameMap.put(itemJo.getInt(<span class="string">&quot;id&quot;</span>), itemJo.getString(<span class="string">&quot;name&quot;</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;Init District List Error!&quot;</span>, e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getCityName</span><span class="params">(<span class="keyword">int</span> cityId)</span> </span>&#123;</span><br><span class="line">      String name = cityIdNameMap.get(cityId);</span><br><span class="line">      <span class="keyword">if</span> (name == <span class="keyword">null</span>) &#123;</span><br><span class="line">        name = <span class="string">&quot;未知&quot;</span>;</span><br><span class="line">      &#125;</span><br><span class="line">       <span class="keyword">return</span> name;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getDistrictName</span><span class="params">(<span class="keyword">int</span> districtId)</span> </span>&#123;</span><br><span class="line">      String name = districtIdNameMap.get(districtId);</span><br><span class="line">       <span class="keyword">if</span> (name == <span class="keyword">null</span>) &#123;</span><br><span class="line">         name = <span class="string">&quot;未知&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">       <span class="keyword">return</span> name;</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>业务中常用的配置信息，通过静态变量一次获取缓存内存中，减少频繁的I/O读取，静态变量实现类间可共享，进程内可共享，缓存的实时性稍差。</p>
 <blockquote>
 <p><strong>这类缓存实现，优点是能直接在heap区内读写，最快也最方便；缺点同样是受heap区域影响，缓存的数据量非常有限，同时缓存时间受GC影响。主要满足单机场景下的小数据量缓存需求，同时对缓存数据的变更无需太敏感感知，如上一般配置管理、基础静态数据等场景。</strong></p>
@@ -438,7 +172,8 @@
 <p><img src="/images/ehcach%E7%BC%93%E5%AD%98%E6%95%B0%E6%8D%AE%E6%B5%81%E8%BD%AC%E5%9B%BE.png" alt="ehcach缓存数据流转图"></p>
 <p>图4 缓存数据流转图（L1:本地内存层；L2:Terracotta服务节点层)</p>
 <p>Ehcache的配置使用如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ehcache</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 指定一个文件目录，当Ehcache把数据写到硬盘上时，将把数据写到这个文件目录下 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">diskStore</span> <span class="attr">path</span>=<span class="string">"java.io.tmpdir"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 设定缓存的默认数据过期策略 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">defaultCache</span></span></span><br><span class="line"><span class="tag">        <span class="attr">maxElementsInMemory</span>=<span class="string">"10000"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">eternal</span>=<span class="string">"false"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">overflowToDisk</span>=<span class="string">"true"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">timeToIdleSeconds</span>=<span class="string">"0"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">timeToLiveSeconds</span>=<span class="string">"0"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">diskPersistent</span>=<span class="string">"false"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">diskExpiryThreadIntervalSeconds</span>=<span class="string">"120"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--  </span></span><br><span class="line"><span class="comment">    设定具体的命名缓存的数据过期策略</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    cache元素的属性：</span></span><br><span class="line"><span class="comment">        name：缓存名称</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        maxElementsInMemory：内存中最大缓存对象数</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        maxElementsOnDisk：硬盘中最大缓存对象数，若是0表示无穷大</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        eternal：true表示对象永不过期，此时会忽略timeToIdleSeconds和timeToLiveSeconds属性，默认为false</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        overflowToDisk：true表示当内存缓存的对象数目达到了maxElementsInMemory界限后，会把溢出的对象写到硬盘缓存中。注意：如果缓存的对象要写入到硬盘中的话，则该对象必须实现了Serializable接口才行。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        diskSpoolBufferSizeMB：磁盘缓存区大小，默认为30MB。每个Cache都应该有自己的一个缓存区。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        diskPersistent：是否缓存虚拟机重启期数据</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        diskExpiryThreadIntervalSeconds：磁盘失效线程运行时间间隔，默认为120秒</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        timeToIdleSeconds： 设定允许对象处于空闲状态的最长时间，以秒为单位。当对象自从最近一次被访问后，如果处于空闲状态的时间超过了timeToIdleSeconds属性值，这个对象就会过期，EHCache将把它从缓存中清空。只有当eternal属性为false，该属性才有效。如果该属性值为0，则表示对象可以无限期地处于空闲状态</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        timeToLiveSeconds：设定对象允许存在于缓存中的最长时间，以秒为单位。当对象自从被存放到缓存中后，如果处于缓存中的时间超过了 timeToLiveSeconds属性值，这个对象就会过期，Ehcache将把它从缓存中清除。只有当eternal属性为false，该属性才有效。如果该属性值为0，则表示对象可以无限期地存在于缓存中。timeToLiveSeconds必须大于timeToIdleSeconds属性，才有意义</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        memoryStoreEvictionPolicy：当达到maxElementsInMemory限制时，Ehcache将会根据指定的策略去清理内存。可选策略有：LRU（最近最少使用，默认策略）、FIFO（先进先出）、LFU（最少访问次数）。</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">cache</span> <span class="attr">name</span>=<span class="string">"CACHE1"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">maxElementsInMemory</span>=<span class="string">"1000"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">eternal</span>=<span class="string">"true"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">overflowToDisk</span>=<span class="string">"true"</span>/&gt;</span>  </span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">cache</span> <span class="attr">name</span>=<span class="string">"CACHE2"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">maxElementsInMemory</span>=<span class="string">"1000"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">eternal</span>=<span class="string">"false"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">timeToIdleSeconds</span>=<span class="string">"200"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">timeToLiveSeconds</span>=<span class="string">"4000"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">overflowToDisk</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ehcache</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ehcache</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 指定一个文件目录，当Ehcache把数据写到硬盘上时，将把数据写到这个文件目录下 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">diskStore</span> <span class="attr">path</span>=<span class="string">&quot;java.io.tmpdir&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 设定缓存的默认数据过期策略 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">defaultCache</span></span></span><br><span class="line"><span class="tag">        <span class="attr">maxElementsInMemory</span>=<span class="string">&quot;10000&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">eternal</span>=<span class="string">&quot;false&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">overflowToDisk</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">timeToIdleSeconds</span>=<span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">timeToLiveSeconds</span>=<span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">diskPersistent</span>=<span class="string">&quot;false&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">diskExpiryThreadIntervalSeconds</span>=<span class="string">&quot;120&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--  </span></span><br><span class="line"><span class="comment">    设定具体的命名缓存的数据过期策略</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    cache元素的属性：</span></span><br><span class="line"><span class="comment">        name：缓存名称</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        maxElementsInMemory：内存中最大缓存对象数</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        maxElementsOnDisk：硬盘中最大缓存对象数，若是0表示无穷大</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        eternal：true表示对象永不过期，此时会忽略timeToIdleSeconds和timeToLiveSeconds属性，默认为false</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        overflowToDisk：true表示当内存缓存的对象数目达到了maxElementsInMemory界限后，会把溢出的对象写到硬盘缓存中。注意：如果缓存的对象要写入到硬盘中的话，则该对象必须实现了Serializable接口才行。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        diskSpoolBufferSizeMB：磁盘缓存区大小，默认为30MB。每个Cache都应该有自己的一个缓存区。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        diskPersistent：是否缓存虚拟机重启期数据</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        diskExpiryThreadIntervalSeconds：磁盘失效线程运行时间间隔，默认为120秒</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        timeToIdleSeconds： 设定允许对象处于空闲状态的最长时间，以秒为单位。当对象自从最近一次被访问后，如果处于空闲状态的时间超过了timeToIdleSeconds属性值，这个对象就会过期，EHCache将把它从缓存中清空。只有当eternal属性为false，该属性才有效。如果该属性值为0，则表示对象可以无限期地处于空闲状态</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        timeToLiveSeconds：设定对象允许存在于缓存中的最长时间，以秒为单位。当对象自从被存放到缓存中后，如果处于缓存中的时间超过了 timeToLiveSeconds属性值，这个对象就会过期，Ehcache将把它从缓存中清除。只有当eternal属性为false，该属性才有效。如果该属性值为0，则表示对象可以无限期地存在于缓存中。timeToLiveSeconds必须大于timeToIdleSeconds属性，才有意义</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        memoryStoreEvictionPolicy：当达到maxElementsInMemory限制时，Ehcache将会根据指定的策略去清理内存。可选策略有：LRU（最近最少使用，默认策略）、FIFO（先进先出）、LFU（最少访问次数）。</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">cache</span> <span class="attr">name</span>=<span class="string">&quot;CACHE1&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">maxElementsInMemory</span>=<span class="string">&quot;1000&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">eternal</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">overflowToDisk</span>=<span class="string">&quot;true&quot;</span>/&gt;</span>  </span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">cache</span> <span class="attr">name</span>=<span class="string">&quot;CACHE2&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">maxElementsInMemory</span>=<span class="string">&quot;1000&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">eternal</span>=<span class="string">&quot;false&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">timeToIdleSeconds</span>=<span class="string">&quot;200&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">timeToLiveSeconds</span>=<span class="string">&quot;4000&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">overflowToDisk</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ehcache</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p><strong>整体上看，Ehcache的使用还是相对简单便捷的，提供了完整的各类API接口。需要注意的是，虽然Ehcache支持磁盘的持久化，但是由于存在两级缓存介质，在一级内存中的缓存，如果没有主动的刷入磁盘持久化的话，在应用异常down机等情形下，依然会出现缓存数据丢失，为此可以根据需要将缓存刷到磁盘，将缓存条目刷到磁盘的操作可以通过cache.flush()方法来执行，需要注意的是，对于对象的磁盘写入，前提是要将对象进行序列化。</strong></p>
 </blockquote>
@@ -483,387 +218,159 @@
 <li>使用粗暴直接的方式，直接Cache.put 加载数据，但自动加载是首选的，因为它可以更容易的推断所有缓存内容的一致性。</li>
 </ol>
 <p>build生成器的两种方式都实现了一种逻辑：从缓存中取key的值，如果该值已经缓存过了则返回缓存中的值，如果没有缓存过可以通过某个方法来获取这个值，不同的地方在于cacheloader的定义比较宽泛，是针对整个cache定义的，可以认为是统一的根据key值load value的方法，而callable的方式较为灵活，允许你在get的时候指定load方法。使用示例如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * CacheLoader</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">loadingCache</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  LoadingCache&lt;String, String&gt; graphs =CacheBuilder.newBuilder()</span><br><span class="line">     .maximumSize(<span class="number">1000</span>).build(<span class="keyword">new</span> CacheLoader&lt;String, String&gt;()</span><br><span class="line">     &#123;</span><br><span class="line">         <span class="meta">@Override</span></span><br><span class="line">         <span class="function"><span class="keyword">public</span> String <span class="title">load</span><span class="params">(String key)</span> <span class="keyword">throws</span> Exception</span></span><br><span class="line"><span class="function">         </span>&#123;</span><br><span class="line">             System.out.println(<span class="string">"key:"</span>+key);</span><br><span class="line">             <span class="keyword">if</span>(<span class="string">"key"</span>.equals(key))&#123;</span><br><span class="line">                 <span class="keyword">return</span> <span class="string">"key return result"</span>;</span><br><span class="line">             &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                 <span class="keyword">return</span> <span class="string">"get-if-absent-compute"</span>;</span><br><span class="line">             &#125;                   </span><br><span class="line">         &#125;</span><br><span class="line">     &#125;);</span><br><span class="line">String resultVal = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    resultVal = graphs.get(<span class="string">"key"</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"> System.out.println(resultVal);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Callable</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">callablex</span><span class="params">()</span> <span class="keyword">throws</span> ExecutionException</span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">   Cache&lt;String, String&gt; cache = CacheBuilder.newBuilder()</span><br><span class="line">     .maximumSize(<span class="number">1000</span>).build();</span><br><span class="line">   String result = cache.get(<span class="string">"key"</span>, <span class="keyword">new</span> Callable&lt;String&gt;()</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span></span></span><br><span class="line"><span class="function">      </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="string">"result"</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  System.out.println(result);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * CacheLoader</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">loadingCache</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  LoadingCache&lt;String, String&gt; graphs =CacheBuilder.newBuilder()</span><br><span class="line">     .maximumSize(<span class="number">1000</span>).build(<span class="keyword">new</span> CacheLoader&lt;String, String&gt;()</span><br><span class="line">     &#123;</span><br><span class="line">         <span class="meta">@Override</span></span><br><span class="line">         <span class="function"><span class="keyword">public</span> String <span class="title">load</span><span class="params">(String key)</span> <span class="keyword">throws</span> Exception</span></span><br><span class="line"><span class="function">         </span>&#123;</span><br><span class="line">             System.out.println(<span class="string">&quot;key:&quot;</span>+key);</span><br><span class="line">             <span class="keyword">if</span>(<span class="string">&quot;key&quot;</span>.equals(key))&#123;</span><br><span class="line">                 <span class="keyword">return</span> <span class="string">&quot;key return result&quot;</span>;</span><br><span class="line">             &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                 <span class="keyword">return</span> <span class="string">&quot;get-if-absent-compute&quot;</span>;</span><br><span class="line">             &#125;                   </span><br><span class="line">         &#125;</span><br><span class="line">     &#125;);</span><br><span class="line">String resultVal = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    resultVal = graphs.get(<span class="string">&quot;key&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"> System.out.println(resultVal);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Callable</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">callablex</span><span class="params">()</span> <span class="keyword">throws</span> ExecutionException</span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">   Cache&lt;String, String&gt; cache = CacheBuilder.newBuilder()</span><br><span class="line">     .maximumSize(<span class="number">1000</span>).build();</span><br><span class="line">   String result = cache.get(<span class="string">&quot;key&quot;</span>, <span class="keyword">new</span> Callable&lt;String&gt;()</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span></span></span><br><span class="line"><span class="function">      </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="string">&quot;result&quot;</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  System.out.println(result);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p><strong>总体来看，Guava Cache基于ConcurrentHashMap的优秀设计借鉴，在高并发场景支持和线程安全上都有相应的改进策略，使用Reference引用命令，提升高并发下的数据……访问速度并保持了GC的可回收，有效节省空间；同时，write链和access链的设计，能更灵活、高效的实现多种类型的缓存清理策略，包括基于容量的清理、基于时间的清理、基于引用的清理等；编程式的build生成器管理，让使用者有更多的自由度，能够根据不同场景设置合适的模式。</strong></p>
 </blockquote>
 
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/cache/" rel="tag"># cache</a>
-          
-        </div>
-      
-
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.com/2018/06/14/cache-note/" data-id="ckde6snuj005qdcpmaack287f" class="article-share-link">Share</a>
       
       
-      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cache/" rel="tag">cache</a></li></ul>
 
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/05/25/aspectJ-AOP/" rel="next" title="AOP之基于AspectJ注解">
-                <i class="fa fa-chevron-left"></i> AOP之基于AspectJ注解
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/14/distributed-cache/" rel="prev" title="分布式缓存">
-                分布式缓存 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
     </footer>
   </div>
   
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-    <div class="comments" id="comments">
-      <div id="SOHUCS"></div>
-    </div>
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
     
-    <div class="sidebar-inner">
+<nav id="article-nav">
+  
+    <a href="/2018/06/14/distributed-cache/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          分布式缓存
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/25/aspectJ-AOP/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">AOP之基于AspectJ注解</div>
+    </a>
+  
+</nav>
 
-      
+  
+</article>
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/">technology</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/">AOP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/AspectJ/">AspectJ</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/spring/">spring</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/Apache-Commons/">Apache Commons</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/CAS/">CAS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/DBMS/">DBMS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/JPDA/">JPDA</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/NAT/">NAT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/OCJP/">OCJP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/SQL/">SQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/cache/">cache</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/cache/spring/">spring</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/dubbo/">dubbo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/kettel/">kettel</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/sql/">sql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/webflux/">webflux</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%9A%E5%8A%A1%E7%9F%A5%E8%AF%86/">业务知识</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%9A%E5%8A%A1%E7%9F%A5%E8%AF%86/%E6%B3%95%E9%99%A2/">法院</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/" rel="tag">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Commons/" rel="tag">Apache Commons</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DBMS/" rel="tag">DBMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPDA/" rel="tag">JPDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OCJP/" rel="tag">OCJP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSO/" rel="tag">SSO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aspectJ/" rel="tag">aspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cache/" rel="tag">cache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/distributed/" rel="tag">distributed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dubbo/" rel="tag">dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kettle/" rel="tag">kettle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/" rel="tag">sql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webflux/" rel="tag">webflux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">内网穿透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%95%E9%99%A2%E4%B8%9A%E5%8A%A1/" rel="tag">法院业务</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AOP/" style="font-size: 16.67px;">AOP</a> <a href="/tags/Apache-Commons/" style="font-size: 10px;">Apache Commons</a> <a href="/tags/DBMS/" style="font-size: 10px;">DBMS</a> <a href="/tags/JPDA/" style="font-size: 13.33px;">JPDA</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/OCJP/" style="font-size: 16.67px;">OCJP</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/aspectJ/" style="font-size: 10px;">aspectJ</a> <a href="/tags/cache/" style="font-size: 16.67px;">cache</a> <a href="/tags/distributed/" style="font-size: 10px;">distributed</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/kettle/" style="font-size: 16.67px;">kettle</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/webflux/" style="font-size: 10px;">webflux</a> <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 10px;">内网穿透</a> <a href="/tags/%E6%B3%95%E9%99%A2%E4%B8%9A%E5%8A%A1/" style="font-size: 20px;">法院业务</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/08/03/log/">日志框架</a>
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
+        
+          <li>
+            <a href="/2020/07/30/maven/">MAVEN</a>
           </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">Hejianjun</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">28</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">24</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#缓存"><span class="nav-number">1.</span> <span class="nav-text">缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#维基百科"><span class="nav-number">1.1.</span> <span class="nav-text">维基百科</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存特征"><span class="nav-number">1.2.</span> <span class="nav-text">缓存特征</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#命中率"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">命中率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最大元素（或最大空间）"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">最大元素（或最大空间）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#清空策略"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">清空策略</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存介质"><span class="nav-number">1.3.</span> <span class="nav-text">缓存介质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存分类和应用场景"><span class="nav-number">1.4.</span> <span class="nav-text">缓存分类和应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地缓存"><span class="nav-number">1.5.</span> <span class="nav-text">本地缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编程直接实现缓存"><span class="nav-number">1.5.1.</span> <span class="nav-text">编程直接实现缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ehcache"><span class="nav-number">1.5.2.</span> <span class="nav-text">Ehcache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ehcache-1"><span class="nav-number">1.5.3.</span> <span class="nav-text">Ehcache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Guava-Cache"><span class="nav-number">1.5.4.</span> <span class="nav-text">Guava Cache</span></a></li></ol></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
+        
+          <li>
+            <a href="/2020/04/25/graphql/">Graphql</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/27/frp/">frp</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/06/%E5%88%91%E4%BA%8B%E6%A1%88%E4%BB%B6/">刑事案件</a>
+          </li>
+        
+      </ul>
     </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Hejianjun</span>
-
-  
-</div>
-
-
-
-
-
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
   </div>
 
   
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Hejianjun<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
   
-
-
-
-
-
-
-
-
-
-
-
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
 
   
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
 
-	
+<script src="/js/script.js"></script>
 
 
 
 
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
+  </div>
 </body>
 </html>

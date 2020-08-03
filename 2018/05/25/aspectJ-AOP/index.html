@@ -1,389 +1,113 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html>
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <meta charset="utf-8">
+  
 
   
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="AOP,aspectJ," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="一、基本使用方法1.1、启用对@AspectJ的支持Spring默认不支持@AspectJ风格的切面声明，为了支持需要使用如下配置：123&amp;lt;!-- 启动@AspectJ支持 --&amp;gt;  &amp;lt;!-- proxy-target-class默认&quot;false&quot;,更改为&quot;ture&quot;使用CGLib动态代理 --&amp;gt;    &amp;lt;aop:aspectj-autoproxy proxy-tar">
-<meta name="keywords" content="AOP,aspectJ">
+  <title>AOP之基于AspectJ注解 | 剑君 の Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、基本使用方法1.1、启用对@AspectJ的支持Spring默认不支持@AspectJ风格的切面声明，为了支持需要使用如下配置： 123&lt;!-- 启动@AspectJ支持 --&gt;  &lt;!-- proxy-target-class默认&quot;false&quot;,更改为&quot;ture&quot;使用CGLib动态代理 --&gt;    &lt;aop:aspect">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AOP之基于AspectJ注解">
-<meta property="og:url" content="https://hejianjun.github.io/2018/05/25/aspectJ-AOP/index.html">
+<meta property="og:url" content="https://hejianjun.com/2018/05/25/aspectJ-AOP/index.html">
 <meta property="og:site_name" content="剑君 の Blog">
-<meta property="og:description" content="一、基本使用方法1.1、启用对@AspectJ的支持Spring默认不支持@AspectJ风格的切面声明，为了支持需要使用如下配置：123&amp;lt;!-- 启动@AspectJ支持 --&amp;gt;  &amp;lt;!-- proxy-target-class默认&quot;false&quot;,更改为&quot;ture&quot;使用CGLib动态代理 --&amp;gt;    &amp;lt;aop:aspectj-autoproxy proxy-tar">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-25T11:54:17.944Z">
+<meta property="og:description" content="一、基本使用方法1.1、启用对@AspectJ的支持Spring默认不支持@AspectJ风格的切面声明，为了支持需要使用如下配置： 123&lt;!-- 启动@AspectJ支持 --&gt;  &lt;!-- proxy-target-class默认&quot;false&quot;,更改为&quot;ture&quot;使用CGLib动态代理 --&gt;    &lt;aop:aspect">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-05-24T17:00:00.000Z">
+<meta property="article:modified_time" content="2018-05-25T11:54:17.944Z">
+<meta property="article:author" content="Hejianjun">
+<meta property="article:tag" content="AOP">
+<meta property="article:tag" content="aspectJ">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AOP之基于AspectJ注解">
-<meta name="twitter:description" content="一、基本使用方法1.1、启用对@AspectJ的支持Spring默认不支持@AspectJ风格的切面声明，为了支持需要使用如下配置：123&amp;lt;!-- 启动@AspectJ支持 --&amp;gt;  &amp;lt;!-- proxy-target-class默认&quot;false&quot;,更改为&quot;ture&quot;使用CGLib动态代理 --&amp;gt;    &amp;lt;aop:aspectj-autoproxy proxy-tar">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Mist',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="https://hejianjun.github.io/2018/05/25/aspectJ-AOP/"/>
-
-
-
-
-
-  <title>AOP之基于AspectJ注解 | 剑君 の Blog</title>
   
-
-
-
-
-
-
-
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
+    <link rel="alternate" href="/atom.xml" title="剑君 の Blog" type="application/atom+xml">
   
   
-    
+    <link rel="icon" href="/favicon.png">
   
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
+<meta name="generator" content="Hexo 5.0.0"></head>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">剑君 の Blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">剑君 の Blog</a>
+      </h1>
+      
     </div>
-      
-        <p class="site-subtitle"></p>
-      
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://hejianjun.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-aspectJ-AOP" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/25/aspectJ-AOP/" class="article-date">
+  <time datetime="2018-05-24T17:00:00.000Z" itemprop="datePublished">2018-05-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/AOP/">AOP</a>►<a class="article-category-link" href="/categories/technology/AOP/AspectJ/">AspectJ</a>
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
   </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-sitemap">
-          <a href="/sitemap.xml" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
-            
-            站点地图
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
+  <div class="article-inner">
     
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hejianjun.github.io/2018/05/25/aspectJ-AOP/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hejianjun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="剑君 の Blog">
-    </span>
-
     
-      <header class="post-header">
-
+      <header class="article-header">
         
-        
-          <h1 class="post-title" itemprop="name headline">AOP之基于AspectJ注解</h1>
-        
+  
+    <h1 class="article-title" itemprop="name">
+      AOP之基于AspectJ注解
+    </h1>
+  
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-25T01:00:00+08:00">
-                2018-05-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/" itemprop="url" rel="index">
-                    <span itemprop="name">technology</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/AOP/" itemprop="url" rel="index">
-                    <span itemprop="name">AOP</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/AOP/AspectJ/" itemprop="url" rel="index">
-                    <span itemprop="name">AspectJ</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
       </header>
     
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
-        <h1 id="一、基本使用方法"><a href="#一、基本使用方法" class="headerlink" title="一、基本使用方法"></a>一、基本使用方法</h1><h3 id="1-1、启用对-AspectJ的支持"><a href="#1-1、启用对-AspectJ的支持" class="headerlink" title="1.1、启用对@AspectJ的支持"></a>1.1、启用对@AspectJ的支持</h3><p>Spring默认不支持@AspectJ风格的切面声明，为了支持需要使用如下配置：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 启动@AspectJ支持 --&gt;</span>  </span><br><span class="line"><span class="comment">&lt;!-- proxy-target-class默认"false",更改为"ture"使用CGLib动态代理 --&gt;</span>    </span><br><span class="line"><span class="tag">&lt;<span class="name">aop:aspectj-autoproxy</span> <span class="attr">proxy-target-class</span>=<span class="string">"false"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>这样Spring就能发现@AspectJ风格的切面并且将切面应用到目标对象。<br><a id="more"></a></p>
+        <h1 id="一、基本使用方法"><a href="#一、基本使用方法" class="headerlink" title="一、基本使用方法"></a>一、基本使用方法</h1><h3 id="1-1、启用对-AspectJ的支持"><a href="#1-1、启用对-AspectJ的支持" class="headerlink" title="1.1、启用对@AspectJ的支持"></a>1.1、启用对@AspectJ的支持</h3><p>Spring默认不支持@AspectJ风格的切面声明，为了支持需要使用如下配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 启动@AspectJ支持 --&gt;</span>  </span><br><span class="line"><span class="comment">&lt;!-- proxy-target-class默认&quot;false&quot;,更改为&quot;ture&quot;使用CGLib动态代理 --&gt;</span>    </span><br><span class="line"><span class="tag">&lt;<span class="name">aop:aspectj-autoproxy</span> <span class="attr">proxy-target-class</span>=<span class="string">&quot;false&quot;</span>/&gt;</span>  </span><br></pre></td></tr></table></figure>
+<p>这样Spring就能发现@AspectJ风格的切面并且将切面应用到目标对象。</p>
+<a id="more"></a>
 <h3 id="1-2、-声明切面"><a href="#1-2、-声明切面" class="headerlink" title="1.2、 声明切面"></a>1.2、 声明切面</h3><p>@AspectJ风格的声明切面非常简单，使用@Aspect注解进行声明：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AdivceMethod</span> </span>&#123;</span><br></pre></td></tr></table></figure>
+
 <p>然后将该切面在配置文件中声明为Bean后，Spring就能自动识别并进行AOP方面的配置：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"aspect"</span> <span class="attr">class</span>=<span class="string">"……AdivceMethod"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;aspect&quot;</span> <span class="attr">class</span>=<span class="string">&quot;……AdivceMethod&quot;</span>/&gt;</span>  </span><br></pre></td></tr></table></figure>
 <p>或者直接使用元注解的方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span>  </span><br><span class="line"><span class="meta">@Aspect</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AdivceMethod</span> </span>&#123;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span>  </span><br><span class="line"><span class="meta">@Aspect</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AdivceMethod</span> </span>&#123;  </span><br></pre></td></tr></table></figure>
+
 <h3 id="1-3、-声明切入点"><a href="#1-3、-声明切入点" class="headerlink" title="1.3、 声明切入点"></a>1.3、 声明切入点</h3><p>@AspectJ风格的命名切入点使用org.aspectj.lang.annotation包下的@Pointcut+方法（方法必须是返回void类型）实现。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Pointcut</span>(value=<span class="string">"切入点表达式"</span>, argNames = <span class="string">"参数名列表"</span>)  </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pointcutName</span><span class="params">(……)</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Pointcut(value=&quot;切入点表达式&quot;, argNames = &quot;参数名列表&quot;)</span>  </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pointcutName</span><span class="params">(……)</span> </span>&#123;&#125;   </span><br></pre></td></tr></table></figure>
 <ul>
 <li><p><strong>value：</strong>指定切入点表达式；</p>
 </li>
@@ -392,11 +116,11 @@
 <li><p><strong>pointcutName：</strong>切入点名字，可以使用该名字进行引用该切入点表达式。</p>
 </li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Pointcut</span>(value=<span class="string">"execution(* cn.javass..*.sayAdvisorBefore(..)) &amp;&amp; args(param)"</span>, argNames = <span class="string">"param"</span>)    </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beforePointcut</span><span class="params">(String param)</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Pointcut(value=&quot;execution(* cn.javass..*.sayAdvisorBefore(..)) &amp;&amp; args(param)&quot;, argNames = &quot;param&quot;)</span>    </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beforePointcut</span><span class="params">(String param)</span> </span>&#123;&#125;    </span><br></pre></td></tr></table></figure>
 <p>定义了一个切入点，名字为<code>beforePointcut</code>，该切入点将匹配目标方法的第一个参数类型为通知方法实现中参数名为<code>param</code>的参数类型。</p>
 <h1 id="二、声明通知"><a href="#二、声明通知" class="headerlink" title="二、声明通知"></a>二、声明通知</h1><p>@AspectJ风格的声明通知也支持5种通知类型：</p>
 <p><strong>2.1、前置通知：</strong>使用org.aspectj.lang.annotation 包下的@Before注解声明；</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Before</span>(value = <span class="string">"切入点表达式或命名切入点"</span>, argNames = <span class="string">"参数列表参数名"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Before(value = &quot;切入点表达式或命名切入点&quot;, argNames = &quot;参数列表参数名&quot;)</span>    </span><br></pre></td></tr></table></figure>
 <ul>
 <li><p><strong>value：</strong>指定切入点表达式或命名切入点；</p>
 </li>
@@ -409,7 +133,7 @@
 <p>3、定义切入点：</p>
 <p>4、定义通知：</p>
 <p><strong>2.2、后置返回通知：</strong>使用org.aspectj.lang.annotation 包下的@AfterReturning注解声明；</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AfterReturning</span>(    </span><br><span class="line">value=<span class="string">"切入点表达式或命名切入点"</span>,    </span><br><span class="line">pointcut=<span class="string">"切入点表达式或命名切入点"</span>,    </span><br><span class="line">argNames=<span class="string">"参数列表参数名"</span>,    </span><br><span class="line">returning=<span class="string">"返回值对应参数名"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AfterReturning(    </span></span><br><span class="line"><span class="meta">value=&quot;切入点表达式或命名切入点&quot;,    </span></span><br><span class="line"><span class="meta">pointcut=&quot;切入点表达式或命名切入点&quot;,    </span></span><br><span class="line"><span class="meta">argNames=&quot;参数列表参数名&quot;,    </span></span><br><span class="line"><span class="meta">returning=&quot;返回值对应参数名&quot;)</span>    </span><br></pre></td></tr></table></figure>
 <ul>
 <li><p><strong>value：</strong>指定切入点表达式或命名切入点；</p>
 </li>
@@ -421,7 +145,7 @@
 </li>
 </ul>
 <p><strong>2.3、后置异常通知：</strong>使用org.aspectj.lang.annotation 包下的@AfterThrowing注解声明；</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AfterThrowing</span> (    </span><br><span class="line">value=<span class="string">"切入点表达式或命名切入点"</span>,    </span><br><span class="line">pointcut=<span class="string">"切入点表达式或命名切入点"</span>,    </span><br><span class="line">argNames=<span class="string">"参数列表参数名"</span>,    </span><br><span class="line">throwing=<span class="string">"异常对应参数名"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AfterThrowing</span> (    </span><br><span class="line">value=<span class="string">&quot;切入点表达式或命名切入点&quot;</span>,    </span><br><span class="line">pointcut=<span class="string">&quot;切入点表达式或命名切入点&quot;</span>,    </span><br><span class="line">argNames=<span class="string">&quot;参数列表参数名&quot;</span>,    </span><br><span class="line">throwing=<span class="string">&quot;异常对应参数名&quot;</span>)    </span><br></pre></td></tr></table></figure>
 <ul>
 <li><p><strong>value：</strong>指定切入点表达式或命名切入点；</p>
 </li>
@@ -434,7 +158,10 @@
 </ul>
 <p>其中测试代码与Schema方式几乎一样，在此就不演示了，如果需要请参考AopTest.java中的testAnnotationAfterThrowingAdvice测试方法。</p>
 <p><strong>2.4、后置最终通知：</strong>使用org.aspectj.lang.annotation 包下的@After注解声明；</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@After</span> (    </span><br><span class="line">value=<span class="string">"切入点表达式或命名切入点"</span>,    </span><br><span class="line">argNames=<span class="string">"参数列表参数名"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@After</span> (    </span><br><span class="line">value=<span class="string">&quot;切入点表达式或命名切入点&quot;</span>,    </span><br><span class="line">argNames=<span class="string">&quot;参数列表参数名&quot;</span>)    </span><br></pre></td></tr></table></figure>
+
+
+
 <ul>
 <li><p><strong>value：</strong>指定切入点表达式或命名切入点；</p>
 </li>
@@ -442,7 +169,9 @@
 </li>
 </ul>
 <p><strong>2.5、环绕通知：</strong>使用org.aspectj.lang.annotation 包下的@Around注解声明；</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Around</span> (    </span><br><span class="line">value=<span class="string">"切入点表达式或命名切入点"</span>,    </span><br><span class="line">argNames=<span class="string">"参数列表参数名"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Around</span> (    </span><br><span class="line">value=<span class="string">&quot;切入点表达式或命名切入点&quot;</span>,    </span><br><span class="line">argNames=<span class="string">&quot;参数列表参数名&quot;</span>)    </span><br></pre></td></tr></table></figure>
+
+
 <ul>
 <li><p><strong>value：</strong>指定切入点表达式或命名切入点；</p>
 </li>
@@ -450,7 +179,7 @@
 </li>
 </ul>
 <h3 id="2-6-引入"><a href="#2-6-引入" class="headerlink" title="2.6  引入"></a>2.6  引入</h3><p>@AspectJ风格的引入声明在切面中使用org.aspectj.lang.annotation包下的@DeclareParents声明：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@DeclareParents</span>(    </span><br><span class="line">value=<span class="string">" AspectJ语法类型表达式"</span>,    </span><br><span class="line">defaultImpl=引入接口的默认实现类)    </span><br><span class="line"><span class="keyword">private</span> Interface <span class="class"><span class="keyword">interface</span></span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@DeclareParents(    </span></span><br><span class="line"><span class="meta">value=&quot; AspectJ语法类型表达式&quot;,    </span></span><br><span class="line"><span class="meta">defaultImpl=引入接口的默认实现类)</span>    </span><br><span class="line"><span class="keyword">private</span> Interface <span class="class"><span class="keyword">interface</span></span>;    </span><br></pre></td></tr></table></figure>
 <ul>
 <li><p><strong>value：</strong>匹配需要引入接口的目标对象的AspectJ语法类型表达式；与Schema方式中的types-matching属性同义；</p>
 </li>
@@ -462,382 +191,151 @@
 
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/AOP/" rel="tag"># AOP</a>
-          
-            <a href="/tags/aspectJ/" rel="tag"># aspectJ</a>
-          
-        </div>
-      
-
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.com/2018/05/25/aspectJ-AOP/" data-id="ckde6snr20010dcpmgnkydwo5" class="article-share-link">Share</a>
       
       
-      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AOP/" rel="tag">AOP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aspectJ/" rel="tag">aspectJ</a></li></ul>
 
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/05/25/spring-AOP-config/" rel="next" title="Spring AOP的配置">
-                <i class="fa fa-chevron-left"></i> Spring AOP的配置
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/14/cache-note/" rel="prev" title="缓存笔记">
-                缓存笔记 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
     </footer>
   </div>
   
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-    <div class="comments" id="comments">
-      <div id="SOHUCS"></div>
-    </div>
-
-  
-
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
     
-    <div class="sidebar-inner">
+<nav id="article-nav">
+  
+    <a href="/2018/06/14/cache-note/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          缓存笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/25/spring-AOP-config/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Spring AOP的配置</div>
+    </a>
+  
+</nav>
 
-      
+  
+</article>
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/">technology</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/">AOP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/AspectJ/">AspectJ</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/spring/">spring</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/Apache-Commons/">Apache Commons</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/CAS/">CAS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/DBMS/">DBMS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/JPDA/">JPDA</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/NAT/">NAT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/OCJP/">OCJP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/SQL/">SQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/cache/">cache</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/cache/spring/">spring</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/dubbo/">dubbo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/kettel/">kettel</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/sql/">sql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/webflux/">webflux</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%9A%E5%8A%A1%E7%9F%A5%E8%AF%86/">业务知识</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%9A%E5%8A%A1%E7%9F%A5%E8%AF%86/%E6%B3%95%E9%99%A2/">法院</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/" rel="tag">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Commons/" rel="tag">Apache Commons</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DBMS/" rel="tag">DBMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPDA/" rel="tag">JPDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OCJP/" rel="tag">OCJP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSO/" rel="tag">SSO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aspectJ/" rel="tag">aspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cache/" rel="tag">cache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/distributed/" rel="tag">distributed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dubbo/" rel="tag">dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kettle/" rel="tag">kettle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/" rel="tag">sql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webflux/" rel="tag">webflux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">内网穿透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%95%E9%99%A2%E4%B8%9A%E5%8A%A1/" rel="tag">法院业务</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AOP/" style="font-size: 16.67px;">AOP</a> <a href="/tags/Apache-Commons/" style="font-size: 10px;">Apache Commons</a> <a href="/tags/DBMS/" style="font-size: 10px;">DBMS</a> <a href="/tags/JPDA/" style="font-size: 13.33px;">JPDA</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/OCJP/" style="font-size: 16.67px;">OCJP</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/aspectJ/" style="font-size: 10px;">aspectJ</a> <a href="/tags/cache/" style="font-size: 16.67px;">cache</a> <a href="/tags/distributed/" style="font-size: 10px;">distributed</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/kettle/" style="font-size: 16.67px;">kettle</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/webflux/" style="font-size: 10px;">webflux</a> <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 10px;">内网穿透</a> <a href="/tags/%E6%B3%95%E9%99%A2%E4%B8%9A%E5%8A%A1/" style="font-size: 20px;">法院业务</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/08/03/log/">日志框架</a>
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
+        
+          <li>
+            <a href="/2020/07/30/maven/">MAVEN</a>
           </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">Hejianjun</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">28</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">24</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、基本使用方法"><span class="nav-number">1.</span> <span class="nav-text">一、基本使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1、启用对-AspectJ的支持"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.1、启用对@AspectJ的支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2、-声明切面"><span class="nav-number">1.0.2.</span> <span class="nav-text">1.2、 声明切面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3、-声明切入点"><span class="nav-number">1.0.3.</span> <span class="nav-text">1.3、 声明切入点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、声明通知"><span class="nav-number">2.</span> <span class="nav-text">二、声明通知</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-引入"><span class="nav-number">2.0.1.</span> <span class="nav-text">2.6  引入</span></a></li></ol></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
+        
+          <li>
+            <a href="/2020/04/25/graphql/">Graphql</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/27/frp/">frp</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/06/%E5%88%91%E4%BA%8B%E6%A1%88%E4%BB%B6/">刑事案件</a>
+          </li>
+        
+      </ul>
     </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Hejianjun</span>
-
-  
-</div>
-
-
-
-
-
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
   </div>
 
   
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Hejianjun<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
   
-
-
-
-
-
-
-
-
-
-
-
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
 
   
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
 
-	
+<script src="/js/script.js"></script>
 
 
 
 
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
+  </div>
 </body>
 </html>

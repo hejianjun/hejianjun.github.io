@@ -1,1819 +1,667 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html>
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <meta charset="utf-8">
+  
 
   
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Hexo, NexT, gaojunru, hejianjun" />
-
-
-
-
-
-
-
-
-
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="剑君 の Blog">
-<meta property="og:url" content="https://hejianjun.github.io/page/3/index.html">
-<meta property="og:site_name" content="剑君 の Blog">
-<meta property="og:locale" content="zh-Hans">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="剑君 の Blog">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Mist',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="https://hejianjun.github.io/page/3/"/>
-
-
-
-
-
   <title>剑君 の Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="剑君 の Blog">
+<meta property="og:url" content="https://hejianjun.com/page/3/index.html">
+<meta property="og:site_name" content="剑君 の Blog">
+<meta property="og:locale">
+<meta property="article:author" content="Hejianjun">
+<meta name="twitter:card" content="summary">
   
-
-
-
-
-
-
-
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
+    <link rel="alternate" href="/atom.xml" title="剑君 の Blog" type="application/atom+xml">
   
   
-    
+    <link rel="icon" href="/favicon.png">
   
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-  <div class="container sidebar-position-left 
-  page-home">
-    <div class="headband"></div>
+<meta name="generator" content="Hexo 5.0.0"></head>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">剑君 の Blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">剑君 の Blog</a>
+      </h1>
+      
     </div>
-      
-        <p class="site-subtitle"></p>
-      
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://hejianjun.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-distributed-cache" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/14/distributed-cache/" class="article-date">
+  <time datetime="2018-06-13T17:00:00.000Z" itemprop="datePublished">2018-06-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/cache/">cache</a>
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
   </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-sitemap">
-          <a href="/sitemap.xml" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
-            
-            站点地图
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-  <section id="posts" class="posts-expand">
+  <div class="article-inner">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hejianjun.github.io/2018/05/25/aspectJ-AOP/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hejianjun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="剑君 の Blog">
-    </span>
-
     
-      <header class="post-header">
-
+      <header class="article-header">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/25/aspectJ-AOP/" itemprop="url">AOP之基于AspectJ注解</a></h1>
-        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/14/distributed-cache/">分布式缓存</a>
+    </h1>
+  
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-25T01:00:00+08:00">
-                2018-05-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/" itemprop="url" rel="index">
-                    <span itemprop="name">technology</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/AOP/" itemprop="url" rel="index">
-                    <span itemprop="name">AOP</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/AOP/AspectJ/" itemprop="url" rel="index">
-                    <span itemprop="name">AspectJ</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
       </header>
     
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
+        <h2 id="分布式缓存"><a href="#分布式缓存" class="headerlink" title="分布式缓存"></a>分布式缓存</h2><p>缓存大致可以分为两类，一种是应用内缓存，比如Map(简单的数据结构)，以及EH Cache(Java第三方库)，另一种就是缓存组件，比如Memached，Redis。</p>
         
-          <h1 id="一、基本使用方法"><a href="#一、基本使用方法" class="headerlink" title="一、基本使用方法"></a>一、基本使用方法</h1><h3 id="1-1、启用对-AspectJ的支持"><a href="#1-1、启用对-AspectJ的支持" class="headerlink" title="1.1、启用对@AspectJ的支持"></a>1.1、启用对@AspectJ的支持</h3><p>Spring默认不支持@AspectJ风格的切面声明，为了支持需要使用如下配置：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 启动@AspectJ支持 --&gt;</span>  </span><br><span class="line"><span class="comment">&lt;!-- proxy-target-class默认"false",更改为"ture"使用CGLib动态代理 --&gt;</span>    </span><br><span class="line"><span class="tag">&lt;<span class="name">aop:aspectj-autoproxy</span> <span class="attr">proxy-target-class</span>=<span class="string">"false"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>这样Spring就能发现@AspectJ风格的切面并且将切面应用到目标对象。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/25/aspectJ-AOP/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          <p class="article-more-link">
+            <a href="/2018/06/14/distributed-cache/#more">Read More</a>
+          </p>
         
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.com/2018/06/14/distributed-cache/" data-id="ckde6snr40014dcpm16bg69ov" class="article-share-link">Share</a>
       
       
-        <div class="post-eof"></div>
-      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cache/" rel="tag">cache</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/distributed/" rel="tag">distributed</a></li></ul>
+
     </footer>
   </div>
   
-  
-  
-  </article>
+</article>
 
 
+  
+    <article id="post-cache-note" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/14/cache-note/" class="article-date">
+  <time datetime="2018-06-13T16:00:00.000Z" itemprop="datePublished">2018-06-14</time>
+</a>
     
-      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/cache/">cache</a>
+  </div>
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hejianjun.github.io/2018/05/25/spring-AOP-config/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hejianjun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="剑君 の Blog">
-    </span>
-
+  </div>
+  <div class="article-inner">
     
-      <header class="post-header">
-
+    
+      <header class="article-header">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/25/spring-AOP-config/" itemprop="url">Spring AOP的配置</a></h1>
-        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/14/cache-note/">缓存笔记</a>
+    </h1>
+  
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-25T00:00:00+08:00">
-                2018-05-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/" itemprop="url" rel="index">
-                    <span itemprop="name">technology</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/AOP/" itemprop="url" rel="index">
-                    <span itemprop="name">AOP</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/AOP/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
       </header>
     
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
+        <h1 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h1><h2 id="维基百科"><a href="#维基百科" class="headerlink" title="维基百科"></a>维基百科</h2><p>高速缓存（英语：cache，/kæʃ/ kash）简称缓存，原始意义是指访问速度比一般随机存取存储器（RAM）快的一种RAM，通常它不像系统主存那样使用DRAM技术，而使用昂贵但较快速的SRAM技术。</p>
         
-          <h1 id="基于XML配置的Spring-AOP"><a href="#基于XML配置的Spring-AOP" class="headerlink" title="基于XML配置的Spring AOP"></a>基于XML配置的Spring AOP</h1><p>基于XML配置的Spring AOP需要引入AOP配置的Schema，然后我们就可以使用AOP Schema下定义的config、aspect、pointcut等标签进行Spring AOP配置了。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:p</span>=<span class="string">"http://www.springframework.org/schema/p"</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:aop</span>=<span class="string">"http://www.springframework.org/schema/aop"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">     http://www.springframework.org/schema/beans/spring-beans-4.1.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">     http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="tag"><span class="string">     http://www.springframework.org/schema/context/spring-context-4.1.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/25/spring-AOP-config/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          <p class="article-more-link">
+            <a href="/2018/06/14/cache-note/#more">Read More</a>
+          </p>
         
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.com/2018/06/14/cache-note/" data-id="ckde6snuj005qdcpmaack287f" class="article-share-link">Share</a>
       
       
-        <div class="post-eof"></div>
-      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cache/" rel="tag">cache</a></li></ul>
+
     </footer>
   </div>
   
-  
-  
-  </article>
+</article>
 
 
+  
+    <article id="post-aspectJ-AOP" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/25/aspectJ-AOP/" class="article-date">
+  <time datetime="2018-05-24T17:00:00.000Z" itemprop="datePublished">2018-05-25</time>
+</a>
     
-      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/AOP/">AOP</a>►<a class="article-category-link" href="/categories/technology/AOP/AspectJ/">AspectJ</a>
+  </div>
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hejianjun.github.io/2018/05/24/AOP-note/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hejianjun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="剑君 の Blog">
-    </span>
-
+  </div>
+  <div class="article-inner">
     
-      <header class="post-header">
-
+    
+      <header class="article-header">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/24/AOP-note/" itemprop="url">AOP笔记</a></h1>
-        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/25/aspectJ-AOP/">AOP之基于AspectJ注解</a>
+    </h1>
+  
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-24T00:00:00+08:00">
-                2018-05-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/" itemprop="url" rel="index">
-                    <span itemprop="name">technology</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/AOP/" itemprop="url" rel="index">
-                    <span itemprop="name">AOP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
       </header>
     
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
+        <h1 id="一、基本使用方法"><a href="#一、基本使用方法" class="headerlink" title="一、基本使用方法"></a>一、基本使用方法</h1><h3 id="1-1、启用对-AspectJ的支持"><a href="#1-1、启用对-AspectJ的支持" class="headerlink" title="1.1、启用对@AspectJ的支持"></a>1.1、启用对@AspectJ的支持</h3><p>Spring默认不支持@AspectJ风格的切面声明，为了支持需要使用如下配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 启动@AspectJ支持 --&gt;</span>  </span><br><span class="line"><span class="comment">&lt;!-- proxy-target-class默认&quot;false&quot;,更改为&quot;ture&quot;使用CGLib动态代理 --&gt;</span>    </span><br><span class="line"><span class="tag">&lt;<span class="name">aop:aspectj-autoproxy</span> <span class="attr">proxy-target-class</span>=<span class="string">&quot;false&quot;</span>/&gt;</span>  </span><br></pre></td></tr></table></figure>
+<p>这样Spring就能发现@AspectJ风格的切面并且将切面应用到目标对象。</p>
         
-          <h1 id="AOP是什么？"><a href="#AOP是什么？" class="headerlink" title="AOP是什么？"></a>AOP是什么？</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>Aspect Oriented Programing，面向切面编程。 是对OOP的补充。利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。 这是其中的一种方式，在运行时动态添加。还有另外一种是在编译代码的时候，将代码切入到指定的方法或者位置上去，这是静态添加的方式。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/24/AOP-note/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          <p class="article-more-link">
+            <a href="/2018/05/25/aspectJ-AOP/#more">Read More</a>
+          </p>
         
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.com/2018/05/25/aspectJ-AOP/" data-id="ckde6snr20010dcpmgnkydwo5" class="article-share-link">Share</a>
       
       
-        <div class="post-eof"></div>
-      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AOP/" rel="tag">AOP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aspectJ/" rel="tag">aspectJ</a></li></ul>
+
     </footer>
   </div>
   
-  
-  
-  </article>
+</article>
 
 
+  
+    <article id="post-spring-AOP-config" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/25/spring-AOP-config/" class="article-date">
+  <time datetime="2018-05-24T16:00:00.000Z" itemprop="datePublished">2018-05-25</time>
+</a>
     
-      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/AOP/">AOP</a>►<a class="article-category-link" href="/categories/technology/AOP/spring/">spring</a>
+  </div>
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hejianjun.github.io/2018/03/26/docker-note/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hejianjun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="剑君 の Blog">
-    </span>
-
+  </div>
+  <div class="article-inner">
     
-      <header class="post-header">
-
+    
+      <header class="article-header">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/26/docker-note/" itemprop="url">docker笔记</a></h1>
-        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/25/spring-AOP-config/">Spring AOP的配置</a>
+    </h1>
+  
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-26T22:48:43+08:00">
-                2018-03-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/" itemprop="url" rel="index">
-                    <span itemprop="name">technology</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/docker/" itemprop="url" rel="index">
-                    <span itemprop="name">docker</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
       </header>
     
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
+        <h1 id="基于XML配置的Spring-AOP"><a href="#基于XML配置的Spring-AOP" class="headerlink" title="基于XML配置的Spring AOP"></a>基于XML配置的Spring AOP</h1><p>基于XML配置的Spring AOP需要引入AOP配置的Schema，然后我们就可以使用AOP Schema下定义的config、aspect、pointcut等标签进行Spring AOP配置了。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:p</span>=<span class="string">&quot;http://www.springframework.org/schema/p&quot;</span> <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:context</span>=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:aop</span>=<span class="string">&quot;http://www.springframework.org/schema/aop&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">     http://www.springframework.org/schema/beans/spring-beans-4.1.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">     http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="tag"><span class="string">     http://www.springframework.org/schema/context/spring-context-4.1.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
         
-          <p>最近在阿里搭了个blog用到了docker打包记录一下</p>
-<p>docker有点像虚拟机不过比虚拟机性能要好一些<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/26/docker-note/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          <p class="article-more-link">
+            <a href="/2018/05/25/spring-AOP-config/#more">Read More</a>
+          </p>
         
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.com/2018/05/25/spring-AOP-config/" data-id="ckde6sns4002cdcpmbpg44450" class="article-share-link">Share</a>
       
       
-        <div class="post-eof"></div>
-      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AOP/" rel="tag">AOP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/" rel="tag">spring</a></li></ul>
+
     </footer>
   </div>
   
-  
-  
-  </article>
+</article>
 
 
+  
+    <article id="post-AOP-note" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/24/AOP-note/" class="article-date">
+  <time datetime="2018-05-23T16:00:00.000Z" itemprop="datePublished">2018-05-24</time>
+</a>
     
-      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/AOP/">AOP</a>
+  </div>
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hejianjun.github.io/2018/03/13/dubbo-note/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hejianjun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="剑君 の Blog">
-    </span>
-
+  </div>
+  <div class="article-inner">
     
-      <header class="post-header">
-
+    
+      <header class="article-header">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/13/dubbo-note/" itemprop="url">dubbo笔记</a></h1>
-        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/24/AOP-note/">AOP笔记</a>
+    </h1>
+  
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-13T20:20:32+08:00">
-                2018-03-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/" itemprop="url" rel="index">
-                    <span itemprop="name">technology</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/dubbo/" itemprop="url" rel="index">
-                    <span itemprop="name">dubbo</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
       </header>
     
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
+        <h1 id="AOP是什么？"><a href="#AOP是什么？" class="headerlink" title="AOP是什么？"></a>AOP是什么？</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>Aspect Oriented Programing，面向切面编程。 是对OOP的补充。利用AOP可以对业务逻辑的各个部分进行隔离，从而使得业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高了开发的效率。 这是其中的一种方式，在运行时动态添加。还有另外一种是在编译代码的时候，将代码切入到指定的方法或者位置上去，这是静态添加的方式。</p>
         
-          <p>公司用到了dubbo拆分服务，开始补习dubbo的知识</p>
+          <p class="article-more-link">
+            <a href="/2018/05/24/AOP-note/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.com/2018/05/24/AOP-note/" data-id="ckde6snqj000ldcpm7drbgzso" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AOP/" rel="tag">AOP</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-docker-note" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/26/docker-note/" class="article-date">
+  <time datetime="2018-03-26T14:48:43.000Z" itemprop="datePublished">2018-03-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/docker/">docker</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/26/docker-note/">docker笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在阿里搭了个blog用到了docker打包记录一下</p>
+<p>docker有点像虚拟机不过比虚拟机性能要好一些</p>
+        
+          <p class="article-more-link">
+            <a href="/2018/03/26/docker-note/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.com/2018/03/26/docker-note/" data-id="ckde6snr70017dcpmcxn18h4m" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-dubbo-note" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/13/dubbo-note/" class="article-date">
+  <time datetime="2018-03-13T12:20:32.000Z" itemprop="datePublished">2018-03-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/dubbo/">dubbo</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/13/dubbo-note/">dubbo笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>公司用到了dubbo拆分服务，开始补习dubbo的知识</p>
 <p>Dubbo是Alibaba开源的分布式服务框架，它最大的特点是按照分层的方式来架构，使用这种方式可以使各个层之间解耦合（或者最大限度地松耦合）。从服务模型的角度来看，Dubbo采用的是一种非常简单的模型，要么是提供方提供服务，要么是消费方消费服务，所以基于这一点可以抽象出服务提供方（Provider）和服务消费方（Consumer）两个角色。</p>
-<p>服务化首先需要把服务抽象为接口，然后使用dubbo把接口暴露出来<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/13/dubbo-note/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+<p>服务化首先需要把服务抽象为接口，然后使用dubbo把接口暴露出来</p>
+        
+          <p class="article-more-link">
+            <a href="/2018/03/13/dubbo-note/#more">Read More</a>
+          </p>
         
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.com/2018/03/13/dubbo-note/" data-id="ckde6snr9001adcpm909sc0cq" class="article-share-link">Share</a>
       
       
-        <div class="post-eof"></div>
-      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dubbo/" rel="tag">dubbo</a></li></ul>
+
     </footer>
   </div>
   
-  
-  
-  </article>
+</article>
 
 
+  
+    <article id="post-kettel-advanced" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/05/kettel-advanced/" class="article-date">
+  <time datetime="2018-03-05T13:35:55.000Z" itemprop="datePublished">2018-03-05</time>
+</a>
     
-      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/kettel/">kettel</a>
+  </div>
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hejianjun.github.io/2018/03/05/kettel-advanced/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hejianjun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="剑君 の Blog">
-    </span>
-
+  </div>
+  <div class="article-inner">
     
-      <header class="post-header">
-
+    
+      <header class="article-header">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/05/kettel-advanced/" itemprop="url">Kettel进阶</a></h1>
-        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/05/kettel-advanced/">Kettel进阶</a>
+    </h1>
+  
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-05T21:35:55+08:00">
-                2018-03-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/" itemprop="url" rel="index">
-                    <span itemprop="name">technology</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/kettel/" itemprop="url" rel="index">
-                    <span itemprop="name">kettel</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
       </header>
     
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
+        <h2 id="日志篇"><a href="#日志篇" class="headerlink" title="日志篇"></a>日志篇</h2><h3 id="日志描述"><a href="#日志描述" class="headerlink" title="日志描述"></a>日志描述</h3><p>在你每一次运行一个任务或者转换时，日志视图会自动打开。它表示在转换或者任务运行的时候，发生了什么。</p>
         
-          <h2 id="日志篇"><a href="#日志篇" class="headerlink" title="日志篇"></a>日志篇</h2><h3 id="日志描述"><a href="#日志描述" class="headerlink" title="日志描述"></a>日志描述</h3><p>在你每一次运行一个任务或者转换时，日志视图会自动打开。它表示在转换或者任务运行的时候，发生了什么。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/05/kettel-advanced/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          <p class="article-more-link">
+            <a href="/2018/03/05/kettel-advanced/#more">Read More</a>
+          </p>
         
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.com/2018/03/05/kettel-advanced/" data-id="ckde6snrk001mdcpm49j19i28" class="article-share-link">Share</a>
       
       
-        <div class="post-eof"></div>
-      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kettle/" rel="tag">kettle</a></li></ul>
+
     </footer>
   </div>
   
-  
-  
-  </article>
+</article>
 
 
+  
+    <article id="post-kettle-getting-started" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/04/kettle-getting-started/" class="article-date">
+  <time datetime="2018-03-04T03:56:54.000Z" itemprop="datePublished">2018-03-04</time>
+</a>
     
-      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/kettel/">kettel</a>
+  </div>
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hejianjun.github.io/2018/03/04/kettle-getting-started/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hejianjun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="剑君 の Blog">
-    </span>
-
+  </div>
+  <div class="article-inner">
     
-      <header class="post-header">
-
+    
+      <header class="article-header">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/04/kettle-getting-started/" itemprop="url">Kettle入门</a></h1>
-        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/04/kettle-getting-started/">Kettle入门</a>
+    </h1>
+  
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-04T11:56:54+08:00">
-                2018-03-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/" itemprop="url" rel="index">
-                    <span itemprop="name">technology</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/kettel/" itemprop="url" rel="index">
-                    <span itemprop="name">kettel</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
       </header>
     
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
+        <h2 id="Spoon编辑篇"><a href="#Spoon编辑篇" class="headerlink" title="Spoon编辑篇"></a>Spoon编辑篇</h2><p>这篇主要说一下Spoon图形工具的使用，多图预警</p>
         
-          <h2 id="Spoon编辑篇"><a href="#Spoon编辑篇" class="headerlink" title="Spoon编辑篇"></a>Spoon编辑篇</h2><p>这篇主要说一下Spoon图形工具的使用，多图预警</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/04/kettle-getting-started/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          <p class="article-more-link">
+            <a href="/2018/03/04/kettle-getting-started/#more">Read More</a>
+          </p>
         
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.com/2018/03/04/kettle-getting-started/" data-id="ckde6snrm001pdcpmgomn90nc" class="article-share-link">Share</a>
       
       
-        <div class="post-eof"></div>
-      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kettle/" rel="tag">kettle</a></li></ul>
+
     </footer>
   </div>
   
-  
-  
-  </article>
+</article>
 
 
+  
+    <article id="post-kettle-note" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/03/kettle-note/" class="article-date">
+  <time datetime="2018-03-03T04:42:47.000Z" itemprop="datePublished">2018-03-03</time>
+</a>
     
-      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/kettel/">kettel</a>
+  </div>
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hejianjun.github.io/2018/03/03/kettle-note/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hejianjun">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="剑君 の Blog">
-    </span>
-
+  </div>
+  <div class="article-inner">
     
-      <header class="post-header">
-
+    
+      <header class="article-header">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/03/kettle-note/" itemprop="url">Kettle笔记</a></h1>
-        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/03/kettle-note/">Kettle笔记</a>
+    </h1>
+  
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-03T12:42:47+08:00">
-                2018-03-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/" itemprop="url" rel="index">
-                    <span itemprop="name">technology</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/technology/kettel/" itemprop="url" rel="index">
-                    <span itemprop="name">kettel</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
       </header>
     
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
-        
-          <p>​    菜爸叫我整理一下kettle的笔记说是要培训，我一个小菜比什么都不懂，只能临时抱下佛脚，百度一下。</p>
+        <p>​    菜爸叫我整理一下kettle的笔记说是要培训，我一个小菜比什么都不懂，只能临时抱下佛脚，百度一下。</p>
 <h2 id="什么是Kettle"><a href="#什么是Kettle" class="headerlink" title="什么是Kettle"></a>什么是Kettle</h2><p>​    Kettle是一款国外开源的ETL工具，纯java编写，可以在Window、Linux、Unix上运行，数据抽取高效稳定。这个是百度百科的原话，用我们的话说就是数据迁移的工具。</p>
 <p>​    Kettle中有两种脚本文件，transformation和job，transformation完成针对数据的基础转换，job则完成整个工作流的控制。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/03/kettle-note/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+        
+          <p class="article-more-link">
+            <a href="/2018/03/03/kettle-note/#more">Read More</a>
+          </p>
         
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.com/2018/03/03/kettle-note/" data-id="ckde6snrn001tdcpm6qizaofo" class="article-share-link">Share</a>
       
       
-        <div class="post-eof"></div>
-      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kettle/" rel="tag">kettle</a></li></ul>
+
     </footer>
   </div>
   
-  
-  
-  </article>
+</article>
 
 
+  
+
+
+  <nav id="page-nav">
     
-  </section>
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
   </nav>
 
-
-
-          </div>
-          
-
-
-          
-
-        </div>
+</section>
         
-          
+          <aside id="sidebar">
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/">technology</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/">AOP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/AspectJ/">AspectJ</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/spring/">spring</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/Apache-Commons/">Apache Commons</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/CAS/">CAS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/DBMS/">DBMS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/JPDA/">JPDA</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/NAT/">NAT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/OCJP/">OCJP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/SQL/">SQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/cache/">cache</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/cache/spring/">spring</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/dubbo/">dubbo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/kettel/">kettel</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/sql/">sql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/webflux/">webflux</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%9A%E5%8A%A1%E7%9F%A5%E8%AF%86/">业务知识</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%9A%E5%8A%A1%E7%9F%A5%E8%AF%86/%E6%B3%95%E9%99%A2/">法院</a></li></ul></li></ul>
     </div>
   </div>
 
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">Hejianjun</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">28</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">24</span>
-                  <span class="site-state-item-name">分类</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Hejianjun</span>
 
   
-</div>
-
-
-
-
-
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
     
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/" rel="tag">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Commons/" rel="tag">Apache Commons</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DBMS/" rel="tag">DBMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPDA/" rel="tag">JPDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OCJP/" rel="tag">OCJP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSO/" rel="tag">SSO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aspectJ/" rel="tag">aspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cache/" rel="tag">cache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/distributed/" rel="tag">distributed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dubbo/" rel="tag">dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kettle/" rel="tag">kettle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/" rel="tag">sql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webflux/" rel="tag">webflux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">内网穿透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%95%E9%99%A2%E4%B8%9A%E5%8A%A1/" rel="tag">法院业务</a></li></ul>
+    </div>
+  </div>
 
-    
 
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AOP/" style="font-size: 16.67px;">AOP</a> <a href="/tags/Apache-Commons/" style="font-size: 10px;">Apache Commons</a> <a href="/tags/DBMS/" style="font-size: 10px;">DBMS</a> <a href="/tags/JPDA/" style="font-size: 13.33px;">JPDA</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/OCJP/" style="font-size: 16.67px;">OCJP</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/aspectJ/" style="font-size: 10px;">aspectJ</a> <a href="/tags/cache/" style="font-size: 16.67px;">cache</a> <a href="/tags/distributed/" style="font-size: 10px;">distributed</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/kettle/" style="font-size: 16.67px;">kettle</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/webflux/" style="font-size: 10px;">webflux</a> <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 10px;">内网穿透</a> <a href="/tags/%E6%B3%95%E9%99%A2%E4%B8%9A%E5%8A%A1/" style="font-size: 20px;">法院业务</a>
+    </div>
   </div>
 
   
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
 
 
   
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/08/03/log/">日志框架</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/30/maven/">MAVEN</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/25/graphql/">Graphql</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/27/frp/">frp</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/06/%E5%88%91%E4%BA%8B%E6%A1%88%E4%BB%B6/">刑事案件</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
 
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Hejianjun<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
 
-
-
-
-
-
-
-
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
   
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
 
   
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
 
-	
+<script src="/js/script.js"></script>
 
 
 
 
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
+  </div>
 </body>
 </html>
