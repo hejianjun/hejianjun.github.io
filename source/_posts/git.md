@@ -12,7 +12,7 @@ typora-root-url: ..
 
 ## git基本概念
 
-![img](images/git原理)
+![git原理](images/git原理)
 
 ## git模型
 
@@ -20,61 +20,61 @@ typora-root-url: ..
 
 ## git基本命令
 
-![img](/images/git基本命令)
+![git基本命令](images/git基本命令)
 
 # merge
 
 ## fast-forward
 
-![img](images/fast-forward.gif)
+![fast-forward](images/fast-forward.gif)
 
 ## no-fast-forward
 
-![img](images/no-fast-forward.gif)
+![no-fast-forward](images/no-fast-forward.gif)
 
-## 合并冲突
+## 冲突
 
-![img](images/CONFLICT.git)
+![conflict](images/conflict.git)
 
 # 重置
 
 ## 软重置
 
-![img](images/soft-reset.gif)
+![soft-reset](images/soft-reset.gif)
 
 ## 硬重置
 
-![img](images/Hard-reset.gif)
+![hard-reset](images/hard-reset.gif)
 
 # 还原
 
 ## revert
 
-![img](images/revert.gif)
+![revert](images/revert.gif)
 
 # 拣选
 
 ## cherry-pick
 
-![img](images/cherry-pick.gif)
+![cherry-pick](images/cherry-pick.gif)
 
 # 取回
 
 ## fetch
 
-![img](images/fetch.gif)
+![fetch](images/fetch.gif)
 
 # 拉取
 
 ## pull
 
-![img](images/pull.gif)
+![pull](images/pull.gif)
 
 # Reflog
 
 ## reflog
-![img](images/reflog1.gif)
+![reflog1](images/reflog1.gif)
 
 ## reflog+reset
 
-![img](images/reflog2.gif)
+![reflog+reset](images/reflog2.gif)

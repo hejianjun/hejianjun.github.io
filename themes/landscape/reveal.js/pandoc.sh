@@ -1,1 +1,1 @@
-pandoc maven.md -s -t revealjs --slide-level=2 -o maven.html -V revealjs-url=. -V theme=serif
+pandoc git.md -s -t revealjs --slide-level=2 -o git.html -V revealjs-url=. -V theme=serif
