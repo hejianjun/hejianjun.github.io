@@ -12,15 +12,15 @@ typora-root-url: ..
 
 ## git基本概念
 
-![git原理](images/git原理)
+![git原理](images/git原理.png)
 
 ## git模型
 
-![git模型](images/git模型)
+![git模型](images/git模型.png)
 
 ## git基本命令
 
-![git基本命令](images/git基本命令)
+![git基本命令](images/git基本命令.png)
 
 # merge
 
