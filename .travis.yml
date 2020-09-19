@@ -16,3 +16,6 @@ deploy:
   on:
     branch: master
   local-dir: public
+  repo: hejianjun/hejianjun.github.io
+  email: hejianjun@hejianjun.com
+  name: hejianjun
