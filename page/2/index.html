@@ -64,6 +64,55 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-log4jdbc&amp;sqlfx" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/16/log4jdbc&sqlfx/" class="article-date">
+  <time datetime="2019-07-16T12:09:00.000Z" itemprop="datePublished">2019-07-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/sql/">sql</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/16/log4jdbc&sqlfx/">log4jdbc 和 sqlfx</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>log4jdbc是我们公司sqlfx的基础构件，下面我来介绍一下他们之间的联系和作用</p>
+<h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><p><code>net.sf.log4jdbc.DriverSpy</code>这个类实现了JDBC的<code>Driver</code>接口,代理了原来数据库的驱动<br>而实现了<code>SpyLogDelegator</code>接口的策略通过配置文件<code>log4jdbc.log4j2.properties</code>打印日志，下面简述一下jdbc4log的配置</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 原来数据库的实际驱动名</span><br><span class="line">log4jdbc.drivers&#x3D;net.sourceforge.jtds.jdbc.Driver</span><br><span class="line"># 将所有堆栈打出，这个会输出大量信息</span><br><span class="line">log4jdbc.dump.fulldebugstacktrace&#x3D;false</span><br><span class="line"># 显示实际调用类的包前缀，jdbc4log会打印堆栈中第一个符合这个正则的调用类</span><br><span class="line">log4jdbc.debug.stack.prefix&#x3D;^com\.thunisoft\.np\.fy.*</span><br><span class="line"># sql分割的最大行数</span><br><span class="line">log4jdbc.dump.sql.maxlinelength&#x3D;150</span><br><span class="line"># 调用的日志策略，如果要使用sqlfx3.0需要使用蔡海滨编写的类</span><br><span class="line">log4jdbc.spylogdelegator.name&#x3D;net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator</span><br><span class="line"># 执行时间超过这个级别的日志将被输出为warn级别</span><br><span class="line">log4jdbc.sqltiming.warn.threshold&#x3D;100</span><br><span class="line"># 执行时间超过这个级别的日志将被输出为error级别</span><br><span class="line">log4jdbc.sqltiming.error.threshold&#x3D;100</span><br></pre></td></tr></table></figure>
+
+<h2 id="SQLFX"><a href="#SQLFX" class="headerlink" title="SQLFX"></a>SQLFX</h2><p>SQLFX是我们公司为了DBA方便的分析项目中不规范的sql而编写的软件，主要由两部分组成client和server</p>
+<p>client的作用类似于ELK中的Filebeat，每天晚上定时（可在服务端配置）将log4jdbc日志压缩后发送到服务端</p>
+<p>server则定时解析client发送上来的log4jdbc日志生成报告并发邮箱给DBA</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.com/2019/07/16/log4jdbc&sqlfx/" data-id="ckdikypvj001jz4pmdbkgcwb9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql/" rel="tag">sql</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-io" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/01/01/io/" class="article-date">
@@ -268,6 +317,50 @@
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OCJP/" rel="tag">OCJP</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-CI" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/01/CI/" class="article-date">
+  <time datetime="2019-01-01T13:35:55.000Z" itemprop="datePublished">2019-01-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/CI/">CI</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/01/CI/">CI</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="CI-CD"><a href="#CI-CD" class="headerlink" title="CI/CD"></a>CI/CD</h1><h2 id="CI"><a href="#CI" class="headerlink" title="CI"></a>CI</h2><p><img src="images/CI.png" alt="CI"></p>
+<h2 id="CD"><a href="#CD" class="headerlink" title="CD"></a>CD</h2><p><img src="images/CD.png" alt="CD"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.com/2019/01/01/CI/" data-id="ckdk2eelt0000iopm5n0wbv62" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CI/" rel="tag">CI</a></li></ul>
 
     </footer>
   </div>
@@ -509,100 +602,6 @@
 
 
   
-    <article id="post-SQL" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/07/05/SQL/" class="article-date">
-  <time datetime="2018-07-05T04:42:47.000Z" itemprop="datePublished">2018-07-05</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/SQL/">SQL</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/05/SQL/">SQL</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="SQL基础学习"><a href="#SQL基础学习" class="headerlink" title="SQL基础学习"></a>SQL基础学习</h1><p>SQL 是用于访问和处理数据库的标准的计算机语言。</p>
-        
-          <p class="article-more-link">
-            <a href="/2018/07/05/SQL/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hejianjun.com/2018/07/05/SQL/" data-id="ckdikypuv000dz4pm8qn2hov5" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-spring-webflux" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/06/29/spring-webflux/" class="article-date">
-  <time datetime="2018-06-28T16:00:00.000Z" itemprop="datePublished">2018-06-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/webflux/">webflux</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/29/spring-webflux/">spring webflux</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="WebFlux"><a href="#WebFlux" class="headerlink" title="WebFlux"></a>WebFlux</h1><h2 id="WebFlux-简介"><a href="#WebFlux-简介" class="headerlink" title="WebFlux 简介"></a>WebFlux 简介</h2><p><img src="/images/spring-webflux.png" alt="WebFlux"></p>
-        
-          <p class="article-more-link">
-            <a href="/2018/06/29/spring-webflux/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://hejianjun.com/2018/06/29/spring-webflux/" data-id="ckdikypxe0062z4pm9gmqaf8g" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webflux/" rel="tag">webflux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -618,7 +617,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/">technology</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/">AOP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/AspectJ/">AspectJ</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/spring/">spring</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/Apache-Commons/">Apache Commons</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/CAS/">CAS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/DBMS/">DBMS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/JPDA/">JPDA</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/NAT/">NAT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/OCJP/">OCJP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/SQL/">SQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/cache/">cache</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/cache/spring/">spring</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/dubbo/">dubbo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/kettel/">kettel</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/sql/">sql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/webflux/">webflux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">版本控制</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%9A%E5%8A%A1%E7%9F%A5%E8%AF%86/">业务知识</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%9A%E5%8A%A1%E7%9F%A5%E8%AF%86/%E6%B3%95%E9%99%A2/">法院</a></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/">technology</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/">AOP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/AspectJ/">AspectJ</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/spring/">spring</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/Apache-Commons/">Apache Commons</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/CAS/">CAS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/CI/">CI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/DBMS/">DBMS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/JPDA/">JPDA</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/NAT/">NAT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/OCJP/">OCJP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/SQL/">SQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/cache/">cache</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/cache/spring/">spring</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/dubbo/">dubbo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/kettel/">kettel</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/sql/">sql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/webflux/">webflux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">版本控制</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%9A%E5%8A%A1%E7%9F%A5%E8%AF%86/">业务知识</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%9A%E5%8A%A1%E7%9F%A5%E8%AF%86/%E6%B3%95%E9%99%A2/">法院</a></li></ul></li></ul>
     </div>
   </div>
 
@@ -628,7 +627,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/" rel="tag">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Commons/" rel="tag">Apache Commons</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DBMS/" rel="tag">DBMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPDA/" rel="tag">JPDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OCJP/" rel="tag">OCJP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSO/" rel="tag">SSO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aspectJ/" rel="tag">aspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cache/" rel="tag">cache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/distributed/" rel="tag">distributed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dubbo/" rel="tag">dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kettle/" rel="tag">kettle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/" rel="tag">sql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webflux/" rel="tag">webflux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">内网穿透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%95%E9%99%A2%E4%B8%9A%E5%8A%A1/" rel="tag">法院业务</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/" rel="tag">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Commons/" rel="tag">Apache Commons</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI/" rel="tag">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DBMS/" rel="tag">DBMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPDA/" rel="tag">JPDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OCJP/" rel="tag">OCJP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSO/" rel="tag">SSO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aspectJ/" rel="tag">aspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cache/" rel="tag">cache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/distributed/" rel="tag">distributed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dubbo/" rel="tag">dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitflow/" rel="tag">gitflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kettle/" rel="tag">kettle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/" rel="tag">sql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webflux/" rel="tag">webflux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">内网穿透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%95%E9%99%A2%E4%B8%9A%E5%8A%A1/" rel="tag">法院业务</a></li></ul>
     </div>
   </div>
 
@@ -638,7 +637,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AOP/" style="font-size: 16.67px;">AOP</a> <a href="/tags/Apache-Commons/" style="font-size: 10px;">Apache Commons</a> <a href="/tags/DBMS/" style="font-size: 10px;">DBMS</a> <a href="/tags/JPDA/" style="font-size: 13.33px;">JPDA</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/OCJP/" style="font-size: 16.67px;">OCJP</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/aspectJ/" style="font-size: 10px;">aspectJ</a> <a href="/tags/cache/" style="font-size: 16.67px;">cache</a> <a href="/tags/distributed/" style="font-size: 10px;">distributed</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/kettle/" style="font-size: 16.67px;">kettle</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/webflux/" style="font-size: 10px;">webflux</a> <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 10px;">内网穿透</a> <a href="/tags/%E6%B3%95%E9%99%A2%E4%B8%9A%E5%8A%A1/" style="font-size: 20px;">法院业务</a>
+      <a href="/tags/AOP/" style="font-size: 16.67px;">AOP</a> <a href="/tags/Apache-Commons/" style="font-size: 10px;">Apache Commons</a> <a href="/tags/CI/" style="font-size: 10px;">CI</a> <a href="/tags/DBMS/" style="font-size: 10px;">DBMS</a> <a href="/tags/JPDA/" style="font-size: 13.33px;">JPDA</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/OCJP/" style="font-size: 16.67px;">OCJP</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/aspectJ/" style="font-size: 10px;">aspectJ</a> <a href="/tags/cache/" style="font-size: 16.67px;">cache</a> <a href="/tags/distributed/" style="font-size: 10px;">distributed</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitflow/" style="font-size: 10px;">gitflow</a> <a href="/tags/kettle/" style="font-size: 16.67px;">kettle</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/webflux/" style="font-size: 10px;">webflux</a> <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 10px;">内网穿透</a> <a href="/tags/%E6%B3%95%E9%99%A2%E4%B8%9A%E5%8A%A1/" style="font-size: 20px;">法院业务</a>
     </div>
   </div>
 
@@ -664,6 +663,10 @@
           </li>
         
           <li>
+            <a href="/2020/08/06/gitflow/">gitflow</a>
+          </li>
+        
+          <li>
             <a href="/2020/08/03/log/">日志框架</a>
           </li>
         
@@ -673,10 +676,6 @@
         
           <li>
             <a href="/2020/04/25/graphql/">Graphql</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/27/frp/">frp</a>
           </li>
         
       </ul>
