@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Kettle笔记 | 剑君 の Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="​    菜爸叫我整理一下kettle的笔记说是要培训，我一个小菜比什么都不懂，只能临时抱下佛脚，百度一下。 什么是Kettle​    Kettle是一款国外开源的ETL工具，纯java编写，可以在Window、Linux、Unix上运行，数据抽取高效稳定。这个是百度百科的原话，用我们的话说就是数据迁移的工具。 ​    Kettle中有两种脚本文件，transformation和job，tra">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kettle笔记">
+<meta property="og:url" content="https://hejianjun.com/2018/03/03/kettle-note/index.html">
+<meta property="og:site_name" content="剑君 の Blog">
+<meta property="og:description" content="​    菜爸叫我整理一下kettle的笔记说是要培训，我一个小菜比什么都不懂，只能临时抱下佛脚，百度一下。 什么是Kettle​    Kettle是一款国外开源的ETL工具，纯java编写，可以在Window、Linux、Unix上运行，数据抽取高效稳定。这个是百度百科的原话，用我们的话说就是数据迁移的工具。 ​    Kettle中有两种脚本文件，transformation和job，tra">
+<meta property="og:locale">
+<meta property="og:image" content="https://hejianjun.com/images/spoon.jpg">
+<meta property="og:image" content="https://hejianjun.com/images/transformation.jpg">
+<meta property="og:image" content="https://hejianjun.com/images/job.jpg">
+<meta property="article:published_time" content="2018-03-03T04:42:47.000Z">
+<meta property="article:modified_time" content="2020-09-19T13:48:03.909Z">
+<meta property="article:author" content="Hejianjun">
+<meta property="article:tag" content="kettle">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hejianjun.com/images/spoon.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="剑君 の Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">剑君 の Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://hejianjun.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-kettle-note" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/03/kettle-note/" class="article-date">
+  <time datetime="2018-03-03T04:42:47.000Z" itemprop="datePublished">2018-03-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/kettel/">kettel</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Kettle笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​    菜爸叫我整理一下kettle的笔记说是要培训，我一个小菜比什么都不懂，只能临时抱下佛脚，百度一下。</p>
+<h2 id="什么是Kettle"><a href="#什么是Kettle" class="headerlink" title="什么是Kettle"></a>什么是Kettle</h2><p>​    Kettle是一款国外开源的ETL工具，纯java编写，可以在Window、Linux、Unix上运行，数据抽取高效稳定。这个是百度百科的原话，用我们的话说就是数据迁移的工具。</p>
+<p>​    Kettle中有两种脚本文件，transformation和job，transformation完成针对数据的基础转换，job则完成整个工作流的控制。</p>
+<a id="more"></a>
+<h2 id="Kettle的安装与运行"><a href="#Kettle的安装与运行" class="headerlink" title="Kettle的安装与运行"></a>Kettle的安装与运行</h2><p>​    可以从 <a target="_blank" rel="noopener" href="https://community.hds.com/docs/DOC-1009855">https://community.hds.com/docs/DOC-1009855</a> 下载最新版的 Kettle软件 ，同时，Kettle 是绿色软件，下载后，解压到任意目录即可。 由于Kettle 是采用java 编写，因此需要在本地有JVM 的运行环境（JDK1.7以上），我们所使用的Kettle的最新版本是7.1 的。安装完成之后，点击目录下面的Spoon.bat或spoon.sh （linux）即可启动kettle的设计工具。</p>
+<p><img src="/images/spoon.jpg" alt="spoon"></p>
+<h2 id="Kettle的基本概念"><a href="#Kettle的基本概念" class="headerlink" title="Kettle的基本概念"></a>Kettle的基本概念</h2><ol>
+<li><strong>作业（job）</strong>，负责将[转换]组织在一起进而完成某一块工作，通常我们需要把一个大的任务分解成几个逻辑上隔离的作业，当这几个作业都完成了，也就说明这项任务完成了。</li>
+</ol>
+<blockquote>
+<ul>
+<li>Job Entry：一个Job Entry 是一个任务的一部分，它执行某些内容。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Hop：一个Hop 代表两个步骤之间的一个或者多个数据流。一个Hop 总是代表着两个Job Entry 之间的连接，并且能够被原始的Job Entry 设置，无条件的执行下一个Job Entry，直到执行成功或者失败。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Note：一个Note 是一个任务附加的文本注释信息。</li>
+</ul>
+</blockquote>
+<ol start="2">
+<li><strong>转换（Transformation）</strong>，定义对数据操作的容器，数据操作就是数据从输入到输出的一个过程，可以理解为比作业粒度更小一级的容器，我们将任务分解成作业，然后需要将作业分解成一个或多个转换，每个转换只完成一部分工作。</li>
+</ol>
+<blockquote>
+<ul>
+<li>Value：Value 是行的一部分，并且是包含以下类型的的数据：Strings、floating point Numbers、unlimited precision BigNumbers、Integers、Dates、或者Boolean。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Row：一行包含0 个或者多个Values。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Output Stream：一个Output Stream 是离开一个步骤时的行的堆栈。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Input Stream：一个Input Stream 是进入一个步骤时的行的堆栈。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Step：转换的一个步骤，可以是一个Stream或是其他元素。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Hop：一个Hop 代表两个步骤之间的一个或者多个数据流。一个Hop 总是代表着一个步骤的输出流和一个步骤的输入流。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Note：一个Note 是一个转换附加的文本注释信息。</li>
+</ul>
+</blockquote>
+<h2 id="Kettle-基本使用"><a href="#Kettle-基本使用" class="headerlink" title="Kettle 基本使用"></a>Kettle 基本使用</h2><ol>
+<li><p>Kettle 的几个子程序</p>
+<blockquote>
+<p><strong>Spoon</strong>图形界面作业和转换设计器</p>
+</blockquote>
+<blockquote>
+<p><strong>Pan</strong>命令行方式执行转换</p>
+</blockquote>
+<blockquote>
+<p><strong>Kitchen</strong>命令行方式执行作业</p>
+</blockquote>
+</li>
+<li><p>转换和作业</p>
+<p>Kettle 的 Spoon 设计器用来设计<strong>转换（Transformation</strong>）和 <strong>作业（Job）</strong>。</p>
+<ul>
+<li><strong>转换</strong>主要是针对数据的各种处理，一个转换里可以包含多个步骤（Step）。</li>
+</ul>
+<p><img src="/images/transformation.jpg" alt="transformation"></p>
+<ul>
+<li><strong>作业</strong>是比转换更高一级的处理流程，一个作业里包括多个作业项（Job Entry），一个作业项代表了一项工作，转换也是一个作业项。</li>
+</ul>
+<p><img src="/images/job.jpg" alt="job"></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.com/2018/03/03/kettle-note/" data-id="ckf9q8wdc0022zrr80mhgbqcd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kettle/" rel="tag">kettle</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/04/kettle-getting-started/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Kettle入门
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/">technology</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/">AOP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/AspectJ/">AspectJ</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/spring/">spring</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/Apache-Commons/">Apache Commons</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/CAS/">CAS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/CI/">CI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/DBMS/">DBMS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/JPDA/">JPDA</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/NAT/">NAT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/OCJP/">OCJP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/SQL/">SQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/cache/">cache</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/cache/spring/">spring</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/dubbo/">dubbo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/kettel/">kettel</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/sql/">sql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/webflux/">webflux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">版本控制</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%9A%E5%8A%A1%E7%9F%A5%E8%AF%86/">业务知识</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%9A%E5%8A%A1%E7%9F%A5%E8%AF%86/%E6%B3%95%E9%99%A2/">法院</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/" rel="tag">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Commons/" rel="tag">Apache Commons</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI/" rel="tag">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DBMS/" rel="tag">DBMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPDA/" rel="tag">JPDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OCJP/" rel="tag">OCJP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSO/" rel="tag">SSO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aspectJ/" rel="tag">aspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cache/" rel="tag">cache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/distributed/" rel="tag">distributed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dubbo/" rel="tag">dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitflow/" rel="tag">gitflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kettle/" rel="tag">kettle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/" rel="tag">sql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webflux/" rel="tag">webflux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">内网穿透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%95%E9%99%A2%E4%B8%9A%E5%8A%A1/" rel="tag">法院业务</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AOP/" style="font-size: 20px;">AOP</a> <a href="/tags/Apache-Commons/" style="font-size: 10px;">Apache Commons</a> <a href="/tags/CI/" style="font-size: 10px;">CI</a> <a href="/tags/DBMS/" style="font-size: 10px;">DBMS</a> <a href="/tags/JPDA/" style="font-size: 13.33px;">JPDA</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/OCJP/" style="font-size: 16.67px;">OCJP</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/aspectJ/" style="font-size: 10px;">aspectJ</a> <a href="/tags/cache/" style="font-size: 16.67px;">cache</a> <a href="/tags/distributed/" style="font-size: 10px;">distributed</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitflow/" style="font-size: 10px;">gitflow</a> <a href="/tags/kettle/" style="font-size: 16.67px;">kettle</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/webflux/" style="font-size: 10px;">webflux</a> <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 10px;">内网穿透</a> <a href="/tags/%E6%B3%95%E9%99%A2%E4%B8%9A%E5%8A%A1/" style="font-size: 20px;">法院业务</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/08/06/gitflow/">gitflow</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/06/git/">git</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/03/log/">日志框架</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/29/maven/">MAVEN</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/25/graphql/">Graphql</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Hejianjun<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
