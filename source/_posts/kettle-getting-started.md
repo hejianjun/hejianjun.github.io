@@ -93,7 +93,7 @@ typora-root-url: ..
    ```java
    2018/03/04 16:39:06 - 表输出.0 - ERROR (version 7.1.0.0-12, build 1 from 2017-05-16 17.18.02 by buildguy) : Because of an error, this step can't continue:
    2018/03/04 16:39:06 - 表输出.0 - ERROR (version 7.1.0.0-12, build 1 from 2017-05-16 17.18.02 by buildguy) : org.pentaho.di.core.exception.KettleException: 
-   2018/03/04 16:39:06 - 表输出.0 - Error inserting row into table [t_users] with values: [何], [建军], [null], [null], [null], [942156265], [null], [null], [null], [null], [null], [null], [null], [null], [null], [null], [null], [null], [	17677322080], [null], [null], [	13558229098], [null], [null], [null], [null], [null], [null], [null]
+   2018/03/04 16:39:06 - 表输出.0 - Error inserting row into table [t_users] with values: [张], [三], [null], [null], [null], [988888888], [null], [null], [null], [null], [null], [null], [null], [null], [null], [null], [null], [null], [	17655555555], [null], [null], [	13558888888], [null], [null], [null], [null], [null], [null], [null]
    2018/03/04 16:39:06 - 表输出.0 - 
    2018/03/04 16:39:06 - 表输出.0 - Error inserting/updating row
    2018/03/04 16:39:06 - 表输出.0 - ERROR: duplicate key value violates unique constraint "users_name_unique"  详细：Key (username)=(何) already exists.
