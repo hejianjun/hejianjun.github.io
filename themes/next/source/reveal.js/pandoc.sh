@@ -1,1 +1,0 @@
-pandoc graphql.md -s -t revealjs --slide-level=2 -o graphql.html -V revealjs-url=. -V theme=serif

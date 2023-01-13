@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>git</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="./css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="./css/theme/serif.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? './css/print/pdf.css' : './css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="./lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+  <h1 class="title">git</h1>
+  <p class="date">2020-08-06 15:27</p>
+</section>
+
+<section><section id="git原理" class="titleslide slide level1"><h1>git原理</h1></section><section id="git基本概念" class="slide level2">
+<h2>git基本概念</h2>
+<figure>
+<img src="images/git原理" alt="git原理" /><figcaption>git原理</figcaption>
+</figure>
+</section><section id="git模型" class="slide level2">
+<h2>git模型</h2>
+<figure>
+<img src="images/git模型" alt="git模型" /><figcaption>git模型</figcaption>
+</figure>
+</section><section id="git基本命令" class="slide level2">
+<h2>git基本命令</h2>
+<figure>
+<img src="images/git基本命令" alt="git基本命令" /><figcaption>git基本命令</figcaption>
+</figure>
+</section></section>
+<section><section id="merge" class="titleslide slide level1"><h1>merge</h1></section><section id="fast-forward" class="slide level2">
+<h2>fast-forward</h2>
+<figure>
+<img src="images/fast-forward.gif" alt="fast-forward" /><figcaption>fast-forward</figcaption>
+</figure>
+</section><section id="no-fast-forward" class="slide level2">
+<h2>no-fast-forward</h2>
+<figure>
+<img src="images/no-fast-forward.gif" alt="no-fast-forward" /><figcaption>no-fast-forward</figcaption>
+</figure>
+</section><section id="合并冲突" class="slide level2">
+<h2>合并冲突</h2>
+<figure>
+<embed src="images/conflict.git" /><figcaption>conflict</figcaption>
+</figure>
+</section></section>
+<section><section id="重置" class="titleslide slide level1"><h1>重置</h1></section><section id="软重置" class="slide level2">
+<h2>软重置</h2>
+<figure>
+<img src="images/soft-reset.gif" alt="soft-reset" /><figcaption>soft-reset</figcaption>
+</figure>
+</section><section id="硬重置" class="slide level2">
+<h2>硬重置</h2>
+<figure>
+<img src="images/hard-reset.gif" alt="hard-reset" /><figcaption>hard-reset</figcaption>
+</figure>
+</section></section>
+<section><section id="还原" class="titleslide slide level1"><h1>还原</h1></section><section id="revert" class="slide level2">
+<h2>revert</h2>
+<figure>
+<img src="images/revert.gif" alt="revert" /><figcaption>revert</figcaption>
+</figure>
+</section></section>
+<section><section id="拣选" class="titleslide slide level1"><h1>拣选</h1></section><section id="cherry-pick" class="slide level2">
+<h2>cherry-pick</h2>
+<figure>
+<img src="images/cherry-pick.gif" alt="cherry-pick" /><figcaption>cherry-pick</figcaption>
+</figure>
+</section></section>
+<section><section id="取回" class="titleslide slide level1"><h1>取回</h1></section><section id="fetch" class="slide level2">
+<h2>fetch</h2>
+<figure>
+<img src="images/fetch.gif" alt="fetch" /><figcaption>fetch</figcaption>
+</figure>
+</section></section>
+<section><section id="拉取" class="titleslide slide level1"><h1>拉取</h1></section><section id="pull" class="slide level2">
+<h2>pull</h2>
+<figure>
+<img src="images/pull.gif" alt="pull" /><figcaption>pull</figcaption>
+</figure>
+</section></section>
+<section><section id="reflog" class="titleslide slide level1"><h1>Reflog</h1></section><section id="reflog-1" class="slide level2">
+<h2>reflog</h2>
+<figure>
+<img src="images/reflog1.gif" alt="reflog1" /><figcaption>reflog1</figcaption>
+</figure>
+</section><section id="reflogreset" class="slide level2">
+<h2>reflog+reset</h2>
+<figure>
+<img src="images/reflog2.gif" alt="reflog+reset" /><figcaption>reflog+reset</figcaption>
+</figure>
+</section></section>
+    </div>
+  </div>
+
+  <script src="./lib/js/head.min.js"></script>
+  <script src="./js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: './lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: './plugin/zoom-js/zoom.js', async: true },
+              { src: './plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
