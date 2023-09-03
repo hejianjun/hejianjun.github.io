@@ -17,11 +17,11 @@ typora-root-url: ..
 
 one day，虎大力给鹿小明提出来一个新的需求，为了更好的进行公司的信息化建设，虎大力想要看到代码执行的情况，执行到某个业务的时候在控制台有所表示，例如：执行到查询方法的时候，需要在控制台上出现，这是一个打印方法的信息。
 
-![img](images/println.png)
+![img](/images/println.png)
 
 鹿小明一想，这好办啊，本来自己为了调试测试方便就写过很多打印语句，现在无非更多而已。于是就加班加点在所有的增删改查方法中都写了`System.out.println()`打印语句。顺利完成了这个工作。
 
-![img](images/println.jpg)
+![img](/images/println.jpg)
 
 
 
@@ -35,7 +35,7 @@ one day，虎大力找到鹿小明：你这个代码里面`System.out.println()`
 
 但是想到要经常开关注释也不是个容易的事儿，于是鹿小明一咬牙，996变007，废寝忘食的更新出了 V2.0版本。他把日志打印封装成框架 logging-1.0.jar，可以进行统一的开关。顺利完成了这个工作。
 
-![img](images/println-if.jpg)
+![img](/images/println-if.jpg)
 
 
 
@@ -47,7 +47,7 @@ one day，虎大力找到鹿小明：你这个日志框架功能太简单了 ，
 
 鹿小明于是冥思苦想，007之后继续007，废寝忘食的更新出了 V3.0 版本，封装成一个新的框架logging-2.0.jar。顺利完成了这个工作。
 
-![img](images/println-file.jpg)
+![img](/images/println-file.jpg)
 
 
 
@@ -57,11 +57,11 @@ one day，虎大力找到鹿小明：你这个日志框架功能太简单了 ，
 
 one day，虎大力找到鹿小明：1.0和2.0的api不一样，1.0换成2.0，2.0换成1.0 每次切换都要改代码，你改一下吧，改成可以想用哪个用哪个的。
 
-鹿小明于是冥思苦想，007之后继续007，这个需求有点难，他从JDBC上找到了灵感，JDBC通过统一接口实现了驱动的切换，日志也可以。![img](images/println-face.jpg)
+鹿小明于是冥思苦想，007之后继续007，这个需求有点难，他从JDBC上找到了灵感，JDBC通过统一接口实现了驱动的切换，日志也可以。![img](/images/println-face.jpg)
 
 于是，他爆肝搞出来一个日志接口层（日志门面），让 1.0 和 2.0的日志框架都实现这个接口，这样想用1.0的时候就导入1.0，想用2.0的时候就导入2.0 。顺利完成了这个任务。
 
-![img](images/println-face2.jpg)
+![img](/images/println-face2.jpg)
 
 ![img](https://oscimg.oschina.net/oscnet/eedbe4c836a3964b26d3055e7e066586fde.jpg)
 
@@ -73,7 +73,7 @@ one day，虎大力找到鹿小明：1.0和2.0的api不一样，1.0换成2.0，2
 
 通过它们就打印出了我们常见的各种日志信息
 
-![img](images/log.jpg)
+![img](/images/log.jpg)
 
 
 
@@ -81,7 +81,7 @@ one day，虎大力找到鹿小明：1.0和2.0的api不一样，1.0换成2.0，2
 
 日志框架实际上分为三个部分，除了上面提到的日志门面（接口）和日志库（实现），还有日志适配器
 
-![img](images/log-frame.jpg)
+![img](/images/log-frame.jpg)
 
 
 
@@ -110,5 +110,4 @@ one day，虎大力找到鹿小明：1.0和2.0的api不一样，1.0换成2.0，2
 | log-jdk            | jdk 在1.4版本出现的java.util.logging 简称 log-jdk |
 
 在实际的开发中，log4j和logback的使用都非常的广泛，但是如果你现在要开发的是一个新项目，那么推荐使用 logback
-
 
