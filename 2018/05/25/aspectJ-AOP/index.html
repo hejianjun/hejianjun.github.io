@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>AOP之基于AspectJ注解 | 剑君 の Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、基本使用方法1.1、启用对@AspectJ的支持Spring默认不支持@AspectJ风格的切面声明，为了支持需要使用如下配置： 123&lt;!-- 启动@AspectJ支持 --&gt;  &lt;!-- proxy-target-class默认&quot;false&quot;,更改为&quot;ture&quot;使用CGLib动态代理 --&gt;    &lt;aop:aspect">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AOP之基于AspectJ注解">
+<meta property="og:url" content="https://hejianjun.github.io/2018/05/25/aspectJ-AOP/index.html">
+<meta property="og:site_name" content="剑君 の Blog">
+<meta property="og:description" content="一、基本使用方法1.1、启用对@AspectJ的支持Spring默认不支持@AspectJ风格的切面声明，为了支持需要使用如下配置： 123&lt;!-- 启动@AspectJ支持 --&gt;  &lt;!-- proxy-target-class默认&quot;false&quot;,更改为&quot;ture&quot;使用CGLib动态代理 --&gt;    &lt;aop:aspect">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-05-24T17:00:00.000Z">
+<meta property="article:modified_time" content="2023-09-08T06:42:16.183Z">
+<meta property="article:author" content="Hejianjun">
+<meta property="article:tag" content="AOP">
+<meta property="article:tag" content="aspectJ">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="剑君 の Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">剑君 の Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://hejianjun.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-aspectJ-AOP" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/25/aspectJ-AOP/" class="article-date">
+  <time datetime="2018-05-24T17:00:00.000Z" itemprop="datePublished">2018-05-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/AOP/">AOP</a>►<a class="article-category-link" href="/categories/technology/AOP/AspectJ/">AspectJ</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      AOP之基于AspectJ注解
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一、基本使用方法"><a href="#一、基本使用方法" class="headerlink" title="一、基本使用方法"></a>一、基本使用方法</h1><h3 id="1-1、启用对-AspectJ的支持"><a href="#1-1、启用对-AspectJ的支持" class="headerlink" title="1.1、启用对@AspectJ的支持"></a>1.1、启用对@AspectJ的支持</h3><p>Spring默认不支持@AspectJ风格的切面声明，为了支持需要使用如下配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 启动@AspectJ支持 --&gt;</span>  </span><br><span class="line"><span class="comment">&lt;!-- proxy-target-class默认&quot;false&quot;,更改为&quot;ture&quot;使用CGLib动态代理 --&gt;</span>    </span><br><span class="line"><span class="tag">&lt;<span class="name">aop:aspectj-autoproxy</span> <span class="attr">proxy-target-class</span>=<span class="string">&quot;false&quot;</span>/&gt;</span>  </span><br></pre></td></tr></table></figure>
+<p>这样Spring就能发现@AspectJ风格的切面并且将切面应用到目标对象。</p>
+<span id="more"></span>
+<h3 id="1-2、-声明切面"><a href="#1-2、-声明切面" class="headerlink" title="1.2、 声明切面"></a>1.2、 声明切面</h3><p>@AspectJ风格的声明切面非常简单，使用@Aspect注解进行声明：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AdivceMethod</span> &#123;</span><br></pre></td></tr></table></figure>
+
+<p>然后将该切面在配置文件中声明为Bean后，Spring就能自动识别并进行AOP方面的配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;aspect&quot;</span> <span class="attr">class</span>=<span class="string">&quot;……AdivceMethod&quot;</span>/&gt;</span>  </span><br></pre></td></tr></table></figure>
+<p>或者直接使用元注解的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span>  </span><br><span class="line"><span class="meta">@Aspect</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AdivceMethod</span> &#123;  </span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3、-声明切入点"><a href="#1-3、-声明切入点" class="headerlink" title="1.3、 声明切入点"></a>1.3、 声明切入点</h3><p>@AspectJ风格的命名切入点使用org.aspectj.lang.annotation包下的@Pointcut+方法（方法必须是返回void类型）实现。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Pointcut(value=&quot;切入点表达式&quot;, argNames = &quot;参数名列表&quot;)</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">pointcutName</span><span class="params">(……)</span> &#123;&#125;   </span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>value：</strong>指定切入点表达式；</p>
+</li>
+<li><p><strong>argNames：</strong>指定命名切入点方法参数列表参数名字，可以有多个用<code>，</code>分隔，这些参数将传递给通知方法同名的参数，同时比如切入点表达式<code>args(param)</code>将匹配参数类型为命名切入点方法同名参数指定的参数类型。</p>
+</li>
+<li><p><strong>pointcutName：</strong>切入点名字，可以使用该名字进行引用该切入点表达式。</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Pointcut(value=&quot;execution(* cn.javass..*.sayAdvisorBefore(..)) &amp;&amp; args(param)&quot;, argNames = &quot;param&quot;)</span>    </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">beforePointcut</span><span class="params">(String param)</span> &#123;&#125;    </span><br></pre></td></tr></table></figure>
+<p>定义了一个切入点，名字为<code>beforePointcut</code>，该切入点将匹配目标方法的第一个参数类型为通知方法实现中参数名为<code>param</code>的参数类型。</p>
+<h1 id="二、声明通知"><a href="#二、声明通知" class="headerlink" title="二、声明通知"></a>二、声明通知</h1><p>@AspectJ风格的声明通知也支持5种通知类型：</p>
+<p><strong>2.1、前置通知：</strong>使用org.aspectj.lang.annotation 包下的@Before注解声明；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Before(value = &quot;切入点表达式或命名切入点&quot;, argNames = &quot;参数列表参数名&quot;)</span>    </span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>value：</strong>指定切入点表达式或命名切入点；</p>
+</li>
+<li><p><strong>argNames：</strong>与Schema方式配置中的同义。</p>
+</li>
+</ul>
+<p>接下来示例一下吧：</p>
+<p>1、定义接口和实现，在此我们就使用Schema风格时的定义；</p>
+<p>2、定义切面：</p>
+<p>3、定义切入点：</p>
+<p>4、定义通知：</p>
+<p><strong>2.2、后置返回通知：</strong>使用org.aspectj.lang.annotation 包下的@AfterReturning注解声明；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AfterReturning(    </span></span><br><span class="line"><span class="meta">value=&quot;切入点表达式或命名切入点&quot;,    </span></span><br><span class="line"><span class="meta">pointcut=&quot;切入点表达式或命名切入点&quot;,    </span></span><br><span class="line"><span class="meta">argNames=&quot;参数列表参数名&quot;,    </span></span><br><span class="line"><span class="meta">returning=&quot;返回值对应参数名&quot;)</span>    </span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>value：</strong>指定切入点表达式或命名切入点；</p>
+</li>
+<li><p> <strong>pointcut：</strong>同样是指定切入点表达式或命名切入点，如果指定了将覆盖value属性指定的，pointcut具有高优先级；</p>
+</li>
+<li><p><strong>argNames：</strong>与Schema方式配置中的同义；</p>
+</li>
+<li><p> <strong>returning：</strong>与Schema方式配置中的同义。</p>
+</li>
+</ul>
+<p><strong>2.3、后置异常通知：</strong>使用org.aspectj.lang.annotation 包下的@AfterThrowing注解声明；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AfterThrowing</span> (    </span><br><span class="line">value=<span class="string">&quot;切入点表达式或命名切入点&quot;</span>,    </span><br><span class="line">pointcut=<span class="string">&quot;切入点表达式或命名切入点&quot;</span>,    </span><br><span class="line">argNames=<span class="string">&quot;参数列表参数名&quot;</span>,    </span><br><span class="line">throwing=<span class="string">&quot;异常对应参数名&quot;</span>)    </span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>value：</strong>指定切入点表达式或命名切入点；</p>
+</li>
+<li><p><strong>pointcut：</strong>同样是指定切入点表达式或命名切入点，如果指定了将覆盖value属性指定的，pointcut具有高优先级；</p>
+</li>
+<li><p><strong>argNames：</strong>与Schema方式配置中的同义；</p>
+</li>
+<li><p><strong>throwing：</strong>与Schema方式配置中的同义。</p>
+</li>
+</ul>
+<p>其中测试代码与Schema方式几乎一样，在此就不演示了，如果需要请参考AopTest.java中的testAnnotationAfterThrowingAdvice测试方法。</p>
+<p><strong>2.4、后置最终通知：</strong>使用org.aspectj.lang.annotation 包下的@After注解声明；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@After</span> (    </span><br><span class="line">value=<span class="string">&quot;切入点表达式或命名切入点&quot;</span>,    </span><br><span class="line">argNames=<span class="string">&quot;参数列表参数名&quot;</span>)    </span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><p><strong>value：</strong>指定切入点表达式或命名切入点；</p>
+</li>
+<li><p><strong>argNames：</strong>与Schema方式配置中的同义；</p>
+</li>
+</ul>
+<p><strong>2.5、环绕通知：</strong>使用org.aspectj.lang.annotation 包下的@Around注解声明；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Around</span> (    </span><br><span class="line">value=<span class="string">&quot;切入点表达式或命名切入点&quot;</span>,    </span><br><span class="line">argNames=<span class="string">&quot;参数列表参数名&quot;</span>)    </span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li><p><strong>value：</strong>指定切入点表达式或命名切入点；</p>
+</li>
+<li><p><strong>argNames：</strong>与Schema方式配置中的同义； </p>
+</li>
+</ul>
+<h3 id="2-6-引入"><a href="#2-6-引入" class="headerlink" title="2.6  引入"></a>2.6  引入</h3><p>@AspectJ风格的引入声明在切面中使用org.aspectj.lang.annotation包下的@DeclareParents声明：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@DeclareParents(    </span></span><br><span class="line"><span class="meta">value=&quot; AspectJ语法类型表达式&quot;,    </span></span><br><span class="line"><span class="meta">defaultImpl=引入接口的默认实现类)</span>    </span><br><span class="line"><span class="keyword">private</span> Interface interface;    </span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>value：</strong>匹配需要引入接口的目标对象的AspectJ语法类型表达式；与Schema方式中的types-matching属性同义；</p>
+</li>
+<li><p><strong>private Interface interface：</strong>指定需要引入的接口；</p>
+</li>
+<li><p><strong>defaultImpl：</strong>指定引入接口的默认实现类，没有与Schema方式中的delegate-ref属性同义的定义方式；</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.github.io/2018/05/25/aspectJ-AOP/" data-id="clma8n98l001p50w3da2jgaie" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AOP/" rel="tag">AOP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aspectJ/" rel="tag">aspectJ</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/06/14/cache-note/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          缓存笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/25/spring-AOP-config/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Spring AOP的配置</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/">technology</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/">AOP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/AspectJ/">AspectJ</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/spring/">spring</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/Apache-Commons/">Apache Commons</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/CAS/">CAS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/CI/">CI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/ChatGPT/">ChatGPT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/DBMS/">DBMS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/JD-GUI/">JD-GUI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/JPDA/">JPDA</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/Modbus/">Modbus</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/NAT/">NAT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/OCJP/">OCJP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/SQL/">SQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/cache/">cache</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/cache/spring/">spring</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/dubbo/">dubbo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/kettel/">kettel</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/sql/">sql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/thingsboard/">thingsboard</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/webflux/">webflux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">版本控制</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%9A%E5%8A%A1%E7%9F%A5%E8%AF%86/">业务知识</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%9A%E5%8A%A1%E7%9F%A5%E8%AF%86/%E6%B3%95%E9%99%A2/">法院</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/" rel="tag">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Commons/" rel="tag">Apache Commons</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI/" rel="tag">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ChatGPT/" rel="tag">ChatGPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DBMS/" rel="tag">DBMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JD-GUI/" rel="tag">JD-GUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPDA/" rel="tag">JPDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Modbus/" rel="tag">Modbus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OCJP/" rel="tag">OCJP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSO/" rel="tag">SSO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aspectJ/" rel="tag">aspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cache/" rel="tag">cache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/distributed/" rel="tag">distributed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dubbo/" rel="tag">dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitflow/" rel="tag">gitflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kettle/" rel="tag">kettle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/" rel="tag">sql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thingsboard/" rel="tag">thingsboard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webflux/" rel="tag">webflux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">内网穿透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%95%E9%99%A2%E4%B8%9A%E5%8A%A1/" rel="tag">法院业务</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AOP/" style="font-size: 16.67px;">AOP</a> <a href="/tags/Apache-Commons/" style="font-size: 10px;">Apache Commons</a> <a href="/tags/CI/" style="font-size: 10px;">CI</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/DBMS/" style="font-size: 10px;">DBMS</a> <a href="/tags/JD-GUI/" style="font-size: 10px;">JD-GUI</a> <a href="/tags/JPDA/" style="font-size: 13.33px;">JPDA</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Modbus/" style="font-size: 10px;">Modbus</a> <a href="/tags/OCJP/" style="font-size: 16.67px;">OCJP</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/aspectJ/" style="font-size: 10px;">aspectJ</a> <a href="/tags/cache/" style="font-size: 16.67px;">cache</a> <a href="/tags/distributed/" style="font-size: 10px;">distributed</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitflow/" style="font-size: 10px;">gitflow</a> <a href="/tags/kettle/" style="font-size: 16.67px;">kettle</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/thingsboard/" style="font-size: 10px;">thingsboard</a> <a href="/tags/webflux/" style="font-size: 10px;">webflux</a> <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 10px;">内网穿透</a> <a href="/tags/%E6%B3%95%E9%99%A2%E4%B8%9A%E5%8A%A1/" style="font-size: 20px;">法院业务</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/09/08/JD-GUI/">JD-GUI</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/07/thingsboard/">thingsboard</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/06/Modbus-TCP/">Modbus TCP/IP</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/05/ChatGPT/">ChatGPT</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/06/git/">git</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Hejianjun<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

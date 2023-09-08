@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>剑君 の Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="剑君 の Blog">
+<meta property="og:url" content="https://hejianjun.github.io/index.html">
+<meta property="og:site_name" content="剑君 の Blog">
+<meta property="og:locale">
+<meta property="article:author" content="Hejianjun">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="剑君 の Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">剑君 の Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://hejianjun.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-JD-GUI" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/09/08/JD-GUI/" class="article-date">
+  <time datetime="2023-09-08T13:35:55.000Z" itemprop="datePublished">2023-09-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/JD-GUI/">JD-GUI</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/09/08/JD-GUI/">JD-GUI</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近接了一个项目需要反编译class，尝试了用<code>ChatGPT4</code> 尝试了一下，不允许，于是使用<code>JD-GUI</code>来操作</p>
+<p><img src="/images/image-20230908122922005.png" alt="image-20230908122922005"></p>
+<h2 id="1-下载和安装"><a href="#1-下载和安装" class="headerlink" title="1. 下载和安装"></a>1. 下载和安装</h2><p>地址：<a target="_blank" rel="noopener" href="http://java-decompiler.github.io/">http://java-decompiler.github.io/</a></p>
+<p>下载链接：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/java-decompiler/jd-gui/releases/download/v1.6.6/jd-gui-1.6.6.jar"><strong>jd-gui-1.6.6.jar</strong></a> </p>
+<p><a target="_blank" rel="noopener" href="https://github.com/java-decompiler/jd-gui/releases/download/v1.6.6/jd-gui-1.6.6-min.jar"><strong>jd-gui-1.6.6-min.jar</strong></a></p>
+<p>绿色软件，用<code>jdk</code>就可以直接启动，运行不了的话打开命令行执行下面语句</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar jd-gui-1.6.6.jar</span><br></pre></td></tr></table></figure>
+
+<p>打开是这个样子的</p>
+<p><img src="/images/image-20230908142843084.png" alt="image-20230908142843084"></p>
+<h2 id="2-设置一下导出格式"><a href="#2-设置一下导出格式" class="headerlink" title="2. 设置一下导出格式"></a>2. 设置一下导出格式</h2><p>这边导出的java需要和源代码对比，所以需要设置一下不导出行号和反编译器信息</p>
+<p>Help–Preferences</p>
+<p><img src="/images/image-20230908143045891.png" alt="image-20230908143045891"></p>
+<p>把Sources saving中的两个框的√去掉（因为默认是选中的）</p>
+<p><img src="/images/image-20230908143113339.png" alt="image-20230908143113339"></p>
+<h2 id="3-打开需要反编译的文件"><a href="#3-打开需要反编译的文件" class="headerlink" title="3. 打开需要反编译的文件"></a>3. 打开需要反编译的文件</h2><p>这里可以选择war包或者jar包，如果是解压好的文件夹，随便找个class打开，jd-gui会自动查找根目录</p>
+<p><img src="/images/image-20230908143602171.png" alt="image-20230908143602171"></p>
+<h2 id="4-导出源代码"><a href="#4-导出源代码" class="headerlink" title="4. 导出源代码"></a>4. 导出源代码</h2><p>在<code>File</code>选项找到<code>Save All Sources</code>这个是保存jar全部类。如果是单个就是<code>Save Sources</code>。</p>
+<p><img src="/images/image-20230908143657849.png" alt="image-20230908143657849"></p>
+<p><img src="/images/image-20230908143826827.png" alt="image-20230908143826827"></p>
+<h2 id="5-现在可以把源码导入到ChatGTP来分析源码了"><a href="#5-现在可以把源码导入到ChatGTP来分析源码了" class="headerlink" title="5. 现在可以把源码导入到ChatGTP来分析源码了"></a>5. 现在可以把源码导入到ChatGTP来分析源码了</h2><p><img src="/images/image-20230908144111744.png" alt="image-20230908144111744"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.github.io/2023/09/08/JD-GUI/" data-id="clma8n98c000x50w31i7ff0f5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JD-GUI/" rel="tag">JD-GUI</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-thingsboard" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/09/07/thingsboard/" class="article-date">
+  <time datetime="2023-09-07T13:35:55.000Z" itemprop="datePublished">2023-09-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/thingsboard/">thingsboard</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/09/07/thingsboard/">thingsboard</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1 安装"></a><strong>1 安装</strong></h2><p>源码地址：<a target="_blank" rel="noopener" href="https://github.com/thingsboard/thingsboard.git">https://github.com/thingsboard/thingsboard.git</a></p>
+<p>编译需要<code>JDK11</code>和<code>MAVN</code></p>
+<h3 id="1-1-在windows上安装docker："><a href="#1-1-在windows上安装docker：" class="headerlink" title="1.1 在windows上安装docker："></a>1.1 在windows上安装docker：</h3><p>docker下载地址：<a target="_blank" rel="noopener" href="https://www.docker.com/products/docker-desktop/">https://www.docker.com/products/docker-desktop/</a></p>
+<p>安装方法看说明</p>
+<p>需要把<code>docker</code>的<code>bin</code>目录添加到环境变量<code>Path</code></p>
+<h3 id="1-2-创建数据卷"><a href="#1-2-创建数据卷" class="headerlink" title="1.2 创建数据卷"></a>1.2 创建数据卷</h3><p>安装好之后需要创建<code>volume </code></p>
+<p>在<code>PowerShell</code>输入</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker volume create mytb-data</span><br><span class="line">docker volume create mytb-logs</span><br></pre></td></tr></table></figure>
+
+<p>创建数据卷和日志卷</p>
+<h3 id="1-3-创建docker-compose-yaml"><a href="#1-3-创建docker-compose-yaml" class="headerlink" title="1.3 创建docker-compose.yaml"></a>1.3 创建<code>docker-compose.yaml</code></h3><p>新建文件夹-&gt;thingsboard-&gt;创建文本文件，重命名为<code>docker-compose.yaml</code></p>
+<p>输入下面内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">version: &#x27;3.0&#x27;</span><br><span class="line">services:</span><br><span class="line">  mytb:</span><br><span class="line">    restart: always</span><br><span class="line">    image: &quot;thingsboard/tb-postgres&quot;</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;8080:9090&quot;</span><br><span class="line">      - &quot;1883:1883&quot;</span><br><span class="line">      - &quot;7070:7070&quot;</span><br><span class="line">      - &quot;5683-5688:5683-5688/udp&quot;</span><br><span class="line">    environment:</span><br><span class="line">      TB_QUEUE_TYPE: in-memory</span><br><span class="line">    volumes:</span><br><span class="line">      - mytb-data:/data</span><br><span class="line">      - mytb-logs:/var/log/thingsboard</span><br><span class="line">volumes:</span><br><span class="line">  mytb-data:</span><br><span class="line">    external: true</span><br><span class="line">  mytb-logs:</span><br><span class="line">    external: true</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>8080:9090</code> - 容器内部HTTP端口 9090 映射到外部 8080 </p>
+</li>
+<li><p><code>1883:1883</code> - 容器内部MQTT 端口 1883映射到外部 1883</p>
+</li>
+<li><p><code>7070:7070</code> - 容器内部Edge RPC 端口 7070映射到外部 7070</p>
+</li>
+<li><p><code>5683-5688:5683-5688/udp</code> - 将本地 UDP 端口 5683-5688 连接到公开的内部 COAP 和 LwM2M 端口</p>
+</li>
+<li><p><code>~/.mytb-data:/data</code> -  ThingsBoard DataBase 数据目录设置为mytb-data</p>
+</li>
+<li><p><code>~/.mytb-logs:/var/log/thingsboard</code> -  ThingsBoard 日志目录设置为mytb-logs</p>
+</li>
+<li><p><code>mytb</code> - 主机名</p>
+</li>
+<li><p><code>restart: always</code> - 设置ThingsBoard自启</p>
+</li>
+<li><p><code>image: thingsboard/tb-postgres</code> - docker镜像，也可以是<code>thingsboard/tb-cassandra</code>或者<code>thingsboard/tb</code></p>
+<p><code>powershell</code>中<code>cd</code>到你创建的目录输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker compose up -d</span><br><span class="line">docker compose logs -f mytb</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>启动<code>thingsboard</code></p>
+<p>打开地址：<a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a></p>
+<p>账号：<strong><a href="mailto:&#116;&#101;&#110;&#x61;&#110;&#x74;&#x40;&#116;&#x68;&#105;&#110;&#x67;&#115;&#x62;&#x6f;&#97;&#114;&#100;&#46;&#x6f;&#114;&#103;">&#116;&#101;&#110;&#x61;&#110;&#x74;&#x40;&#116;&#x68;&#105;&#110;&#x67;&#115;&#x62;&#x6f;&#97;&#114;&#100;&#46;&#x6f;&#114;&#103;</a></strong></p>
+<p>密码：<strong>tenant</strong></p>
+<h2 id="2-添加设备"><a href="#2-添加设备" class="headerlink" title="2 添加设备"></a><strong>2 添加设备</strong></h2><ul>
+<li><p>登录并打开设备页面</p>
+</li>
+<li><p>单击”+”图标</p>
+</li>
+<li><p>输入设备名称</p>
+<p><img src="/images/image-20230908122316888.png" alt="image-20230908122316888"></p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.github.io/2023/09/07/thingsboard/" data-id="clma8n994003h50w3fth93txc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/thingsboard/" rel="tag">thingsboard</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Modbus-TCP" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/09/06/Modbus-TCP/" class="article-date">
+  <time datetime="2023-09-06T13:35:55.000Z" itemprop="datePublished">2023-09-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/Modbus/">Modbus</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/09/06/Modbus-TCP/">Modbus TCP/IP</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-什么是Modbus？"><a href="#1-什么是Modbus？" class="headerlink" title="1 什么是Modbus？"></a><strong>1 什么是Modbus？</strong></h2><p><code>Modbus</code>是<code>Modicon</code>（施耐德）公司于1979年开发的<strong>串行通信协议</strong>。它最初设计用于公司的可编程逻辑控制器（PLC）。 Modbus是一种开放式协议，支持使用<strong>RS232</strong>/<strong>RS485</strong>/<strong>RS422</strong>协议的串行设备，同时还支持调制解调器。 它的简单性以及制造商可以免费将其纳入其产品的事实使其成为连接工业电子设备的最流行的方法。 <code>Modbus</code>比其他通信协议使用的更广泛的主要原因有以下几点：</p>
+<ul>
+<li>公开发表并且无著作权要求；</li>
+<li>易于部署和维护；</li>
+<li>对供应商来说，修改移动本地的比特或字节没有很多限制；</li>
+</ul>
+<p><code>Modbus</code>通过设备之间的串行线进行<strong>数据传输</strong>。最简单的设置是使用一根串行电缆连接两个设备（主设备和从设备）上的串行端口。 数据以称为<strong>比特</strong>的<code>1</code>和<code>0</code>的序列发送。每个位都作为电压发送。<code>0</code>被发送为正电压，<code>1</code>被发送为负电压。如下图所示；</p>
+<p><img src="/images/v2-2e492552efa411fd08e8d845be94fc9a_720w.webp" alt="img"></p>
+<h2 id="2-主从模式"><a href="#2-主从模式" class="headerlink" title="2 主从模式"></a><strong>2 主从模式</strong></h2><p><code>Modbus</code>解决了通过<strong>串行线路</strong>在电子设备之间发送信息的问题。 该协议在遵循该协议的体系结构中实现<strong>主/从模型</strong>。 Modbus主站（<code>Master</code>）负责从其他设备（<code>Slave</code>）请求信息。 标准Modbus网络中有一个Modbus主站。具体如下图所示；</p>
+<p><img src="https://pic3.zhimg.com/80/v2-d77edfa02c902c279dfea6a8fbbb1496_720w.webp" alt="img"></p>
+<p>主设备向从设备请求信息，最多大约可达到240个 . 每个从设备都有自己<strong>唯一的从设备地址标识</strong>（<code>Slave Address</code>）。 除了从从设备请求信息之外，主设备还可以写入从设备的<strong>内部寄存器</strong>。</p>
+<h2 id="3-协议的分类"><a href="#3-协议的分类" class="headerlink" title="3 协议的分类"></a><strong>3 协议的分类</strong></h2><p><code>Modbus</code>的应用十分广泛，特别是在工业控制领域，具体如下图所示；</p>
+<p><img src="/images/v2-b64ee7e832b4c1ac19ebe6e468b7fca1_720w.webp" alt="img"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.github.io/2023/09/06/Modbus-TCP/" data-id="clma8n98f001350w31n84gnpk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Modbus/" rel="tag">Modbus</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ChatGPT" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2023/09/05/ChatGPT/" class="article-date">
+  <time datetime="2023-09-05T13:35:55.000Z" itemprop="datePublished">2023-09-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/ChatGPT/">ChatGPT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/09/05/ChatGPT/">ChatGPT</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ChatGPT"><a href="#ChatGPT" class="headerlink" title="ChatGPT"></a>ChatGPT</h1><h2 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h2><p>登录后选择GPT-4下拉<br><img src="/images/acd7cbed49c9d25e19dc22fd11b918a.png" alt="Advanced Data Analysis"><br>选择<code>Advanced Data Analysis</code><br>对话框就会出现+号，就可以上传文件了</p>
+<h2 id="分析代码"><a href="#分析代码" class="headerlink" title="分析代码"></a>分析代码</h2><p>把整个<code>JD-GUI</code>反编译的结果可以直接通过上面的上传文件上传到<code>GPT-4</code>中进行分析</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.github.io/2023/09/05/ChatGPT/" data-id="clma8n98b000u50w33740bw3q" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ChatGPT/" rel="tag">ChatGPT</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-git" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/08/06/git/" class="article-date">
+  <time datetime="2020-08-06T07:27:00.000Z" itemprop="datePublished">2020-08-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">版本控制</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/06/git/">git</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="git原理"><a href="#git原理" class="headerlink" title="git原理"></a>git原理</h1><h2 id="git基本概念"><a href="#git基本概念" class="headerlink" title="git基本概念"></a>git基本概念</h2><p><img src="/images/git%E5%8E%9F%E7%90%86.png" alt="git原理"></p>
+<h2 id="git模型"><a href="#git模型" class="headerlink" title="git模型"></a>git模型</h2><p><img src="/images/git%E6%A8%A1%E5%9E%8B.png" alt="git模型"></p>
+<h2 id="git基本命令"><a href="#git基本命令" class="headerlink" title="git基本命令"></a>git基本命令</h2><p><img src="/images/git%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4.png" alt="git基本命令"></p>
+<h1 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h1><h2 id="fast-forward"><a href="#fast-forward" class="headerlink" title="fast-forward"></a>fast-forward</h2><p><img src="/images/fast-forward.gif" alt="fast-forward"></p>
+<h2 id="no-fast-forward"><a href="#no-fast-forward" class="headerlink" title="no-fast-forward"></a>no-fast-forward</h2><p><img src="/images/no-fast-forward.gif" alt="no-fast-forward"></p>
+<h2 id="冲突"><a href="#冲突" class="headerlink" title="冲突"></a>冲突</h2><p><img src="/images/conflict.git" alt="conflict"></p>
+<h1 id="重置"><a href="#重置" class="headerlink" title="重置"></a>重置</h1><h2 id="软重置"><a href="#软重置" class="headerlink" title="软重置"></a>软重置</h2><p><img src="/images/soft-reset.gif" alt="soft-reset"></p>
+<h2 id="硬重置"><a href="#硬重置" class="headerlink" title="硬重置"></a>硬重置</h2><p><img src="/images/hard-reset.gif" alt="hard-reset"></p>
+<h1 id="还原"><a href="#还原" class="headerlink" title="还原"></a>还原</h1><h2 id="revert"><a href="#revert" class="headerlink" title="revert"></a>revert</h2><p><img src="/images/revert.gif" alt="revert"></p>
+<h1 id="拣选"><a href="#拣选" class="headerlink" title="拣选"></a>拣选</h1><h2 id="cherry-pick"><a href="#cherry-pick" class="headerlink" title="cherry-pick"></a>cherry-pick</h2><p><img src="/images/cherry-pick.gif" alt="cherry-pick"></p>
+<h1 id="取回"><a href="#取回" class="headerlink" title="取回"></a>取回</h1><h2 id="fetch"><a href="#fetch" class="headerlink" title="fetch"></a>fetch</h2><p><img src="/images/fetch.gif" alt="fetch"></p>
+<h1 id="拉取"><a href="#拉取" class="headerlink" title="拉取"></a>拉取</h1><h2 id="pull"><a href="#pull" class="headerlink" title="pull"></a>pull</h2><p><img src="/images/pull.gif" alt="pull"></p>
+<h1 id="Reflog"><a href="#Reflog" class="headerlink" title="Reflog"></a>Reflog</h1><h2 id="reflog"><a href="#reflog" class="headerlink" title="reflog"></a>reflog</h2><p><img src="/images/reflog1.gif" alt="reflog1"></p>
+<h2 id="reflog-reset"><a href="#reflog-reset" class="headerlink" title="reflog+reset"></a>reflog+reset</h2><p><img src="/images/reflog2.gif" alt="reflog+reset"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.github.io/2020/08/06/git/" data-id="clma8n98q002850w38vcg8zbt" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-gitflow" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/08/06/gitflow/" class="article-date">
+  <time datetime="2020-08-06T07:27:00.000Z" itemprop="datePublished">2020-08-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">版本控制</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/06/gitflow/">gitflow</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="gitflow"><a href="#gitflow" class="headerlink" title="gitflow"></a>gitflow</h1><p><img src="images/gitlab_flow_gitdashflow.png" alt="Vincent Driessen制作的Git Flow时间线，经允许使用"></p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA54AAAgwCAYAAABKnuuDAAAgAElEQVR4XuzbsZFkWRmE0Z6RNgJvegID1gDcwCjcwAAsmApMQUBBamJFkOvt/TbvaQPe/fNkKSn0tw9/BAgQIECAAAECBAgQIEDgQYFvD37bpwkQIECAAAECBAgQIECAwIfh6UdAgAABAgQIECBAgAABAo8KGJ6P8vo4AQIECBAgQIAAAQIECBiefgMECBAgQIAAAQIECBAg8KiA4fkor48TIECAAAECBAgQIECAgOHpN0CAAAECBAgQIECAAAECjwoYno/y+jgBAgQIECBAgAABAgQIGJ5+AwQIECBAgAABAgQIECDwqIDh+SivjxMgQIAAAQIECBAgQICA4ek3QIAAAQIECBAgQIAAAQKPChiej/L6OAECBAgQIECAAAECBAgYnn4DBAgQIECAAAECBAgQIPCogOH5KK+PEyBAgAABAgQIECBAgIDh6TdAgAABAgQIECBAgAABAo8KGJ6P8vo4AQIECBAgQIAAAQIECBiefgMECBAgQIAAAQIECBAg8KiA4fkor48TIECAAAECBAgQIECAwNuG548fP/7x9fX154+Pjz9hJUCAAAECBAgQIECAAIE/rsDX19e/vn///s+fP3/++o4Ubxuen5+f/zY631GJbxAgQIAAAQIECBAgQCAh8J/X6/XLOy555/D8esdBvkGAAAECBAgQIECAAAECDYHX6/WWzfiWj/xG8vn5aXg2fhuuIECAAAECBAgQIECAwFsE8sPzb3//+ZagPkKAAAECBAgQIECAAAECv4/AX//y438eMjx/H3evECBAgAABAgQIECBA4BoBw/OaqgUlQIAAAQIECBAgQIDAGQHD84y7VwkQIECAAAECBAgQIHCNgOF5TdWCEiBAgAABAgQIECBA4IyA4XnG3asECBAgQIAAAQIECBC4RsDwvKZqQQkQIECAAAECBAgQIHBGwPA84+5VAgQIECBAgAABAgQIXCNgeF5TtaAECBAgQIAAAQIECBA4I2B4nnH3KgECBAgQIECAAAECBK4RMDyvqVpQAgQIECBAgAABAgQInBEwPM+4e5UAAQIECBAgQIAAAQLXCBie11QtKAECBAgQIECAAAECBM4IGJ5n3L1KgAABAgQIECBAgACBawQMz2uqFpQAAQIECBAgQIAAAQJnBAzPM+5eJUCAAAECBAgQIECAwDUChuc1VQtKgAABAgQIECBAgACBMwKG5xl3rxIgQIAAAQIECBAgQOAaAcPzmqoFJUCAAAECBAgQIECAwBkBw/OMu1cJECBAgAABAgQIECBwjYDheU3VghIgQIAAAQIECBAgQOCMgOF5xt2rBAgQIECAAAECBAgQuEbA8LymakEJECBAgAABAgQIECBwRsDwPOPuVQIECBAgQIAAAQIECFwjYHheU7WgBAgQIECAAAECBAgQOCNgeJ5x9yoBAgQIECBAgAABAgSuETA8r6laUAIECBAgQIAAAQIECJwRMDzPuHuVAAECBAgQIECAAAEC1wgYntdULSgBAgQIECBAgAABAgTOCBieZ9y9SoAAAQIECBAgQIAAgWsEDM9rqhaUAAECBAgQIECAAAECZwQMzzPuXiVAgAABAgQIECBAgMA1AobnNVULSoAAAQIECBAgQIAAgTMChucZd68SIECAAAECBAgQIEDgGgHD85qqBSVAgAABAgQIECBAgMAZAcPzjLtXCRAgQIAAAQIECBAgcI2A4XlN1YISIECAAAECBAgQIEDgjIDhecbdqwQIECBAgAABAgQIELhGwPC8pmpBCRAgQIAAAQIECBAgcEbA8Dzj7lUCBAgQIECAAAECBAhcI2B4XlO1oAQIECBAgAABAgQIEDgjYHiecfcqAQIECBAgQIAAAQIErhEwPK+pWlACBAgQIECAAAECBAicETA8z7h7lQABAgQIECBAgAABAtcIGJ7XVC0oAQIECBAgQIAAAQIEzggYnmfcvUqAAAECBAgQIECAAIFrBAzPa6oWlAABAgQIECBAgAABAmcEDM8z7l4lQIAAAQIECBAgQIDANQKG5zVVC0qAAAECBAgQIECAAIEzAobnGXevEiBAgAABAgQIECBA4BoBw/OaqgUlQIAAAQIECBAgQIDAGQHD84y7VwkQIECAAAECBAgQIHCNgOF5TdWCEiBAgAABAgQIECBA4IyA4XnG3asECBAgQIAAAQIECBC4RsDwvKZqQQkQIECAAAECBAgQIHBGwPA84+5VAgQIECBAgAABAgQIXCPwhxue1zQjKAECBAgQIECAAAECBEYFXq/Xt3dEe8tHfjvk8/Pz6x0H+QYBAgQIECBAgAABAgQINAQMz0YPriBAgAABAgQIECBAgMCsgOE5W61gBAgQIECAAAECBAgQaAjkh+e7Dmxwu4IAAQIECBAgQIAAAQL7Av//L5Tv2nWP/Y/nuw7cr1ZCAgQIECBAgAABAgQINAQMz0YPriBAgAABAgQIECBAgMCsgOE5W61gBAgQIECAAAECBAgQaAgYno0eXEGAAAECBAgQIECAAIFZAcNztlrBCBAgQIAAAQIECBAg0BAwPBs9uIIAAQIECBAgQIAAAQKzAobnbLWCESBAgAABAgQIECBAoCFgeDZ6cAUBAgQIECBAgAABAgRmBQzP2WoFI0CAAAECBAgQIECAQEPA8Gz04AoCBAgQIECAAAECBAjMChies9UKRoAAAQIECBAgQIAAgYaA4dnowRUECBAgQIAAAQIECBCYFTA8Z6sVjAABAgQIECBAgAABAg0Bw7PRgysIECBAgAABAgQIECAwK2B4zlYrGAECBAgQIECAAAECBBoChmejB1cQIECAAAECBAgQIEBgVsDwnK1WMAIECBAgQIAAAQIECDQEDM9GD64gQIAAAQIECBAgQIDArIDhOVutYAQIECBAgAABAgQIEGgIGJ6NHlxBgAABAgQIECBAgACBWQHDc7ZawQgQIECAAAECBAgQINAQMDwbPbiCAAECBAgQIECAAAECswKG52y1ghEgQIAAAQIECBAgQKAhYHg2enAFAQIECBAgQIAAAQIEZgUMz9lqBSNAgAABAgQIECBAgEBDwPBs9OAKAgQIECBAgAABAgQIzAoYnrPVCkaAAAECBAgQIECAAIGGgOHZ6MEVBAgQIECAAAECBAgQmBUwPGerFYwAAQIECBAgQIAAAQINAcOz0YMrCBAgQIAAAQIECBAgMCtgeM5WKxgBAgQIECBAgAABAgQaAoZnowdXECBAgAABAgQIECBAYFbA8JytVjACBAgQIECAAAECBAg0BAzPRg+uIECAAAECBAgQIECAwKyA4TlbrWAECBAgQIAAAQIECBBoCBiejR5cQYAAAQIECBAgQIAAgVkBw3O2WsEIECBAgAABAgQIECDQEDA8Gz24ggABAgQIECBAgAABArMChudstYIRIECAAAECBAgQIECgIWB4NnpwBQECBAgQIECAAAECBGYFDM/ZagUjQIAAAQIECBAgQIBAQ8DwbPTgCgIECBAgQIAAAQIECMwKGJ6z1QpGgAABAgQIECBAgACBhoDh2ejBFQQIECBAgAABAgQIEJgVMDxnqxWMAAECBAgQIECAAAECDQHDs9GDKwgQIECAAAECBAgQIDArYHjOVisYAQIECBAgQIAAAQIEGgKGZ6MHVxAgQIAAAQIECBAgQGBWwPCcrVYwAgQIECBAgAABAgQINAQMz0YPriBAgAABAgQIECBAgMCsgOE5W61gBAgQIECAAAECBAgQaAgYno0eXEGAAAECBAgQIECAAIFZAcNztlrBCBAgQIAAAQIECBAg0BAwPBs9uIIAAQIECBAgQIAAAQKzAobnbLWCESBAgAABAgQIECBAoCFgeDZ6cAUBAgQIECBAgAABAgRmBQzP2WoFI0CAAAECBAgQIECAQEPA8Gz04AoCBAgQIECAAAECBAjMChies9UKRoAAAQIECBAgQIAAgYaA4dnowRUECBAgQIAAAQIECBCYFTA8Z6sVjAABAgQIECBAgAABAg0Bw7PRgysIECBAgAABAgQIECAwK2B4zlYrGAECBAgQIECAAAECBBoChmejB1cQIECAAAECBAgQIEBgVsDwnK1WMAIECBAgQIAAAQIECDQEDM9GD64gQIAAAQIECBAgQIDArIDhOVutYAQIECBAgAABAgQIEGgIGJ6NHlxBgAABAgQIECBAgACBWQHDc7ZawQgQIECAAAECBAgQINAQMDwbPbiCAAECBAgQIECAAAECswKG52y1ghEgQIAAAQIECBAgQKAhYHg2enAFAQIECBAgQIAAAQIEZgUMz9lqBSNAgAABAgQIECBAgEBDwPBs9OAKAgQIECBAgAABAgQIzAoYnrPVCkaAAAECBAgQIECAAIGGgOHZ6MEVBAgQIECAAAECBAgQmBUwPGerFYwAAQIECBAgQIAAAQINAcOz0YMrCBAgQIAAAQIECBAgMCtgeM5WKxgBAgQIECBAgAABAgQaAoZnowdXECBAgAABAgQIECBAYFbA8JytVjACBAgQIECAAAECBAg0BAzPRg+uIECAAAECBAgQIECAwKyA4TlbrWAECBAgQIAAAQIECBBoCBiejR5cQYAAAQIECBAgQIAAgVkBw3O2WsEIECBAgAABAgQIECDQEDA8Gz24ggABAgQIECBAgAABArMChudstYIRIECAAAECBAgQIECgIWB4NnpwBQECBAgQIECAAAECBGYFDM/ZagUjQIAAAQIECBAgQIBAQ8DwbPTgCgIECBAgQIAAAQIECMwKGJ6z1QpGgAABAgQIECBAgACBhoDh2ejBFQQIECBAgAABAgQIEJgVMDxnqxWMAAECBAgQIECAAAECDQHDs9GDKwgQIECAAAECBAgQIDArYHjOVisYAQIECBAgQIAAAQIEGgKGZ6MHVxAgQIAAAQIECBAgQGBWwPCcrVYwAgQIECBAgAABAgQINAQMz0YPriBAgAABAgQIECBAgMCsgOE5W61gBAgQIECAAAECBAgQaAgYno0eXEGAAAECBAgQIECAAIFZAcNztlrBCBAgQIAAAQIECBAg0BAwPBs9uIIAAQIECBAgQIAAAQKzAobnbLWCESBAgAABAgQIECBAoCFgeDZ6cAUBAgQIECBAgAABAgRmBQzP2WoFI0CAAAECBAgQIECAQEPA8Gz04AoCBAgQIECAAAECBAjMChies9UKRoAAAQIECBAgQIAAgYaA4dnowRUECBAgQIAAAQIECBCYFTA8Z6sVjAABAgQIECBAgAABAg0Bw7PRgysIECBAgAABAgQIECAwK2B4zlYrGAECBAgQIECAAAECBBoChmejB1cQIECAAAECBAgQIEBgVsDwnK1WMAIECBAgQIAAAQIECDQEDM9GD64gQIAAAQIECBAgQIDArIDhOVutYAQIECBAgAABAgQIEGgIGJ6NHlxBgAABAgQIECBAgACBWQHDc7ZawQgQIECAAAECBAgQINAQMDwbPbiCAAECBAgQIECAAAECswKG52y1ghEgQIAAAQIECBAgQKAhYHg2enAFAQIECBAgQIAAAQIEZgUMz9lqBSNAgAABAgQIECBAgEBDwPBs9OAKAgQIECBAgAABAgQIzAoYnrPVCkaAAAECBAgQIECAAIGGgOHZ6MEVBAgQIECAAAECBAgQmBUwPGerFYwAAQIECBAgQIAAAQINAcOz0YMrCBAgQIAAAQIECBAgMCtgeM5WKxgBAgQIECBAgAABAgQaAoZnowdXECBAgAABAgQIECBAYFbA8JytVjACBAgQIECAAAECBAg0BAzPRg+uIECAAAECBAgQIECAwKyA4TlbrWAECBAgQIAAAQIECBBoCBiejR5cQYAAAQIECBAgQIAAgVkBw3O2WsEIECBAgAABAgQIECDQEDA8Gz24ggABAgQIECBAgAABArMChudstYIRIECAAAECBAgQIECgIWB4NnpwBQECBAgQIECAAAECBGYFDM/ZagUjQIAAAQIECBAgQIBAQ8DwbPTgCgIECBAgQIAAAQIECMwKGJ6z1QpGgAABAgQIECBAgACBhoDh2ejBFQQIECBAgAABAgQIEJgVMDxnqxWMAAECBAgQIECAAAECDQHDs9GDKwgQIECAAAECBAgQIDArYHjOVisYAQIECBAgQIAAAQIEGgKGZ6MHVxAgQIAAAQIECBAgQGBWwPCcrVYwAgQIECBAgAABAgQINAQMz0YPriBAgAABAgQIECBAgMCsgOE5W61gBAgQIECAAAECBAgQaAgYno0eXEGAAAECBAgQIECAAIFZAcNztlrBCBAgQIAAAQIECBAg0BAwPBs9uIIAAQIECBAgQIAAAQKzAobnbLWCESBAgAABAgQIECBAoCFgeDZ6cAUBAgQIECBAgAABAgRmBQzP2WoFI0CAAAECBAgQIECAQEPA8Gz04AoCBAgQIECAAAECBAjMChies9UKRoAAAQIECBAgQIAAgYaA4dnowRUECBAgQIAAAQIECBCYFTA8Z6sVjAABAgQIECBAgAABAg0Bw7PRgysIECBAgAABAgQIECAwK2B4zlYrGAECBAgQIECAAAECBBoChmejB1cQIECAAAECBAgQIEBgVsDwnK1WMAIECBAgQIAAAQIECDQEDM9GD64gQIAAAQIECBAgQIDArIDhOVutYAQIECBAgAABAgQIEGgIGJ6NHlxBgAABAgQIECBAgACBWQHDc7ZawQgQIECAAAECBAgQINAQMDwbPbiCAAECBAgQIECAAAECswKG52y1ghEgQIAAAQIECBAgQKAhYHg2enAFAQIECBAgQIAAAQIEZgUMz9lqBSNAgAABAgQIECBAgEBDwPBs9OAKAgQIECBAgAABAgQIzAoYnrPVCkaAAAECBAgQIECAAIGGgOHZ6MEVBAgQIECAAAECBAgQmBUwPGerFYwAAQIECBAgQIAAAQINAcOz0YMrCBAgQIAAAQIECBAgMCtgeM5WKxgBAgQIECBAgAABAgQaAoZnowdXECBAgAABAgQIECBAYFbA8JytVjACBAgQIECAAAECBAg0BAzPRg+uIECAAAECBAgQIECAwKyA4TlbrWAECBAgQIAAAQIECBBoCBiejR5cQYAAAQIECBAgQIAAgVkBw3O2WsEIECBAgAABAgQIECDQEDA8Gz24ggABAgQIECBAgAABArMChudstYIRIECAAAECBAgQIECgIWB4NnpwBQECBAgQIECAAAECBGYFDM/ZagUjQIAAAQIECBAgQIBAQ8DwbPTgCgIECBAgQIAAAQIECMwKGJ6z1QpGgAABAgQIECBAgACBhoDh2ejBFQQIECBAgAABAgQIEJgVMDxnqxWMAAECBAgQIECAAAECDQHDs9GDKwgQIECAAAECBAgQIDArYHjOVisYAQIECBAgQIAAAQIEGgKGZ6MHVxAgQIAAAQIECBAgQGBWwPCcrVYwAgQIECBAgAABAgQINAQMz0YPriBAgAABAgQIECBAgMCsgOE5W61gBAgQIECAAAECBAgQaAgYno0eXEGAAAECBAgQIECAAIFZAcNztlrBCBAgQIAAAQIECBAg0BAwPBs9uIIAAQIECBAgQIAAAQKzAobnbLWCESBAgAABAgQIECBAoCFgeDZ6cAUBAgQIECBAgAABAgRmBQzP2WoFI0CAAAECBAgQIECAQEPA8Gz04AoCBAgQIECAAAECBAjMChies9UKRoAAAQIECBAgQIAAgYaA4dnowRUECBAgQIAAAQIECBCYFTA8Z6sVjAABAgQIECBAgAABAg0Bw7PRgysIECBAgAABAgQIECAwK2B4zlYrGAECBAgQIECAAAECBBoChmejB1cQIECAAAECBAgQIEBgVsDwnK1WMAIECBAgQIAAAQIECDQEDM9GD64gQIAAAQIECBAgQIDArIDhOVutYAQIECBAgAABAgQIEGgIGJ6NHlxBgAABAgQIECBAgACBWQHDc7ZawQgQIECAAAECBAgQINAQMDwbPbiCAAECBAgQIECAAAECswKG52y1ghEgQIAAAQIECBAgQKAhYHg2enAFAQIECBAgQIAAAQIEZgUMz9lqBSNAgAABAgQIECBAgEBDwPBs9OAKAgQIECBAgAABAgQIzAoYnrPVCkaAAAECBAgQIECAAIGGgOHZ6MEVBAgQIECAAAECBAgQmBUwPGerFYwAAQIECBAgQIAAAQINAcOz0YMrCBAgQIAAAQIECBAgMCtgeM5WKxgBAgQIECBAgAABAgQaAoZnowdXECBAgAABAgQIECBAYFbA8JytVjACBAgQIECAAAECBAg0BAzPRg+uIECAAAECBAgQIECAwKyA4TlbrWAECBAgQIAAAQIECBBoCBiejR5cQYAAAQIECBAgQIAAgVkBw3O2WsEIECBAgAABAgQIECDQEDA8Gz24ggABAgQIECBAgAABArMChudstYIRIECAAAECBAgQIECgIWB4NnpwBQECBAgQIECAAAECBGYFDM/ZagUjQIAAAQIECBAgQIBAQ8DwbPTgCgIECBAgQIAAAQIECMwKGJ6z1QpGgAABAgQIECBAgACBhoDh2ejBFQQIECBAgAABAgQIEJgVMDxnqxWMAAECBAgQIECAAAECDQHDs9GDKwgQIECAAAECBAgQIDArYHjOVisYAQIECBAgQIAAAQIEGgKGZ6MHVxAgQIAAAQIECBAgQGBWwPCcrVYwAgQIECBAgAABAgQINAQMz0YPriBAgAABAgQIECBAgMCsgOE5W61gBAgQIECAAAECBAgQaAgYno0eXEGAAAECBAgQIECAAIFZAcNztlrBCBAgQIAAAQIECBAg0BAwPBs9uIIAAQIECBAgQIAAAQKzAobnbLWCESBAgAABAgQIECBAoCFgeDZ6cAUBAgQIECBAgAABAgRmBQzP2WoFI0CAAAECBAgQIECAQEPA8Gz04AoCBAgQIECAAAECBAjMChies9UKRoAAAQIECBAgQIAAgYaA4dnowRUECBAgQIAAAQIECBCYFTA8Z6sVjAABAgQIECBAgAABAg0Bw7PRgysIECBAgAABAgQIECAwK2B4zlYrGAECBAgQIECAAAECBBoChmejB1cQIECAAAECBAgQIEBgVsDwnK1WMAIECBAgQIAAAQIECDQEDM9GD64gQIAAAQIECBAgQIDArIDhOVutYAQIECBAgAABAgQIEGgIGJ6NHlxBgAABAgQIECBAgACBWQHDc7ZawQgQIECAAAECBAgQINAQMDwbPbiCAAECBAgQIECAAAECswKG52y1ghEgQIAAAQIECBAgQKAhYHg2enAFAQIECBAgQIAAAQIEZgUMz9lqBSNAgAABAgQIECBAgEBDwPBs9OAKAgQIECBAgAABAgQIzAoYnrPVCkaAAAECBAgQIECAAIGGgOHZ6MEVBAgQIECAAAECBAgQmBUwPGerFYwAAQIECBAgQIAAAQINAcOz0YMrCBAgQIAAAQIECBAgMCtgeM5WKxgBAgQIECBAgAABAgQaAoZnowdXECBAgAABAgQIECBAYFbA8JytVjACBAgQIECAAAECBAg0BAzPRg+uIECAAAECBAgQIECAwKyA4TlbrWAECBAgQIAAAQIECBBoCBiejR5cQYAAAQIECBAgQIAAgVkBw3O2WsEIECBAgAABAgQIECDQEDA8Gz24ggABAgQIECBAgAABArMChudstYIRIECAAAECBAgQIECgIWB4NnpwBQECBAgQIECAAAECBGYFDM/ZagUjQIAAAQIECBAgQIBAQ8DwbPTgCgIECBAgQIAAAQIECMwKGJ6z1QpGgAABAgQIECBAgACBhoDh2ejBFQQIECBAgAABAgQIEJgVMDxnqxWMAAECBAgQIECAAAECDQHDs9GDKwgQIECAAAECBAgQIDArYHjOVisYAQIECBAgQIAAAQIEGgKGZ6MHVxAgQIAAAQIECBAgQGBWwPCcrVYwAgQIECBAgAABAgQINAQMz0YPriBAgAABAgQIECBAgMCsgOE5W61gBAgQIECAAAECBAgQaAgYno0eXEGAAAECBAgQIECAAIFZAcNztlrBCBAgQIAAAQIECBAg0BAwPBs9uIIAAQIECBAgQIAAAQKzAobnbLWCESBAgAABAgQIECBAoCFgeDZ6cAUBAgQIECBAgAABAgRmBQzP2WoFI0CAAAECBAgQIECAQEPA8Gz04AoCBAgQIECAAAECBAjMChies9UKRoAAAQIECBAgQIAAgYaA4dnowRUECBAgQIAAAQIECBCYFTA8Z6sVjAABAgQIECBAgAABAg0Bw7PRgysIECBAgAABAgQIECAwK2B4zlYrGAECBAgQIECAAAECBBoChmejB1cQIECAAAECBAgQIEBgVsDwnK1WMAIECBAgQIAAAQIECDQEDM9GD64gQIAAAQIECBAgQIDArIDhOVutYAQIECBAgAABAgQIEGgIGJ6NHlxBgAABAgQIECBAgACBWQHDc7ZawQgQIECAAAECBAgQINAQMDwbPbiCAAECBAgQIECAAAECswKG52y1ghEgQIAAAQIECBAgQKAhYHg2enAFAQIECBAgQIAAAQIEZgUMz9lqBSNAgAABAgQIECBAgEBDwPBs9OAKAgQIECBAgAABAgQIzAoYnrPVCkaAAAECBAgQIECAAIGGgOHZ6MEVBAgQIECAAAECBAgQmBUwPGerFYwAAQIECBAgQIAAAQINAcOz0YMrCBAgQIAAAQIECBAgMCtgeM5WKxgBAgQIECBAgAABAgQaAoZnowdXECBAgAABAgQIECBAYFbA8JytVjACBAgQIECAAAECBAg0BAzPRg+uIECAAAECBAgQIECAwKyA4TlbrWAECBAgQIAAAQIECBBoCBiejR5cQYAAAQIECBAgQIAAgVkBw3O2WsEIECBAgAABAgQIECDQEDA8Gz24ggABAgQIECBAgAABArMChudstYIRIECAAC/oXPMAACAASURBVAECBAgQIECgIWB4NnpwBQECBAgQIECAAAECBGYFDM/ZagUjQIAAAQIECBAgQIBAQ8DwbPTgCgIECBAgQIAAAQIECMwKGJ6z1QpGgAABAgQIECBAgACBhoDh2ejBFQQIECBAgAABAgQIEJgVMDxnqxWMAAECBAgQIECAAAECDQHDs9GDKwgQIECAAAECBAgQIDArYHjOVisYAQIECBAgQIAAAQIEGgKGZ6MHVxAgQIAAAQIECBAgQGBWwPCcrVYwAgQIECBAgAABAgQINAQMz0YPriBAgAABAgQIECBAgMCsgOE5W61gBAgQIECAAAECBAgQaAgYno0eXEGAAAECBAgQIECAAIFZAcNztlrBCBAgQIAAAQIECBAg0BAwPBs9uIIAAQIECBAgQIAAAQKzAobnbLWCESBAgAABAgQIECBAoCFgeDZ6cAUBAgQIECBAgAABAgRmBQzP2WoFI0CAAAECBAgQIECAQEPA8Gz04AoCBAgQIECAAAECBAjMChies9UKRoAAAQIECBAgQIAAgYaA4dnowRUECBAgQIAAAQIECBCYFTA8Z6sVjAABAgQIECBAgAABAg0Bw7PRgysIECBAgAABAgQIECAwK2B4zlYrGAECBAgQIECAAAECBBoChmejB1cQIECAAAECBAgQIEBgVsDwnK1WMAIECBAgQIAAAQIECDQEDM9GD64gQIAAAQIECBAgQIDArIDhOVutYAQIECBAgAABAgQIEGgIGJ6NHlxBgAABAgQIECBAgACBWQHDc7ZawQgQIECAAAECBAgQINAQMDwbPbiCAAECBAgQIECAAAECswKG52y1ghEgQIAAAQIECBAgQKAhYHg2enAFAQIECBAgQIAAAQIEZgUMz9lqBSNAgAABAgQIECBAgEBDwPBs9OAKAgQIECBAgAABAgQIzAoYnrPVCkaAAAECBAgQIECAAIGGgOHZ6MEVBAgQIECAAAECBAgQmBUwPGerFYwAAQIECBAgQIAAAQINAcOz0YMrCBAgQIAAAQIECBAgMCtgeM5WKxgBAgQIECBAgAABAgQaAoZnowdXECBAgAABAgQIECBAYFbA8JytVjACBAgQIECAAAECBAg0BAzPRg+uIECAAAECBAgQIECAwKyA4TlbrWAECBAgQIAAAQIECBBoCBiejR5cQYAAAQIECBAgQIAAgVkBw3O2WsEIECBAgAABAgQIECDQEDA8Gz24ggABAgQIECBAgAABArMChudstYIRIECAAAECBAgQIECgIWB4NnpwBQECBAgQIECAAAECBGYFDM/ZagUjQIAAAQIECBAgQIBAQ8DwbPTgCgIECBAgQIAAAQIECMwKGJ6z1QpGgAABAgQIECBAgACBhoDh2ejBFQQIECBAgAABAgQIEJgVMDxnqxWMAAECBAgQIECAAAECDQHDs9GDKwgQIECAAAECBAgQIDArYHjOVisYAQIECBAgQIAAAQIEGgKGZ6MHVxAgQIAAAQIECBAgQGBWwPCcrVYwAgQIECBAgAABAgQINAQMz0YPriBAgAABAgQIECBAgMCsgOE5W61gBAgQIECAAAECBAgQaAgYno0eXEGAAAECBAgQIECAAIFZAcNztlrBCBAgQIAAAQIECBAg0BAwPBs9uIIAAQIECBAgQIAAAQKzAobnbLWCESBAgAABAgQIECBAoCFgeDZ6cAUBAgQIECBAgAABAgRmBQzP2WoFI0CAAAECBAgQIECAQEPA8Gz04AoCBAgQIECAAAECBAjMChies9UKRoAAAQIECBAgQIAAgYaA4dnowRUECBAgQIAAAQIECBCYFTA8Z6sVjAABAgQIECBAgAABAg0Bw7PRgysIECBAgAABAgQIECAwK2B4zlYrGAECBAgQIECAAAECBBoChmejB1cQIECAAAECBAgQIEBgVsDwnK1WMAIECBAgQIAAAQIECDQEDM9GD64gQIAAAQIECBAgQIDArIDhOVutYAQIECBAgAABAgQIEGgIGJ6NHlxBgAABAgQIECBAgACBWQHDc7ZawQgQIECAAAECBAgQINAQMDwbPbiCAAECBAgQIECAAAECswKG52y1ghEgQIAAAQIECBAgQKAhYHg2enAFAQIECBAgQIAAAQIEZgUMz9lqBSNAgAABAgQIECBAgEBDwPBs9OAKAgQIECBAgAABAgQIzAoYnrPVCkaAAAECBAgQIECAAIGGgOHZ6MEVBAgQIECAAAECBAgQmBUwPGerFYwAAQIECBAgQIAAAQINAcOz0YMrCBAgQIAAAQIECBAgMCtgeM5WKxgBAgQIECBAgAABAgQaAoZnowdXECBAgAABAgQIECBAYFbA8JytVjACBAgQIECAAAECBAg0BAzPRg+uIECAAAECBAgQIECAwKyA4TlbrWAECBAgQIAAAQIECBBoCBiejR5cQYAAAQIECBAgQIAAgVkBw3O2WsEIECBAgAABAgQIECDQEDA8Gz24ggABAgQIECBAgAABArMChudstYIRIECAAAECBAgQIECgIWB4NnpwBQECBAgQIECAAAECBGYFDM/ZagUjQIAAAQIECBAgQIBAQ8DwbPTgCgIECBAgQIAAAQIECMwKGJ6z1QpGgAABAgQIECBAgACBhoDh2ejBFQQIECBAgAABAgQIEJgVMDxnqxWMAAECBAgQIECAAAECDQHDs9GDKwgQIECAAAECBAgQIDArYHjOVisYAQIECBAgQIAAAQIEGgKGZ6MHVxAgQIAAAQIECBAgQGBWwPCcrVYwAgQIECBAgAABAgQINAQMz0YPriBAgAABAgQIECBAgMCsgOE5W61gBAgQIECAAAECBAgQaAgYno0eXEGAAAECBAgQIECAAIFZAcNztlrBCBAgQIAAAQIECBAg0BAwPBs9uIIAAQIECBAgQIAAAQKzAobnbLWCESBAgAABAgQIECBAoCFgeDZ6cAUBAgQIECBAgAABAgRmBQzP2WoFI0CAAAECBAgQIECAQEPA8Gz04AoCBAgQIECAAAECBAjMChies9UKRoAAAQIECBAgQIAAgYaA4dnowRUECBAgQIAAAQIECBCYFTA8Z6sVjAABAgQIECBAgAABAg0Bw7PRgysIECBAgAABAgQIECAwK2B4zlYrGAECBAgQIECAAAECBBoChmejB1cQIECAAAECBAgQIEBgVsDwnK1WMAIECBAgQIAAAQIECDQEDM9GD64gQIAAAQIECBAgQIDArIDhOVutYAQIECBAgAABAgQIEGgIGJ6NHlxBgAABAgQIECBAgACBWQHDc7ZawQgQIECAAAECBAgQINAQMDwbPbiCAAECBAgQIECAAAECswKG52y1ghEgQIAAAQIECBAgQKAhYHg2enAFAQIECBAgQIAAAQIEZgUMz9lqBSNAgAABAgQIECBAgEBDwPBs9OAKAgQIECBAgAABAgQIzAoYnrPVCkaAAAECBAgQIECAAIGGgOHZ6MEVBAgQIECAAAECBAgQmBUwPGerFYwAAQIECBAgQIAAAQINAcOz0YMrCBAgQIAAAQIECBAgMCtgeM5WKxgBAgQIECBAgAABAgQaAoZnowdXECBAgAABAgQIECBAYFbA8JytVjACBAgQIECAAAECBAg0BAzPRg+uIECAAAECBAgQIECAwKyA4TlbrWAECBAgQIAAAQIECBBoCBiejR5cQYAAAQIECBAgQIAAgVkBw3O2WsEIECBAgAABAgQIECDQEDA8Gz24ggABAgQIECBAgAABArMChudstYIRIECAAAECBAgQIECgIWB4NnpwBQECBAgQIECAAAECBGYFDM/ZagUjQIAAAQIECBAgQIBAQ8DwbPTgCgIECBAgQIAAAQIECMwKGJ6z1QpGgAABAgQIECBAgACBhoDh2ejBFQQIECBAgAABAgQIEJgVMDxnqxWMAAECBAgQIECAAAECDQHDs9GDKwgQIECAAAECBAgQIDArYHjOVisYAQIECBAgQIAAAQIEGgKGZ6MHVxAgQIAAAQIECBAgQGBWwPCcrVYwAgQIECBAgAABAgQINAQMz0YPriBAgAABAgQIECBAgMCsgOE5W61gBAgQIECAAAECBAgQaAgYno0eXEGAAAECBAgQIECAAIFZAcNztlrBCBAgQIAAAQIECBAg0BAwPBs9uIIAAQIECBAgQIAAAQKzAobnbLWCESBAgAABAgQIECBAoCFgeDZ6cAUBAgQIECBAgAABAgRmBQzP2WoFI0CAAAECBAgQIECAQEPA8Gz04AoCBAgQIECAAAECBAjMChies9UKRoAAAQIECBAgQIAAgYaA4dnowRUECBAgQIAAAQIECBCYFTA8Z6sVjAABAgQIECBAgAABAg0Bw7PRgysIECBAgAABAgQIECAwK2B4zlYrGAECBAgQIECAAAECBBoChmejB1cQIECAAAECBAgQIEBgVsDwnK1WMAIECBAgQIAAAQIECDQEDM9GD64gQIAAAQIECBAgQIDArIDhOVutYAQIECBAgAABAgQIEGgIGJ6NHlxBgAABAgQIECBAgACBWQHDc7ZawQgQIECAAAECBAgQINAQMDwbPbiCAAECBAgQIECAAAECswKG52y1ghEgQIAAAQIECBAgQKAhYHg2enAFAQIECBAgQIAAAQIEZgUMz9lqBSNAgAABAgQIECBAgEBDwPBs9OAKAgQIECBAgAABAgQIzAoYnrPVCkaAAAECBAgQIECAAIGGgOHZ6MEVBAgQIECAAAECBAgQmBUwPGerFYwAAQIECBAgQIAAAQINAcOz0YMrCBAgQIAAAQIECBAgMCtgeM5WKxgBAgQIECBAgAABAgQaAoZnowdXECBAgAABAgQIECBAYFbA8JytVjACBAgQIECAAAECBAg0BAzPRg+uIECAAAECBAgQIECAwKyA4TlbrWAECBAgQIAAAQIECBBoCBiejR5cQYAAAQIECBAgQIAAgVkBw3O2WsEIECBAgAABAgQIECDQEDA8Gz24ggABAgQIECBAgAABArMChudstYIRIECAAAECBAgQIECgIWB4NnpwBQECBAgQIECAAAECBGYFDM/ZagUjQIAAAQIECBAgQIBAQ8DwbPTgCgIECBAgQIAAAQIECMwKGJ6z1QpGgAABAgQIECBAgACBhoDh2ejBFQQIECBAgAABAgQIEJgVMDxnqxWMAAECBAgQIECAAAECDQHDs9GDKwgQIECAAAECBAgQIDArYHjOVisYAQIECBAgQIAAAQIEGgKGZ6MHVxAgQIAAAQIECBAgQGBWwPCcrVYwAgQIECBAgAABAgQINAQMz0YPriBAgAABAgQIECBAgMCsgOE5W61gBAgQIECAAAECBAgQaAgYno0eXEGAAAECBAgQIECAAIFZAcNztlrBCBAgQIAAAQIECBAg0BAwPBs9uIIAAQIECBAgQIAAAQKzAobnbLWCESBAgAABAgQIECBAoCFgeDZ6cAUBAgQIECBAgAABAgRmBQzP2WoFI0CAAAECBAgQIECAQEPA8Gz04AoCBAgQIECAAAECBAjMChies9UKRoAAAQIECBAgQIAAgYaA4dnowRUECBAgQIAAAQIECBCYFTA8Z6sVjAABAgQIECBAgAABAg0Bw7PRgysIECBAgAABAgQIECAwK2B4zlYrGAECBAgQIECAAAECBBoChmejB1cQIECAAAECBAgQIEBgVsDwnK1WMAIECBAgQIAAAQIECDQEDM9GD64gQIAAAQIECBAgQIDArIDhOVutYAQIECBAgAABAgQIEGgIGJ6NHlxBgAABAgQIECBAgACBWQHDc7ZawQgQIECAAAECBAgQINAQMDwbPbiCAAECBAgQIECAAAECswKG52y1ghEgQIAAAQIECBAgQKAhYHg2enAFAQIECBAgQIAAAQIEZgUMz9lqBSNAgAABAgQIECBAgEBDwPBs9OAKAgQIECBAgAABAgQIzAoYnrPVCkaAAAECBAgQIECAAIGGgOHZ6MEVBAgQIECAAAECBAgQmBUwPGerFYwAAQIECBAgQIAAAQINAcOz0YMrCBAgQIAAAQIECBAgMCtgeM5WKxgBAgQIECBAgAABAgQaAoZnowdXECBAgAABAgQIECBAYFbA8JytVjACBAgQIECAAAECBAg0BAzPRg+uIECAAAECBAgQIECAwKyA4TlbrWAECBAgQIAAAQIECBBoCBiejR5cQYAAAQIECBAgQIAAgVkBw3O2WsEIECBAgAABAgQIECDQEDA8Gz24ggABAgQIECBAgAABArMChudstYIRIECAAAECBAgQIECgIWB4NnpwBQECBAgQIECAAAECBGYFDM/ZagUjQIAAAQIECBAgQIBAQ8DwbPTgCgIECBAgQIAAAQIECMwKGJ6z1QpGgAABAgQIECBAgACBhoDh2ejBFQQIECBAgAABAgQIEJgVMDxnqxWMAAECBAgQIECAAAECDQHDs9GDKwgQIECAAAECBAgQIDArYHjOVisYAQIECBAgQIAAAQIEGgKGZ6MHVxAgQIAAAQIECBAgQGBWwPCcrVYwAgQIECBAgAABAgQINAQMz0YPriBAgAABAgQIECBAgMCsgOE5W61gBAgQIECAAAECBAgQaAgYno0eXEGAAAECBAgQIECAAIFZAcNztlrBCBAgQIAAAQIECBAg0BAwPBs9uIIAAQIECBAgQIAAAQKzAobnbLWCESBAgAABAgQIECBAoCFgeDZ6cAUBAgQIECBAgAABAgRmBQzP2WoFI0CAAAECBAgQIECAQEPA8Gz04AoCBAgQIECAAAECBAjMChies9UKRoAAAQIECBAgQIAAgYaA4dnowRUECBAgQIAAAQIECBCYFTA8Z6sVjAABAgQIECBAgAABAg0Bw7PRgysIECBAgAABAgQIECAwK2B4zlYrGAECBAgQIECAAAECBBoChmejB1cQIECAAAECBAgQIEBgVsDwnK1WMAIECBAgQIAAAQIECDQEDM9GD64gQIAAAQIECBAgQIDArIDhOVutYAQIECBAgAABAgQIEGgIGJ6NHlxBgAABAgQIECBAgACBWQHDc7ZawQgQIECAAAECBAgQINAQMDwbPbiCAAECBAgQIECAAAECswKG52y1ghEgQIAAAQIECBAgQKAhYHg2enAFAQIECBAgQIAAAQIEZgUMz9lqBSNAgAABAgQIECBAgEBDwPBs9OAKAgQIECBAgAABAgQIzAoYnrPVCkaAAAECBAgQIECAAIGGgOHZ6MEVBAgQIECAAAECBAgQmBUwPGerFYwAAQIECBAgQIAAAQINAcOz0YMrCBAgQIAAAQIECBAgMCtgeM5WKxgBAgQIECBAgAABAgQaAoZnowdXECBAgAABAgQIECBAYFbA8JytVjACBAgQIECAAAECBAg0BAzPRg+uIECAAAECBAgQIECAwKyA4TlbrWAECBAgQIAAAQIECBBoCBiejR5cQYAAAQIECBAgQIAAgVkBw3O2WsEIECBAgAABAgQIECDQEDA8Gz24ggABAgQIECBAgAABArMChudstYIRIECAAAECBAgQIECgIWB4NnpwBQECBAgQIECAAAECBGYFDM/ZagUjQIAAAQIECBAgQIBAQ8DwbPTgCgIECBAgQIAAAQIECMwKGJ6z1QpGgAABAgQIECBAgACBhoDh2ejBFQQIECBAgAABAgQIEJgVMDxnqxWMAAECBAgQIECAAAECDQHDs9GDKwgQIECAAAECBAgQIDArYHjOVisYAQIECBAgQIAAAQIEGgKGZ6MHVxAgQIAAAQIECBAgQGBWwPCcrVYwAgQIECBAgAABAgQINAQMz0YPriBAgAABAgQIECBAgMCsgOE5W61gBAgQIECAAAECBAgQaAgYno0eXEGAAAECBAgQIECAAIFZAcNztlrBCBAgQIAAAQIECBAg0BAwPBs9uIIAAQIECBAgQIAAAQKzAobnbLWCESBAgAABAgQIECBAoCFgeDZ6cAUBAgQIECBAgAABAgRmBQzP2WoFI0CAAAECBAgQIECAQEPA8Gz04AoCBAgQIECAAAECBAjMChies9UKRoAAAQIECBAgQIAAgYaA4dnowRUECBAgQIAAAQIECBCYFTA8Z6sVjAABAgQIECBAgAABAg0Bw7PRgysIECBAgAABAgQIECAwK2B4zlYrGAECBAgQIECAAAECBBoChmejB1cQIECAAAECBAgQIEBgVsDwnK1WMAIECBAgQIAAAQIECDQEDM9GD64gQIAAAQIECBAgQIDArIDhOVutYAQIECBAgAABAgQIEGgIGJ6NHlxBgAABAgQIECBAgACBWQHDc7ZawQgQIECAAAECBAgQINAQMDwbPbiCAAECBAgQIECAAAECswKG52y1ghEgQIAAAQIECBAgQKAhYHg2enAFAQIECBAgQIAAAQIEZgUMz9lqBSNAgAABAgQIECBAgEBDwPBs9OAKAgQIECBAgAABAgQIzAoYnrPVCkaAAAECBAgQIECAAIGGgOHZ6MEVBAgQIECAAAECBAgQmBUwPGerFYwAAQIECBAgQIAAAQINAcOz0YMrCBAgQIAAAQIECBAgMCtgeM5WKxgBAgQIECBAgAABAgQaAoZnowdXECBAgAABAgQIECBAYFbA8JytVjACBAgQIECAAAECBAg0BAzPRg+uIECAAAECBAgQIECAwKyA4TlbrWAECBAgQIAAAQIECBBoCBiejR5cQYAAAQIECBAgQIAAgVkBw3O2WsEIECBAgAABAgQIECDQEDA8Gz24ggABAgQIECBAgAABArMChudstYIRIECAAAECBAgQIECgIWB4NnpwBQECBAgQIECAAAECBGYFDM/ZagUjQIAAAQIECBAgQIBAQ8DwbPTgCgIECBAgQIAAAQIECMwKGJ6z1QpGgAABAgQIECBAgACBhoDh2ejBFQQIECBAgAABAgQIEJgVMDxnqxWMAAECBAgQIECAAAECDQHDs9GDKwgQIECAAAECBAgQIDArYHjOVisYAQIECBAgQIAAAQIEGgKGZ6MHVxAgQIAAAQIECBAgQGBWwPCcrVYwAgQIECBAgAABAgQINAQMz0YPriBAgAABAgQIECBAgMCsgOE5W61gBAgQIECAAAECBAgQaAgYno0eXEGAAAECBAgQIECAAIFZAcNztlrBCBAgQIAAAQIECBAg0BAwPBs9uIIAAQIECBAgQIAAAQKzAobnbLWCESBAgAABAgQIECBAoCFgeDZ6cAUBAgQIECBAgAABAgRmBQzP2WoFI0CAAAECBAgQIECAQEPA8Gz04AoCBAgQIECAAAECBAjMChies9UKRoAAAQIECBAgQIAAgYaA4dnowRUECBAgQIAAAQIECBCYFTA8Z6sVjAABAgQIECBAgAABAg0Bw7PRgysIECBAgAABAgQIECAwK2B4zlYrGAECBAgQIECAAAECBBoChmejB1cQIECAAAECBAgQIEBgVsDwnK1WMAIECBAgQIAAAQIECDQEDM9GD64gQIAAAQIECBAgQIDArIDhOVutYAQIECBAgAABAgQIEGgIGJ6NHlxBgAABAgQIECBAgACBWQHDc7ZawQgQIECAAAECBAgQINAQMDwbPbiCAAECBAgQIECAAAECswKG52y1ghEgQIAAAQIECBAgQKAhYHg2enAFAQIECBAgQIAAAQIEZgUMz9lqBSNAgAABAgQIECBAgEBDwPBs9OAKAgQIECBAgAABAgQIzAoYnrPVCkaAAAECBAgQIECAAIGGgOHZ6MEVBAgQIECAAAECBAgQmBUwPGerFYwAAQIECBAgQIAAAQINAcOz0YMrCBAgQIAAAQIECBAgMCtgeM5WKxgBAgQIECBAgAABAgQaAoZnowdXECBAgAABAgQIECBAYFbA8JytVjACBAgQIECAAAECBAg0BAzPRg+uIECAAAECBAgQIECAwKyA4TlbrWAECBAgQIAAAQIECBBoCBiejR5cQYAAAQIECBAgQIAAgVkBw3O2WsEIECBAgAABAgQIECDQEDA8Gz24ggABAgQIECBAgAABArMChudstYIRIECAAAECBAgQIECgIWB4NnpwBQECBAgQIECAAAECBGYFDM/ZagUjQIAAAQIECBAgQIBAQ8DwbPTgCgIECBAgQIAAAQIECMwKGJ6z1QpGgAABAgQIECBAgACBhoDh2ejBFQQIECBAgAABAgQIEJgVMDxnqxWMAAECBAgQIECAAAECDQHDs9GDKwgQIECAAAECBAgQIDArYHjOVisYAQIECBAgQIAAAQIEGgKGZ6MHVxAgQIAAAQIECBAgQGBWwPCcrVYwAgQIECBAgAABAgQINAQMz0YPriBAgAABAgQIECBAgMCsgOE5W61gBAgQIECAAAECBAgQaAgYno0eXEGAAAECBAgQIECAAIFZAcNztlrBCBAgQIAAAQIECBAg0BAwPBs9uIIAAQIECBAgQIAAAQKzAobnbLWCESBAgAABAgQIECBAoCFgeDZ6cAUBAgQIECBAgAABAgRmBQzP2WoFI0CAAAECBAgQIECAQEPA8Gz04AoCBAgQIECAAAECBAjMChies9UKRoAAAQIECBAgQIAAgYaA4dnowRUECBAgQIAAAQIECBCYFTA8Z6sVjAABAgQIECBAgAABAg0Bw7PRgysIECBAgAABAgQIECAwK2B4zlYrGAECBAgQIECAAAECBBoChmejB1cQIECAAAECBAgQIEBgVsDwnK1WMAIECBAgQIAAAQIECDQEDM9GD64gQIAAAQIECBAgQIDArIDhOVutYAQIECBAgAABAgQIEGgIGJ6NHlxBgAABAgQIECBAgACBWQHDc7ZawQgQIECAAAECBAgQINAQMDwbPbiCAAECBAgQIECAAAECswKG52y1ghEgQIAAAQIECBAgQKAhYHg2enAFAQIECBAgQIAAAQIEZgUMz9lqBSNAgAABAgQIECBAgEBDwPBs9OAKzkunlAAAIABJREFUAgQIECBAgAABAgQIzAoYnrPVCkaAAAECBAgQIECAAIGGgOHZ6MEVBAgQIECAAAECBAgQmBUwPGerFYwAAQIECBAgQIAAAQINAcOz0YMrCBAgQIAAAQIECBAgMCtgeM5WKxgBAgQIECBAgAABAgQaAoZnowdXECBAgAABAgQIECBAYFbA8JytVjACBAgQIECAAAECBAg0BAzPRg+uIECAAAECBAgQIECAwKyA4TlbrWAECBAgQIAAAQIECBBoCBiejR5cQYAAAQIECBAgQIAAgVkBw3O2WsEIECBAgAABAgQIECDQEDA8Gz24ggABAgQIECBAgAABArMChudstYIRIECAAAECBAgQIECgIWB4NnpwBQECBAgQIECAAAECBGYFDM/ZagUjQIAAAQIECBAgQIBAQ8DwbPTgCgIECBAgQIAAAQIECMwKGJ6z1QpGgAABAgQIECBAgACBhoDh2ejBFQQIECBAgAABAgQIEJgVMDxnqxWMAAECBAgQIECAAAECDQHDs9GDKwgQIECAAAECBAgQIDArYHjOVisYAQIECBAgQIAAAQIEGgKGZ6MHVxAgQIAAAQIECBAgQGBWwPCcrVYwAgQIECBAgAABAgQINAQMz0YPriBAgAABAgQIECBAgMCsgOE5W61gBAgQIECAAAECBAgQaAgYno0eXEGAAAECBAgQIECAAIFZAcNztlrBCBAgQIAAAQIECBAg0BAwPBs9uIIAAQIECBAgQIAAAQKzAobnbLWCESBAgAABAgQIECBAoCFgeDZ6cAUBAgQIECBAgAABAgRmBQzP2WoFI0CAAAECBAgQIECAQEPA8Gz04AoCBAgQIECAAAECBAjMChies9UKRoAAAQIECBAgQIAAgYaA4dnowRUECBAgQIAAAQIECBCYFTA8Z6sVjAABAgQIECBAgAABAg0Bw7PRgysIECBAgAABAgQIECAwK2B4zlYrGAECBAgQIECAAAECBBoChmejB1cQIECAAAECBAgQIEBgVsDwnK1WMAIECBAgQIAAAQIECDQEDM9GD64gQIAAAQIECBAgQIDArIDhOVutYAQIECBAgAABAgQIEGgIGJ6NHlxBgAABAgQIECBAgACBWQHDc7ZawQgQIECAAAECBAgQINAQMDwbPbiCAAECBAgQIECAAAECswKG52y1ghEgQIAAAQIECBAgQKAhYHg2enAFAQIECBAgQIAAAQIEZgUMz9lqBSNAgAABAgQIECBAgEBDwPBs9OAKAgQIECBAgAABAgQIzAoYnrPVCkaAAAECBAgQIECAAIGGgOHZ6MEVBAgQIECAAAECBAgQmBUwPGerFYwAAQIECBAgQIAAAQINAcOz0YMrCBAgQIAAAQIECBAgMCtgeM5WKxgBAgQIECBAgAABAgQaAoZnowdXECBAgAABAgQIECBAYFbA8JytVjACBAgQIECAAAECBAg0BAzPRg+uIECAAAECBAgQIECAwKyA4TlbrWAECBAgQIAAAQIECBBoCBiejR5cQYAAAQIECBAgQIAAgVkBw3O2WsEIECBAgAABAgQIECDQEDA8Gz24ggABAgQIECBAgAABArMChudstYIRIECAAAECBAgQIECgIWB4NnpwBQECBAgQIECAAAECBGYFDM/ZagUjQIAAAQIECBAgQIBAQ8DwbPTgCgIECBAgQIAAAQIECMwKGJ6z1QpGgAABAgQIECBAgACBhoDh2ejBFQQIECBAgAABAgQIEJgVMDxnqxWMAAECBAgQIECAAAECDQHDs9GDKwgQIECAAAECBAgQIDArYHjOVisYAQIECBAgQIAAAQIEGgKGZ6MHVxAgQIAAAQIECBAgQGBWwPCcrVYwAgQIECBAgAABAgQINAQMz0YPriBAgAABAgQIECBAgMCsgOE5W61gBAgQIECAAAECBAgQaAgYno0eXEGAAAECBAgQIECAAIFZAcNztlrBCBAgQIAAAQIECBAg0BAwPBs9uIIAAQIECBAgQIAAAQKzAobnbLWCESBAgAABAgQIECBAoCFgeDZ6cAUBAgQIECBAgAABAgRmBQzP2WoFI0CAAAECBAgQIECAQEPA8Gz04AoCBAgQIECAAAECBAjMChies9UKRoAAAQIECBAgQIAAgYaA4dnowRUECBAgQIAAAQIECBCYFTA8Z6sVjAABAgQIECBAgAABAg0Bw7PRgysIECBAgAABAgQIECAwK2B4zlYrGAECBAgQIECAAAECBBoChmejB1cQIECAAAECBAgQIEBgVsDwnK1WMAIECBAgQIAAAQIECDQEDM9GD64gQIAAAQIECBAgQIDArIDhOVutYAQIECBAgAABAgQIEGgIGJ6NHlxBgAABAgQIECBAgACBWQHDc7ZawQgQIECAAAECBAgQINAQMDwbPbiCAAECBAgQIECAAAECswKG52y1ghEgQIAAAQIECBAgQKAhYHg2enAFAQIECBAgQIAAAQIEZgUMz9lqBSNAgAABAgQIECBAgEBDwPBs9OAKAgQIECBAgAABAgQIzAoYnrPVCkaAAAECBAgQIECAAIGGgOHZ6MEVBAgQIECAAAECBAgQmBUwPGerFYwAAQIECBAgQIAAAQINAcOz0YMrCBAgQIAAAQIECBAgMCtgeM5WKxgBAgQIECBAgAABAgQaAoZnowdXECBAgAABAgQIECBAYFbA8JytVjACBAgQIECAAAECBAg0BAzPRg+uIECAAAECBAgQIECAwKyA4TlbrWAECBAgQIAAAQIECBBoCBiejR5cQYAAAQIECBAgQIAAgVkBw3O2WsEIECBAgAABAgQIECDQEDA8Gz24ggABAgQIECBAgAABArMChudstYIRIECAAAECBAgQIECgIWB4NnpwBQECBAgQIECAAAECBGYFDM/ZagUjQIAAAQIECBAgQIBAQ8DwbPTgCgIECBAgQIAAAQIECMwKGJ6z1QpGgAABAgQIECBAgACBhoDh2ejBFQQIECBAgAABAgQIEJgVMDxnqxWMAAECBAgQIECAAAECDQHDs9GDKwgQIECAAAECBAgQIDArYHjOVisYAQIECBAgQIAAAQIEGgKGZ6MHVxAgQIAAAQIECBAgQGBWwPCcrVYwAgQIECBAgAABAgQINAQMz0YPriBAgAABAgQIECBAgMCsgOE5W61gBAgQIECAAAECBAgQaAgYno0eXEGAAAECBAgQIECAAIFZAcNztlrBCBAgQIAAAQIECBAg0BAwPBs9uIIAAQIECBAgQIAAAQKzAobnbLWCESBAgAABAgQIECBAoCFgeDZ6cAUBAgQIECBAgAABAgRmBQzP2WoFI0CAAAECBAgQIECAQEPA8Gz04AoCBAgQIECAAAECBAjMChies9UKRoAAAQIECBAgQIAAgYaA4dnowRUECBAgQIAAAQIECBCYFTA8Z6sVjAABAgQIECBAgAABAg0Bw7PRgysIECBAgAABAgQIECAwK2B4zlYrGAECBAgQIECAAAECBBoChmejB1cQIECAAAECBAgQIEBgVsDwnK1WMAIECBAgQIAAAQIECDQEDM9GD64gQIAAAQIECBAgQIDArIDhOVutYAQIECBAgAABAgQIEGgIGJ6NHlxBgAABAgQIECBAgACBWQHDc7ZawQgQIECAAAECBAgQINAQMDwbPbiCAAECBAgQIECAAAECswKG52y1ghEgQIAAAQIECBAgQKAhYHg2enAFAQIECBAgQIAAAQIEZgUMz9lqBSNAgAABAgQIECBAgEBDwPBs9OAKAgQIECBAgAABAgQIzAoYnrPVCkaAAAECBAgQIECAAIGGgOHZ6MEVBAgQIECAAAECBAgQmBUwPGerFYwAAQIECBAgQIAAAQINAcOz0YMrCBAgQIAAAQIECBAgMCtgeM5WKxgBAgQIECBAgAABAgQaAoZnowdXECBAgAABAgQIECBAYFbA8JytVjACBAgQIECAAAECBAg0BAzPRg+uIECAAAECBAgQIECAwKyA4TlbrWAECBAgQIAAAQIECBBoCBiejR5cQYAAAQIECBAgQIAAgVkBw3O2WsEIECBAgAABAgQIECDQEDA8Gz24ggABAgQIECBAgAABArMChudstYIRIECAAAECBAgQIECgIWB4NnpwBQECBAgQIECAAAECBGYFDM/ZagUjQIAAAQIECBAgQIBAQ8DwbPTgCgIECBAgQIAAAQIECMwKGJ6z1QpGgAABAgQIECBAgACBhoDh2ejBFQQIECBAgAABAgQIEJgVMDxnqxWMAAECBAgQIECAAAECDQHDs9GDKwgQIECAAAECBAgQIDArYHjOVisYAQIECBAgQIAAAQIEGgKGZ6MHVxAgQIAAAQIECBAgQGBWwPCcrVYwAgQIECBAgAABAgQINAQMz0YPriBAgAABAgQIECBAgMCsgOE5W61gBAgQIECAAAECBAgQaAgYno0eXEGAAAECBAgQIECAAIFZAcNztlrBCBAgQIAAAQIECBAg0BAwPBs9uIIAAQIECBAgQIAAAQKzAobnbLWCESBAgAABAgQIECBAoCFgeDZ6cAUBAgQIECBAgAABAgRmBQzP2WoFI0CAAAECBAgQIECAQEPA8Gz04AoCBAgQIECAAAECBAjMChies9UKRoAAAQIECBAgQIAAgYaA4dnowRUECBAgQIAAAQIECBCYFTA8Z6sVjAABAgQIECBAgAABAg0Bw7PRgysIECBAgAABAgQIECAwK2B4zlYrGAECBAgQIECAAAECBBoChmejB1cQIECAAAECBAgQIEBgVsDwnK1WMAIECBAgQIAAAQIECDQEDM9GD64gQIAAAQIECBAgQIDArIDhOVutYAQIECBAgAABAgQIEGgIGJ6NHlxBgAABAgQIECBAgACBWQHDc7ZawQgQIECAAAECBAgQINAQMDwbPbiCAAECBAgQIECAAAECswKG52y1ghEgQIAAAQIECBAgQKAhYHg2enAFAQIECBAgQIAAAQIEZgUMz9lqBSNAgAABAgQIECBAgEBDwPBs9OAKAgQIECBAgAABAgQIzAoYnrPVCkaAAAECBAgQIECAAIGGgOHZ6MEVBAgQIECAAAECBAgQmBUwPGerFYwAAQIECBAgQIAAAQINAcOz0YMrCBAgQIAAAQIECBAgMCtgeM5WKxgBAgQIECBAgAABAgQaAoZnowdXECBAgAABAgQIECBAYFbA8JytVjACBAgQIECAAAECBAg0BAzPRg+uIECAAAECBAgQIECAwKyA4TlbrWAECBAgQIAAAQIECBBoCBiejR5cQYAAAQIECBAgQIAAgVkBw3O2WsEIECBAgAABAgQIECDQEDA8Gz24ggABAgQIECBAgAABArMChudstYIRIECAAAECBAgQIECgIWB4NnpwBQECBAgQIECAAAECBGYFDM/ZagUjQIAAAQIECBAgQIBAQ8DwbPTgCgIECBAgQIAAAQIECMwKGJ6z1QpGgAABAgQIECBAgACBhoDh2ejBFQQIECBAgAABAgQIEJgVMDxnqxWMAAECBAgQIECAAAECDQHDs9GDKwgQIECAAAECBAgQIDArYHjOVisYAQIECBAgQIAAAQIEGgKGZ6MHVxAgQIAAAQIECBAgQGBWwPCcrVYwAgQIECBAgAABAgQINAQMz0YPriBAgAABAgQIECBAgMCsgOE5W61gBAgQIECAAAECBAgQaAgYno0eXEGAAAECBAgQIECAAIFZAcNztlrBCBAgQIAAAQIECBAg0BAwPBs9uIIAAQIECBAgQIAAAQKzAobnbLWCESBAgAABAgQIECBAoCFgeDZ6cAUBAgQIECBAgAABAgRmBQzP2WoFI0CAAAECBAgQIECAQEPA8Gz04AoCBAgQIECAAAECBAjMChies9UKRoAAAQIECBAgQIAAgYaA4dnowRUECBAgQIAAAQIECBCYFTA8Z6sVjAABAgQIECBAgAABAg0Bw7PRgysIECBAgAABAgQIECAwK2B4zlYrGAECBAgQIECAAAECBBoChmejB1cQIECAAAECBAgQIEBgVsDwnK1WMAIECBAgQIAAAQIECDQEDM9GD64gQIAAAQIECBAgQIDArIDhOVutYAQIECBAgAABAgQIEGgIGJ6NHlxBgAABAgQIECBAgACBWQHDc7ZawQgQIECAAAECBAgQINAQMDwbPbiCAAECBAgQIECAAAECswKG52y1ghEgQIAAAQIECBAgQKAhYHg2enAFAQIECBAgQIAAAQIEZgUMz9lqBSNAgAABAgQIECBAgEBDwPBs9OAKAgQIECBAgAABAgQIzAoYnrPVCkaAAAECBAgQIECAAIGGgOHZ6MEVBAgQIECAAAECBAgQmBUwPGerFYwAAQIECBAgQIAAAQINAcOz0YMrCBAgQIAAAQIECBAgMCtgeM5WKxgBAgQIECBAgAABAgQaAoZnowdXECBAgAABAgQIECBAYFbA8JytVjACBAgQIECAAAECBAg0BAzPRg+uIECAAAECBAgQIECAwKyA4TlbrWAECBAgQIAAAQIECBBoCBiejR5cQYAAAQIECBAgQIAAgVkBw3O2WsEIECBAgAABAgQIECDQEDA8Gz24ggABAgQIECBAgAABArMChudstYIRIECAAAECBAgQIECgIWB4NnpwBQECBAgQIECAAAECBGYFDM/ZagUjQIAAAQIECBAgQIBAQ8DwbPTgCgIECBAgQIAAAQIECMwKGJ6z1QpGgAABAgQIECBAgACBhoDh2ejBFQQIECBAgAABAgQIEJgVMDxnqxWMwH/bs4MbJ6IoiKLqeFg5AwiCeBDxEARE0F4RT4/YjWY5asmX0gmgv+udWpVMgAABAgQIECBAgEBDwPBs9CAFAQIECBAgQIAAAQIEZgUMz9lqHUaAAAECBAgQIECAAIGGgOHZ6EEKAgQIECBAgAABAgQIzAoYnrPVOowAAQIECBAgQIAAAQINAcOz0YMUBAgQIECAAAECBAgQmBUwPGerdRgBAgQIECBAgAABAgQaAoZnowcpCBAgQIAAAQIECBAgMCtgeM5W6zACBAgQIECAAAECBAg0BAzPRg9SECBAgAABAgQIECBAYFbA8Jyt1mEECBAgQIAAAQIECBBoCBiejR6kIECAAAECBAgQIECAwKyA4TlbrcMIECBAgAABAgQIECDQEDA8Gz1IQYAAAQIECBAgQIAAgVkBw3O2WocRIECAAAECBAgQIECgIWB4NnqQggABAgQIECBAgAABArMChudstQ4jQIAAAQIECBAgQIBAQ8DwbPQgBQECBAgQIECAAAECBGYFDM/Zah1GgAABAgQIECBAgACBhoDh2ehBCgIECBAgQIAAAQIECMwKGJ6z1TqMAAECBAgQIECAAAECDQHDs9GDFAQIECBAgAABAgQIEJgVMDxnq3UYAQIECBAgQIAAAQIEGgKGZ6MHKQgQIECAAAECBAgQIDArYHjOVuswAgQIECBAgAABAgQINAQMz0YPUhAgQIAAAQIECBAgQGBWwPCcrdZhBAgQIECAAAECBAgQaAgYno0epCBAgAABAgQIECBAgMCsgOE5W63DCBAgQIAAAQIECBAg0BAwPBs9SEGAAAECBAgQIECAAIFZAcNztlqHESBAgAABAgQIECBAoCFgeDZ6kIIAAQIECBAgQIAAAQKzAobnbLUOI0CAAAECBAgQIECAQEPA8Gz0IAUBAgQIECBAgAABAgRmBQzP2WodRoAAAQIECBAgQIAAgYaA4dnoQQoCBAgQIECAAAECBAjMChies9U6jAABAgQIECBAgAABAg0Bw7PRgxQECBAgQIAAAQIECBCYFTA8Z6t1GAECBAgQIECAAAECBBoChmejBykIECBAgAABAgQIECAwK2B4zlbrMAIECBAgQIAAAQIECDQEDM9GD1IQIECAAAECBAgQIEBgVsDwnK3WYQQIECBAgAABAgQIEGgIGJ6NHqQgQIAAAQIECBAgQIDArIDhOVutwwgQIECAAAECBAgQINAQMDwbPUhBgAABAgQIECBAgACBWQHDc7ZahxEgQIAAAQIECBAgQKAhYHg2epCCAAECBAgQIECAAAECswKG52y1DiNAgAABAgQIECBAgEBDwPBs9CAFAQIECBAgQIAAAQIEZgUMz9lqHUaAAAECBAgQIECAAIGGgOHZ6EEKAgQIECBAgAABAgQIzAoYnrPVOowAAQIECBAgQIAAAQINAcOz0YMUBAgQIECAAAECBAgQmBUwPGerdRgBAgQIECBAgAABAgQaAoZnowcpCBAgQIAAAQIECBAgMCtgeM5W6zACBAgQIECAAAECBAg0BAzPRg9SECBAgAABAgQIECBAYFbA8Jyt1mEECBAgQIAAAQIECBBoCBiejR6kIECAAAECBAgQIECAwKyA4TlbrcMIECBAgAABAgQIECDQEDA8Gz1IQYAAAQIECBAgQIAAgVkBw3O2WocRIECAAAECBAgQIECgIWB4NnqQggABAgQIECBAgAABArMChudstQ4jQIAAAQIECBAgQIBAQ8DwbPQgBQECBAgQIECAAAECBGYFDM/Zah1GgAABAgQIECBAgACBhoDh2ehBCgIECBAgQIAAAQIECMwKGJ6z1TqMAAECBAgQIECAAAECDQHDs9GDFAQIECBAgAABAgQIEJgVMDxnq3UYAQIECBAgQIAAAQIEGgKGZ6MHKQgQIECAAAECBAgQIDArYHjOVuswAgQIECBAgAABAgQINAQMz0YPUhAgQIAAAQIECBAgQGBWwPCcrdZhBAgQIECAAAECBAgQaAgYno0epCBAgAABAgQIECBAgMCsgOE5W63DCBAgQIAAAQIECBAg0BAwPBs9SEGAAAECBAgQIECAAIFZAcNztlqHESBAgAABAgQIECBAoCFgeDZ6kIIAAQIECBAgQIAAAQKzAobnbLUOI0CAAAECBAgQIECAQEPA8Gz0IAUBAgQIECBAgAABAgRmBQzP2WodRoAAAQIECBAgQIAAgYaA4dnoQQoCBAgQIECAAAECBAjMChies9U6jAABAgQIECBAgAABAg0Bw7PRgxQECBAgQIAAAQIECBCYFTA8Z6t1GAECBAgQIECAAAECBBoChmejBykIECBAgAABAgQIECAwK2B4zlbrMAIECBAgQIAAAQIECDQEDM9GD1IQIECAAAECBAgQIEBgVsDwnK3WYQQIECBAgAABAgQIEGgIGJ6NHqQgQIAAAQIECBAgQIDArIDhOVutwwgQIECAAAECBAgQINAQMDwbPUhBgAABAgQIECBAgACBWQHDc7ZahxEgQIAAAQIECBAgQKAhYHg2epCCAAECBAgQIECAAAECswKG52y1DiNAgAABAgQIECBAgEBDwPBs9CAFAQIECBAgQIAAAQIEZgUMz9lqHUaAAAECBAgQIECAAIGGgOHZ6EEKAgQIECBAgAABAgQIzAoYnrPVOowAAQIECBAgQIAAAQINAcOz0YMUBAgQIECAAAECBAgQmBUwPGerdRgBAgQIECBAgAABAgQaAoZnowcpCBAgQIAAAQIECBAgMCtgeM5W6zACBAgQIECAAAECBAg0BAzPRg9SECBAgAABAgQIECBAYFbA8Jyt1mEECBAgQIAAAQIECBBoCBiejR6kIECAAAECBAgQIECAwKyA4TlbrcMIECBAgAABAgQIECDQEDA8Gz1IQYAAAQIECBAgQIAAgVkBw3O2WocRIECAAAECBAgQIECgIWB4NnqQggABAgQIECBAgAABArMChudstQ4jQIAAAQIECBAgQIBAQ8DwbPQgBQECBAgQIECAAAECBGYFDM/Zah1GgAABAgQIECBAgACBhoDh2ehBCgIECBAgQIAAAQIECMwKGJ6z1TqMAAECBAgQIECAAAECDQHDs9GDFAQIECBAgAABAgQIEJgVMDxnq3UYAQIECBAgQIAAAQIEGgKGZ6MHKQgQIECAAAECBAgQIDArYHjOVuswAgQIECBAgAABAgQINAQMz0YPUhAgQIAAAQIECBAgQGBWwPCcrdZhBAgQIECAAAECBAgQaAgYno0epCBAgAABAgQIECBAgMCsgOE5W63DCBAgQIAAAQIECBAg0BAwPBs9SEGAAAECBAgQIECAAIFZAcNztlqHESBAgAABAgQIECBAoCFgeDZ6kIIAAQIECBAgQIAAAQKzAobnbLUOI0CAAAECBAgQIECAQEPA8Gz0IAUBAgQIECBAgAABAgRmBQzP2WodRoAAAQIECBAgQIAAgYaA4dnoQQoCBAgQIECAAAECBAjMChies9U6jAABAgQIECBAgAABAg0Bw7PRgxQECBAgQIAAAQIECBCYFTA8Z6t1GAECBAgQIECAAAECBBoChmejBykIECBAgAABAgQIECAwK2B4zlbrMAIECBAgQIAAAQIECDQEDM9GD1IQIECAAAECBAgQIEBgVsDwnK3WYQQIECBAgAABAgQIEGgIGJ6NHqQgQIAAAQIECBAgQIDArIDhOVutwwgQIECAAAECBAgQINAQMDwbPUhBgAABAgQIECBAgACBWQHDc7ZahxEgQIAAAQIECBAgQKAhYHg2epCCAAECBAgQIECAAAECswKG52y1DiNAgAABAgQIECBAgEBDwPBs9CAFAQIECBAgQIAAAQIEZgUMz9lqHUaAAAECBAgQIECAAIGGgOHZ6EEKAgQIECBAgAABAgQIzAoYnrPVOowAAQIECBAgQIAAAQINAcOz0YMUBAgQIECAAAECBAgQmBUwPGerdRgBAgQIECBAgAABAgQaAoZnowcpCBAgQIAAAQIECBAgMCtgeM5W6zACBAgQIECAAAECBAg0BAzPRg9SECBAgAABAgQIECBAYFbA8Jyt1mEECBAgQIAAAQIECBBoCBiejR6kIECAAAECBAgQIECAwKyA4TlbrcMIECBAgAABAgQIECDQEDA8Gz1IQYAAAQIECBAgQIC1ElluAAAgAElEQVQAgVkBw3O2WocRIECAAAECBAgQIECgIWB4NnqQggABAgQIECBAgAABArMChudstQ4jQIAAAQIECBAgQIBAQ8DwbPQgBQECBAgQIECAAAECBGYFDM/Zah1GgAABAgQIECBAgACBhoDh2ehBCgIECBAgQIAAAQIECMwKGJ6z1TqMAAECBAgQIECAAAECDQHDs9GDFAQIECBAgAABAgQIEJgVMDxnq3UYAQIECBAgQIAAAQIEGgKGZ6MHKQgQIECAAAECBAgQIDArYHjOVuswAgQIECBAgAABAgQINAQMz0YPUhAgQIAAAQIECBAgQGBWwPCcrdZhBAgQIECAAAECBAgQaAgYno0epCBAgAABAgQIECBAgMCsgOE5W63DCBAgQIAAAQIECBAg0BAwPBs9SEGAAAECBAgQIECAAIFZAcNztlqHESBAgAABAgQIECBAoCFgeDZ6kIIAAQIECBAgQIAAAQKzAobnbLUOI0CAAAECBAgQIECAQEPA8Gz0IAUBAgQIECBAgAABAgRmBQzP2WodRoAAAQIECBAgQIAAgYaA4dnoQQoCBAgQIECAAAECBAjMChies9U6jAABAgQIECBAgAABAg0Bw7PRgxQECBAgQIAAAQIECBCYFTA8Z6t1GAECBAgQIECAAAECBBoChmejBykIECBAgAABAgQIECAwK2B4zlbrMAIECBAgQIAAAQIECDQEDM9GD1IQIECAAAECBAgQIEBgVsDwnK3WYQQIECBAgAABAgQIEGgIGJ6NHqQgQIAAAQIECBAgQIDArIDhOVutwwgQIECAAAECBAgQINAQMDwbPUhBgAABAgQIECBAgACBWQHDc7ZahxEgQIAAAQIECBAgQKAhYHg2epCCAAECBAgQIECAAAECswKG52y1DiNAgAABAgQIECBAgEBDwPBs9CAFAQIECBAgQIAAAQIEZgUMz9lqHUaAAAECBAgQIECAAIGGgOHZ6EEKAgQIECBAgAABAgQIzAoYnrPVOowAAQIECBAgQIAAAQINAcOz0YMUBAgQIECAAAECBAgQmBUwPGerdRgBAgQIECBAgAABAgQaAoZnowcpCBAgQIAAAQIECBAgMCtgeM5W6zACBAgQIECAAAECBAg0BAzPRg9SECBAgAABAgQIECBAYFbA8Jyt1mEECBAgQIAAAQIECBBoCBiejR6kIECAAAECBAgQIECAwKyA4TlbrcMIECBAgAABAgQIECDQEDA8Gz1IQYAAAQIECBAgQIAAgVkBw3O2WocRIECAAAECBAgQIECgIWB4NnqQggABAgQIECBAgAABArMChudstQ4jQIAAAQIECBAgQIBAQ8DwbPQgBQECBAgQIECAAAECBGYFDM/Zah1GgAABAgQIECBAgACBhoDh2ehBCgIECBAgQIAAAQIECMwKGJ6z1TqMAAECBAgQIECAAAECDQHDs9GDFAQIECBAgAABAgQIEJgVMDxnq3UYAQIECBAgQIAAAQIEGgKGZ6MHKQgQIECAAAECBAgQIDArYHjOVuswAgQIECBAgAABAgQINAQMz0YPUhAgQIAAAQIECBAgQGBWwPCcrdZhBAgQIECAAAECBAgQaAgYno0epCBAgAABAgQIECBAgMCsgOE5W63DCBAgQIAAAQIECBAg0BAwPBs9SEGAAAECBAgQIECAAIFZAcNztlqHESBAgAABAgQIECBAoCFgeDZ6kIIAAQIECBAgQIAAAQKzAobnbLUOI0CAAAECBAgQIECAQEPA8Gz0IAUBAgQIECBAgAABAgRmBQzP2WodRoAAAQIECBAgQIAAgYaA4dnoQQoCBAgQIECAAAECBAjMChies9U6jAABAgQIECBAgAABAg0Bw7PRgxQECBAgQIAAAQIECBCYFTA8Z6t1GAECBAgQIECAAAECBBoChmejBykIECBAgAABAgQIECAwK2B4zlbrMAIECBAgQIAAAQIECDQEDM9GD1IQIECAAAECBAgQIEBgVsDwnK3WYQQIECBAgAABAgQIEGgIGJ6NHqQgQIAAAQIECBAgQIDArIDhOVutwwgQIECAAAECBAgQINAQMDwbPUhBgAABAgQIECBAgACBWQHDc7ZahxEgQIAAAQIECBAgQKAhYHg2epCCAAECBAgQIECAAAECswKG52y1DiNAgAABAgQIECBAgEBDwPBs9CAFAQIECBAgQIAAAQIEZgUMz9lqHUaAAAECBAgQIECAAIGGgOHZ6EEKAgQIECBAgAABAgQIzAoYnrPVOowAAQIECBAgQIAAAQINAcOz0YMUBAgQIECAAAECBAgQmBUwPGerdRgBAgQIECBAgAABAgQaAoZnowcpCBAgQIAAAQIECBAgMCtgeM5W6zACBAgQIECAAAECBAg0BAzPRg9SECBAgAABAgQIECBAYFbA8Jyt1mEECBAgQIAAAQIECBBoCBiejR6kIECAAAECBAgQIECAwKyA4TlbrcMIECBAgAABAgQIECDQEDA8Gz1IQYAAAQIECBAgQIAAgVkBw3O2WocRIECAAAECBAgQIECgIWB4NnqQggABAgQIECBAgAABArMChudstQ4jQIAAAQIECBAgQIBAQ8DwbPQgBQECBAgQIECAAAECBGYFDM/Zah1GgAABAgQIECBAgACBhoDh2ehBCgIECBAgQIAAAQIECMwKGJ6z1TqMAAECBAgQIECAAAECDQHDs9GDFAQIECBAgAABAgQIEJgVMDxnq3UYAQIECBAgQIAAAQIEGgKGZ6MHKQgQIECAAAECBAgQIDArYHjOVuswAgQIECBAgAABAgQINAQMz0YPUhAgQIAAAQIECBAgQGBWwPCcrdZhBAgQIECAAAECBAgQaAgYno0epCBAgAABAgQIECBAgMCsgOE5W63DCBAgQIAAAQIECBAg0BAwPBs9SEGAAAECBAgQIECAAIFZAcNztlqHESBAgAABAgQIECBAoCFgeDZ6kIIAAQIECBAgQIAAAQKzAobnbLUOI0CAAAECBAgQIECAQEPA8Gz0IAUBAgQIECBAgAABAgRmBQzP2WodRoAAAQIECBAgQIAAgYaA4dnoQQoCBAgQIECAAAECBAjMChies9U6jAABAgQIECBAgAABAg0Bw7PRgxQECBAgQIAAAQIECBCYFTA8Z6t1GAECBAgQIECAAAECBBoChmejBykIECBAgAABAgQIECAwK2B4zlbrMAIECBAgQIAAAQIECDQEDM9GD1IQIECAAAECBAgQIEBgVsDwnK3WYQQIECBAgAABAgQIEGgIGJ6NHqQgQIAAAQIECBAgQIDArIDhOVutwwgQIECAAAECBAgQINAQMDwbPUhBgAABAgQIECBAgACBWQHDc7ZahxEgQIAAAQIECBAgQKAhYHg2epCCAAECBAgQIECAAAECswKG52y1DiNAgAABAgQIECBAgEBDwPBs9CAFAQIECBAgQIAAAQIEZgUMz9lqHUaAAAECBAgQIECAAIGGgOHZ6EEKAgQIECBAgAABAgQIzAoYnrPVOowAAQIECBAgQIAAAQINAcOz0YMUBAgQIECAAAECBAgQmBUwPGerdRgBAgQIECBAgAABAgQaAoZnowcpCBAgQIAAAQIECBAgMCtgeM5W6zACBAgQIECAAAECBAg0BAzPRg9SECBAgAABAgQIECBAYFbA8Jyt1mEECBAgQIAAAQIECBBoCBiejR6kIECAAAECBAgQIECAwKyA4TlbrcMIECBAgAABAgQIECDQEDA8Gz1IQYAAAQIECBAgQIAAgVkBw3O2WocRIECAAAECBAgQIECgIWB4NnqQggABAgQIECBAgAABArMChudstQ4jQIAAAQIECBAgQIBAQ8DwbPQgBQECBAgQIECAAAECBGYFDM/Zah1GgAABAgQIECBAgACBhoDh2ehBCgIECBAgQIAAAQIECMwKGJ6z1TqMAAECBAgQIECAAAECDQHDs9GDFAQIECBAgAABAgQIEJgVMDxnq3UYAQIECBAgQIAAAQIEGgKGZ6MHKQgQIECAAAECBAgQIDArYHjOVuswAgQIECBAgAABAgQINAQMz0YPUhAgQIAAAQIECBAgQGBWwPCcrdZhBAgQIECAAAECBAgQaAgYno0epCBAgAABAgQIECBAgMCsgOE5W63DCBAgQIAAAQIECBAg0BAwPBs9SEGAAAECBAgQIECAAIFZAcNztlqHESBAgAABAgQIECBAoCFgeDZ6kIIAAQIECBAgQIAAAQKzAobnbLUOI0CAAAECBAgQIECAQEPA8Gz0IAUBAgQIECBAgAABAgRmBQzP2WodRoAAAQIECBAgQIAAgYaA4dnoQQoCBAgQIECAAAECBAjMChies9U6jAABAgQIECBAgAABAg0Bw7PRgxQECBAgQIAAAQIECBCYFTA8Z6t1GAECBAgQIECAAAECBBoChmejBykIECBAgAABAgQIECAwK2B4zlbrMAIECBAgQIAAAQIECDQEDM9GD1IQIECAAAECBAgQIEBgVsDwnK3WYQQIECBAgAABAgQIEGgIGJ6NHqQgQIAAAQIECBAgQIDArIDhOVutwwgQIECAAAECBAgQINAQMDwbPUhBgAABAgQIECBAgACBWQHDc7ZahxEgQIAAAQIECBAgQKAhYHg2epCCAAECBAgQIECAAAECswKG52y1DiNAgAABAgQIECBAgEBDwPBs9CAFAQIECBAgQIAAAQIEZgUMz9lqHUaAAAECBAgQIECAAIGGgOHZ6EEKAgQIECBAgAABAgQIzAoYnrPVOowAAQIECBAgQIAAAQINAcOz0YMUBAgQIECAAAECBAgQmBUwPGerdRgBAgQIECBAgAABAgQaAoZnowcpCBAgQIAAAQIECBAgMCtgeM5W6zACBAgQIECAAAECBAg0BAzPRg9SECBAgAABAgQIECBAYFbA8Jyt1mEECBAgQIAAAQIECBBoCBiejR6kIECAAAECBAgQIECAwKyA4TlbrcMIECBAgAABAgQIECDQEDA8Gz1IQYAAAQIECBAgQIAAgVkBw3O2WocRIECAAAECBAgQIECgIWB4NnqQggABAgQIECBAgAABArMChudstQ4jQIAAAQIECBAgQIBAQ8DwbPQgBQECBAgQIECAAAECBGYFDM/Zah1GgAABAgQIECBAgACBhoDh2ehBCgIECBAgQIAAAQIECMwKGJ6z1TqMAAECBAgQIECAAAECDQHDs9GDFAQIECBAgAABAgQIEJgVMDxnq3UYAQIECBAgQIAAAQIEGgKGZ6MHKQgQIECAAAECBAgQIDArYHjOVuswAgQIECBAgAABAgQINAQMz0YPUhAgQIAAAQIECBAgQGBWwPCcrdZhBAgQIECAAAECBAgQaAgYno0epCBAgAABAgQIECBAgMCsgOE5W63DCBAgQIAAAQIECBAg0BAwPBs9SEGAAAECBAgQIECAAIFZAcNztlqHESBAgAABAgQIECBAoCFgeDZ6kIIAAQIECBAgQIAAAQKzAobnbLUOI0CAAAECBAgQIECAQEPA8Gz0IAUBAgQIECBAgAABAgRmBQzP2WodRoAAAQIECBAgQIAAgYaA4dnoQQoCBAgQIECAAAECBAjMChies9U6jAABAgQIECBAgAABAg0Bw7PRgxQECBAgQIAAAQIECBCYFTA8Z6t1GAECBAgQIECAAAECBBoChmejBykIECBAgAABAgQIECAwK2B4zlbrMAIECBAgQIAAAQIECDQEDM9GD1IQIECAAAECBAgQIEBgVsDwnK3WYQQIECBAgAABAgQIEGgIGJ6NHqQgQIAAAQIECBAgQIDArIDhOVutwwgQIECAAAECBAgQINAQMDwbPUhBgAABAgQIECBAgACBWQHDc7ZahxEgQIAAAQIECBAgQKAhYHg2epCCAAECBAgQIECAAAECswKG52y1DiNAgAABAgQIECBAgEBDwPBs9CAFAQIECBAgQIAAAQIEZgUMz9lqHUaAAAECBAgQIECAAIGGgOHZ6EEKAgQIECBAgAABAgQIzAoYnrPVOowAAQIECBAgQIAAAQINAcOz0YMUBAgQIECAAAECBAgQmBUwPGerdRgBAgQIECBAgAABAgQaAoZnowcpCBAgQIAAAQIECBAgMCtgeM5W6zACBAgQIECAAAECBAg0BAzPRg9SECBAgAABAgQIECBAYFbA8Jyt1mEECBAgQIAAAQIECBBoCBiejR6kIECAAAECBAgQIECAwKyA4TlbrcMIECBAgAABAgQIECDQEDA8Gz1IQYAAAQIECBAgQIAAgVkBw3O2WocRIECAAAECBAgQIECgIWB4NnqQggABAgQIECBAgAABArMChudstQ4jQIAAAQIECBAgQIBAQ8DwbPQgBQECBAgQIECAAAECBGYFDM/Zah1GgAABAgQIECBAgACBhoDh2ehBCgIECBAgQIAAAQIECMwKGJ6z1TqMAAECBAgQIECAAAECDQHDs9GDFAQIECBAgAABAgQIEJgVMDxnq3UYAQIECBAgQIAAAQIEGgKGZ6MHKQgQIECAAAECBAgQIDArYHjOVuswAgQIECBAgAABAgQINAQMz0YPUhAgQIAAAQIECBAgQGBWwPCcrdZhBAgQIECAAAECBAgQaAgYno0epCBAgAABAgQIECBAgMCsgOE5W63DCBAgQIAAAQIECBAg0BAwPBs9SEGAAAECBAgQIECAAIFZAcNztlqHESBAgAABAgQIECBAoCFgeDZ6kIIAAQIECBAgQIAAAQKzAobnbLUOI0CAAAECBAgQIECAQEPA8Gz0IAUBAgQIECBAgAABAgRmBQzP2WodRoAAAQIECBAgQIAAgYaA4dnoQQoCBAgQIECAAAECBAjMChies9U6jAABAgQIECBAgAABAg0Bw7PRgxQECBAgQIAAAQIECBCYFTA8Z6t1GAECBAgQIECAAAECBBoChmejBykIECBAgAABAgQIECAwK2B4zlbrMAIECBAgQIAAAQIECDQEDM9GD1IQIECAAAECBAgQIEBgVsDwnK3WYQQIECBAgAABAgQIEGgIGJ6NHqQgQIAAAQIECBAgQIDArIDhOVutwwgQIECAAAECBAgQINAQMDwbPUhBgAABAgQIECBAgACBWQHDc7ZahxEgQIAAAQIECBAgQKAhYHg2epCCAAECBAgQIECAAAECswKG52y1DiNAgAABAgQIECBAgEBDwPBs9CAFAQIECBAgQIAAAQIEZgUMz9lqHUaAAAECBAgQIECAAIGGgOHZ6EEKAgQIECBAgAABAgQIzAoYnrPVOowAAQIECBAgQIAAAQINAcOz0YMUBAgQIECAAAECBAgQmBUwPGerdRgBAgQIECBAgAABAgQaAoZnowcpCBAgQIAAAQIECBAgMCtgeM5W6zACBAgQIECAAAECBAg0BAzPRg9SECBAgAABAgQIECBAYFbA8Jyt1mEECBAgQIAAAQIECBBoCBiejR6kIECAAAECBAgQIECAwKyA4TlbrcMIECBAgAABAgQIECDQEDA8Gz1IQYAAAQIECBAgQIAAgVkBw3O2WocRIECAAAECBAgQIECgIWB4NnqQggABAgQIECBAgAABArMChudstQ4jQIAAAQIECBAgQIBAQ8DwbPQgBQECBAgQIECAAAECBGYFDM/Zah1GgAABAgQIECBAgACBhoDh2ehBCgIECBAgQIAAAQIECMwKGJ6z1TqMAAECBAgQIECAAAECDQHDs9GDFAQIECBAgAABAgQIEJgVMDxnq3UYAQIECBAgQIAAAQIEGgKGZ6MHKQgQIECAAAECBAgQIDArYHjOVuswAgQIECBAgAABAgQINAQMz0YPUhAgQIAAAQIECBAgQGBWwPCcrdZhBAgQIECAAAECBAgQaAgYno0epCBAgAABAgQIECBAgMCsgOE5W63DCBAgQIAAAQIECBAg0BAwPBs9SEGAAAECBAgQIECAAIFZAcNztlqHESBAgAABAgQIECBAoCFgeDZ6kIIAAQIECBAgQIAAAQKzAobnbLUOI0CAAAECBAgQIECAQEPA8Gz0IAUBAgQIECBAgAABAgRmBQzP2WodRoAAAQIECBAgQIAAgYaA4dnoQQoCBAgQIECAAAECBAjMChies9U6jAABAgQIECBAgAABAg0Bw7PRgxQECBAgQIAAAQIECBCYFTA8Z6t1GAECBAgQIECAAAECBBoChmejBykIECBAgAABAgQIECAwK2B4zlbrMAIECBAgQIAAAQIECDQEDM9GD1IQIECAAAECBAgQIEBgVsDwnK3WYQQIECBAgAABAgQIEGgIGJ6NHqQgQIAAAQIECBAgQIDArIDhOVutwwgQIECAAAECBAgQINAQMDwbPUhBgAABAgQIECBAgACBWQHDc7ZahxEgQIAAAQIECBAgQKAhYHg2epCCAAECBAgQIECAAAECswKG52y1DiNAgAABAgQIECBAgEBDwPBs9CAFAQIECBAgQIAAAQIEZgUMz9lqHUaAAAECBAgQIECAAIGGgOHZ6EEKAgQIECBAgAABAgQIzAoYnrPVOowAAQIECBAgQIAAAQINAcOz0YMUBAgQIECAAAECBAgQmBUwPGerdRgBAgQIECBAgAABAgQaAoZnowcpCBAgQIAAAQIECBAgMCtgeM5W6zACBAgQIECAAAECBAg0BAzPRg9SECBAgAABAgQIECBAYFbA8Jyt1mEECBAgQIAAAQIECBBoCBiejR6kIECAAAECBAgQIECAwKyA4TlbrcMIECBAgAABAgQIECDQEDA8Gz1IQYAAAQIECBAgQIAAgVkBw3O2WocRIECAAAECBAgQIECgIWB4NnqQggABAgQIECBAgAABArMChudstQ4jQIAAAQIECBAgQIBAQ8DwbPQgBQECBAgQIECAAAECBGYFDM/Zah1GgAABAgQIECBAgACBhoDh2ehBCgIECBAgQIAAAQIECMwKGJ6z1TqMAAECBAgQIECAAAECDQHDs9GDFAQIECBAgAABAgQIEJgVMDxnq3UYAQIECBAgQIAAAQIEGgKGZ6MHKQgQIECAAAECBAgQIDArYHjOVuswAgQIECBAgAABAgQINAQMz0YPUhAgQIAAAQIECBAgQGBWwPCcrdZhBAgQIECAAAECBAgQaAgYno0epCBAgAABAgQIECBAgMCsgOE5W63DCBAgQIAAAQIECBAg0BAwPBs9SEGAAAECBAgQIECAAIFZAcNztlqHESBAgAABAgQIECBAoCFgeDZ6kIIAAQIECBAgQIAAAQKzAobnbLUOI0CAAAECBAgQIECAQEPA8Gz0IAUBAgQIECBAgAABAgRmBQzP2WodRoAAAQIECBAgQIAAgYaA4dnoQQoCBAgQIECAAAECBAjMChies9U6jAABAgQIECBAgAABAg0Bw7PRgxQECBAgQIAAAQIECBCYFTA8Z6t1GAECBAgQIECAAAECBBoChmejBykIECBAgAABAgQIECAwK2B4zlbrMAIECBAgQIAAAQIECDQEDM9GD1IQIECAAAECBAgQIEBgVsDwnK3WYQQIECBAgAABAgQIEGgIGJ6NHqQgQIAAAQIECBAgQIDArIDhOVutwwgQIECAAAECBAgQINAQMDwbPUhBgAABAgQIECBAgACBWQHDc7ZahxEgQIAAAQIECBAgQKAhYHg2epCCAAECBAgQIECAAAECswKG52y1DiNAgAABAgQIECBAgEBDwPBs9CAFAQIECBAgQIAAAQIEZgUMz9lqHUaAAAECBAgQIECAAIGGgOHZ6EEKAgQIECBAgAABAgQIzAoYnrPVOowAAQIECBAgQIAAAQINAcOz0YMUBAgQIECAAAECBAgQmBUwPGerdRgBAgQIECBAgAABAgQaAoZnowcpCBAgQIAAAQIECBAgMCtgeM5W6zACBAgQIECAAAECBAg0BAzPRg9SECBAgAABAgQIECBAYFbA8Jyt1mEECBAgQIAAAQIECBBoCBiejR6kIECAAAECBAgQIECAwKyA4TlbrcMIECBAgAABAgQIECDQEDA8Gz1IQYAAAQIECBAgQIAAgVkBw3O2WocRIECAAAECBAgQIECgIWB4NnqQggABAgQIECBAgAABArMChudstQ4jQIAAAQIECBAgQIBAQ8DwbPQgBQECBAgQIECAAAECBGYFDM/Zah1GgAABAgQIECBAgACBhoDh2ehBCgIECBAgQIAAAQIECMwKGJ6z1TqMAAECBAgQIECAAAECDQHDs9GDFAQIECBAgAABAgQIEJgVMDxnq3UYAQIECBAgQIAAAQIEGgKGZ6MHKQgQIECAAAECBAgQIDArYHjOVuswAgQIECBAgAABAgQINAQMz0YPUhAgQIAAAQIECBAgQGBWwPCcrdZhBAgQIECAAAECBAgQaAgYno0epCBAgAABAgQIECBAgMCsgOE5W63DCBAgQIAAAQIECBAg0BAwPBs9SEGAAAECBAgQIECAAIFZAcNztlqHESBAgAABAgQIECBAoCFgeDZ6kIIAAQIECBAgQIAAAQKzAobnbLUOI0CAAAECBAgQIECAQEPA8Gz0IAUBAgQIECBAgAABAgRmBQzP2WodRoAAAQIECBAgQIAAgYaA4dnoQQoCBAgQIECAAAECBAjMChies9U6jAABAgQIECBAgAABAg0Bw7PRgxQECBAgQIAAAQIECBCYFTA8Z6t1GAECBAgQIECAAAECBBoChmejBykIECBAgAABAgQIECAwK2B4zlbrMAIECBAgQIAAAQIECDQEDM9GD1IQIECAAAECBAgQIEBgVsDwnK3WYQQIECBAgAABAgQIEGgIGJ6NHqQgQIAAAQIECBAgQIDArIDhOVutwwgQIECAAAECBAgQINAQMDwbPUhBgAABAgQIECBAgACBWQHDc7ZahxEgQIAAAQIECBAgQKAhYHg2epCCAAECBAgQIECAAAECswKG52y1DiNAgAABAm6vKuoAACAASURBVAQIECBAgEBDwPBs9CAFAQIECBAgQIAAAQIEZgUMz9lqHUaAAAECBAgQIECAAIGGgOHZ6EEKAgQIECBAgAABAgQIzAoYnrPVOowAAQIECBAgQIAAAQINAcOz0YMUBAgQIECAAAECBAgQmBUwPGerdRgBAgQIECBAgAABAgQaAoZnowcpCBAgQIAAAQIECBAgMCtgeM5W6zACBAgQIECAAAECBAg0BAzPRg9SECBAgAABAgQIECBAYFbA8Jyt1mEECBAgQIAAAQIECBBoCBiejR6kIECAAAECBAgQIECAwKyA4TlbrcMIECBAgAABAgQIECDQEDA8Gz1IQYAAAQIECBAgQIAAgVkBw3O2WocRIECAAAECBAgQIECgIWB4NnqQggABAgQIECBAgAABArMChudstQ4jQIAAAQIECBAgQIBAQ8DwbPQgBQECBAgQIECAAAECBGYFDM/Zah1GgAABAgQIECBAgACBhoDh2ehBCgIECBAgQIAAAQIECMwKGJ6z1TqMAAECBAgQIECAAAECDQHDs9GDFAQIECBAgAABAgQIEJgVMDxnq3UYAQIECBAgQIAAAQIEGgKGZ6MHKQgQIECAAAECBAgQIDArYHjOVuswAgQIECBAgAABAgQINAQMz0YPUhAgQIAAAQIECBAgQGBWwPCcrdZhBAgQIECAAAECBAgQaAgYno0epCBAgAABAgQIECBAgMCsgOE5W63DCBAgQIAAAQIECBAg0BAwPBs9SEGAAAECBAgQIECAAIFZAcNztlqHESBAgAABAgQIECBAoCFgeDZ6kIIAAQIECBAgQIAAAQKzAobnbLUOI0CAAAECBAgQIECAQEPA8Gz0IAUBAgQIECBAgAABAgRmBQzP2WodRoAAAQIECBAgQIAAgYaA4dnoQQoCBAgQIECAAAECBAjMChies9U6jAABAgQIECBAgAABAg0Bw7PRgxQECBAgQIAAAQIECBCYFTA8Z6t1GAECBAgQIECAAAECBBoChmejBykIECBAgAABAgQIECAwK2B4zlbrMAIECBAgQIAAAQIECDQEDM9GD1IQIECAAAECBAgQIEBgVsDwnK3WYQQIECBAgAABAgQIEGgIGJ6NHqQgQIAAAQIECBAgQIDArIDhOVutwwgQIECAAAECBAgQINAQMDwbPUhBgAABAgQIECBAgACBWQHDc7ZahxEgQIAAAQIECBAgQKAhYHg2epCCAAECBAgQIECAAAECswKG52y1DiNAgAABAgQIECBAgEBDwPBs9CAFAQIECBAgQIAAAQIEZgUMz9lqHUaAAAECBAgQIECAAIGGgOHZ6EEKAgQIECBAgAABAgQIzAoYnrPVOowAAQIECBAgQIAAAQINAcOz0YMUBAgQIECAAAECBAgQmBUwPGerdRgBAgQIECBAgAABAgQaAoZnowcpCBAgQIAAAQIECBAgMCtgeM5W6zACBAgQIECAAAECBAg0BAzPRg9SECBAgAABAgQIECBAYFbA8Jyt1mEECBAgQIAAAQIECBBoCBiejR6kIECAAAECBAgQIECAwKyA4TlbrcMIECBAgAABAgQIECDQEDA8Gz1IQYAAAQIECBAgQIAAgVkBw3O2WocRIECAAAECBAgQIECgIWB4NnqQggABAgQIECBAgAABArMChudstQ4jQIAAAQIECBAgQIBAQ8DwbPQgBQECBAgQIECAAAECBGYFDM/Zah1GgAABAgQIECBAgACBhoDh2ehBCgIECBAgQIAAAQIECMwKGJ6z1TqMAAECBAgQIECAAAECDQHDs9GDFAQIECBAgAABAgQIEJgVMDxnq3UYAQIECBAgQIAAAQIEGgKGZ6MHKQgQIECAAAECBAgQIDArYHjOVuswAgQIECBAgAABAgQINAQMz0YPUhAgQIAAAQIECBAgQGBWwPCcrdZhBAgQIECAAAECBAgQaAgYno0epCBAgAABAgQIECBAgMCsgOE5W63DCBAgQIAAAQIECBAg0BAwPBs9SEGAAAECBAgQIECAAIFZAcNztlqHESBAgAABAgQIECBAoCFgeDZ6kIIAAQIECBAgQIAAAQKzAobnbLUOI0CAAAECBAgQIECAQEPA8Gz0IAUBAgQIECBAgAABAgRmBQzP2WodRoAAAQIECBAgQIAAgYaA4dnoQQoCBAgQIECAAAECBAjMChies9U6jAABAgQIECBAgAABAg0Bw7PRgxQECBAgQIAAAQIECBCYFTA8Z6t1GAECBAgQIECAAAECBBoChmejBykIECBAgAABAgQIECAwK2B4zlbrMAIECBAgQIAAAQIECDQEDM9GD1IQIECAAAECBAgQIEBgVsDwnK3WYQQIECBAgAABAgQIEGgIGJ6NHqQgQIAAAQIECBAgQIDArIDhOVutwwgQIECAAAECBAgQINAQMDwbPUhBgAABAgQIECBAgACBWQHDc7ZahxEgQIAAAQIECBAgQKAhYHg2epCCAAECBAgQIECAAAECswKG52y1DiNAgAABAgQIECBAgEBDwPBs9CAFAQIECBAgQIAAAQIEZgUMz9lqHUaAAAECBAgQIECAAIGGgOHZ6EEKAgQIECBAgAABAgQIzAoYnrPVOowAAQIECBAgQIAAAQINAcOz0YMUBAgQIECAAAECBAgQmBUwPGerdRgBAgQIECBAgAABAgQaAoZnowcpCBAgQIAAAQIECBAgMCtgeM5W6zACBAgQIECAAAECBAg0BAzPRg9SECBAgAABAgQIECBAYFbA8Jyt1mEECBAgQIAAAQIECBBoCBiejR6kIECAAAECBAgQIECAwKyA4TlbrcMIECBAgAABAgQIECDQEDA8Gz1IQYAAAQIECBAgQIAAgVkBw3O2WocRIECAAAECBAgQIECgIWB4NnqQggABAgQIECBAgAABArMChudstQ4jQIAAAQIECBAgQIBAQ8DwbPQgBQECBAgQIECAAAECBGYFDM/Zah1GgAABAgQIECBAgACBhoDh2ehBCgIECBAgQIAAAQIECMwKGJ6z1TqMAAECBAgQIECAAAECDQHDs9GDFAQIECBAgAABAgQIEJgVMDxnq3UYAQIECBAgQIAAAQIEGgKGZ6MHKQgQIECAAAECBAgQIDArYHjOVuswAgQIECBAgAABAgQINAQMz0YPUhAgQIAAAQIECBAgQGBWwPCcrdZhBAgQIECAAAECBAgQaAgYno0epCBAgAABAgQIECBAgMCsgOE5W63DCBAgQIAAAQIECBAg0BAwPBs9SEGAAAECBAgQIECAAIFZAcNztlqHESBAgAABAgQIECBAoCFgeDZ6kIIAAQIECBAgQIAAAQKzAobnbLUOI0CAAAECBAgQIECAQEPA8Gz0IAUBAgQIECBAgAABAgRmBQzP2WodRoAAAQIECBAgQIAAgYaA4dnoQQoCBAgQIECAAAECBAjMChies9U6jAABAgQIECBAgAABAg0Bw7PRgxQECBAgQIAAAQIECBCYFTA8Z6t1GAECBAgQIECAAAECBBoChmejBykIECBAgAABAgQIECAwK2B4zlbrMAIECBAgQIAAAQIECDQEDM9GD1IQIECAAAECBAgQIEBgVsDwnK3WYQQIECBAgAABAgQIEGgIGJ6NHqQgQIAAAQIECBAgQIDArIDhOVutwwgQIECAAAECBAgQINAQMDwbPUhBgAABAgQIECBAgACBWQHDc7ZahxEgQIAAAQIECBAgQKAhYHg2epCCAAECBAgQIECAAAECswKG52y1DiNAgAABAgQIECBAgEBDwPBs9CAFAQIECBAgQIAAAQIEZgUMz9lqHUaAAAECBAgQIECAAIGGgOHZ6EEKAgQIECBAgAABAgQIzAoYnrPVOowAAQIECBAgQIAAAQINAcOz0YMUBAgQIECAAAECBAgQmBUwPGerdRgBAgQIECBAgAABAgQaAoZnowcpCBAgQIAAAQIECBAgMCtgeM5W6zACBAgQIECAAAECBAg0BAzPRg9SECBAgAABAgQIECBAYFbA8Jyt1mEECBAgQIAAAQIECBBoCBiejR6kIECAAAECBAgQIECAwKyA4TlbrcMIECBAgAABAgQIECDQEDA8Gz1IQYAAAQIECBAgQIAAgVkBw3O2WocRIECAAAECBAgQIECgIWB4NnqQggABAgQIECBAgAABArMChudstQ4jQIAAAQIECBAgQIBAQ8DwbPQgBQECBAgQIECAAAECBGYFDM/Zah1GgAABAgQIECBAgACBhoDh2ehBCgIECBAgQIAAAQIECMwKGJ6z1TqMAAECBAgQIECAAAECDQHDs9GDFAQIECBAgAABAgQIEJgVMDxnq3UYAQIECBAgQIAAAQIEGgKGZ6MHKQgQIECAAAECBAgQIDArYHjOVuswAgQIECBAgAABAgQINAQMz0YPUhAgQIAAAQIECBAgQGBWwPCcrdZhBAgQIECAAAECBAgQaAgYno0epCBAgAABAgQIECBAgMCsgOE5W63DCBAgQIAAAQIECBAg0BAwPBs9SEGAAAECBAgQIECAAIFZAcNztlqHESBAgAABAgQIECBAoCFgeDZ6kIIAAQIECBAgQIAAAQKzAobnbLUOI0CAAAECBAgQIECAQEPA8Gz0IAUBAgQIECBAgAABAgRmBQzP2WodRoAAAQIECBAgQIAAgYaA4dnoQQoCBAgQIECAAAECBAjMChies9U6jAABAgQIECBAgAABAg0Bw7PRgxQECBAgQIAAAQIECBCYFTA8Z6t1GAECBAgQIECAAAECBBoChmejBykIECBAgAABAgQIECAwK2B4zlbrMAIECBAgQIAAAQIECDQEDM9GD1IQIECAAAECBAgQIEBgVsDwnK3WYQQIECBAgAABAgQIEGgIGJ6NHqQgQIAAAQIECBAgQIDArIDhOVutwwgQIECAAAECBAgQINAQMDwbPUhBgAABAgQIECBAgACBWQHDc7ZahxEgQIAAAQIECBAgQKAhYHg2epCCAAECBAgQIECAAAECswKG52y1DiNAgAABAgQIECBAgEBDwPBs9CAFAQIECBAgQIAAAQIEZgUMz9lqHUaAAAECBAgQIECAAIGGgOHZ6EEKAgQIECBAgAABAgQIzAoYnrPVOowAAQIECBAgQIAAAQINAcOz0YMUBAgQIECAAAECBAgQmBUwPGerdRgBAgQIECBAgAABAgQaAoZnowcpCBAgQIAAAQIECBAgMCtgeM5W6zACBAgQIECAAAECBAg0BAzPRg9SECBAgAABAgQIECBAYFbA8Jyt1mEECBAgQIAAAQIECBBoCBiejR6kIECAAAECBAgQIECAwKyA4TlbrcMIECBAgAABAgQIECDQEDA8Gz1IQYAAAQIECBAgQIAAgVkBw3O2WocRIECAAAECBAgQIECgIWB4NnqQggABAgQIECBAgAABArMChudstQ4jQIAAAQIECBAgQIBAQ8DwbPQgBQECBAgQIECAAAECBGYFDM/Zah1GgAABAgQIECBAgACBhoDh2ehBCgIECBAgQIAAAQIECMwKGJ6z1TqMAAECBAgQIECAAAECDQHDs9GDFAQIECBAgAABAgQIEJgVMDxnq3UYAQIECBAgQIAAAQIEGgKGZ6MHKQgQIECAAAECBAgQIDArYHjOVuswAgQIECBAgAABAgQINAQMz0YPUhAgQIAAAQIECBAgQGBWwPCcrdZhBAgQIECAAAECBAgQaAgYno0epCBAgAABAgQIECBAgMCsgOE5W63DCBAgQIAAAQIECBAg0BAwPBs9SEGAAAECBAgQIECAAIFZAcNztlqHESBAgAABAgQIECBAoCFgeDZ6kIIAAQIECBAgQIAAAQKzAobnbLUOI0CAAAECBAgQIECAQEPA8Gz0IAUBAgQIECBAgAABAgRmBQzP2WodRoAAAQIECBAgQIAAgYaA4dnoQQoCBAgQIECAAAECBAjMChies9U6jAABAgQIECBAgAABAg0Bw7PRgxQECBAgQIAAAQIECBCYFTA8Z6t1GAECBAgQIECAAAECBBoChmejBykIECBAgAABAgQIECAwK2B4zlbrMAIECBAgQIAAAQIECDQEDM9GD1IQIECAAAECBAgQIEBgVsDwnK3WYQQIECBAgAABAgQIEGgIGJ6NHqQgQIAAAQIECBAgQIDArIDhOVutwwgQIECAAAECBAgQINAQMDwbPUhBgAABAgQIECBAgACBWQHDc7ZahxEgQIAAAQIECBAgQKAhYHg2epCCAAECBAgQIECAAAECswKG52y1DiNAgAABAgQIECBAgEBDwPBs9CAFAQIECBAgQIAAAQIEZgUMz9lqHUaAAAECBAgQIECAAIGGgOHZ6EEKAgQIECBAgAABAgQIzAoYnrPVOowAAQIECBAgQIAAAQINAcOz0YMUBAgQIECAAAECBAgQmBUwPGerdRgBAgQIECBAgAABAgQaAoZnowcpCBAgQIAAAQIECBAgMCtgeM5W6zACBAgQIECAAAECBAg0BAzPRg9SECBAgAABAgQIECBAYFbA8Jyt1mEECBAgQIAAAQIECBBoCBiejR6kIECAAAECBAgQIECAwKyA4TlbrcMIECBAgAABAgQIECDQEDA8Gz1IQYAAAQIECBAgQIAAgVkBw3O2WocRIECAAAECBAgQIECgIWB4NnqQggABAgQIECBAgAABArMChudstQ4jQIAAAQIECBAgQIBAQ8DwbPQgBQECBAgQIECAAAECBGYFDM/Zah1GgAABAgQIECBAgACBhoDh2ehBCgIECBAgQIAAAQIECMwKGJ6z1TqMAAECBAgQIECAAAECDQHDs9GDFAQIECBAgAABAgQIEJgVMDxnq3UYAQIECBAgQIAAAQIEGgKGZ6MHKQgQIECAAAECBAgQIDArYHjOVuswAgQIECBAgAABAgQINAQMz0YPUhAgQIAAAQIECBAgQGBWwPCcrdZhBAgQIECAAAECBAgQaAgYno0epCBAgAABAgQIECBAgMCsgOE5W63DCBAgQIAAAQIECBAg0BAwPBs9SEGAAAECBAgQIECAAIFZAcNztlqHESBAgAABAgQIECBAoCFgeDZ6kIIAAQIECBAgQIAAAQKzAobnbLUOI0CAAAECBAgQIECAQEPA8Gz0IAUBAgQIECBAgAABAgRmBQzP2WodRoAAAQIECBAgQIAAgYaA4dnoQQoCBAgQIECAAAECBAjMChies9U6jAABAgQIECBAgAABAg0Bw7PRgxQECBAgQIAAAQIECBCYFTA8Z6t1GAECBAgQIECAAAECBBoChmejBykIECBAgAABAgQIECAwK2B4zlbrMAIECBAgQIAAAQIECDQEDM9GD1IQIECAAAECBAgQIEBgVsDwnK3WYQQIECBAgAABAgQIEGgIGJ6NHqQgQIAAAQIECBAgQIDArIDhOVutwwgQIECAAAECBAgQINAQMDwbPUhBgAABAgQIECBAgACBWQHDc7ZahxEgQIAAAQIECBAgQKAhYHg2epCCAAECBAgQIECAAAECswKG52y1DiNAgAABAgQIECBAgEBDwPBs9CAFAQIECBAgQIAAAQIEZgUMz9lqHUaAAAECBAgQIECAAIGGgOHZ6EEKAgQIECBAgAABAgQIzAoYnrPVOowAAQIECBAgQIAAAQINAcOz0YMUBAgQIECAAAECBAgQmBUwPGerdRgBAgQIECBAgAABAgQaAoZnowcpCBAgQIAAAQIECBAgMCtgeM5W6zACBAgQIECAAAECBAg0BAzPRg9SECBAgAABAgQIECBAYFbA8Jyt1mEECBAgQIAAAQIECBBoCBiejR6kIECAAAECBAgQIECAwKyA4TlbrcMIECBAgAABAgQIECDQEDA8Gz1IQYAAAQIECBAgQIAAgVkBw3O2WocRIECAAAECBAgQIECgIWB4NnqQggABAgQIECBAgAABArMChudstQ4jQIAAAQIECBAgQIBAQ8DwbPQgBQECBAgQIECAAAECBGYFDM/Zah1GgAABAgQIECBAgACBhoDh2ehBCgIECBAgQIAAAQIECMwKGJ6z1TqMAAECBAgQIECAAAECDQHDs9GDFAQIECBAgAABAgQIEJgVMDxnq3UYAQIECBAgQIAAAQIEGgKGZ6MHKQgQIECAAAECBAgQIDArYHjOVuswAgQIECBAgAABAgQINAQMz0YPUhAgQIAAAQIECBAgQGBWwPCcrdZhBAgQIECAAAECBAgQaAgYno0epCBAgAABAgQIECBAgMCsgOE5W63DCBAgQIAAAQIECBAg0BAwPBs9SEGAAAECBAgQIECAAIFZAcNztlqHESBAgAABAgQIECBAoCFgeDZ6kIIAAQIECBAgQIAAAQKzAobnbLUOI0CAAAECBAgQIECAQEPA8Gz0IAUBAgQIECBAgAABAgRmBQzP2WodRoAAAQIECBAgQIAAgYaA4dnoQQoCBAgQIECAAAECBAjMChies9U6jAABAgQIECBAgAABAg0Bw7PRgxQECBAgQIAAAQIECBCYFTA8Z6t1GAECBAgQIECAAAECBBoChmejBykIECBAgAABAgQIECAwK2B4zlbrMAIECBAgQIAAAQIECDQEDM9GD1IQIECAAAECBAgQIEBgVsDwnK3WYQQIECBAgAABAgQIEGgIGJ6NHqQgQIAAAQIECBAgQIDArIDhOVutwwgQIECAAAECBAgQINAQMDwbPUhBgAABAgQIECBAgACBWQHDc7ZahxEgQIAAAQIECBAgQKAhYHg2epCCAAECBAgQIECAAAECswKG52y1DiNAgAABAgQIECBAgEBDwPBs9CAFAQIECBAgQIAAAQIEZgUMz9lqHUaAAAECBAgQIECAAIGGgOHZ6EEKAgQIECBAgAABAgQIzAoYnrPVOowAAQIECBAgQIAAAQINAcOz0YMUBAgQIECAAAECBAgQmBUwPGerdRgBAgQIECBAgAABAgQaAoZnowcpCBAgQIAAAQIECBAgMCtgeM5W6zACBAgQIECAAAECBAg0BAzPRg9SECBAgAABAgQIECBAYFbA8Jyt1mEECBAgQIAAAQIECBBoCBiejR6kIECAAAECBAgQIECAwKyA4TlbrcMIECBAgAABAgQIECDQEDA8Gz1IQYAAAQIECBAgQIAAgVkBw3O2WocRIECAAAECBAgQIECgIWB4NnqQggABAgQIECBAgAABArMChudstQ4jQIAAAQIECBAgQIBAQ8DwbPQgBQECBAgQIECAAAECBGYFDM/Zah1GgAABAgQIECBAgACBhoDh2ehBCgIECBAgQIAAAQIECMwKGJ6z1TqMAAECBAgQIECAAAECDQHDs9GDFAQIECBAgAABAgQIEJgVMDxnq3UYAQIECBAgQIAAAQIEGgKGZ6MHKQgQIECAAAECBAgQIDArYHjOVuswAgQIECBAgAABAgQINAQMz0YPUhAgQIAAAQIECBAgQGBWwPCcrdZhBAgQIECAAAECBAgQaAgYno0epCBAgAABAgQIECBAgMCsgOE5W63DCBAgQIAAAQIECBAg0BAwPBs9SEGAAAECBAgQIECAAIFZAcNztlqHESBAgAABAgQIECBAoCFgeDZ6kIIAAQIECBAgQIAAAQKzAobnbLUOI0CAAAECBAgQIECAQEPA8Gz0IAUBAgQIECBAgAABAgRmBQzP2WodRoAAAQIECBAgQIAAgYaA4dnoQQoCBAgQIECAAAECBAjMChies9U6jAABAgQIECBAgAABAg0Bw7PRgxQECBAgQIAAAQIECBCYFTA8Z6t1GAECBAgQIECAAAECBBoChmejBykIECBAgAABAgQIECAwK2B4zlbrMAIECBAgQIAAAQIECDQEDM9GD1IQIECAAAECBAgQIEBgVsDwnK3WYQQIECBAgAABAgQIEGgIGJ6NHqQgQIAAAQIECBAgQIDArIDhOVutwwgQIECAAAECBAgQINAQMDwbPUhBgAABAgQIECBAgACBWQHDc7ZahxEgQIAAAQIECBAgQKAhYHg2epCCAAECBAgQIECAAAECswKG52y1DiNAgAABAgQIECBAgEBDwPBs9CAFAQIECBAgQIAAAQIEZgUMz9lqHUaAAAECBAgQIECAAIGGgOHZ6EEKAgQIECBAgAABAgQIzAoYnrPVOowAAQIECBAgQIAAAQINAcOz0YMUBAgQIECAAAECBAgQmBUwPGerdRgBAgQIECBAgAABAgQaAoZnowcpCBAgQIAAAQIECBAgMCtgeM5W6zACBAgQIECAAAECBAg0BAzPRg9SECBAgAABAgQIECBAYFbA8Jyt1mEECBAgQIAAAQIECBBoCBiejR6kIECAAAECBAgQIECAwKyA4TlbrcMIECBAgAABAgQIECDQEDA8Gz1IQYAAAQIECBAgQIAAgVkBw3O2WocRIECAAAECBAgQIECgIWB4NnqQggABAgQIECBAgAABArMChudstQ4jQIAAAQIECBAgQIBAQ8DwbPQgBQECBAgQIECAAAECBGYFDM/Zah1GgAABAgQIECBAgACBhoDh2ehBCgIECBAgQIAAAQIECMwKGJ6z1TqMAAECBAgQIECAAAECDQHDs9GDFAQIECBAgAABAgQIEJgVMDxnq3UYAQIECBAgQIAAAQIEGgKGZ6MHKQgQIECAAAECBAgQIDArYHjOVuswAgQIECBAgAABAgQINAQMz0YPUhAgQIAAAQIECBAgQGBWwPCcrdZhBAgQIECAAAECBAgQaAj8d8OzwSYFAQIECBAgQIAAAQIECHxW4DzP47Pfvv/ulkf+PfhxGd8RzhsECBAgQIAAAQIECBAg8DqB3PB8PB6/j+P4+joSv0yAAAECBAgQIECAAAECdwlc1/Xn+Xx+u+O9O//x/HEcx/frur7cEcwbBAgQIECAAAECBAgQIPAageM4/l7X9es8z593JLhteN4RxhsECBAgQIAAAQIECBAgsCdg8OFWwgAAAVJJREFUeO516iICBAgQIECAAAECBAikBAzPVB3CECBAgAABAgQIECBAYE/A8Nzr1EUECBAgQIAAAQIECBBICRieqTqEIUCAAAECBAgQIECAwJ6A4bnXqYsIECBAgAABAgQIECCQEjA8U3UIQ4AAAQIECBAgQIAAgT0Bw3OvUxcRIECAAAECBAgQIEAgJWB4puoQhgABAgQIECBAgAABAnsChudepy4iQIAAAQIECBAgQIBASsDwTNUhDAECBAgQIECAAAECBPYEDM+9Tl1EgAABAgQIECBAgACBlIDhmapDGAIECBAgQIAAAQIECOwJGJ57nbqIAAECBAgQIECAAAECKQHDM1WHMAQIECBAgAABAgQIENgTMDz3OnURAQIECBAgQIAAAQIEUgKGZ6oOYQgQIECAAAECBAgQILAnYHjudeoiAgQIECBAgAABAgQIpATeAERUGPHcQXejAAAAAElFTkSuQmCC" alt="img"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.github.io/2020/08/06/gitflow/" data-id="clma8n98r002c50w3a7o2e8e9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gitflow/" rel="tag">gitflow</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-log" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/08/03/log/" class="article-date">
+  <time datetime="2020-08-03T12:09:00.000Z" itemprop="datePublished">2020-08-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/sql/">sql</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/03/log/">日志框架</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="故事开始"><a href="#故事开始" class="headerlink" title="故事开始"></a>故事开始</h1><p>在一家IT企业中，项目经理虎大力（龙套） 正在指挥 程序员鹿小明（精英龙套）开发一个大型的增删改查项目。为了开发这个项目。项目组仅有的程序员鹿小明每天工作996</p>
+<h1 id="故事进入-V1-0-环节"><a href="#故事进入-V1-0-环节" class="headerlink" title="故事进入 V1.0 环节"></a>故事进入 V1.0 环节</h1><p>one day，虎大力给鹿小明提出来一个新的需求，为了更好的进行公司的信息化建设，虎大力想要看到代码执行的情况，执行到某个业务的时候在控制台有所表示，例如：执行到查询方法的时候，需要在控制台上出现，这是一个打印方法的信息。</p>
+<p><img src="/images/println.png" alt="img"></p>
+<p>鹿小明一想，这好办啊，本来自己为了调试测试方便就写过很多打印语句，现在无非更多而已。于是就加班加点在所有的增删改查方法中都写了<code>System.out.println()</code>打印语句。顺利完成了这个工作。</p>
+<p><img src="/images/println.jpg" alt="img"></p>
+<h1 id="故事进入-V2-0-环节"><a href="#故事进入-V2-0-环节" class="headerlink" title="故事进入 V2.0 环节"></a>故事进入 V2.0 环节</h1><p>一段时间岁月静好</p>
+<p>one day，虎大力找到鹿小明：你这个代码里面<code>System.out.println()</code>太多了，我需要你做成，测试时候显示，上线之后不显示。你去搞一下。</p>
+<p>鹿小明于是冥思苦想：我要不要上线的时候把打印语句注释掉，测试的时候再打开呢？</p>
+<p>但是想到要经常开关注释也不是个容易的事儿，于是鹿小明一咬牙，996变007，废寝忘食的更新出了 V2.0版本。他把日志打印封装成框架 logging-1.0.jar，可以进行统一的开关。顺利完成了这个工作。</p>
+<p><img src="/images/println-if.jpg" alt="img"></p>
+<h1 id="故事进入-V3-0-环节"><a href="#故事进入-V3-0-环节" class="headerlink" title="故事进入 V3.0 环节"></a>故事进入 V3.0 环节</h1><p>一段时间岁月静好</p>
+<p>one day，虎大力找到鹿小明：你这个日志框架功能太简单了 ，再搞点新功能，像输出到文件啊，异步啊都搞上。</p>
+<p>鹿小明于是冥思苦想，007之后继续007，废寝忘食的更新出了 V3.0 版本，封装成一个新的框架logging-2.0.jar。顺利完成了这个工作。</p>
+<p><img src="/images/println-file.jpg" alt="img"></p>
+<h1 id="故事进入-V4-0-环节"><a href="#故事进入-V4-0-环节" class="headerlink" title="故事进入 V4.0 环节"></a>故事进入 V4.0 环节</h1><p>一段时间岁月静好</p>
+<p>one day，虎大力找到鹿小明：1.0和2.0的api不一样，1.0换成2.0，2.0换成1.0 每次切换都要改代码，你改一下吧，改成可以想用哪个用哪个的。</p>
+<p>鹿小明于是冥思苦想，007之后继续007，这个需求有点难，他从JDBC上找到了灵感，JDBC通过统一接口实现了驱动的切换，日志也可以。<img src="/images/println-face.jpg" alt="img"></p>
+<p>于是，他爆肝搞出来一个日志接口层（日志门面），让 1.0 和 2.0的日志框架都实现这个接口，这样想用1.0的时候就导入1.0，想用2.0的时候就导入2.0 。顺利完成了这个任务。</p>
+<p><img src="/images/println-face2.jpg" alt="img"></p>
+<p>而这个设计的结构也是现在主流日志框架：log4j logback log4j2 等的结构</p>
+<table>
+<thead>
+<tr>
+<th align="left">日志门面（接口）</th>
+<th align="left">日志实现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">SLF4J，commons-logging</td>
+<td align="left">Logback，Log4j</td>
+</tr>
+</tbody></table>
+<p>通过它们就打印出了我们常见的各种日志信息</p>
+<p><img src="/images/log.jpg" alt="img"></p>
+<h2 id="日志框架结构分析"><a href="#日志框架结构分析" class="headerlink" title="日志框架结构分析"></a>日志框架结构分析</h2><p>日志框架实际上分为三个部分，除了上面提到的日志门面（接口）和日志库（实现），还有日志适配器</p>
+<p><img src="/images/log-frame.jpg" alt="img"></p>
+<h1 id="日志门面-接口规范"><a href="#日志门面-接口规范" class="headerlink" title="日志门面 接口规范"></a>日志门面 接口规范</h1><p>定义接口规范，不负责具体实现，也就是说以后代码中打印日志时调用的日志门面接口的方法。常见的有 SLF4J，commons-logging 都是这样。常见的日志门面有下面几种</p>
+<table>
+<thead>
+<tr>
+<th align="left">日志门面（接口规范层）</th>
+<th align="left">简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">JCL（Jakarta  Commons Logging）</td>
+<td align="left">这个jar就是常见的 commons-logging.jar，也是Spring框架中使用的日志门面。由于上一次更新还是在2014年，所以不建议使用</td>
+</tr>
+<tr>
+<td align="left"><strong>SLF4j（Simple  Logging Facade for Java）</strong></td>
+<td align="left">这个jar可以说是最常用的日志jar包了</td>
+</tr>
+<tr>
+<td align="left">jboss-logging</td>
+<td align="left">使用最少，一些特定的框架在使用</td>
+</tr>
+</tbody></table>
+<p>根据简单的分析，在我们的代码中如果要选择一款 日志的接口规范的话，毫无疑问，<strong>只有 SLF4j 配得上我们的项目。</strong></p>
+<h1 id="日志库-代码实现"><a href="#日志库-代码实现" class="headerlink" title="日志库 代码实现"></a>日志库 代码实现</h1><p>日志库是日志功能的具体实现，早期就是为了替代 System.out 语句而出现的。常用的日志库如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left">日志库（日志实现）</th>
+<th align="left">简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">log4j</td>
+<td align="left">最早诞生，用的也最多</td>
+</tr>
+<tr>
+<td align="left">logback</td>
+<td align="left">最晚出现，和log4j同一作者，是log4j的升级版</td>
+</tr>
+<tr>
+<td align="left">log-jdk</td>
+<td align="left">jdk 在1.4版本出现的java.util.logging 简称 log-jdk</td>
+</tr>
+</tbody></table>
+<p>在实际的开发中，log4j和logback的使用都非常的广泛，但是如果你现在要开发的是一个新项目，那么推荐使用 logback</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.github.io/2020/08/03/log/" data-id="clma8n98z002y50w39gpl8ifn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-maven" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/30/maven/" class="article-date">
+  <time datetime="2020-07-29T16:00:00.000Z" itemprop="datePublished">2020-07-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/Java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/30/maven/">MAVEN</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="为何需要MAVEN"><a href="#为何需要MAVEN" class="headerlink" title="为何需要MAVEN"></a>为何需要MAVEN</h1><h2 id="使用maven前"><a href="#使用maven前" class="headerlink" title="使用maven前"></a>使用maven前</h2><p><img src="images/india.png" alt="印度挂票"></p>
+<p>项目臃肿不堪，jar包从各种渠道引入</p>
+<h2 id="使用maven后"><a href="#使用maven后" class="headerlink" title="使用maven后"></a>使用maven后</h2><p><img src="images/china.png" alt="中国高铁"></p>
+<p>项目从统一的规范下载，升级管理jar版本只需要修改配置文件</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><table>
+<thead>
+<tr>
+<th>系统变量名</th>
+<th>说明</th>
+<th>实例值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MAVEN_HOME</td>
+<td>maven根目录</td>
+<td>C:\tool\apache-maven-3.3.9</td>
+</tr>
+<tr>
+<td>Path</td>
+<td>windows查找命令路径</td>
+<td>;%MAVEN_HOME%\bin</td>
+</tr>
+</tbody></table>
+<h1 id="约定配置"><a href="#约定配置" class="headerlink" title="约定配置"></a>约定配置</h1><p>##常用Maven目录结构</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">src</span><br><span class="line">  -main</span><br><span class="line">      –java java源代码文件</span><br><span class="line">      –resources 资源库，会自动复制到classes目录里</span><br><span class="line">      –webapp web应用的目录。WEB-INF、css、js等</span><br><span class="line">  –test</span><br><span class="line">      –java 单元测试java源代码文件</span><br><span class="line">      –resources 测试需要用的资源库</span><br><span class="line">target 打包输出目录</span><br><span class="line">pom.xml  maven的pom文件</span><br><span class="line">LICENSE.txt Project’s license</span><br><span class="line">README.txt Project’s readme</span><br></pre></td></tr></table></figure>
+
+<h1 id="Maven-POM"><a href="#Maven-POM" class="headerlink" title="Maven POM"></a>Maven POM</h1><h2 id="pom文件"><a href="#pom文件" class="headerlink" title="pom文件"></a>pom文件</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span> = <span class="string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span> = <span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span> = <span class="string">&quot;http://maven.apache.org/POM/4.0.0</span></span></span><br><span class="line"><span class="string"><span class="tag">    http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span></span><br><span class="line"> </span><br><span class="line">    <span class="comment">&lt;!-- 模型版本 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 公司或者组织的唯一标志，并且配置时生成的路径也是由此生成， 如com.companyname.project-group，maven会将该项目打成的jar包放本地路径：/com/companyname/project-group --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.thunisoft.project-group<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 项目的唯一ID，一个groupId下面可能多个项目，就是靠artifactId来区分的 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>project<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 版本号 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="node说明"><a href="#node说明" class="headerlink" title="node说明"></a>node说明</h2><table>
+<thead>
+<tr>
+<th>节点</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>project</td>
+<td>工程的根标签。</td>
+</tr>
+<tr>
+<td>modelVersion</td>
+<td>模型版本需要设置为 4.0。</td>
+</tr>
+<tr>
+<td>groupId</td>
+<td>这是工程组的标识。它在一个组织或者项目中通常是唯一的</td>
+</tr>
+<tr>
+<td>artifactId</td>
+<td>这是工程的标识。它通常是工程的名称。</td>
+</tr>
+<tr>
+<td>version</td>
+<td>这是工程的版本号。在 artifact 的仓库中，它用来区分不同的版本。</td>
+</tr>
+</tbody></table>
+<h1 id="Maven有哪些常用命令？都是什么作用？"><a href="#Maven有哪些常用命令？都是什么作用？" class="headerlink" title="Maven有哪些常用命令？都是什么作用？"></a>Maven有哪些常用命令？都是什么作用？</h1><h2 id="Maven-构建生命周期"><a href="#Maven-构建生命周期" class="headerlink" title="Maven 构建生命周期"></a>Maven 构建生命周期</h2><p><img src="images/maven.png" alt="Maven构建生命周期"></p>
+<h2 id="Clean（清理）"><a href="#Clean（清理）" class="headerlink" title="Clean（清理）"></a>Clean（清理）</h2><p>移除所有上一次构建生成的文件</p>
+<h2 id="Compile（编译）"><a href="#Compile（编译）" class="headerlink" title="Compile（编译）"></a>Compile（编译）</h2><p>编译项目的源代码。</p>
+<h2 id="Package（打包）"><a href="#Package（打包）" class="headerlink" title="Package（打包）"></a>Package（打包）</h2><p>将编译后的代码打包成可分发格式的文件，比如JAR、WAR或者EAR文件。</p>
+<h2 id="Install（安装）"><a href="#Install（安装）" class="headerlink" title="Install（安装）"></a>Install（安装）</h2><p>安装项目包到本地仓库，这样项目包可以用作其他本地项目的依赖。</p>
+<h2 id="Deploy（部署）"><a href="#Deploy（部署）" class="headerlink" title="Deploy（部署）"></a>Deploy（部署）</h2><p>将最终的项目包复制到远程仓库中与其他开发者和项目共享。</p>
+<h1 id="设置JDK版本"><a href="#设置JDK版本" class="headerlink" title="设置JDK版本"></a>设置JDK版本</h1><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>$&#123;java.version&#125;<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>$&#123;java.version&#125;<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.build.sourceEncoding</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">project.reporting.outputEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.reporting.outputEncoding</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h1 id="Maven-快照-SNAPSHOT"><a href="#Maven-快照-SNAPSHOT" class="headerlink" title="Maven 快照(SNAPSHOT)"></a>Maven 快照(SNAPSHOT)</h1><h2 id="1、Snapshot-版本代表不稳定、尚处于开发中的版本。"><a href="#1、Snapshot-版本代表不稳定、尚处于开发中的版本。" class="headerlink" title="1、Snapshot 版本代表不稳定、尚处于开发中的版本。"></a>1、Snapshot 版本代表不稳定、尚处于开发中的版本。</h2><h2 id="2、Release-版本则代表稳定的版本。"><a href="#2、Release-版本则代表稳定的版本。" class="headerlink" title="2、Release 版本则代表稳定的版本。"></a>2、Release 版本则代表稳定的版本。</h2><h1 id="什么情况下该用-SNAPSHOT"><a href="#什么情况下该用-SNAPSHOT" class="headerlink" title="什么情况下该用 SNAPSHOT?"></a>什么情况下该用 SNAPSHOT?</h1><h2 id="协同开发时"><a href="#协同开发时" class="headerlink" title="协同开发时"></a>协同开发时</h2><p>如果 A 依赖构件 B，由于 B 会更新，B 应该使用 SNAPSHOT 来标识自己。<br>这种做法的必要性可以反证如下：</p>
+<h2 id="a"><a href="#a" class="headerlink" title="a"></a>a</h2><p>如果 B 不用 SNAPSHOT，而是每次更新后都使用一个稳定的版本，那版本号就会升得太快，每天一升甚至每个小时一升，这就是对版本号的滥用。</p>
+<h2 id="b"><a href="#b" class="headerlink" title="b"></a>b</h2><p>如果 B 不用 SNAPSHOT, 但一直使用一个单一的 Release 版本号，那当 B 更新后，A 可能并不会接受到更新。因为 A 所使用的 repository 一般不会频繁更新 release 版本的缓存（即本地 repository)，所以B以不换版本号的方式更新后，A在拿B时发现本地已有这个版本，就不会去远程Repository下载最新的 B</p>
+<h1 id="所有地方都用-SNAPSHOT-版本行不行？"><a href="#所有地方都用-SNAPSHOT-版本行不行？" class="headerlink" title="所有地方都用 SNAPSHOT 版本行不行？"></a>所有地方都用 SNAPSHOT 版本行不行？</h1><h2 id="不行。"><a href="#不行。" class="headerlink" title="不行。"></a>不行。</h2><p>正式环境中不得使用 snapshot 版本的库。 比如说，今天你依赖某个 snapshot 版本的第三方库成功构建了自己的应用，明天再构建时可能就会失败，因为今晚第三方可能已经更新了它的 snapshot 库。你再次构建时，Maven 会去远程 repository 下载 snapshot 的最新版本，你构建时用的库就是新的 jar 文件了，这时正确性就很难保证了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.github.io/2020/07/30/maven/" data-id="clma8n991003550w320712d1f" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-graphql" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/25/graphql/" class="article-date">
+  <time datetime="2020-04-25T05:27:25.000Z" itemprop="datePublished">2020-04-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/25/graphql/">Graphql</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h1><h2 id="一种用于-API-的查询语言"><a href="#一种用于-API-的查询语言" class="headerlink" title="一种用于 API 的查询语言"></a>一种用于 API 的查询语言</h2><p>GraphQL 既是一种用于 API 的查询语言也是一个满足你数据查询的运行时。 GraphQL 对你的 API 中的数据提供了一套易于理解的完整描述，使得客户端能够准确地获得它需要的数据，而且没有任何冗余，也让 API 更容易地随着时间推移而演进，还能用于构建强大的开发者工具。</p>
+<h2 id="请求你所要的数据-不多不少"><a href="#请求你所要的数据-不多不少" class="headerlink" title="请求你所要的数据 不多不少"></a>请求你所要的数据 不多不少</h2><p>向你的 API 发出一个 GraphQL 请求就能准确获得你想要的数据，不多不少。 GraphQL 查询总是返回可预测的结果。使用 GraphQL 的应用可以工作得又快又稳，因为控制数据的是应用，而不是服务器。</p>
+<h2 id="获取多个资源-只用一个请求"><a href="#获取多个资源-只用一个请求" class="headerlink" title="获取多个资源 只用一个请求"></a>获取多个资源 只用一个请求</h2><p>GraphQL 查询不仅能够获得资源的属性，还能沿着资源间引用进一步查询。典型的 REST API 请求多个资源时得载入多个 URL，而 GraphQL 可以通过一次请求就获取你应用所需的所有数据。这样一来，即使是比较慢的移动网络连接下，使用 GraphQL 的应用也能表现得足够迅速。</p>
+<h2 id="描述所有的可能-类型系统"><a href="#描述所有的可能-类型系统" class="headerlink" title="描述所有的可能 类型系统"></a>描述所有的可能 类型系统</h2><p>GraphQL API 基于类型和字段的方式进行组织，而非入口端点。你可以通过一个单一入口端点得到你所有的数据能力。GraphQL 使用类型来保证应用只请求可能的数据，还提供了清晰的辅助性错误信息。应用可以使用类型，而避免编写手动解析代码。</p>
+<h2 id="API-演进-无需划分版本"><a href="#API-演进-无需划分版本" class="headerlink" title="API 演进 无需划分版本"></a>API 演进 无需划分版本</h2><p>给你的 GraphQL API 添加字段和类型而无需影响现有查询。老旧的字段可以废弃，从工具中隐藏。通过使用单一演进版本，GraphQL API 使得应用始终能够使用新的特性，并鼓励使用更加简洁、更好维护的服务端代码。</p>
+<h2 id="使用你现有的-数据和代码"><a href="#使用你现有的-数据和代码" class="headerlink" title="使用你现有的 数据和代码"></a>使用你现有的 数据和代码</h2><p>GraphQL 让你的整个应用共享一套 API，而不用被限制于特定存储引擎。GraphQL 引擎已经有多种语言实现，通过 GraphQL API 能够更好利用你的现有数据和代码。你只需要为类型系统的字段编写函数，GraphQL 就能通过优化并发的方式来调用它们。</p>
+<h1 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h1><h2 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h2><p>graphql-java需要运行在java 8 及其以上</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.graphql-java<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>graphql-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>14.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> graphql.ExecutionResult;</span><br><span class="line"><span class="keyword">import</span> graphql.GraphQL;</span><br><span class="line"><span class="keyword">import</span> graphql.schema.GraphQLSchema;</span><br><span class="line"><span class="keyword">import</span> graphql.schema.StaticDataFetcher;</span><br><span class="line"><span class="keyword">import</span> graphql.schema.idl.RuntimeWiring;</span><br><span class="line"><span class="keyword">import</span> graphql.schema.idl.SchemaGenerator;</span><br><span class="line"><span class="keyword">import</span> graphql.schema.idl.SchemaParser;</span><br><span class="line"><span class="keyword">import</span> graphql.schema.idl.TypeDefinitionRegistry;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> graphql.schema.idl.RuntimeWiring.newRuntimeWiring;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloWorld</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">schema</span> <span class="operator">=</span> <span class="string">&quot;type Query&#123;hello: String&#125;&quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">SchemaParser</span> <span class="variable">schemaParser</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SchemaParser</span>();</span><br><span class="line">        <span class="type">TypeDefinitionRegistry</span> <span class="variable">typeDefinitionRegistry</span> <span class="operator">=</span> schemaParser.parse(schema);</span><br><span class="line"></span><br><span class="line">        <span class="type">RuntimeWiring</span> <span class="variable">runtimeWiring</span> <span class="operator">=</span> newRuntimeWiring()</span><br><span class="line">                .type(<span class="string">&quot;Query&quot;</span>, builder -&gt; builder.dataFetcher(<span class="string">&quot;hello&quot;</span>, <span class="keyword">new</span> <span class="title class_">StaticDataFetcher</span>(<span class="string">&quot;world&quot;</span>)))</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line">        <span class="type">SchemaGenerator</span> <span class="variable">schemaGenerator</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SchemaGenerator</span>();</span><br><span class="line">        <span class="type">GraphQLSchema</span> <span class="variable">graphQLSchema</span> <span class="operator">=</span> schemaGenerator.makeExecutableSchema(typeDefinitionRegistry, runtimeWiring);</span><br><span class="line"></span><br><span class="line">        <span class="type">GraphQL</span> <span class="variable">build</span> <span class="operator">=</span> GraphQL.newGraphQL(graphQLSchema).build();</span><br><span class="line">        <span class="type">ExecutionResult</span> <span class="variable">executionResult</span> <span class="operator">=</span> build.execute(<span class="string">&quot;&#123;hello&#125;&quot;</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(executionResult.getData().toString());</span><br><span class="line">        <span class="comment">// Prints: &#123;hello=world&#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Schema"><a href="#Schema" class="headerlink" title="Schema"></a>Schema</h1><h2 id="SDL"><a href="#SDL" class="headerlink" title="SDL"></a>SDL</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 审判组织成员</span><br><span class="line">interface <span class="title class_">Spzzcy</span>&#123;</span><br><span class="line">    # 编号</span><br><span class="line">    <span class="attr">bh</span>: <span class="variable constant_">ID</span></span><br><span class="line">    # 角色</span><br><span class="line">    <span class="attr">js</span>: <span class="title class_">String</span></span><br><span class="line">    # 姓名</span><br><span class="line">    <span class="attr">xm</span>: <span class="title class_">String</span></span><br><span class="line">&#125;</span><br><span class="line"># 通用审判组织成员</span><br><span class="line">type <span class="variable constant_">T_FY_SPZZCY</span> implements <span class="title class_">Spzzcy</span>&#123;</span><br><span class="line">    <span class="attr">bh</span>: <span class="variable constant_">ID</span></span><br><span class="line">    <span class="attr">js</span>: <span class="title class_">String</span></span><br><span class="line">    <span class="attr">xm</span>: <span class="title class_">String</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="DataFetcher"><a href="#DataFetcher" class="headerlink" title="DataFetcher"></a>DataFetcher</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取诉讼档案</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 诉讼档案获取器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> DataFetcher <span class="title function_">getSsda</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> env -&gt; &#123;</span><br><span class="line">		<span class="type">GraphQLContext</span> <span class="variable">context</span> <span class="operator">=</span> env.getContext();</span><br><span class="line">		Set&lt;String&gt; columns = GraphQLUtils.getColumns(env.getSelectionSet(), env.getFieldType());</span><br><span class="line">		<span class="type">Integer</span> <span class="variable">ajlb</span> <span class="operator">=</span> context.get(<span class="string">&quot;ajlb&quot;</span>);</span><br><span class="line">		<span class="type">String</span> <span class="variable">bhaj</span> <span class="operator">=</span> context.get(<span class="string">&quot;bhaj&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> graphqlDao.getSsda(ajlb, bhaj, columns);</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="TypeResolver"><a href="#TypeResolver" class="headerlink" title="TypeResolver"></a>TypeResolver</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取类型转换器</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 类型转换器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> TypeResolver <span class="title function_">getTypeResolver</span><span class="params">(String alias)</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> env -&gt; &#123;</span><br><span class="line">		<span class="type">GraphQLContext</span> <span class="variable">context</span> <span class="operator">=</span> env.getContext();</span><br><span class="line">		<span class="keyword">return</span> GraphQLUtils.getType(env.getSchema(), context.get(<span class="string">&quot;ajlb&quot;</span>), alias);</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Types"><a href="#Types" class="headerlink" title="Types"></a>Types</h2><p>GraphQL 支持以下数据类型</p>
+<ul>
+<li>Scalar</li>
+<li>Object</li>
+<li>Interface</li>
+<li>Union</li>
+<li>InputObject</li>
+<li>Enum</li>
+</ul>
+<h1 id="Execution"><a href="#Execution" class="headerlink" title="Execution"></a>Execution</h1><h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 查询数据</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> ywlx 业务类型</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> query 查询条件</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> variables 查询变量</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 案件数据</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> Map&lt;String, Object&gt; <span class="title function_">query</span><span class="params">(Integer ywlx, String query, Map&lt;String, Object&gt; variables)</span> &#123;</span><br><span class="line">	<span class="comment">//当业务类型查询不到相应的案件类别时，（有可能是业务标识为&lt;司法辅助&gt;司法辅助没有业务类型，用的是业务标识）如果案件类别为空，则返回</span></span><br><span class="line">	<span class="type">Integer</span> <span class="variable">ajlb</span> <span class="operator">=</span> ZzfwGyUtils.getAjlbByYwlx(ywlx);</span><br><span class="line">	<span class="keyword">if</span> (ajlb == <span class="literal">null</span>) &#123;</span><br><span class="line">		logger.error(<span class="string">&quot;未根据所传业务类型找到对应的案件类别,业务类型:&#123;&#125;&quot;</span>, ywlx);</span><br><span class="line">		<span class="keyword">return</span> NOT_FOUND;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">IDictCache</span> <span class="variable">dict</span> <span class="operator">=</span> DictManager.getDict(ajlb);</span><br><span class="line">	logger.info(<span class="string">&quot;ywlx:&#123;&#125;,query:&#123;&#125;,variables,&#123;&#125;&quot;</span>,ywlx,query,variables);</span><br><span class="line">	<span class="type">ExecutionInput</span> <span class="variable">executionInput</span> <span class="operator">=</span> ExecutionInput.newExecutionInput()</span><br><span class="line">			.context(GraphQLContext.newContext().of(<span class="string">&quot;ywlx&quot;</span>,ywlx).of(<span class="string">&quot;ajlb&quot;</span>, ajlb))</span><br><span class="line">			.variables(variables)</span><br><span class="line">			.root(dict)</span><br><span class="line">			.query(query)</span><br><span class="line">			.build();</span><br><span class="line">	<span class="type">ExecutionResult</span> <span class="variable">execute</span> <span class="operator">=</span> graphQL.execute(executionInput);</span><br><span class="line">	<span class="keyword">return</span> execute.toSpecification();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Data-Fetchers"><a href="#Data-Fetchers" class="headerlink" title="Data Fetchers"></a>Data Fetchers</h2><p>每个graphql字段类型都有一个<code>graphql.schema.DataFetcher</code>关联。其他语言的graphql实现通常将这种代码称为<code>resolvers</code>。</p>
+<p>如果没有在字段上指定DataFetcher，则将使用<code>graphql.schema.PropertyDataFetcher</code>来获取Java POJO对象的字段值。</p>
+<h1 id="Data-mapping"><a href="#Data-mapping" class="headerlink" title="Data mapping"></a>Data mapping</h1><h2 id="PropertyDataFetcher"><a href="#PropertyDataFetcher" class="headerlink" title="PropertyDataFetcher"></a>PropertyDataFetcher</h2><p>GraphQL-Java默认的<code>graphql.schema.PropertyDataFetcher</code>支持Map或者POJO<br>对于Schema中的每个对象，会通过Map的get(String key)方法或者POJO的getter方法获取它并返回</p>
+<h1 id="SDL-Directives"><a href="#SDL-Directives" class="headerlink" title="SDL Directives"></a>SDL Directives</h1><h2 id="附加操作"><a href="#附加操作" class="headerlink" title="附加操作"></a>附加操作</h2><h3 id="原来的SDL"><a href="#原来的SDL" class="headerlink" title="原来的SDL"></a>原来的SDL</h3><p>我们可以看到js属性是个代码值我们需要进行转换，这个通常需要在data fetcher中进行处理</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 通用审判组织成员</span><br><span class="line">type <span class="variable constant_">T_FY_SPZZCY</span> implements <span class="title class_">Spzzcy</span>&#123;</span><br><span class="line">    <span class="attr">bh</span>: <span class="variable constant_">ID</span></span><br><span class="line">    <span class="attr">js</span>: <span class="title class_">String</span></span><br><span class="line">    <span class="attr">xm</span>: <span class="title class_">String</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="但是我们现在有更简单的方法"><a href="#但是我们现在有更简单的方法" class="headerlink" title="但是我们现在有更简单的方法"></a>但是我们现在有更简单的方法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 设置代码转换 使用<span class="title class_">Artery</span>数据字典</span><br><span class="line">directive @dict on <span class="variable constant_">FIELD_DEFINITION</span></span><br><span class="line"># 通用审判组织成员</span><br><span class="line">type <span class="variable constant_">T_FY_SPZZCY</span> implements <span class="title class_">Spzzcy</span>&#123;</span><br><span class="line">    <span class="attr">bh</span>: <span class="variable constant_">ID</span></span><br><span class="line">    <span class="attr">js</span>: <span class="title class_">String</span> @dict</span><br><span class="line">    <span class="attr">xm</span>: <span class="title class_">String</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.github.io/2020/04/25/graphql/" data-id="clma8n98s002f50w3783y22d5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-frp" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/27/frp/" class="article-date">
+  <time datetime="2020-03-27T02:08:39.000Z" itemprop="datePublished">2020-03-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/technology/">technology</a>►<a class="article-category-link" href="/categories/technology/NAT/">NAT</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/27/frp/">frp</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>公司使用NAT协议，所以远程一直靠TeamViewer，然后TeamViewer给我们公司发了律师函，有天逛github无意间发现frp这个“神器”，本着互联网精神，给大家共享一下（被公司网管或者ZF的BM部门抓到可不关我的事）。</p>
+        
+          <p class="article-more-link">
+            <a href="/2020/03/27/frp/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://hejianjun.github.io/2020/03/27/frp/" data-id="clma8n98p002550w38o3q9kxy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">内网穿透</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/">technology</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/">AOP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/AspectJ/">AspectJ</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/AOP/spring/">spring</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/Apache-Commons/">Apache Commons</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/CAS/">CAS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/CI/">CI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/ChatGPT/">ChatGPT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/DBMS/">DBMS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/JD-GUI/">JD-GUI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/JPDA/">JPDA</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/Modbus/">Modbus</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/NAT/">NAT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/OCJP/">OCJP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/SQL/">SQL</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/cache/">cache</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/technology/cache/spring/">spring</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/docker/">docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/dubbo/">dubbo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/kettel/">kettel</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/sql/">sql</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/thingsboard/">thingsboard</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/webflux/">webflux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/technology/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">版本控制</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%9A%E5%8A%A1%E7%9F%A5%E8%AF%86/">业务知识</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%9A%E5%8A%A1%E7%9F%A5%E8%AF%86/%E6%B3%95%E9%99%A2/">法院</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/" rel="tag">AOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-Commons/" rel="tag">Apache Commons</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CI/" rel="tag">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ChatGPT/" rel="tag">ChatGPT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DBMS/" rel="tag">DBMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JD-GUI/" rel="tag">JD-GUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JPDA/" rel="tag">JPDA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Modbus/" rel="tag">Modbus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OCJP/" rel="tag">OCJP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSO/" rel="tag">SSO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aspectJ/" rel="tag">aspectJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cache/" rel="tag">cache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/distributed/" rel="tag">distributed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dubbo/" rel="tag">dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitflow/" rel="tag">gitflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kettle/" rel="tag">kettle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/" rel="tag">sql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thingsboard/" rel="tag">thingsboard</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webflux/" rel="tag">webflux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">内网穿透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B3%95%E9%99%A2%E4%B8%9A%E5%8A%A1/" rel="tag">法院业务</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AOP/" style="font-size: 16.67px;">AOP</a> <a href="/tags/Apache-Commons/" style="font-size: 10px;">Apache Commons</a> <a href="/tags/CI/" style="font-size: 10px;">CI</a> <a href="/tags/ChatGPT/" style="font-size: 10px;">ChatGPT</a> <a href="/tags/DBMS/" style="font-size: 10px;">DBMS</a> <a href="/tags/JD-GUI/" style="font-size: 10px;">JD-GUI</a> <a href="/tags/JPDA/" style="font-size: 13.33px;">JPDA</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Modbus/" style="font-size: 10px;">Modbus</a> <a href="/tags/OCJP/" style="font-size: 16.67px;">OCJP</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/SSO/" style="font-size: 10px;">SSO</a> <a href="/tags/aspectJ/" style="font-size: 10px;">aspectJ</a> <a href="/tags/cache/" style="font-size: 16.67px;">cache</a> <a href="/tags/distributed/" style="font-size: 10px;">distributed</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gitflow/" style="font-size: 10px;">gitflow</a> <a href="/tags/kettle/" style="font-size: 16.67px;">kettle</a> <a href="/tags/spring/" style="font-size: 13.33px;">spring</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/thingsboard/" style="font-size: 10px;">thingsboard</a> <a href="/tags/webflux/" style="font-size: 10px;">webflux</a> <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 10px;">内网穿透</a> <a href="/tags/%E6%B3%95%E9%99%A2%E4%B8%9A%E5%8A%A1/" style="font-size: 20px;">法院业务</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">September 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/09/08/JD-GUI/">JD-GUI</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/07/thingsboard/">thingsboard</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/06/Modbus-TCP/">Modbus TCP/IP</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/05/ChatGPT/">ChatGPT</a>
+          </li>
+        
+          <li>
+            <a href="/2020/08/06/git/">git</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Hejianjun<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
