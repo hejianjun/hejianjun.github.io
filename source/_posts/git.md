@@ -34,7 +34,7 @@ typora-root-url: ..
 
 ## 冲突
 
-![conflict](/images/conflict.git)
+![conflict](/images/conflict.gif)
 
 # 重置
 
